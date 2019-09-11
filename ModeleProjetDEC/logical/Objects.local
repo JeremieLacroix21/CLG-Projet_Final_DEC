@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.logical.LogicalDesign>
+   <object objectType="Entity" objectID="B5AD77C4-99ED-2AA2-83A1-123942AB32A8" name="Distributeur" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="8FFB374B-9159-1600-71FB-92E49EBACAD4" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Entity" objectID="B0083FEC-9540-590C-004B-B7598EFE0317" name="Fournisseur" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="8FFB374B-9159-1600-71FB-92E49EBACAD4" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Entity" objectID="EB48A7AD-3849-0961-09F3-B4B820FA69A3" name="User" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="8FFB374B-9159-1600-71FB-92E49EBACAD4" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Relation" objectID="A905A664-A0E8-09CE-48EA-48FE232DE55F" name="Composition" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Relation" propertyParentId="8FFB374B-9159-1600-71FB-92E49EBACAD4" propertySourceId="EB48A7AD-3849-0961-09F3-B4B820FA69A3" propertyTargetId="B0083FEC-9540-590C-004B-B7598EFE0317"/>
+   <object objectType="Relation" objectID="3295D2F6-EDF9-8EE8-2E4B-9E8EE657B2D6" name="Relation_3" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Relation" propertyParentId="8FFB374B-9159-1600-71FB-92E49EBACAD4" propertySourceId="EB48A7AD-3849-0961-09F3-B4B820FA69A3" propertyTargetId="B5AD77C4-99ED-2AA2-83A1-123942AB32A8"/>
+</oracle.dbtools.crest.model.design.logical.LogicalDesign>

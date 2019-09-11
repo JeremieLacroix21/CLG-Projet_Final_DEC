@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B0083FEC-9540-590C-004B-B7598EFE0317" name="Fournisseur">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:39:59 UTC</createdTime>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="IdUser" id="176AD9FC-E167-1EE1-386F-596F90B74B80">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:44:35 UTC</createdTime>
+<generatorID>A905A664-A0E8-09CE-48EA-48FE232DE55F</generatorID>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<referedAttribute>45C3EE22-3C85-9D7C-8F4E-016F94793AA6</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Description" id="07AF29A7-0462-AA75-9E36-7B3184E2CE4B">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:40:33 UTC</createdTime>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>350</dataTypeSize>
+<ownDataTypeParameters>350,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NombreEtoile" id="88301727-AC90-F835-1D0E-8EDE263B5821">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:40:49 UTC</createdTime>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="MotsCles" id="365EFF07-2B72-DF76-0134-CB34C6F3E226">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:41:27 UTC</createdTime>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="GUIDImage" id="FEB308C0-494C-2A70-E3E5-62BD7D5489F0">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:41:56 UTC</createdTime>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="98DF118D-25D9-4779-DB2A-B928CA85CC96" name="Fournisseur PK">
+<createdBy>Jérémie</createdBy>
+<createdTime>2019-09-11 15:42:54 UTC</createdTime>
+<ownerDesignName>ModeleProjetDEC</ownerDesignName>
+<engineerTo>
+<item key="52F25B07-5191-3870-645F-86E637F4CCF4" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>176AD9FC-E167-1EE1-386F-596F90B74B80</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
