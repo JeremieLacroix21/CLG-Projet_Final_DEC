@@ -1,0 +1,29 @@
+<div>   
+    <h1 align="center">Express Shop</h1>
+    <mat-card>
+            <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form>
+        <p>
+            <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="username">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+        </p>
+        <p *ngIf="error" class="error">
+            {{ error }}
+        </p>
+        
+        <mat-checkbox> Remember me</mat-checkbox>
+        <div class="button_div">
+            <button type="submit" mat-button>Subscribe</button>
+            <button class= "button_login" type="submit" mat-button>Login</button>
+        </div>
+        </form>
+    </mat-card-content>
+    </mat-card>
+</div> 
