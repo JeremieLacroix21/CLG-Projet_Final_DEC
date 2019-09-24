@@ -3,15 +3,17 @@
     <mat-card>
             <mat-card-title>Login</mat-card-title>
     <mat-card-content>
-        <form>
+        <form [formGroup] = "form">
         <p>
             <mat-form-field>
-            <input type="text" matInput placeholder="Username" formControlName="username">
+            <input type="text" matInput placeholder="username" formControlName="username">
+            <div *ngIf="username.touched && username.invalid"class="alert alert-danger">username is required</div>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
             <input type="password" matInput placeholder="Password" formControlName="password">
+            <div *ngIf="password.touched && password.invalid"class="alert alert-danger">password is required</div>
             </mat-form-field>
         </p>
         <p *ngIf="error" class="error">
@@ -21,7 +23,7 @@
         <mat-checkbox> Remember me</mat-checkbox>
         <div class="button_div">
             <button type="submit" mat-button>Subscribe</button>
-            <button class= "button_login" type="submit" mat-button>Login</button>
+            <button class= "button_login" type="submit" mat-button onclick="loginClick(username.value, password.value)">Login</button>
         </div>
         </form>
     </mat-card-content>
