@@ -41,7 +41,7 @@
     </p>
     
     <p class="btn-container">
-        <button (click)="test" type="submit" mat-button>Modifier</button>
+        <button (click)="onClickModifyProfile" type="submit" mat-button>Modifier</button>
     </p>
 
 </form>
@@ -65,6 +65,7 @@
 
     <p><mat-form-field>
         <input type="password" matInput placeholder="Confirmation" [formControl]="confirm">
+        <mat-error *ngIf="confirm.hasError('notMatching') && !confirm.hasError('required')">Le confirmation ne correspond pas au nouveau mot de passe</mat-error>
         <mat-error *ngIf="confirm.hasError('required')">Le confirmation de mot de passe est obligatoire</mat-error>
     </mat-form-field></p>
 
@@ -73,7 +74,7 @@
     </p>
 
     <p class="btn-container">
-        <button type="submit" mat-button>Changer</button>
+        <button (click)="onClickChangePassword" type="submit" mat-button>Changer</button>
     </p>    
 
 </form>

@@ -7,7 +7,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } 
   styleUrls: ['./modif-profile.component.css']
 })
 export class ModifProfileComponent implements OnInit {
-  
+
   profileForm = new FormGroup({
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -21,7 +21,7 @@ export class ModifProfileComponent implements OnInit {
     oldPassword: new FormControl('', Validators.required),
     newPassword: new FormControl('', [Validators.required]),
     confirm: new FormControl('', [Validators.required])
-  })
+  }, this.checkPasswords)
 
   public phoneMask = {
     guide: false,
@@ -46,7 +46,23 @@ export class ModifProfileComponent implements OnInit {
   get newPassword() { return this.passwordForm.get('newPassword'); }
   get confirm() { return this.passwordForm.get('confirm'); }
 
-  test() {
-    window.alert(this.phone);
+  checkPasswords(group: FormGroup) {
+    let newPasswordValue = group.get('newPassword').value;
+    let confirm = group.get('confirm');
+    let confirmMatches = newPasswordValue === confirm.value;
+
+    if (!confirmMatches) {
+      confirm.setErrors({notMatching: true});
+    }
+    
+    return null;
+  }
+
+  onClickModifyProfile() {
+    window.alert('Your profile was modified');
+  }
+
+  onClickChangePassword() {
+    window.alert('Your password was changed');
   }
 }
