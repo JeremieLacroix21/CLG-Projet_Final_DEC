@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { HomeComponent } from './home.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+import { ModifProfileComponent } from './modif-profile.component';
+
+describe('ModifProfileComponent', () => {
+  let component: ModifProfileComponent;
+  let fixture: ComponentFixture<ModifProfileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ ModifProfileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(ModifProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

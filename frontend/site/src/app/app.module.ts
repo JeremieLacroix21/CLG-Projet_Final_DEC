@@ -6,13 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule, MatInputModule, MatButtonModule } from '@angular/material';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatCardModule, MatInputModule, MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
@@ -31,10 +31,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -50,12 +47,17 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule } from '@angular/forms';
 
+@NgModule({
+  
+})
+export class CustomMaterialModule { }
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ModifProfileComponent,
     
   ],
   imports: [
@@ -70,6 +72,7 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,
     ReactiveFormsModule,
     CommonModule,
+
     MatToolbarModule,
     MatSidenavModule,
     A11yModule,
@@ -100,7 +103,6 @@ import { FormsModule } from '@angular/forms';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
@@ -113,11 +115,28 @@ import { FormsModule } from '@angular/forms';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule
   ],
   providers: [
     
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+ 
+  exports: [BrowserAnimationsModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatNativeDateModule,
+    MatIconModule, 
+    MatSidenavModule, 
+    MatListModule, 
+    MatToolbarModule],
 })
 export class AppModule { }
