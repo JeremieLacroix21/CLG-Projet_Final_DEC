@@ -10,9 +10,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatCardModule, MatInputModule, MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/material';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
+
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
-=======
 import { HttpClientModule } from '@angular/common/http';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -47,7 +46,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule } from '@angular/forms';
->>>>>>> 9c17d50e3f8a91d72d5fb59db49291a66619cb56
 
 @NgModule({
   
