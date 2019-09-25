@@ -19,8 +19,8 @@ export class ModifProfileComponent implements OnInit {
 
   passwordForm = new FormGroup({
     oldPassword: new FormControl('', Validators.required),
-    newPassword: new FormControl('', Validators.required),
-    confirm: new FormControl('', Validators.required)
+    newPassword: new FormControl('', [Validators.required]),
+    confirm: new FormControl('', [Validators.required])
   })
 
   public phoneMask = {

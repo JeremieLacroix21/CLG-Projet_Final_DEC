@@ -1,4 +1,3 @@
-<script src='ngMask.min.js'></script>
 
 <mat-card class="profile-mat-card"><mat-card-title>Modifier Profil</mat-card-title>
 <mat-card-content>
@@ -7,7 +6,7 @@
 
     <p><mat-form-field>
         <input type="text" matInput placeholder="Nom d'utilisateur" [formControl]="username">
-        <div *ngIf="username.touched && username.invalid"class="alert alert-danger">Le nom d'utilisateur est obligatoire</div>
+        <mat-error *ngIf="username.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
     </mat-form-field></p>
 
     <p><mat-form-field>
@@ -56,17 +55,17 @@
 
     <p><mat-form-field>
         <input type="password" matInput placeholder="Mot de passe" [formControl]="oldPassword">
-        <div *ngIf="oldPassword.touched && oldPassword.invalid"class="alert alert-danger">Le mot de passe est obligatoire</div>
+        <mat-error *ngIf="oldPassword.hasError('required')">Le mot de passe est obligatoire</mat-error>
     </mat-form-field></p>
 
     <p><mat-form-field>
         <input type="password" matInput placeholder="Nouveau mot de passe" [formControl]="newPassword">
-        <div *ngIf="newPassword.touched && newPassword.invalid"class="alert alert-danger">Le nouveau mot de passe est obligatoire</div>
+        <mat-error *ngIf="newPassword.hasError('required')">Le nouveau mot de passe est obligatoire</mat-error>
     </mat-form-field></p>
 
     <p><mat-form-field>
         <input type="password" matInput placeholder="Confirmation" [formControl]="confirm">
-        <div *ngIf="confirm.touched && confirm.invalid"class="alert alert-danger">La confirmation de mot de passe est obligatoire</div>
+        <mat-error *ngIf="confirm.hasError('required')">Le confirmation de mot de passe est obligatoire</mat-error>
     </mat-form-field></p>
 
     <p *ngIf="error" class="error">
