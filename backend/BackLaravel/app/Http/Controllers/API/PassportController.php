@@ -35,6 +35,7 @@ class PassportController extends Controller
    {
        $validator = Validator::make($request->all(), [
            'name' => 'required',
+           'email' => 'required|email',
            'password' => 'required',
            'c_password' => 'required|same:password',
            'nom' => 'required',
@@ -55,6 +56,7 @@ class PassportController extends Controller
        $success['name'] =  $user->name;
        DB::table('user')->insert(array(
         'nomutilisateur' =>  $input['name'],
+        'email' => $input['email'],
         'motdepasse' => $input['password'],
         'nom' => $input['nom'],
         'prenom' => $input['prenom'],
