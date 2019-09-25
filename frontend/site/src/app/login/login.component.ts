@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { TouchSequence } from 'selenium-webdriver';
+import { Component, OnInit} from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { AuthenticationService } from '../services/authentification.service'
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,12 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   })
 
-  constructor() { }
+  invalidLogin: boolean;
+
+  constructor(
+    private router: Router, 
+    private authService: AuthenticationService
+  ) { }
 
   ngOnInit() {
   }
@@ -27,6 +33,10 @@ export class LoginComponent implements OnInit {
   {
     return this.form.get('password');
   }
+
+ onSubmit(){
+   console.log(this.form.value);
+ }
 
 }
 
