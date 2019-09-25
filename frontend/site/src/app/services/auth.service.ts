@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models';
 import { config } from '../../config';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +24,17 @@ export class AuthService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${config.apiUrl}/api/login`, { username, password })
-            .pipe(map(user => {
-                if (user && user.token) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
-
-                return user;
-            }));
+        const body = new HttpParams()
+        .set('name', username)
+        .set('password', password);
+    
+      return this.http.post(`http://127.0.0.1:8000/api/login`,
+        body.toString(),
+        {
+          headers: new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+        }
+      );
     }
 
     logout() {

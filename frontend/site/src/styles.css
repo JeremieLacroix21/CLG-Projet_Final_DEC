@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+<<<<<<< HEAD
 
 body, html {
     height: 100%;
@@ -18,3 +19,6 @@ body, html {
     background-size: cover;
   }
   
+=======
+/*@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css";*/
+>>>>>>> 85c015b2d293c40f14c3f354fb89eeddb76cd1b7
