@@ -17,7 +17,6 @@ const routes: Routes = [
     component: LoginComponent
 },
 
-// otherwise redirect to home
 { path: '**', redirectTo: '' }
 ];
 
