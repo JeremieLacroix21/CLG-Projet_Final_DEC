@@ -9,21 +9,21 @@ import { AbstractControlDirective } from '@angular/forms';
 
 
 const routes: Routes = [
-{
+  {
     path: '',
     component: HomeComponent,
     //canActivate: [AuthGuard]
-},
-{
+  },
+  {
     path: 'login',
     component: LoginComponent
-},
-{
-  path: 'profil',
-  component: ModifProfileComponent,
-},
-  
-{ path: '**', redirectTo: '' }
+  },
+  {
+    path: 'profile',
+    component: ModifProfileComponent,
+  },
+    
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

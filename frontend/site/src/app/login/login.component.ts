@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                    localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
