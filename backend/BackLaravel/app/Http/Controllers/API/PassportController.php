@@ -16,15 +16,15 @@ class PassportController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function login(Request $request){
-       $credentials = $request->only('name', 'password');
-       if(Auth::attempt($credentials)){
-           $user = Auth::user();
-           $success['token'] =  $user->createToken('MyApp')->accessToken;
-           return response()->json(['success' => $success], $this->successStatus);
-       }
-       else{
-           return response()->json(['error'=> $credentials], 401);
-       }
+    $user_favorites = DB::table('user')
+    ->where('nomutilisateur', '=', $request->get('name'))
+    ->where('motdepasse', '=', $request->get('password'))
+    ->first();
+    if (is_null($user_favorites)) {
+      return response()->json(['error'=> 'User doesnt exist'], 401);
+    } else {
+        return response()->json(['success' => 'Tu es connecte'], $this->successStatus);
+    }
    }
    /**
     * Register api
