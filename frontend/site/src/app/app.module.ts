@@ -10,6 +10,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatCardModule, MatInputModule, MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/material';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask'
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -45,7 +47,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+<<<<<<< HEAD
 import { FormsModule } from '@angular/forms';
+=======
+import {FormsModule } from '@angular/forms';
+import { TextMaskModule } from 'angular2-text-mask';
+
+>>>>>>> 7f106555fd276c1802dcc2ff685740249e4d5959
 @NgModule({
   
   imports: []
@@ -115,7 +123,8 @@ export class CustomMaterialModule { }
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    TextMaskModule
   ],
   providers: [
     

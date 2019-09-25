@@ -21,7 +21,10 @@
     "@angular/platform-browser": "~8.2.4",
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
+    "angular2-text-mask": "^9.0.0",
     "hammerjs": "^2.0.8",
+    "ng-mask": "^3.1.1",
+    "ngx-mask": "^8.0.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -3,32 +3,33 @@
       <button mat-icon-button>
         <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
       </button>
+      <h1>Navigation</h1>
       <span class="menu-spacer"></span>
       
       <div>
-        <a mat-button [routerLink]="'/modif-profile'"> Profil </a>
+        <a mat-button [routerLink]="'/profile'"> Profil </a>
         <a mat-button [routerLink]="'/create-account'"> Commande </a>
         <a mat-button [routerLink]="'/contacts'"> Messagerie </a>
         <a mat-button [routerLink]="'/create-contact'"> Recherche </a>
   
       </div>
     </mat-toolbar-row>
-  
-    <mat-toolbar-row>
-        <span style="font-size: 12px;">Bienvenue sur expresshop</span>
-      </mat-toolbar-row>
-  </mat-toolbar>
+   </mat-toolbar>
 
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
       <mat-nav-list>
         
   
+<<<<<<< HEAD
         <a mat-list-item [routerLink]="'/profile'"> Profil </a>
+=======
+        <a mat-list-item [routerLink]="'/Profile'"> Profil </a>
+>>>>>>> 7f106555fd276c1802dcc2ff685740249e4d5959
         <a mat-list-item [routerLink]="'/Subscribe'"> Commande </a>
         <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
         <a mat-list-item [routerLink]="'/create-contact'"> Recherche </a>
-        <a mat-list-item (click)="sidenav.toggle()" href="" [routerLink]="'/login'" mat-list-item>Se deconnecter</a>
+        <a mat-list-item (click)="logout()" href=""  mat-list-item>Se deconnecter</a>
   
       </mat-nav-list>
     </mat-sidenav>
