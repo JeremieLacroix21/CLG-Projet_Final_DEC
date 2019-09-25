@@ -11,17 +11,17 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     //canActivate: [AuthGuard]
-  },
-  {
+},
+{
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'profile',
-    component: ModifProfileComponent
-  },
+},
+{
+  path: 'profile',
+  component: ModifProfileComponent
+},
   
-  { path: '**', redirectTo: '' }
+{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({
