@@ -18,7 +18,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'profil',
+    path: 'profile',
     component: ModifProfileComponent,
   },
     
