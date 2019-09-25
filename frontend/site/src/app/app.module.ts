@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule, MatInputModule, MatButtonModule } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ModifProfileComponent,
     
   ],
   imports: [
