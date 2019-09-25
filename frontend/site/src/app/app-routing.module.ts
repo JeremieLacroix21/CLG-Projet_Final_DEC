@@ -7,7 +7,7 @@ import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { AuthGuard } from './guard';
 
 const routes: Routes = [
-  {
+{
     path: '',
     component: HomeComponent,
     //canActivate: [AuthGuard]
@@ -25,7 +25,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

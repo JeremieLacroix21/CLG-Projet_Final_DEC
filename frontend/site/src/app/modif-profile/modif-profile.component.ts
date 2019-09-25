@@ -10,8 +10,8 @@ export class ModifProfileComponent implements OnInit {
   
   profileForm = new FormGroup({
     username: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(14)]),
     logo: new FormControl('', Validators.required),
     description: new FormControl(''),
     tags: new FormControl('')
@@ -22,6 +22,13 @@ export class ModifProfileComponent implements OnInit {
     newPassword: new FormControl('', Validators.required),
     confirm: new FormControl('', Validators.required)
   })
+
+  public phoneMask = {
+    guide: false,
+    showMask: true,
+    keepCharPositions: true,
+    mask: ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  };
 
   constructor() {}
 
@@ -38,4 +45,8 @@ export class ModifProfileComponent implements OnInit {
   get oldPassword() { return this.passwordForm.get('oldPassword'); }
   get newPassword() { return this.passwordForm.get('newPassword'); }
   get confirm() { return this.passwordForm.get('confirm'); }
+
+  test() {
+    window.alert(this.phone);
+  }
 }
