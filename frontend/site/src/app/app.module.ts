@@ -12,7 +12,7 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { ModifProfileComponent } from './modif-profile/modif-profile.component';
+import { ModifProfileComponent } from './home/modif-profile/modif-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
