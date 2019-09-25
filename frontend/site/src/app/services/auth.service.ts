@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models';
@@ -24,20 +24,17 @@ export class AuthService {
     }
 
     login(username: string, password: string) {
-        var data = "username="+username+"&password="+password+"&grant_type=password";
-        var reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded'});
-        return this.http.post(`http://127.0.0.1:8000/api/login`,data,{headers:reqHeader});
-        
-        
-        /*return this.http.post<any>(`http://127.0.0.1:8000/api/login`, { username, password })
-            .pipe(map(user => {
-                if (user && user.token) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
-
-                return user;
-            }));*/
+        const body = new HttpParams()
+        .set('name', username)
+        .set('password', password);
+    
+      return this.http.post(`http://127.0.0.1:8000/api/login`,
+        body.toString(),
+        {
+          headers: new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+        }
+      );
     }
 
     logout() {
