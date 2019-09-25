@@ -1,5 +1,5 @@
 <h3>home</h3>
-<ul>
+<!-- <ul>
   <li>
     <a [routerLink]="'browseproduct'" routerLinkActive="active"> browseproduct</a>
   </li>
@@ -7,4 +7,45 @@
     <a [routerLink]="'modifprofile'" routerLinkActive="active"> modifprofile</a>
   </li>
 </ul>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+<mat-toolbar color="blue" style="background-color: rgb(149, 161, 172)">
+    <mat-toolbar-row>
+    
+      <button mat-icon-button><mat-icon (click)="sidenav.toggle()">menu</mat-icon></button>
+      <h1>Navigation</h1>
+      <span class="menu-spacer"></span>
+      <div>
+    
+        <a mat-button [routerLink]="'/profile'">Profil</a>
+        <a mat-button [routerLink]="'/create-account'">Commande</a>
+        <a mat-button [routerLink]="'/contacts'">Messagerie</a>
+        <a mat-button [routerLink]="'/create-contact'">Recherche</a>
+    
+      </div>
+    
+    </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+    
+      <mat-nav-list>
+    
+        <a mat-list-item [routerLink]="'/Profile'">Profil</a>
+        <a mat-list-item [routerLink]="'/Subscribe'">Commande</a>
+        <a mat-list-item [routerLink]="'/contacts'">Contacts</a>
+        <a mat-list-item [routerLink]="'/create-contact'">Recherche</a>
+        <a mat-list-item (click)="logout()" href="" mat-list-item>Se deconnecter</a>
+    
+      </mat-nav-list>
+    
+    </mat-sidenav>
+    <mat-sidenav-content>
+    
+      <div style="height: 88vh;">
+        <router-outlet></router-outlet>
+      </div>
+    
+    </mat-sidenav-content>
+    </mat-sidenav-container>
