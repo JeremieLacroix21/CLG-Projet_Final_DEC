@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
    console.log(this.form.controls.username.value);
    this.submitted = true;
 
-        // stop here if form is invalid
         if (this.form.invalid) {
             return;
         }
