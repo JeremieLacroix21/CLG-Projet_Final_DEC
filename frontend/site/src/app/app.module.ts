@@ -6,12 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule, MatInputModule, MatButtonModule } from '@angular/material';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatCardModule, MatInputModule, MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+@NgModule({
+  
+})
+export class CustomMaterialModule { }
 
 @NgModule({
   declarations: [
@@ -30,11 +34,33 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatNativeDateModule,
+    MatIconModule, 
+    MatSidenavModule, 
+    MatListModule, 
+    MatToolbarModule
   ],
   providers: [
     
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+ 
+  exports: [BrowserAnimationsModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatNativeDateModule,
+    MatIconModule, 
+    MatSidenavModule, 
+    MatListModule, 
+    MatToolbarModule],
 })
 export class AppModule { }
