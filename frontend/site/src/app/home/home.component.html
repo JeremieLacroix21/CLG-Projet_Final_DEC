@@ -24,7 +24,7 @@
       <mat-nav-list>
         
   
-        <a mat-list-item [routerLink]="'/Profil'"> Profil </a>
+        <a mat-list-item [routerLink]="'/profile'"> Profil </a>
         <a mat-list-item [routerLink]="'/Subscribe'"> Commande </a>
         <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
         <a mat-list-item [routerLink]="'/create-contact'"> Recherche </a>
@@ -34,8 +34,8 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div style="height: 88vh;">
-  
-        <router-outlet></router-outlet>
+          
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
+  <router-outlet></router-outlet>

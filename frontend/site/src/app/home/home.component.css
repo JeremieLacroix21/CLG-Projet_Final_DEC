@@ -12,3 +12,8 @@
     overflow: auto;
     border: 1px solid #555;
   }
+
+  #div_home_content{
+    background-color: blueviolet;
+    height: 100%;
+  }
