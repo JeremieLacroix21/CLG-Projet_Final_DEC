@@ -8,11 +8,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  });
  Route::post('login', 'API\PassportController@login');
  Route::post('register', 'API\PassportController@register');
- Route::group(['middleware' => 'auth:api'], function(){
- Route::post('get-details', 'API\PassportController@getDetails');
- //profil--jérémie
+ Route::post('/ShowProduct','API\ProduitController@ShowProduct');
+  //profil--jérémie
 Route::put('/profil','API\ProfilController@Updatepassword');
 Route::post('/profil','API\ProfilController@GetUser');
+ Route::group(['middleware' => 'auth:api'], function(){
+ Route::post('get-details', 'API\PassportController@getDetails');
  });
 
 // CATCH ALL ROUTE =============================  
