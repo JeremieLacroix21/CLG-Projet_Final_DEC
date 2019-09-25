@@ -7,6 +7,7 @@ import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { AuthGuard } from './guard';
 import { AbstractControlDirective } from '@angular/forms';
 
+
 const routes: Routes = [
 {
     path: '',
