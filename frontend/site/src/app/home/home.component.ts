@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
 
 export class HomeComponent implements OnInit {
 
+  events: string[] = [];
+  opened: boolean;
+  
   constructor() { }
 
   ngOnInit() {
