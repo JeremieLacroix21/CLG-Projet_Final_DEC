@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { AuthGuard } from './guard';
 import { AbstractControlDirective } from '@angular/forms';
+import { BrowseProductsComponent } from './browse-products/browse-products.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ModifProfileComponent,
+  },
+  {
+    path: 'browse',
+    component: BrowseProductsComponent
   },
     
   { path: '**', redirectTo: '' }

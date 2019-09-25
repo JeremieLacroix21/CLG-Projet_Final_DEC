@@ -1,8 +1,9 @@
 
 <mat-card class="profile-mat-card"><mat-card-title>Modifier Profil</mat-card-title>
 <mat-card-content>
-
 <form [formGroup]="profileForm">
+
+    <!-- TODO: Display/Hide fields based on the type of the connected user -->
 
     <p><mat-form-field>
         <input type="text" matInput placeholder="Nom d'utilisateur" [formControl]="username">
@@ -45,7 +46,6 @@
     </p>
 
 </form>
-
 </mat-card-content>
 </mat-card>
 

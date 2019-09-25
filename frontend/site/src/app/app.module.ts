@@ -48,6 +48,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { BrowseProductsComponent } from './browse-products/browse-products.component';
 
 export class CustomMaterialModule { }
 
@@ -57,6 +58,7 @@ export class CustomMaterialModule { }
     LoginComponent,
     HomeComponent,
     ModifProfileComponent,
+    BrowseProductsComponent,
     
   ],
 
