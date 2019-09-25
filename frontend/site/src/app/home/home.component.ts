@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule} from "@angular/core";
 import { CommonModule } from '@angular/common';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
