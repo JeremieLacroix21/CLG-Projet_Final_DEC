@@ -15,7 +15,6 @@ const routes: Routes = [
 {
     path: 'login',
     component: LoginComponent
-<<<<<<< HEAD
   },
   {
     path: 'profile',
@@ -24,15 +23,6 @@ const routes: Routes = [
   },
   { path: '**',
     redirectTo: '' }
-=======
-},
-{
-  path: 'profil',
-  component: ModifProfileComponent,
-},
-  
-{ path: '**', redirectTo: '' }
->>>>>>> 7f106555fd276c1802dcc2ff685740249e4d5959
 ];
 
 @NgModule({
