@@ -8,7 +8,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  });
  Route::post('login', 'API\PassportController@login');
  Route::post('register', 'API\PassportController@register');
- Route::post('/ShowProduct','API\ProduitController@ShowProduct');
+ Route::post('ShowProduct','API\ProduitController@ShowProduct');
+ Route::post('AddProduct','API\ProduitController@AddProduct');
   //profil--jérémie
 Route::put('/profil','API\ProfilController@Updatepassword');
 Route::post('/profil','API\ProfilController@GetUser');
