@@ -13,11 +13,16 @@ class ProduitController extends Controller
    {
         $produit = DB::table('produits')->get();
         $data = [];
-        foreach($produit as $produits) { }
+        foreach($produit as $produits) 
         {
             $data[$produits->idproduits] = [$produits->nom_produit, $produits->type,$produits->prix, 
-            $produits->idfourniseur,$produits->enstock];
+            $produits->idfournisseur,$produits->enstock];
         }
         return json_encode($data);
     }
+
+   public function AddProduct()
+   {
+        //ajout d'un produit
+   }
 }
