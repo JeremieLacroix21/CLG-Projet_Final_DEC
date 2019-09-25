@@ -10,6 +10,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatCardModule, MatInputModule, MatButtonModule, MatNativeDateModule, MatIconModule, MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/material';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -55,6 +57,7 @@ export class CustomMaterialModule { }
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ModifProfileComponent,
     
   ],
   imports: [
