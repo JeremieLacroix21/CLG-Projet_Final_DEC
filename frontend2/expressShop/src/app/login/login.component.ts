@@ -61,12 +61,12 @@ export class LoginComponent implements OnInit {
                 },
                 error => {
                     // COMMENT FOR DEBUG
-                    /* this.invalidLogin = true;
-                    this.loading = false; */
+                    this.invalidLogin = true;
+                    this.loading = false; 
 
                     //DEBUG UNCOMMENT TO GAIN ACCESS LOGIN --> HOME
-                    localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
-                    this.router.navigate([this.returnUrl]);
+                    /* localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
+                    this.router.navigate([this.returnUrl]); */
                 });
  }
 
