@@ -3,8 +3,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } 
 
 @Component({
   selector: 'app-modif-profile',
-  templateUrl: './modif-profile.component.html',
-  styleUrls: ['./modif-profile.component.css']
+  templateUrl: './modif-profile.component.html'
 })
 export class ModifProfileComponent implements OnInit {
 
