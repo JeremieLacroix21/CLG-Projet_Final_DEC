@@ -21,8 +21,18 @@ class ProduitController extends Controller
         return json_encode($data);
     }
 
-   public function AddProduct()
+   public function AddProduct(Request $request)
    {
-        //ajout d'un produit
+       $input = $request->all();
+       $produit = Produit::create($input);
+       DB::table('produits')->insert(array(
+        'nom_produit' =>  $input['nom'],
+        'type' => $input['type'],
+        'prix' => $input['prix'],
+        'idfournisseur' => $input['idfournisseur'],
+        'enstock' => $input['enstock'],
+        'GUID' => $input['GUID'],
+        'Tags' => $input['Tags'],
+       ));
    }
 }

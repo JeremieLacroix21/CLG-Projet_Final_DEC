@@ -33,27 +33,7 @@ class PassportController extends Controller
     */
    public function register(Request $request)
    {
-       $validator = Validator::make($request->all(), [
-           'name' => 'required',
-           'email' => 'required|email',
-           'password' => 'required',
-           'c_password' => 'required|same:password',
-           'nom' => 'required',
-           'prenom' => 'required',
-           'TypeUser' => 'required',
-           'adresse' => 'required',
-           'admin' => 'required',
-           'confirme' => 'required',
-           'dateinscription' => 'required',
-       ]);
-       if ($validator->fails()) {
-           return response()->json(['error'=>$validator->errors()], 401);            
-       }
        $input = $request->all();
-       $input['password'] = bcrypt($input['password']);
-       $user = User::create($input);
-       $success['token'] =  $user->createToken('MyApp')->accessToken;
-       $success['name'] =  $user->name;
        DB::table('user')->insert(array(
         'nomutilisateur' =>  $input['name'],
         'email' => $input['email'],
@@ -66,7 +46,7 @@ class PassportController extends Controller
         'confirme' => $input['confirme'],
         'dateinscription' => $input['dateinscription']
        ));
-       return response()->json(['success'=>$success], $this->successStatus);
+       return response()->json(['success'=> 'User Created'], $this->successStatus);
    }
    /**
     * details api
