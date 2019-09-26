@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
-import { products } from '../../models/sample-products';
 
+import { products } from '../../models/sample-products';
+import { Product } from '../../models/product';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
-  selector: 'app-browseproduct',
-  templateUrl: './browseproduct.component.html',
-  styleUrls: ['./browseproduct.component.css']
+  selector: 'app-browse-products',
+  templateUrl: './browse-products.component.html',
+  styleUrls: ['./browse-products.component.css']
 })
-export class BrowseproductComponent implements OnInit {
+export class BrowseProductsComponent implements OnInit {
 
   products = products;
 

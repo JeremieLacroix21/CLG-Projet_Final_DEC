@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { DEBUGGING } from '../models/DEBUG-LOGIN';
 
 import { AuthService } from '../services';
 
@@ -13,8 +14,8 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
 
-        //COMMENT FOR DEBUG
-        if (currentUser) {
+        //COMMENT FOR DEBUG (or see app/models/DEBUG-LOGIN.ts)
+        if (currentUser || DEBUGGING) {
             return true;
         }
 

@@ -12,7 +12,6 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { ModifProfileComponent } from './/modif-profile/modif-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -46,10 +45,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {ModifProfileComponent} from './modif-profile/modif-profile.component'
+
 import {FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { BrowseProductsComponent } from './browse-products/browse-products.component';
 
+export class CustomMaterialModule { }
 
 @NgModule({
   declarations: [

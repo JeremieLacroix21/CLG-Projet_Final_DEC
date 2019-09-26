@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from '../services';
 import { first } from 'rxjs/operators';
+import { DEBUGGING } from '../models/DEBUG-LOGIN';
 
 @Component({
   selector: 'app-login',
@@ -21,54 +22,53 @@ export class LoginComponent implements OnInit {
   returnUrl: string
   invalidLogin: boolean;
 
+  get username() { return this.form.get('username'); }
+  get password() { return this.form.get('password'); }
+
   constructor(
     private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthService
-  ) { }
+    private router: Router,
+    private authenticationService: AuthService
+  ){ }
 
   ngOnInit() {
-        this.authenticationService.logout();
+    this.authenticationService.logout();
 
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  get username()
-  {
-    return this.form.get('username');
+  onSubmit() {
+    //console.log(this.form.controls.username.value);
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authenticationService
+      .login(this.form.controls.username.value, this.form.controls.password.value)
+      .pipe(first())
+      .subscribe(
+          data => {
+            localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
+            this.router.navigate([this.returnUrl]);
+          },
+          error => {
+            // COMMENT FOR DEBUG (or see app/models/DEBUG-LOGIN.ts)
+            if (!DEBUGGING) {
+              this.invalidLogin = true;
+              this.loading = false; 
+            }
+            
+
+            //DEBUG UNCOMMENT TO GAIN ACCESS LOGIN --> HOME (or see app/models/DEBUG-LOGIN.ts)
+            if (DEBUGGING) {
+              localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
+              this.router.navigate([this.returnUrl]);
+            }
+          }
+      );
   }
-
-  get password()
-  {
-    return this.form.get('password');
-  }
-
- onSubmit(){
-   console.log(this.form.controls.username.value);
-   this.submitted = true;
-
-        if (this.form.invalid) {
-            return;
-        }
-
-        this.loading = true;
-        this.authenticationService.login(this.form.controls.username.value, this.form.controls.password.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    // COMMENT FOR DEBUG
-                    this.invalidLogin = true;
-                    this.loading = false; 
-
-                    //DEBUG UNCOMMENT TO GAIN ACCESS LOGIN --> HOME
-                    /* localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
-                    this.router.navigate([this.returnUrl]); */
-                });
- }
 
 }
-
