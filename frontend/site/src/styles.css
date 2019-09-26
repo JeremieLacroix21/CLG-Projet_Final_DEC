@@ -2,3 +2,21 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /*@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css";*/
 @import "~@material/icon-button/dist/mdc.icon-button";
+
+
+body, html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url('./campagne.jpg');
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
