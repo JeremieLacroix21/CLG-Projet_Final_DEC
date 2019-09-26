@@ -8,7 +8,7 @@ import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 const routes: Routes = [
   {
     path: '', component: HomeComponent, children:[
-      {path: 'browse', component: BrowseProductsComponent},
+      {path: '', component: BrowseProductsComponent},
       {path: 'modifprofile', component: ModifProfileComponent}
     ]
   }
