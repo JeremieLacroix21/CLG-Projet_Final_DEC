@@ -119,6 +119,7 @@ export class CustomMaterialModule { }
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    TextMaskModule,
   ],
 
   providers: [],
