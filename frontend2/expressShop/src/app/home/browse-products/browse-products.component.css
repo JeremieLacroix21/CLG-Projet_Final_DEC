@@ -1,0 +1,71 @@
+
+.grid-container {
+    display: grid;
+    
+    grid-column-gap: 1%;
+    grid-row-gap: 2%;
+
+    padding: 5px;
+}
+
+.product-card {
+}
+
+.product-img-card {
+    object-fit: cover;
+}
+
+.product-card-content {
+    text-align: justify;
+}
+
+.cart-btn {
+    float: right;
+}
+
+.mdc-icon-button {
+    padding: 0px;
+    padding-top: 4px;
+    top: 2.2px;
+    width: 38px;
+    height: 38px;
+}
+
+.mat-card-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/****************************************************************************************
+    ADAPTING THE GRID TO DIFFERENT SIZES OF SCREENS
+
+    We want N items of the same width, and we want a gap equal to 1% of the container's width between each item.
+    For N items, we always have (N - 1) gaps, so the width of an item can be calculated as follows : (100% - (N - 1)%) / N%
+****************************************************************************************/
+@media only screen and (max-width: 900px) {
+    .product-img-card {
+        max-height: 250px;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .grid-container {
+        grid-template-columns: 24.25% 24.25% 24.25% 24.25%;
+    }
+
+    .product-img-card {
+        max-height: 300px;
+    }
+}
+
+@media only screen and (max-width: 799px) {
+    .grid-container {
+        grid-template-columns: 32.66% 32.66% 32.66%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .grid-container {
+        grid-template-columns: 49.5% 49.5%;
+    }
+}

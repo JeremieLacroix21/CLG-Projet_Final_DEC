@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { BrowseproductComponent } from './browseproduct/browseproduct.component';
-import { ModifprofileComponent } from './modifprofile/modifprofile.component';
+import { BrowseProductsComponent } from './browse-products/browse-products.component';
+import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { HomeComponent } from './home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -58,8 +58,8 @@ import { TextMaskModule } from 'angular2-text-mask';
 @NgModule({
   declarations: [
     HomeComponent,
-    BrowseproductComponent,
-    ModifprofileComponent
+    BrowseProductsComponent,
+    ModifProfileComponent
   ],
   imports: [
     CommonModule,

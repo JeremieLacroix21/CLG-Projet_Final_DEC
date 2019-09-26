@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { BrowseproductComponent } from './browseproduct/browseproduct.component';
-import { ModifprofileComponent } from './modifprofile/modifprofile.component';
+import { BrowseProductsComponent } from './browse-products/browse-products.component';
+import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 
 
 const routes: Routes = [
   {
     path: '', component: HomeComponent, children:[
-      {path: 'browseproduct', component: BrowseproductComponent},
-      {path: 'modifprofile', component: ModifprofileComponent}
+      {path: 'browse', component: BrowseProductsComponent},
+      {path: 'modifprofile', component: ModifProfileComponent}
     ]
   }
 ];

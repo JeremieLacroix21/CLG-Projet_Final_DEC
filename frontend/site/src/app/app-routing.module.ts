@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guard';
 import { AbstractControlDirective } from '@angular/forms';
 import { BrowseProductsComponent } from './browse-products/browse-products.component';
+import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 
 
 const routes: Routes = [
@@ -16,12 +17,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-<<<<<<< HEAD
-},
-{ 
-    path: '**',
-    redirectTo: '' }
-=======
   },
   {
     path: 'profile',
@@ -33,7 +28,6 @@ const routes: Routes = [
   },
     
   { path: '**', redirectTo: '' }
->>>>>>> 85c015b2d293c40f14c3f354fb89eeddb76cd1b7
 ];
 
 @NgModule({

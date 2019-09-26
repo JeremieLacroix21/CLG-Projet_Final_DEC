@@ -1,0 +1,21 @@
+.profile-mat-card {
+    margin: 25px;
+}
+
+.profile-mat-card mat-form-field {
+    display: inline;
+}
+
+.profile-mat-card p {
+    margin: 20px;
+}
+
+.description-box {
+    letter-spacing: 1px;
+    padding: 10px;
+    line-height: 1.5;
+}
+
+.btn-container {
+    text-align: center;
+}
