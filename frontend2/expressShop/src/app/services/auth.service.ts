@@ -28,7 +28,7 @@ export class AuthService {
         .set('name', username)
         .set('password', password);
     
-      return this.http.post(`http://127.0.0.1:8000/api/login`,
+      return this.http.post(`${config.apiUrl}/api/login`,
         body.toString(),
         {
           headers: new HttpHeaders()
