@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models';
 import { config } from '../../config';
@@ -34,7 +34,8 @@ export class AuthService {
           headers: new HttpHeaders()
             .set('Content-Type', 'application/x-www-form-urlencoded')
         }
-      );
+      ); 
+
     }
 
     logout() {

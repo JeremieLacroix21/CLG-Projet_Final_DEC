@@ -4,15 +4,18 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guard';
 const routes: Routes = [
   {
+    path: 'home',
+    canActivate: [AuthGuard],
+    loadChildren: () => import(`./home/home.module`).then(m => m.HomeModule)
+  },
+  {
     path: 'login', component: LoginComponent
   },
   {
     path: '',
-    loadChildren: () => import(`./home/home.module`).then(m => m.HomeModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: '**', redirectTo: 'login', pathMatch: 'full'
+    canActivate: [AuthGuard],
+    redirectTo: 'home',
+    pathMatch: 'full'
   }
 ];
 
