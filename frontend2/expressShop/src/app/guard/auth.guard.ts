@@ -22,6 +22,6 @@ export class AuthGuard implements CanActivate {
         return false; 
 
         //DEBUG UNCOMMENT TO GAIN ACCESS LOGIN --> HOME
-        return true;
+        //return true;
     }
 }
