@@ -3,9 +3,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use App\Mail\EmailSender;
 
 class PassportController extends Controller
 {
@@ -71,8 +72,10 @@ class PassportController extends Controller
             </html>
             ";
             $message = wordwrap($message,70);
-            $headers = "From: charlesbourgeois@live.ca";
-            mail($User->email,$subject,$message,$headers);
+            $data = ['message' => 'allo'];
+            Mail::to($User->email)->send(new EmailSender($data));
+            //$headers = "From: charlesbourgeois@live.ca";
+            //mail($User->email,$subject,$message,$headers);
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
    }
