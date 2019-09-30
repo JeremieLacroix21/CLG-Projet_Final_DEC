@@ -72,10 +72,8 @@ class PassportController extends Controller
             </html>
             ";
             $message = wordwrap($message,70);
-            $data = ['message' => 'allo'];
-            Mail::to($User->email)->send(new EmailSender($data));
-            //$headers = "From: charlesbourgeois@live.ca";
-            //mail($User->email,$subject,$message,$headers);
+            $data = ['message' => $message];
+            Mail::to('expressShop.Recovery@hotmail.com')->send(new EmailSender($data));
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
    }
