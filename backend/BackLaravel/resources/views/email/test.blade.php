@@ -2,9 +2,10 @@
     <html lang="en-US">
     	<head>
     		<meta charset="utf-8">
+			<meta name="viewport">
     	</head>
     	<body>
     		<h2>Test Email</h2>
-    		<p>{{ $message }}</p>
+			<p>{{ $messages }}</p>
     	</body>
     </html>
