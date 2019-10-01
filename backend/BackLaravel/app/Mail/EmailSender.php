@@ -30,6 +30,6 @@ class EmailSender extends Mailable
                     ->bcc($address, $name)
                     ->replyTo($address, $name)
                     ->subject($subject)
-                    ->with([ 'messages' => $this->data['message'] ]);
+                    ->with([ 'messages' =>  $this->data['message'] ]);
     }
 }

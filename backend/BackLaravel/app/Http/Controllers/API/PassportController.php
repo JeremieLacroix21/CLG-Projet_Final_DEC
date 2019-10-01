@@ -57,30 +57,25 @@ class PassportController extends Controller
             return response()->json(['error'=> 'User doesnt exist'], 401);
         }
         else{
-            $subject = "Nom d'utilisateur de votre compte Express shop";
-            $message = "
-            <html>
-            <head>
-            <title>Récupération du nom d'utilisateur de votre compte Express shop</title>
-            </head>
-            <body>
-            <p>bonjour vous avez tenter de récupérer votre nom d'utilisateur de votre compte Express Shop</p>
-            <p>Voici votre nom d'utilisateur: " . $User->nomutilisateur . "</p>
-            <p>Si vous n'avez pas tenter de récupérer votre nom d'utilisateur, veuillez communiquer avec</p>
-            <p>notre service d'aide à l'email suivant: <a>admin@example.com</a></p>
-            </body>
-            </html>
-            ";
-            $message = wordwrap($message,70);
+            $message =  $User->nomutilisateur;
             $data = ['message' => $message];
-            Mail::to('expressShop.Recovery@hotmail.com')->send(new EmailSender($data));
+            Mail::to($User->email)->send(new EmailSender($data));
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
    }
 
    public function RecoverPassword(Request $request)
    {
-       
+        $User = DB::table('user')->select('*')->where('nomutilisateur', $request['nomutilisateur'])->first();
+        if (is_null($User)) {
+            return response()->json(['error'=> 'User doesnt exist'], 401);
+        }
+        else{
+            $message =  $User->motdepasse;
+            $data = ['message' => $message];
+            Mail::to($User->email)->send(new EmailSender($data));
+            return response()->json(['success'=> 'email sent'], $this->successStatus);
+        } 
    }
 
 
