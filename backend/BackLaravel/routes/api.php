@@ -21,10 +21,3 @@ Route::post('/profil','API\ProfilController@GetUser');
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
  });
-
-// CATCH ALL ROUTE =============================  
-// all routes that are not home or api will be redirected to the frontend 
-// this allows angular to route them 
-Route::any('{catchall}', function() {
-    return View::make('index'); 
-  })->where('catchall', '.*');

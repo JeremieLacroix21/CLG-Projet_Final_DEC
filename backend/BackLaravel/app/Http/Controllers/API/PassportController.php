@@ -52,6 +52,7 @@ class PassportController extends Controller
 
    public function RecoverUsername(Request $request)
    {
+        $number = 1;
         $User = DB::table('user')->select('*')->where('email', $request['email'])->first();
         if (is_null($User)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
@@ -59,13 +60,14 @@ class PassportController extends Controller
         else{
             $message =  $User->nomutilisateur;
             $data = ['message' => $message];
-            Mail::to($User->email)->send(new EmailSender($data));
+            Mail::to($User->email)->send(new EmailSender($data, $number));
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
    }
 
    public function RecoverPassword(Request $request)
    {
+        $number = 2;
         $User = DB::table('user')->select('*')->where('nomutilisateur', $request['nomutilisateur'])->first();
         if (is_null($User)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
@@ -73,7 +75,7 @@ class PassportController extends Controller
         else{
             $message =  $User->motdepasse;
             $data = ['message' => $message];
-            Mail::to($User->email)->send(new EmailSender($data));
+            Mail::to($User->email)->send(new EmailSender($data, $number));
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
    }
