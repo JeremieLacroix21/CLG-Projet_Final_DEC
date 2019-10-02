@@ -7,7 +7,7 @@
       </a>
       <span class="menu-spacer"></span>
       <div>
-        <a mat-button [routerLink]="'modifprofile'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
+        <a mat-button [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
     
     </mat-toolbar-row>
@@ -18,6 +18,8 @@
     
       <mat-nav-list>
         <a mat-list-item [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</a>
+        <a mat-list-item [routerLink]="'browseProduct'" routerLinkActive="active">Produits</a>
+        <a mat-list-item [routerLink]="'shoppingCart'" routerLinkActive="active">Panier d'achat</a>
       </mat-nav-list>
     
     </mat-sidenav>
