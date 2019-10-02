@@ -14,15 +14,8 @@ import { first } from 'rxjs/operators';
 })
 export class BrowseProductsComponent implements OnInit
 {
-<<<<<<< HEAD
-  //max = 9999;
-  //min = 0;
-
-=======
   max = 9999;
   min = 0;
-  
->>>>>>> c35795307b10f49f638aaecc52af9d555171065e
   // Contains all the products got from the api
   // TODO: Load the products in loadProducts() instead of using the sample
   private loadedProducts : Product[];
