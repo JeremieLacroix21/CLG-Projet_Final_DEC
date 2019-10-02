@@ -79,6 +79,7 @@ export class ShoppingCartComponent implements OnInit {
   delete(column)
   {
     delete this.TABelement[column];
+    document.getElementById("tr" + column).remove();
   }
   SousTotal(i) : string
   {
@@ -93,6 +94,7 @@ export class ShoppingCartComponent implements OnInit {
         this.total += this.TABelement[i].prix * this.TABelement[i].qty;
     }
   }
+  
 
 }
 
