@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { BrowseProductsComponent } from './browse-products/browse-products.component';
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
+import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'modifprofile',
         component: ModifProfileComponent
+      },
+      {
+        path: 'fournisseurListe',
+        component: FournisseurListeComponent
       }
     ]
   }

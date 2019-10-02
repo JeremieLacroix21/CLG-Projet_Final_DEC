@@ -53,13 +53,15 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
+import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     BrowseProductsComponent,
-    ModifProfileComponent
+    ModifProfileComponent,
+    FournisseurListeComponent
   ],
   imports: [
     CommonModule,
