@@ -14,9 +14,7 @@ export class ProductService {
    }
 
   GetProduct() {
-    const body = new HttpParams();
-    return this.http.post<any>(`${config.apiUrl}/api/ShowProduct`,
-    body.toString(),
+    return this.http.get<Product>(`${config.apiUrl}/api/ShowProduct`,
     {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
