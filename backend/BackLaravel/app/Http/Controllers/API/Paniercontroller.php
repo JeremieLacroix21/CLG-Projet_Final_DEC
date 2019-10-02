@@ -16,8 +16,15 @@ class PassportController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-   public function GetPanier(Request $request){
-   
+    public function GetPanier(Request $request){
+        
+
+
+    }
+
+    public function AddItempanier(Request $request){
+        
+
 
     }
 
