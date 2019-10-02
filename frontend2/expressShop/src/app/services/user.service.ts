@@ -12,11 +12,9 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-      return this.http.get<User[]>(`${config.apiUrl}/getAllUsers`,
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-      }
-      );
-    }
+    return this.http.get<User[]> (
+      `${config.apiUrl}/api/GetAllUsers`,
+      {headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')}
+    );
+  }
 }

@@ -10,15 +10,22 @@ import { Observable } from 'rxjs';
 })
 export class AdminUsersComponent implements OnInit {
 
-  private loadedUser: Observable<User[]>;
+  usersLoaded: Promise<boolean>;
+  loadedUser: User[];
 
-  constructor(private userService: UserService) { this.initUsers(); }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.initUsers();
   }
 
   private initUsers() {
-    this.loadedUser = this.userService.getAll();
+    this.userService.getAll().subscribe(
+      data => {
+        this.loadedUser = data;
+        this.usersLoaded = Promise.resolve(true);
+      }
+    );
   }
 
 }
