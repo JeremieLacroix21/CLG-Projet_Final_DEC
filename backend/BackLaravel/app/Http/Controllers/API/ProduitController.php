@@ -15,8 +15,8 @@ class ProduitController extends Controller
         $data = [];
         foreach($produit as $produits) 
         {
-            $data[$produits->idproduits] = [$produits->nom_produit,$produits->prix, 
-            $produits->idfournisseur,$produits->enstock,$produits->GUID,$produits->Description];
+            $data[$produits->idproduits] = [$produits->nom,$produits->prix, 
+            $produits->idFournisseur,$produits->enStock,$produits->imgGUID,$produits->description];
         }
         return json_encode($data);
     }
@@ -38,8 +38,8 @@ class ProduitController extends Controller
         }
         foreach($produit as $produits) 
         {
-            $data[$produits->idproduits] = [$produits->nom_produit,$produits->prix, 
-            $produits->idfournisseur,$produits->enstock,$produits->GUID,$produits->Description];
+            $data[$produits->idproduits] = [$produits->nom,$produits->prix, 
+            $produits->idFournisseur,$produits->enStock,$produits->imgGUID,$produits->description];
         }
         return json_encode($data);
     }
@@ -49,22 +49,22 @@ class ProduitController extends Controller
        $input = $request->all();
        //Ajout du produit
        DB::table('produits')->insert(array(
-        'nom_produit' =>  $input['nom_produit'],
+        'nom' =>  $input['nom'],
         'prix' => $input['prix'],
-        'idfournisseur' => $input['idfournisseur'],
-        'enstock' => $input['enstock'],
-        'GUID' => $input['GUID'],
-        'Description' => $input['Description'],
+        'idFournisseur' => $input['idFournisseur'],
+        'enStock' => $input['enStock'],
+        'imgGUID' => $input['imgGUID'],
+        'description' => $input['description'],
        ));
        //Ajout du tag
        $data = explode(";",$input["Tags"]);
        foreach ($data as $Tags) {
         $TagExiste = DB::table('tags_produit')
-        ->where('Tag', '=', $Tags)
+        ->where('tag', '=', $Tags)
         ->first();
         if (is_null($TagExiste)) {
             DB::table('tags_produit')->insert(array(
-                'Tag' => $Tags
+                'tag' => $Tags
                ));
         }
         //Ajout du lien tag
@@ -78,7 +78,7 @@ class ProduitController extends Controller
        $data = $request->file('Image')->getClientOriginalName();
        $destination = base_path() . '/storage/ImageUpload';
         $ImageExiste = DB::table('produits')
-        ->where('GUID', '=', $data)
+        ->where('imgGUID', '=', $data)
         ->first();
         if (is_null($ImageExiste)) {
             $request->file('Image')->move($destination, $data);

@@ -17,7 +17,7 @@ class PassportController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function login(Request $request){
-    $user_favorites = DB::table('user')
+    $user_favorites = DB::table('users')
     ->where('nomutilisateur', '=', $request->get('name'))
     ->where('motdepasse', '=', $request->get('password'))
     ->first();
@@ -35,7 +35,7 @@ class PassportController extends Controller
    public function register(Request $request)
    {
        $input = $request->all();
-       DB::table('user')->insert(array(
+       DB::table('users')->insert(array(
         'nomutilisateur' =>  $input['name'],
         'email' => $input['email'],
         'motdepasse' => $input['password'],
@@ -53,7 +53,7 @@ class PassportController extends Controller
    public function RecoverUsername(Request $request)
    {
         $number = 1;
-        $User = DB::table('user')->select('*')->where('email', $request['email'])->first();
+        $User = DB::table('users')->select('*')->where('email', $request['email'])->first();
         if (is_null($User)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
         }
@@ -68,7 +68,7 @@ class PassportController extends Controller
    public function RecoverPassword(Request $request)
    {
         $number = 2;
-        $User = DB::table('user')->select('*')->where('nomutilisateur', $request['nomutilisateur'])->first();
+        $User = DB::table('users')->select('*')->where('nomutilisateur', $request['nomutilisateur'])->first();
         if (is_null($User)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
         }

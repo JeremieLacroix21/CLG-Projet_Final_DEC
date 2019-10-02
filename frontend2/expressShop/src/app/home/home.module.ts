@@ -6,6 +6,9 @@ import { BrowseProductsComponent } from './browse-products/browse-products.compo
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { HomeComponent } from './home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 //Angular Material Components
 import {MatCheckboxModule} from '@angular/material';
@@ -42,7 +45,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatDividerModule} from '@angular/material/divider';
 
-
 //other
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -53,8 +55,6 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
-import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -63,7 +63,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     BrowseProductsComponent,
     ModifProfileComponent,
     FournisseurListeComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    AdminUsersComponent
   ],
   imports: [
     CommonModule,
