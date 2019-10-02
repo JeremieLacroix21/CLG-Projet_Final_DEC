@@ -1,0 +1,10 @@
+input{
+    width: 50px;
+    border: aquamarine;
+    text-align: center;
+}
+
+th{
+    padding:10px;
+    border: 2px black groove;
+}

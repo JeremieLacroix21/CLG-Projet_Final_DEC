@@ -4,4 +4,5 @@ export class product
     nom: string;
     prix: number;
     photo: string;
+    qty: number;
 }

@@ -7,12 +7,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let Country of country">
-        <th scope="row">{{Country.id}}</th>
-        <th>{{Country.name}}</th>
-        <th>{{Country.flag}}</th>
-        <th>{{Country.area}}</th>
-        <th>{{Country.population}}</th>
+      <tr mdbTableCol *ngFor="let p of TABelement; let i = index ">
+        <th scope="row">{{p.photo}}</th>
+        <th>{{p.id}}</th>
+        <th>{{p.nom}}</th>
+        <th>{{p.prix}}</th>
+        <th>
+            <button type="submit" (click)="increment(i)" id="bt1plus">+</button>
+                <input type="number" min="0" id="text+i" (keyup)="0" (key.enter)="set(i)"  placeholder="{{p.qty}}">
+            <button type="submit" (click)="decrement(i)" id="btmoin">-</button>
+        </th>
+        <th>{{this.SousTotal(i)}}</th>
       </tr>
     </tbody>
   </table>
+  <table>
+  <thead>
+        <tr>
+          <th>Total   </th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>{{total}}</th>
+        </tr>
+      </thead>
+    </table>
+<br/>
+  <p>test</p>
+
+
