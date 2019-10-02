@@ -13,6 +13,10 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'browseProduct'
+      },
+      {
+        path: 'browseProduct',
         component: BrowseProductsComponent
       },
       {
