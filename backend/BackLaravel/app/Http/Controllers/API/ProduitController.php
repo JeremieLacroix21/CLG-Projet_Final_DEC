@@ -70,7 +70,7 @@ class ProduitController extends Controller
         //Ajout du lien tag
         DB::select('Call InsertionLienTagsProduit(?)',array($Tags));
        }
-       return response()->json(['sucess'=> 'produit inséré'], 200);
+       return response()->json(['sucess'=> 'produit insere'], 200);
    }
 
    public function AddImage(Request $request)

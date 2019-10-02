@@ -4,7 +4,7 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost/',
+    'url' => 'http://localhost:8000/',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -317,7 +317,7 @@
       array (
         'driver' => 'local',
         'root' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\app/public',
-        'url' => 'http://localhost//storage',
+        'url' => 'http://localhost:8000//storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -416,16 +416,16 @@
   'mail' => 
   array (
     'driver' => 'smtp',
-    'host' => 'smtp.mailtrap.io',
-    'port' => '2525',
+    'host' => 'smtp.googlemail.com',
+    'port' => '465',
     'from' => 
     array (
-      'address' => 'ExpressShop.Recovery@hotmail.com',
-      'name' => 'Recovery',
+      'address' => 'hello@example.com',
+      'name' => 'Example',
     ),
-    'encryption' => 'tls',
-    'username' => '590bcd26794e7a',
-    'password' => 'fb7a691f6f0067',
+    'encryption' => 'ssl',
+    'username' => 'expressshop.recovery@gmail.com',
+    'password' => 'Mastercharles14',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'markdown' => 
     array (
@@ -490,8 +490,8 @@
   array (
     'mailgun' => 
     array (
-      'domain' => NULL,
-      'secret' => NULL,
+      'domain' => 'https://api.mailgun.net/v3/sandbox2fda8427eb324b10acf035991fed035f.mailgun.org',
+      'secret' => 'c2e47e1912310a349cc564e53463ad94-af6c0cec-9fbd3d77',
       'endpoint' => 'api.mailgun.net',
     ),
     'postmark' => 

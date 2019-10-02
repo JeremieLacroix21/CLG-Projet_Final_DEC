@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from 'src/app/product.entity';
+import { combineLatest } from 'rxjs';
  //items = TABelement;
   
     
@@ -58,13 +59,13 @@ export class ShoppingCartComponent implements OnInit {
   }
   decrement(column)
   {
-    if(this.TABelement[column].qty - 1 > 0)
+    if(this.TABelement[column].qty - 1 == 0)
     {
-    this.TABelement[column].qty -= 1;
+      this.delete(column);
     }
     else 
     {
-      this.delete(column);
+      this.TABelement[column].qty -= 1;
     }
     this.Total();
   }
@@ -77,10 +78,8 @@ export class ShoppingCartComponent implements OnInit {
 
   delete(column)
   {
-    const index = this.TABelement.indexOf(column, 0);
-    if (index > -1) {
-       this.TABelement.splice(index, 1);
-    }
+    delete this.TABelement[column];
+    document.getElementById("tr" + column).remove();
   }
   SousTotal(i) : string
   {
@@ -95,6 +94,7 @@ export class ShoppingCartComponent implements OnInit {
         this.total += this.TABelement[i].prix * this.TABelement[i].qty;
     }
   }
+  
 
 }
 

@@ -14,9 +14,15 @@ import { first } from 'rxjs/operators';
 })
 export class BrowseProductsComponent implements OnInit
 {
+<<<<<<< HEAD
   //max = 9999;
   //min = 0;
 
+=======
+  max = 9999;
+  min = 0;
+  
+>>>>>>> c35795307b10f49f638aaecc52af9d555171065e
   // Contains all the products got from the api
   // TODO: Load the products in loadProducts() instead of using the sample
   private loadedProducts : Product[];
@@ -62,17 +68,14 @@ export class BrowseProductsComponent implements OnInit
     // Toggle the favorite attribute
     btn.attributes['favorite'].value = (btn.attributes['favorite'].value === 'false' ? 'true' : 'false');
 
-    // TODO: Update the product (replace code below)
+    let newFavoriteValue = false;
     for(var i = 0; i < this.loadedProducts.length; ++i) {
       if (this.loadedProducts[i].idproduits == productId) {
-        if (btn.attributes['favorite'].value === 'true') {
-          window.alert(this.loadedProducts[i].nom_produit + ' has been added to your favorites')
-        } else {
-          window.alert(this.loadedProducts[i].nom_produit + ' has been removed from your favorites')
-        }
+        newFavoriteValue = (btn.attributes['favorite'].value === 'true');
         break;
       }
     }
+<<<<<<< HEAD
   } */
 
   GetProducts(){
@@ -85,6 +88,19 @@ export class BrowseProductsComponent implements OnInit
           console.log(data);
         }
     );
+=======
+
+    // TODO: Update the product (replace alerts below)
+    if (newFavoriteValue) {
+      window.alert(this.loadedProducts[i].nom_produit + ' has been added to your favorites')
+    } else {
+      window.alert(this.loadedProducts[i].nom_produit + ' has been removed from your favorites')
+    }
+  }
+
+  GetProducts() {
+    
+>>>>>>> c35795307b10f49f638aaecc52af9d555171065e
   }
 
 }

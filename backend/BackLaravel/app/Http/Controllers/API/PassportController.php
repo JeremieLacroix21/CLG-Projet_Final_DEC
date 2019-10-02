@@ -80,5 +80,22 @@ class PassportController extends Controller
         } 
    }
 
-
+   public function GetAllUsers()
+   {
+        $users = DB::table('users')->get();
+        $data = []; 
+        foreach($users as $user) {
+            $data[$user->iduser] = [
+                $user->iduser,
+                $user->nomutilisateur,
+                $user->nom,
+                $user->prenom,
+                $user->TypeUser,
+                $user->confirme,
+                $user->dateinscription,
+                $user->email
+            ];
+        }
+        return json_encode($data);
+    }
 }

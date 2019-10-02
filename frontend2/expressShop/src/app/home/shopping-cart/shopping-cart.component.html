@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let p of TABelement; let i = index ">
+      <tr mdbTableCol *ngFor="let p of TABelement; let i = index" [attr.id]="tr + p.id">
         <th scope="row">{{p.photo}}</th>
         <th>{{p.id}}</th>
         <th>{{p.nom}}</th>
@@ -24,8 +24,8 @@
   <table>
   <thead>
         <tr>
-          <th>Total   </th>
-          <th></th>
+          <th>Total</th>
+          <th class=""></th>
           <th></th>
           <th></th>
           <th>{{total}}</th>
