@@ -424,8 +424,8 @@
       'name' => 'Example',
     ),
     'encryption' => 'ssl',
-    'username' => 'expressshop.recovery@gmail.com',
-    'password' => 'Mastercharles14',
+    'username' => 'express.shop.company@gmail.com',
+    'password' => 'Expressshop74',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'markdown' => 
     array (
