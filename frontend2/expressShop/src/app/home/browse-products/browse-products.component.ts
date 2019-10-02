@@ -25,9 +25,9 @@ export class BrowseProductsComponent implements OnInit
 
   ngOnInit() {
   }
-
   // Gets a list of products from the API.
   // TODO: Include parameters for searches and filters
+
   private loadProducts() {
     // TODO: Call the API to get the products
 
@@ -66,6 +66,10 @@ export class BrowseProductsComponent implements OnInit
         break;
       }
     }
+  }
+
+  GetProducts(){
+    
   }
 
 }
