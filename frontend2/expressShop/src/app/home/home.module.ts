@@ -54,6 +54,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
 import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste
     HomeComponent,
     BrowseProductsComponent,
     ModifProfileComponent,
-    FournisseurListeComponent
+    FournisseurListeComponent,
+    ShoppingCartComponent
   ],
   imports: [
     CommonModule,
