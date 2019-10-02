@@ -24,6 +24,15 @@ class ProduitController extends Controller
    public function AddProduct(Request $request)
    {
        $input = $request->all();
+       //Ajout du produit
+       DB::table('produits')->insert(array(
+        'nom_produit' =>  $input['nom_produit'],
+        'prix' => $input['prix'],
+        'idfournisseur' => $input['idfournisseur'],
+        'enstock' => $input['enstock'],
+        'GUID' => $input['GUID'],
+        'Description' => $input['Description'],
+       ));
        //Ajout du tag
        $data = explode(";",$input["Tags"]);
        foreach ($data as $Tags) {
@@ -35,19 +44,10 @@ class ProduitController extends Controller
                 'Tag' => $Tags
                ));
         }
+        //Ajout du lien tag
+        DB::select('Call InsertionLienTagsProduit(?)',array($Tags));
        }
-       return response()->json(['success'=> 'Tag inséré'], 200);
-       //Ajout du lien_Tag
-
-       //Ajout du produit
-       DB::table('produits')->insert(array(
-        'nom_produit' =>  $input['nom'],
-        'prix' => $input['prix'],
-        'idfournisseur' => $input['idfournisseur'],
-        'enstock' => $input['enstock'],
-        'GUID' => $input['GUID'],
-        'Tags' => $input['Tags'],
-       ));
+       return response()->json(['sucess'=> 'produit inséré'], 200);
    }
 
    public function AddImage(Request $request)
@@ -62,7 +62,7 @@ class ProduitController extends Controller
             return json_encode($data);
         }
         else{
-           return response()->json(['error'=> 'Nom déja utilisé'], 401);
+           return response()->json(['error'=> 'Nom dimage déja utilisé'], 401);
         }
    }
 }
