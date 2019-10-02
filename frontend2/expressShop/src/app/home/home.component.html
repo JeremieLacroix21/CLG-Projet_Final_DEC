@@ -1,10 +1,13 @@
-<mat-toolbar color="blue" style="background-color: rgb(149, 161, 172)">
-    <mat-toolbar-row>
-    
+<mat-toolbar color="primary" style="background-color: rgb(149, 161, 172)">
+    <mat-toolbar-row>    
       <button mat-icon-button><mat-icon (click)="sidenav.toggle()">menu</mat-icon></button>
+      <a class="homeLink" [routerLink]="''">
+        <img class="logoES" src="../../assets/img/ESLogo2_Black_NoBg_NoText_Reverse_278x155.png" />
+        <span class="EStitle-black">xpress Shop</span>
+      </a>
       <span class="menu-spacer"></span>
       <div>
-        <a mat-button [routerLink]="'modifprofile'" routerLinkActive="active"> modifprofile</a>
+        <a mat-button [routerLink]="'modifprofile'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
     
     </mat-toolbar-row>
@@ -19,7 +22,7 @@
     
     </mat-sidenav>
     <mat-sidenav-content>
-    
+      
       <div style="height: 88vh;">
         <router-outlet></router-outlet>
       </div>

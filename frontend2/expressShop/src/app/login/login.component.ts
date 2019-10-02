@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
+    
     this.loading = true;
     this.authenticationService
       .login(this.form.controls.username.value, this.form.controls.password.value)
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
               this.invalidLogin = true;
               this.loading = false; 
             }
-            
 
             //DEBUG UNCOMMENT TO GAIN ACCESS LOGIN --> HOME (or see app/models/DEBUG-LOGIN.ts)
             if (DEBUGGING) {

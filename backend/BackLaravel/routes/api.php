@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('AddProduct','API\ProduitController@AddProduct');
  Route::post('AddImage', 'API\ProduitController@AddImage');
 //Route Profil
-Route::put('/profil','API\ProfilController@Updatepassword');
-Route::post('/profil','API\ProfilController@GetUser');
+ Route::put('/profil','API\ProfilController@Updatepassword');
+ Route::post('/profil','API\ProfilController@GetUser');
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
  });

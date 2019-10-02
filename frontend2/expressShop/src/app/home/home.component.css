@@ -1,0 +1,23 @@
+.logoES {
+    height: 46px;
+}
+
+.EStitle-black {
+    color: #424244;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.EStitle-red {
+    color: #ee1b24;
+    font-style: italic;
+}
+
+.menu-spacer {
+    flex: 1 1 auto;
+}
+
+.homeLink {
+    text-decoration: none;
+    display: contents;
+}
