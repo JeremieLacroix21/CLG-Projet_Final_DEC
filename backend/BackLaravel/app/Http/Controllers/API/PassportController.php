@@ -84,16 +84,16 @@ class PassportController extends Controller
    {
         $users = DB::table('users')->get();
         $data = []; 
-        foreach($user as $users) {
-            $data[$users->iduser] = [
-                $users->iduser,
-                $users->nomutilisateur,
-                $users->nom,
-                $users->prenom,
-                $users->TypeUser,
-                $users->confirme,
-                $users->dateinscription,
-                $users->email
+        foreach($users as $user) {
+            $data[$user->iduser] = [
+                $user->iduser,
+                $user->nomutilisateur,
+                $user->nom,
+                $user->prenom,
+                $user->TypeUser,
+                $user->confirme,
+                $user->dateinscription,
+                $user->email
             ];
         }
         return json_encode($data);
