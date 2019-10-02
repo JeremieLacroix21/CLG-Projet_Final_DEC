@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { products } from '../../models/sample-products';
+import { ProductService } from '../../services/product.service';
+
 import { Product } from '../../models/product';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { Router, ActivatedRoute } from "@angular/router";
 import { Supplier } from 'src/app/models/supplier';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-browse-products',
@@ -12,24 +14,34 @@ import { Supplier } from 'src/app/models/supplier';
 })
 export class BrowseProductsComponent implements OnInit
 {
+<<<<<<< HEAD
+  //max = 9999;
+  //min = 0;
+
+=======
   max = 9999;
   min = 0;
   
+>>>>>>> c35795307b10f49f638aaecc52af9d555171065e
   // Contains all the products got from the api
   // TODO: Load the products in loadProducts() instead of using the sample
-  private loadedProducts = products;
+  private loadedProducts : Product[];
   // Contains all the owners(suppliers) that own products in the array above
   // Example: supplierMap[products[0].idfournisseur].nomutilisateur
-  private supplierMap: { [key:number]:Supplier } = {};
+  //private supplierMap: { [key:number]:Supplier } = {};
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private productservice: ProductService) {
+      this.GetProducts();
+    }
 
   ngOnInit() {
   }
   // Gets a list of products from the API.
   // TODO: Include parameters for searches and filters
 
-  private loadProducts() {
+  /* private loadProducts() {
     // TODO: Call the API to get the products
 
     // Get a list of all the products' owners and map them to their id
@@ -40,9 +52,9 @@ export class BrowseProductsComponent implements OnInit
         //this.supplierMap[product.idfournisseur] = LOADED_SUPPLIER;
       }
     }
-  }
+  } */
 
-  private onClickFavoriteBtn(event) {
+  /* private onClickFavoriteBtn(event) {
     let btnId = event.currentTarget.id;
     let btn = document.getElementById(btnId);
     let splitBtnId = btnId.split('-');
@@ -63,17 +75,18 @@ export class BrowseProductsComponent implements OnInit
         break;
       }
     }
+  } */
 
-    // TODO: Update the product (replace alerts below)
-    if (newFavoriteValue) {
-      window.alert(this.loadedProducts[i].nom_produit + ' has been added to your favorites')
-    } else {
-      window.alert(this.loadedProducts[i].nom_produit + ' has been removed from your favorites')
-    }
-  }
-
-  GetProducts() {
-    
+  GetProducts(){
+    this.productservice
+    .GetProduct()
+    .pipe(first())
+    .subscribe(
+        data => {
+          this.loadedProducts = data['loadedProducts'];
+          console.log(data);
+        }
+    );
   }
 
 }
