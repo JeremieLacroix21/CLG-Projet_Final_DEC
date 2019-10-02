@@ -12,6 +12,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('register', 'API\PassportController@register');
  Route::post('RecoverUsername', 'API\PassportController@RecoverUsername');
  Route::post('RecoverPassword', 'API\PassportController@RecoverPassword');
+ Route::get('GetUsers', 'API\PassportController@GetAllUsers');
 //Route Produit
  Route::post('ShowProduct','API\ProduitController@ShowProduct');
  Route::post('ShowProductParRecherche','API\ProduitController@ShowProductParRecherche');
