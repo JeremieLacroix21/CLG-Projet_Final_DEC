@@ -75,7 +75,6 @@ export class BrowseProductsComponent implements OnInit
         break;
       }
     }
-<<<<<<< HEAD
   } */
 
   GetProducts(){
@@ -88,19 +87,6 @@ export class BrowseProductsComponent implements OnInit
           console.log(data);
         }
     );
-=======
-
-    // TODO: Update the product (replace alerts below)
-    if (newFavoriteValue) {
-      window.alert(this.loadedProducts[i].nom_produit + ' has been added to your favorites')
-    } else {
-      window.alert(this.loadedProducts[i].nom_produit + ' has been removed from your favorites')
-    }
-  }
-
-  GetProducts() {
-    
->>>>>>> c35795307b10f49f638aaecc52af9d555171065e
   }
 
 }
