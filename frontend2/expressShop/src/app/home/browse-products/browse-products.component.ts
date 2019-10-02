@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { products } from '../../models/sample-products';
 import { Product } from '../../models/product';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { Supplier } from 'src/app/models/supplier';
 
 @Component({
   selector: 'app-browse-products',
@@ -11,15 +12,15 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 })
 export class BrowseProductsComponent implements OnInit
 {
-
   max = 9999;
   min = 0;
+
   // Contains all the products got from the api
   // TODO: Load the products in loadProducts() instead of using the sample
   private loadedProducts = products;
   // Contains all the owners(suppliers) that own products in the array above
   // Example: supplierMap[products[0].idfournisseur].nomutilisateur
-  private supplierMap: { [key:number]:string } = {};
+  private supplierMap: { [key:number]:Supplier } = {};
 
   constructor() { }
 

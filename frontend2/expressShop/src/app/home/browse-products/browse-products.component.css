@@ -1,9 +1,10 @@
-.mat-form-field{
+.mat-form-field {
     padding-left: 20px;
 }
-.container{
+.container {
     padding: 10px;
 }
+
 .grid-container {
     display: grid;
     

@@ -5,6 +5,7 @@ import { BrowseProductsComponent } from './browse-products/browse-products.compo
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'shoppingCart',
         component: ShoppingCartComponent
+      },
+      {
+        path: 'admin-users',
+        component: AdminUsersComponent
       }
     ]
   }

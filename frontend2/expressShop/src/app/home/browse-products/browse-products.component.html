@@ -29,6 +29,7 @@
         <mat-form-field class="example-margin">
             <input matInput type="number" placeholder="Prix min" value="min">
         </mat-form-field>
+
         <mat-form-field class="example-margin">
             <input matInput type="number" placeholder="Prix max" value="max">
         </mat-form-field>
@@ -51,13 +52,13 @@
             <!-- TODO: Define and implement the action to execute when clicking the product's picture -->
             <a href=""><img mat-card-image class="product-img-card" src="http://pbs.twimg.com/media/Dg19RdYWsAAkoI0.jpg" /></a>
 
-            <!-- TODO: Get the product's description onClickFavoriteBtn($event)-->
+            <!-- TODO: Get the product's description -->
             <mat-card-content class="product-card-content">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially un...
             </mat-card-content>
 
             <mat-card-actions>
-                <button favorite="false" (click)="loadProducts()" id="add-to-favorites-{{product.idproduits}}" class="mdc-icon-button">
+                <button favorite="false" (click)="onClickFavoriteBtn($event)" id="add-to-favorites-{{product.idproduits}}" class="mdc-icon-button">
                     <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
                     <i class="material-icons mdc-icon-button__icon">star_border</i>
                 </button>
