@@ -1,34 +1,70 @@
+<div class="container">    
+    <mat-card class="filter-card">
+        <mat-form-field>
+            <input matInput placeholder="Categorie" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+                    <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
+                        <span>{{state.name}}</span> |
+                        <small></small>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
 
-<div class="grid-container">
+        <mat-form-field>
+                <input matInput placeholder="Fournisseur" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+                        <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
+                            <span>{{state.name}}</span> |
+                            <small></small>
+                    </mat-option>
+                </mat-autocomplete>
+        </mat-form-field>
 
-    <mat-card *ngFor="let product of loadedProducts" class="product-card grid-item">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
 
-        <mat-card-title-group>
-            <mat-card-title>{{product.nom_produit}}</mat-card-title>
-            <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->
-            <!-- TODO: Get the supplier's name -->
-            <mat-card-subtitle>Offert par <a href="">Pom</a></mat-card-subtitle>
-            <!-- TODO: Load the supplier's logo -->
-            <a href=""><img mat-card-avatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" /></a>
-        </mat-card-title-group>
-
-        <!-- TODO: Load the product's image -->
-        <!-- TODO: Define and implement the action to execute when clicking the product's picture -->
-        <a href=""><img mat-card-image class="product-img-card" src="http://pbs.twimg.com/media/Dg19RdYWsAAkoI0.jpg" /></a>
-
-        <!-- TODO: Get the product's description onClickFavoriteBtn($event)-->
-        <mat-card-content class="product-card-content">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially un...
-        </mat-card-content>
-
-        <mat-card-actions>
-            <button favorite="false" (click)="loadProducts()" id="add-to-favorites-{{product.idproduits}}" class="mdc-icon-button">
-                <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
-                <i class="material-icons mdc-icon-button__icon">star_border</i>
-            </button>
-            <button class="cart-btn" mat-icon-button><mat-icon>add_shopping_cart</mat-icon></button>
-        </mat-card-actions>
-
+        <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Prix min" value="min">
+        </mat-form-field>
+        <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Prix max" value="max">
+        </mat-form-field>
     </mat-card>
 
+    <div class="grid-container">
+
+        <mat-card *ngFor="let product of loadedProducts" class="product-card grid-item">
+
+            <mat-card-title-group>
+                <mat-card-title>{{product.nom_produit}}</mat-card-title>
+                <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->
+                <!-- TODO: Get the supplier's name -->
+                <mat-card-subtitle>Offert par <a href="">Pom</a></mat-card-subtitle>
+                <!-- TODO: Load the supplier's logo -->
+                <a href=""><img mat-card-avatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" /></a>
+            </mat-card-title-group>
+
+            <!-- TODO: Load the product's image -->
+            <!-- TODO: Define and implement the action to execute when clicking the product's picture -->
+            <a href=""><img mat-card-image class="product-img-card" src="http://pbs.twimg.com/media/Dg19RdYWsAAkoI0.jpg" /></a>
+
+            <!-- TODO: Get the product's description onClickFavoriteBtn($event)-->
+            <mat-card-content class="product-card-content">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially un...
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button favorite="false" (click)="loadProducts()" id="add-to-favorites-{{product.idproduits}}" class="mdc-icon-button">
+                    <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                    <i class="material-icons mdc-icon-button__icon">star_border</i>
+                </button>
+                <button class="cart-btn" mat-icon-button><mat-icon>add_shopping_cart</mat-icon></button>
+            </mat-card-actions>
+
+        </mat-card>
+
+    </div>
 </div>

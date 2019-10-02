@@ -11,6 +11,9 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 })
 export class BrowseProductsComponent implements OnInit
 {
+
+  max = 9999;
+  min = 0;
   // Contains all the products got from the api
   // TODO: Load the products in loadProducts() instead of using the sample
   private loadedProducts = products;
