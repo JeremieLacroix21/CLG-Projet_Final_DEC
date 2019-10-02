@@ -35,4 +35,10 @@ class ProduitController extends Controller
         'Tags' => $input['Tags'],
        ));
    }
+
+   public function AddImage(Request $request)
+   {
+       $path=$request->file('Image')->store('ImageUpload');
+       return json_encode($path);
+   }
 }
