@@ -16,7 +16,30 @@ class ProduitController extends Controller
         foreach($produit as $produits) 
         {
             $data[$produits->idproduits] = [$produits->nom_produit,$produits->prix, 
-            $produits->idfournisseur,$produits->enstock,$produits->GUID,$produits->Tags];
+            $produits->idfournisseur,$produits->enstock,$produits->GUID,$produits->Description];
+        }
+        return json_encode($data);
+    }
+
+    public function ShowProductParRecherche(Request $request)
+    {
+        $data = [];
+        if(!is_null($request["Tags"])){
+            $produit = DB::select('Call SearchProduct(?,?,?)',array("Tags",$request["Tags"],null));
+        }
+        else if(!is_null($request["fournisseur"])){
+            $produit = DB::select('Call SearchProduct(?,?,?)',array("fournisseur",$request["fournisseur"],null));
+        }
+        else if(!is_null($request["nomproduit"])){
+            $produit = DB::select('Call SearchProduct(?,?,?)',array("nomproduit",$request["nomproduit"],null));
+        }
+        else if(!is_null($request["PrixMin"]) && !is_null($request["PrixMax"])){
+            $produit = DB::select('Call SearchProduct(?,?,?)',array("Prix",$request["PrixMin"],$request["PrixMax"]));
+        }
+        foreach($produit as $produits) 
+        {
+            $data[$produits->idproduits] = [$produits->nom_produit,$produits->prix, 
+            $produits->idfournisseur,$produits->enstock,$produits->GUID,$produits->Description];
         }
         return json_encode($data);
     }

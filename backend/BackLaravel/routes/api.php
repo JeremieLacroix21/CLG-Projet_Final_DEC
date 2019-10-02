@@ -14,6 +14,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('RecoverPassword', 'API\PassportController@RecoverPassword');
 //Route Produit
  Route::post('ShowProduct','API\ProduitController@ShowProduct');
+ Route::post('ShowProductParRecherche','API\ProduitController@ShowProductParRecherche');
  Route::post('AddProduct','API\ProduitController@AddProduct');
  Route::post('AddImage', 'API\ProduitController@AddImage');
 //Route Profil
