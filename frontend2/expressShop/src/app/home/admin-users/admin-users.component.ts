@@ -13,10 +13,9 @@ export class AdminUsersComponent implements OnInit {
   usersLoaded: Promise<boolean>;
   loadedUser: User[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {this.initUsers(); }
 
   ngOnInit() {
-    this.initUsers();
   }
 
   private initUsers() {
