@@ -55,6 +55,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import { TextMaskModule } from 'angular2-text-mask';
      CdkTableModule,
      CdkTreeModule,
      MatTreeModule,
+     NgxSpinnerModule
   ]
 })
 export class HomeModule { }

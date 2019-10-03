@@ -21,3 +21,7 @@
     text-decoration: none;
     display: contents;
 }
+
+.mat-sidenav-container {
+    height: calc(100% - 64px);
+}

@@ -10,15 +10,17 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) {
-   }
+  constructor(private http: HttpClient) {}
 
-  GetProduct() {
-    return this.http.get<Product>(`${config.apiUrl}/api/ShowProduct`,
-    {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-    }).pipe(map(product =>{return product}));
+  getAll() {
+    return this.http.get<Product[]>(
+      `${config.apiUrl}/api/GetAllProducts`,
+      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') }
+    );
+  }
 
+  search(/*search params*/) {
+    // call api/SearchProducts
+    return null;
   }
 }

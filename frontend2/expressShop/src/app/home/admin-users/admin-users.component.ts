@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/users'
+import { BD_User } from '../../models/user'
 import { UserService } from '../../services/user.service'
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-admin-users',
@@ -10,21 +11,13 @@ import { Observable } from 'rxjs';
 })
 export class AdminUsersComponent implements OnInit {
 
-  usersLoaded: Promise<boolean>;
-  loadedUser: User[];
+  private loadedUsers: Observable<BD_User[]>;
+  private columnsToDisplay = ['id', 'type', 'username', 'firstName', 'lastName', 'email', 'creationDate', 'accepted'];
 
-  constructor(private userService: UserService) {this.initUsers(); }
+  constructor(private userService: UserService, private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
+    this.loadedUsers = this.userService.getAll();
+    this.spinner.show();
   }
-
-  private initUsers() {
-    this.userService.getAll().subscribe(
-      data => {
-        this.loadedUser = data;
-        this.usersLoaded = Promise.resolve(true);
-      }
-    );
-  }
-
 }
