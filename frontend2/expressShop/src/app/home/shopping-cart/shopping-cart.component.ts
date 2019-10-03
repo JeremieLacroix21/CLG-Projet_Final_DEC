@@ -51,12 +51,16 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
   increment(column)
   {
     this.TABelement[column].qty += 1;    
     this.Total();
       
   }
+
+
   decrement(column)
   {
     if(this.TABelement[column].qty - 1 == 0)
@@ -71,8 +75,7 @@ export class ShoppingCartComponent implements OnInit {
   }
   set(i)  
   {
-
-
+    
   } 
 
 
@@ -81,10 +84,13 @@ export class ShoppingCartComponent implements OnInit {
     delete this.TABelement[column];
     document.getElementById("tr" + column).remove();
   }
+
+
   SousTotal(i) : string
   {
     return (this.TABelement[i].prix * this.TABelement[i].qty).toString();
   }
+
 
   Total()
   {
@@ -94,8 +100,8 @@ export class ShoppingCartComponent implements OnInit {
         this.total += this.TABelement[i].prix * this.TABelement[i].qty;
     }
   }
-  
 
+  
 }
 
 
