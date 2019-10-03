@@ -6,7 +6,6 @@ use App\User;
 use Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Mail\EmailSender;
 
 class PanierController extends Controller
 {
@@ -28,3 +27,4 @@ class PanierController extends Controller
 
     }
 }
+?>
