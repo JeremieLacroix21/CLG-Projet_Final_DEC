@@ -14,8 +14,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('RecoverPassword', 'API\PassportController@RecoverPassword');
  Route::get('GetAllUsers', 'API\PassportController@GetAllUsers');
 //Route Produit
- Route::get('ShowProduct','API\ProduitController@ShowProduct');
- Route::post('ShowProductParRecherche','API\ProduitController@ShowProductParRecherche');
+ Route::get('GetAllProducts','API\ProduitController@GetAllProducts');
+ Route::post('SearchProducts','API\ProduitController@SearchProducts');
  Route::post('AddProduct','API\ProduitController@AddProduct');
  Route::post('AddImage', 'API\ProduitController@AddImage');
  //route panier

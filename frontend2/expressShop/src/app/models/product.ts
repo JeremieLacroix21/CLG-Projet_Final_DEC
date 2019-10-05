@@ -1,10 +1,10 @@
 export class Product {
-    idproduits: number;
+    idProduit: number;
     prix: number;
     tags: string[];
-    idfournisseur: number;
-    enstock: number;
-    nom_produit: string;
-    GUID: string;
+    idFournisseur: number;
+    enStock: number;
+    nom: string;
+    imgGUID: string;
     description: string;
 }

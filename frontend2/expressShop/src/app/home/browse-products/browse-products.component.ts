@@ -6,6 +6,8 @@ import { Product } from '../../models/product';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Supplier } from 'src/app/models/supplier';
 import { first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-browse-products',
@@ -16,27 +18,23 @@ export class BrowseProductsComponent implements OnInit
 {
   max = 9999;
   min = 0;
-  // Contains all the products got from the api
-  // TODO: Load the products in loadProducts() instead of using the sample
-  private loadedProducts : Product[];
+
+  private loadedProducts : Observable<Product[]>;
   // Contains all the owners(suppliers) that own products in the array above
   // Example: supplierMap[products[0].idfournisseur].nomutilisateur
   //private supplierMap: { [key:number]:Supplier } = {};
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private productservice: ProductService) {
-      this.GetProducts();
-    }
+  constructor(private productService: ProductService, private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
+    this.loadProducts();
+    this.spinner.show();
   }
-  // Gets a list of products from the API.
-  // TODO: Include parameters for searches and filters
 
-  /* private loadProducts() {
-    // TODO: Call the API to get the products
+  private loadProducts() {
+    this.loadedProducts = this.productService.getAll();
 
+    /*
     // Get a list of all the products' owners and map them to their id
     for(let product of this.loadedProducts) {
       // Check if the supplier is already loaded
@@ -45,41 +43,7 @@ export class BrowseProductsComponent implements OnInit
         //this.supplierMap[product.idfournisseur] = LOADED_SUPPLIER;
       }
     }
-  } */
-
-  /* private onClickFavoriteBtn(event) {
-    let btnId = event.currentTarget.id;
-    let btn = document.getElementById(btnId);
-    let splitBtnId = btnId.split('-');
-    let productId = splitBtnId[splitBtnId.length-1];
-
-    // Switch the displayed icon
-    for(var i = 0; i < btn.children.length; ++i) {
-      btn.children[i].classList.toggle('mdc-icon-button__icon--on');
-    }
-
-    // Toggle the favorite attribute
-    btn.attributes['favorite'].value = (btn.attributes['favorite'].value === 'false' ? 'true' : 'false');
-
-    let newFavoriteValue = false;
-    for(var i = 0; i < this.loadedProducts.length; ++i) {
-      if (this.loadedProducts[i].idproduits == productId) {
-        newFavoriteValue = (btn.attributes['favorite'].value === 'true');
-        break;
-      }
-    }
-  } */
-
-  GetProducts(){
-    this.productservice
-    .GetProduct()
-    .pipe(first())
-    .subscribe(
-        data => {
-          this.loadedProducts = data['loadedProducts'];
-          console.log(data);
-        }
-    );
+    */
   }
 
 }

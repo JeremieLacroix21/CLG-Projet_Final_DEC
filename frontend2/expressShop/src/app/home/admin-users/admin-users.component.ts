@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/users'
-import { UserService } from '../../services/user.service'
-import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BD_User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+import { map, filter, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { NgxSpinnerService } from "ngx-spinner";
+import { MatTableDataSource, MatSort, MatSortModule, MatPaginator, MatSlideToggle } from '@angular/material';
 
 @Component({
   selector: 'app-admin-users',
@@ -10,21 +13,66 @@ import { Observable } from 'rxjs';
 })
 export class AdminUsersComponent implements OnInit {
 
-  usersLoaded: Promise<boolean>;
-  loadedUser: User[];
+  private loadedUsers: Observable<BD_User[]>;
+  test: MatSlideToggle;
 
-  constructor(private userService: UserService) {this.initUsers(); }
+  private dataSource: MatTableDataSource<BD_User>;
+  private columnsToDisplay = ['iduser', 'TypeUser', 'nomutilisateur', 'prenom', 'nom', 'email', 'dateinscription', 'confirme', 'actions'];
+
+  @ViewChild(MatSort, {static: false})
+    set findSort(s: MatSort) {
+      if (s && this.dataSource) {
+        this.dataSource.sort = s;
+      }
+    };
+
+  constructor(private userService: UserService, private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
+    this.requestAllUser();
+    this.spinner.show();
   }
 
-  private initUsers() {
-    this.userService.getAll().subscribe(
-      data => {
-        this.loadedUser = data;
-        this.usersLoaded = Promise.resolve(true);
-      }
-    );
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }  
+  
+  requestAllUser() {
+    this.loadedUsers = this.userService.getAll();
+    this.loadedUsers.subscribe(data=> {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
 
+  onChangeConfirmRegistration(event) {
+    let messageConfirmBlock = "Êtes-vous sûr de vouloir bloquer cet utilisateur ?";
+    let messageConfirmUnblock = "Êtes-vous sûr de vouloir débloquer cet utilisateur ?" +
+      "\nIl gagnera accès aux fonctionnalitées majeures du site en fonction de son type de compte.";
+
+    if (window.confirm(event.checked ? messageConfirmUnblock : messageConfirmBlock)) {
+      // Get the user id from the sender
+      let userIdToConfirm = event.source.id.split('-')[2];
+
+      // TODO: Call UpdateConfirmRegistration(userIdToConfirm, event.checked)
+
+      // Update the user locally
+      this.dataSource.data.find(u => u.iduser == userIdToConfirm).confirme = event.checked;
+    }
+  }
+
+  onClickDeleteAccount(event) {
+    let messageConfirmDelete = "Êtes-vous sûr de vouloir supprimer cet utilisateur ?" +
+      "\nToute les données associées au compte seront perdues définitivement.";
+
+    if (window.confirm(messageConfirmDelete)) {
+      // Get the user id from the sender
+      let senderBtn = document.getElementById(event.currentTarget.id);
+      let userIdToDelete = parseInt(senderBtn.id.split('-')[2]);
+      
+      // TODO: Call DeleteUser(userIdToDelete)
+
+      // Delete the user locally
+      this.dataSource.data = this.dataSource.data.filter(u => u.iduser != userIdToDelete);
+    }
+  }
 }

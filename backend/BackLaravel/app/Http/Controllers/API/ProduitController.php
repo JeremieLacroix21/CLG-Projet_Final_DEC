@@ -9,19 +9,28 @@ use Illuminate\Support\Facades\DB;
 
 class ProduitController extends Controller
 {
-   public function ShowProduct()
+   public function GetAllProducts()
    {
-        $produit = DB::table('produits')->get();
+        $produits = DB::table('produits')->get();
         $data = [];
-        foreach($produit as $produits) 
+        $i = 0;
+        foreach($produits as $produit) 
         {
-            $data[$produits->idproduits] = [$produits->nom,$produits->prix, 
-            $produits->idFournisseur,$produits->enStock,$produits->imgGUID,$produits->description];
+            $data[$i] = [
+                'idproduits'>$produit->idproduits,
+                'nom'=>$produit->nom,
+                'prix'=>$produit->prix, 
+                'idFournisseur'=>$produit->idFournisseur,
+                'enStock'=>$produit->enStock,
+                'imgGUID'=>$produit->imgGUID,
+                'description'=>$produit->description
+            ];
+            ++$i;
         }
         return json_encode($data);
     }
 
-    public function ShowProductParRecherche(Request $request)
+    public function SearchProducts(Request $request)
     {
         $data = [];
         if(!is_null($request["Tags"])){
