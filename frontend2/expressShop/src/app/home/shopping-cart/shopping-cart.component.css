@@ -3,8 +3,12 @@ input{
     border: aquamarine;
     text-align: center;
 }
-
-th{
-    padding:10px;
-    border: 2px black groove;
+table {
+    width: 100%;
 }
+.mat-table-sticky {
+    border-top: 1px solid #e0e0e0;
+  }
+  tr.mat-footer-row {
+    font-weight: bold;
+  }

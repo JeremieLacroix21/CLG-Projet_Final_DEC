@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { product } from 'src/app/product.entity';
 import { combineLatest } from 'rxjs';
+
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import { Product } from 'src/app/models/product';
+import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
  //items = TABelement;
   
     
@@ -12,9 +17,13 @@ import { combineLatest } from 'rxjs';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent implements OnInit {
 
-  headElements : string[] = ["image","id","nom","prix","quantité","sous-total"];
+
+export class ShoppingCartComponent implements OnInit {
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité', 'sous-total'];
   NOMPAGE = "Votre Panier";
   TABelement : product[] = [
     {
@@ -40,7 +49,8 @@ export class ShoppingCartComponent implements OnInit {
     },
   
   ];
-
+  
+  dataSource = new MatTableDataSource<product>(this.TABelement);
   total : number;
 
 
@@ -48,8 +58,9 @@ export class ShoppingCartComponent implements OnInit {
   constructor() { 
       this.Total();
   }
-
   ngOnInit() {
+
+    this.dataSource.paginator = this.paginator;
   }
 
 
