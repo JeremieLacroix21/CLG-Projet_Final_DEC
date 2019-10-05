@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { product } from 'src/app/product.entity';
 import { combineLatest } from 'rxjs';
-
+import {MatButtonModule} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Product } from 'src/app/models/product';
