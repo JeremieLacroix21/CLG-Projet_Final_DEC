@@ -23,4 +23,22 @@ export class ProductService {
     // call api/SearchProducts
     return null;
   }
+
+  
+  AddProductToCart(iduser:number,idproduit:number,qty:number)
+  { 
+    /*TODO*/
+  
+  }
+  DeleteProductFromCart(iduser:number,idproduit:number)
+  {
+    /*TODO*/
+  }
+  GetCart(iduser:number)
+  {
+    /*TODO*/
+  }
+
+
+
 }

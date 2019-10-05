@@ -45,5 +45,7 @@ export class BrowseProductsComponent implements OnInit
     }
     */
   }
+  private AddProductToCart (id:number) {
 
+  }
 }

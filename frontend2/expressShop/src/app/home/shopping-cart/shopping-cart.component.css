@@ -12,3 +12,14 @@ table {
   tr.mat-footer-row {
     font-weight: bold;
   }
+
+  .PanierButton{
+      margin: 10px;
+  }
+
+  .PanierButtonDiv{
+    margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
