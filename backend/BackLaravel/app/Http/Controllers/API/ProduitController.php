@@ -112,9 +112,27 @@ class ProduitController extends Controller
 
    public function GetpanierFromId(Request $request)
    {
+    $data = [];
+    $produits = DB::table('panier')
+    ->join('produits', 'panier.idproduit', '=', 'produit.idproduits')
+    ->select('panier.idproduit, produit.nom, produit.prix,produit.imageGUID,panier.quantity')
+    ->where('iduser', '=', $request['id'])
+    ->get();
 
-    
+    foreach($produits as $produit)
+    {
+        $data[$produits->idproduits] = [$produits->idproduit, $produits->$nom, $produits->$prix,$produits->$imageGUID,$produits->$quantity];
+    }
+    return json_encode($data);
    }
+
+   public function DeleteProductFromPanier(Request $request)
+   {
+       DB::table('panier')->where('idproduit', '=', $request['idproduit'])
+       ->where('iduser', '=', $request['iduser'])
+       ->delete();
+   }
+
 
 
 }

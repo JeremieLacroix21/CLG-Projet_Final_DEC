@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { productPanier } from 'src/app/productPanier.entity';
+import { productPanier } from 'src/app/models/productPanier.entity';
 import { combineLatest } from 'rxjs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
