@@ -115,7 +115,7 @@ class ProduitController extends Controller
     $data = [];
     $produits = DB::table('panier')
     ->join('produits', 'panier.idproduit', '=', 'produits.idproduits')
-    ->select('panier.iduser','panier.idproduit', 'produits.nom', 'produits.prix','produits.imgGUID', 'panier.quantity')
+    ->select('iduser','idproduit', 'nom', 'prix','imgGUID', 'quantity')
     //->where('iduser', '=', $request['iduser'])
     ->get();
     
