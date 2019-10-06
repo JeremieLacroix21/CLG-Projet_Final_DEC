@@ -97,5 +97,25 @@ class ProduitController extends Controller
            return response()->json(['error'=> 'Nom dimage déja utilisé'], 401);
         }
    }
+
+   public function AddProductToPanier(Request $request)
+   {
+    $input = $request->all();
+    //Ajout du produit
+    DB::table('panier')->insert(array(
+     'iduser' =>  $input['iduser'],
+     'idproduit' =>  $input['idproduit'],
+     'quantity' =>  $input['quantity']
+    ));
+    return response()->json(['sucess'=> 'produit insere'], 200);
+   }
+
+   public function GetpanierFromId(Request $request)
+   {
+
+    
+   }
+
+
 }
 ?>

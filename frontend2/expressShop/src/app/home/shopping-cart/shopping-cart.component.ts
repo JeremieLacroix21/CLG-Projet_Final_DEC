@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { product } from 'src/app/product.entity';
+import { productPanier } from 'src/app/productPanier.entity';
 import { combineLatest } from 'rxjs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
@@ -25,7 +25,7 @@ export class ShoppingCartComponent implements OnInit {
 
   displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité', 'sous-total'];
   NOMPAGE = "Votre Panier";
-  TABelement : product[] = [
+  TABelement : productPanier[] = [
     {
       id: 1,
       nom: "allo",
@@ -50,7 +50,7 @@ export class ShoppingCartComponent implements OnInit {
   
   ];
   
-  dataSource = new MatTableDataSource<product>(this.TABelement);
+  dataSource = new MatTableDataSource<productPanier>(this.TABelement);
   total : number;
 
 

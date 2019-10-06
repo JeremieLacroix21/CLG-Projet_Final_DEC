@@ -4,6 +4,7 @@ import { config } from '../../config';
 import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { productPanier } from '../models/productPanier.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,10 @@ export class ProductService {
   }
   GetCart(iduser:number)
   {
-    /*TODO*/
+    return this.http.get<productPanier[]>(
+      `${config.apiUrl}/api/GetProduitPanier`,
+      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') }
+    );
   }
 
 
