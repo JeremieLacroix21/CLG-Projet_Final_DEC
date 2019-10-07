@@ -39,14 +39,23 @@
             <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-select name="TypeUser" formControlName="TypeUser" placeholder="Type du compte">
-                <mat-option [value]="Fournisseur"> Fournisseur </mat-option>
-                <mat-option [value]="Distributeur"> Distributeur </mat-option>
-            </mat-select>
+            <mat-label>Type du compte</mat-label>
+            <select matNativeControl>
+                <option value="Fournisseur">Fournisseur</option>
+                <option value="Distributeur">Distributeur</option>
+            </select>
         </mat-form-field></p>
+        
+        <p class="upload">Photo de profil</p>
+        <p>
+            <img id="Image" src="campagne.jpg" class="IMG"/>
+            <mat-form-field appearance="outline" class="Description">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput placeholder="Description de votre compagnie"></textarea>
+            </mat-form-field>
+        </p>
+        <p><input type='file' class="upload"/></p>
     
-        <p *ngIf="invalidLogin" class="error">Informations invalides</p>
-
         <div class="button_div">
             <button mat-button>Annuler</button>
             <button class="button_login" type="submit" mat-button>S'inscrire</button>

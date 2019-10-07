@@ -18,7 +18,8 @@ export class SubscribeComponent implements OnInit {
     TypeUser: new FormControl('', Validators.required),
     adresse: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    Telephone: new FormControl('', Validators.required)
+    Telephone: new FormControl('', Validators.required),
+    Image: new FormControl('', Validators.required)
   })
 
   loading = false;
@@ -34,6 +35,7 @@ export class SubscribeComponent implements OnInit {
   get adresse() { return this.form.get('adresse'); }
   get email() { return this.form.get('email'); }
   get Telephone() { return this.form.get('Telephone'); }
+  get Image() { return this.form.get('Image'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +47,9 @@ export class SubscribeComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  onFileChanged(event) {
+    const file = event.target.files[0]
+  }
   onSubmit() {
     this.submitted = true;
 
