@@ -5,8 +5,10 @@
   }
 
   .mat-form-field {
-    width: 100%;
+    width: 45%;
     min-width: 300px;
+    margin-left:15px;
+    margin-right:15px;
   }
 
   mat-card-title,
@@ -20,8 +22,7 @@
     width: 300px;
     color: white;
     background-color: red;
-  }
-  .button_div{
+  }  .button_div{
       padding-top: 20px;
   }
   .button_login {

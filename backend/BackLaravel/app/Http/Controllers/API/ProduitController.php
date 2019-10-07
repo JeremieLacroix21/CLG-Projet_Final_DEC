@@ -114,14 +114,18 @@ class ProduitController extends Controller
    {
     $data = [];
     $produits = DB::table('panier')
-    ->join('produits', 'panier.idproduit', '=', 'produit.idproduits')
-    ->select('panier.idproduit, produit.nom, produit.prix,produit.imageGUID,panier.quantity')
-    ->where('iduser', '=', $request['id'])
+    ->join('produits', 'panier.idproduit', '=', 'produits.idproduits')
+    ->select('iduser','idproduit', 'nom', 'prix','imgGUID', 'quantity')
+    //->where('iduser', '=', $request['iduser'])
     ->get();
+    
 
+    $i = 0;
     foreach($produits as $produit)
     {
-        $data[$produits->idproduits] = [$produits->idproduit, $produits->$nom, $produits->$prix,$produits->$imageGUID,$produits->$quantity];
+        //$data[$i] = [$produit->idproduit, $produit->nom, $produit->prix,$produit->imageGUID,$produit->quantity];
+        $data[$i] = [$produit->iduser,$produit->idproduit, $produit->nom, $produit->prix,$produit->imgGUID, $produit->quantity];
+        ++$i;
     }
     return json_encode($data);
    }
