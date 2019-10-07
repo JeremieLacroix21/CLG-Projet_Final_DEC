@@ -6,7 +6,7 @@ import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
-import { SubscribeComponent } from './subscribe/subscribe.component';
+import { SubscribeComponent } from '../subscribe/subscribe.component';
 
 const routes: Routes = [
   {

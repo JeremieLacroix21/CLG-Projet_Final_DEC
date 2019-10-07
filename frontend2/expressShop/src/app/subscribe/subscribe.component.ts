@@ -18,6 +18,7 @@ export class SubscribeComponent implements OnInit {
     TypeUser: new FormControl('', Validators.required),
     adresse: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
+    Telephone: new FormControl('', Validators.required)
   })
 
   loading = false;
@@ -32,6 +33,7 @@ export class SubscribeComponent implements OnInit {
   get TypeUser() { return this.form.get('TypeUser'); }
   get adresse() { return this.form.get('adresse'); }
   get email() { return this.form.get('email'); }
+  get Telephone() { return this.form.get('Telephone'); }
 
   constructor(
     private route: ActivatedRoute,

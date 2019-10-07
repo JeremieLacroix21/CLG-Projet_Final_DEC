@@ -26,12 +26,21 @@
         </mat-form-field></p>
 
         <p><mat-form-field>
-            <input type="adresse" id="inputadresse" name="adresse" ngModel class="form-control" matInput placeholder="Adresse" formControlName="adresse">
+            <input type="adresse" id="inputadresse" name="adresse" ngModel class="form-control" matInput placeholder="Adresse"  formControlName="adresse">
             <mat-error *ngIf="adresse.hasError('required')">L'adresse est obligatoire</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input type="email" id="inputemail" name="email" ngModel class="form-control" placeholder="Adresse courriel" matInput formControlName="password" >
-            <mat-error *ngIf="password.hasError('required')">L'adresse courriel est obligatoire</mat-error>
+            <input type="Telephone" id="inputTelephone" name="Telephone" ngModel class="form-control"  placeholder="Numéro de téléphone" matInput formControlName="Telephone" >
+            <mat-error *ngIf="Telephone.hasError('required')">Le numéro de téléphone est obligatoire</mat-error>
+        </mat-form-field></p>
+
+        <p><mat-form-field>
+            <input type="email" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Adresse courriel" formControlName="email">
+            <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="TypeUser" id="inputTypeUser" name="TypeUser" ngModel class="form-control" placeholder="Type du compte" matInput formControlName="TypeUser" >
+            <mat-error *ngIf="TypeUser.hasError('required')">Le type de l'utilisateur est obligatoire</mat-error>
         </mat-form-field></p>
     
         <p *ngIf="invalidLogin" class="error">Informations invalides</p>
