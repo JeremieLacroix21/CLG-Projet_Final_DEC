@@ -1,0 +1,48 @@
+<div>
+
+    <h1 align="center">Express Shop</h1>
+    
+    <mat-card>
+        <mat-card-title>Inscription</mat-card-title>
+    <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
+        <p><mat-form-field>
+            <input type="username" id="inputUsername" name="username" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username">
+            <mat-error *ngIf="username.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Mot de passe" matInput formControlName="password" >
+            <mat-error *ngIf="password.hasError('required')">Le mot de passe est obligatoire</mat-error>
+        </mat-form-field></p>
+    
+        <p><mat-form-field>
+            <input type="prenom" id="inputprenom" name="prenom" ngModel class="form-control" matInput placeholder="Prénom" formControlName="prenom">
+            <mat-error *ngIf="prenom.hasError('required')">Le prenom est obligatoire</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="nom" id="inputnom" name="nom" ngModel class="form-control" placeholder="Nom de famille" matInput formControlName="nom" >
+            <mat-error *ngIf="nom.hasError('required')">Le nom est obligatoire</mat-error>
+        </mat-form-field></p>
+
+        <p><mat-form-field>
+            <input type="adresse" id="inputadresse" name="adresse" ngModel class="form-control" matInput placeholder="Adresse" formControlName="adresse">
+            <mat-error *ngIf="adresse.hasError('required')">L'adresse est obligatoire</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="email" id="inputemail" name="email" ngModel class="form-control" placeholder="Adresse courriel" matInput formControlName="password" >
+            <mat-error *ngIf="password.hasError('required')">L'adresse courriel est obligatoire</mat-error>
+        </mat-form-field></p>
+    
+        <p *ngIf="invalidLogin" class="error">Informations invalides</p>
+
+        <div class="button_div">
+            <button mat-button>Annuler</button>
+            <button class="button_login" type="submit" mat-button>S'inscrire</button>
+        </div>
+    
+    </form>
+    </mat-card-content>
+    </mat-card>
+    
+    </div>
