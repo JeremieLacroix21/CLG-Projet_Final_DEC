@@ -39,8 +39,10 @@
             <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input type="TypeUser" id="inputTypeUser" name="TypeUser" ngModel class="form-control" placeholder="Type du compte" matInput formControlName="TypeUser" >
-            <mat-error *ngIf="TypeUser.hasError('required')">Le type de l'utilisateur est obligatoire</mat-error>
+            <mat-select name="TypeUser" formControlName="TypeUser" placeholder="Type du compte">
+                <mat-option [value]="Fournisseur"> Fournisseur </mat-option>
+                <mat-option [value]="Distributeur"> Distributeur </mat-option>
+            </mat-select>
         </mat-form-field></p>
     
         <p *ngIf="invalidLogin" class="error">Informations invalides</p>
