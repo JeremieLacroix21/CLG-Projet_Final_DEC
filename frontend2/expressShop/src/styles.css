@@ -35,3 +35,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white;
   padding-top: 50px;
 }
+
+.description-field {
+  min-height: 125px;
+  min-width: 430px;
+}
+
+.description-field textarea {
+  min-height: 125px;
+}
