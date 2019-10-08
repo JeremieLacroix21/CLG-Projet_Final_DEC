@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ProductService } from '../../services/product.service';
-
+import { map } from 'rxjs/operators';
 import { Product } from '../../models/product';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Supplier } from 'src/app/models/supplier';
 import { first } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -14,21 +14,31 @@ import { NgxSpinnerService } from "ngx-spinner";
   templateUrl: './browse-products.component.html',
   styleUrls: ['./browse-products.component.css']
 })
-export class BrowseProductsComponent implements OnInit
+export class BrowseProductsComponent implements OnInit, OnDestroy
 {
-  max = 9999;
-  min = 0;
+  /* max = 9999;
+  min = 0; */
+  subscription: Subscription;
+  products: Product[];
+  filteredProducts: Product[];
 
   private loadedProducts : Observable<Product[]>;
   // Contains all the owners(suppliers) that own products in the array above
   // Example: supplierMap[products[0].idfournisseur].nomutilisateur
   //private supplierMap: { [key:number]:Supplier } = {};
 
-  constructor(private productService: ProductService, private spinner: NgxSpinnerService) {}
+  constructor(private productService: ProductService, private spinner: NgxSpinnerService) {
+    this.subscription = this.productService.getAll()
+      .subscribe(products => this.filteredProducts = this.products = products );
+  }
 
   ngOnInit() {
     this.loadProducts();
     this.spinner.show();
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   private loadProducts() {
@@ -47,5 +57,11 @@ export class BrowseProductsComponent implements OnInit
   }
   private AddProductToCart (id:number) {
 
+  }
+
+  private FilterNom(chaine:string){
+    this.filteredProducts = (chaine) ?
+      this.products.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase())):
+        this.products;
   }
 }
