@@ -24,6 +24,7 @@ hs_err_pid*
 
 # Frontend
 DEBUG-LOGIN.ts
+API-CONFIG.ts
 
 # Backend
 **/bootstrap/cache/config.php
