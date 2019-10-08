@@ -1,7 +1,7 @@
 <div class="container">
 
 <mat-card class="filter-card">
-    <mat-form-field>
+   <!--  <mat-form-field>
         <input matInput placeholder="Categorie" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
         <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
@@ -21,22 +21,22 @@
                         <small></small>
                 </mat-option>
             </mat-autocomplete>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Nom">
+        <input matInput (keyup)="FilterNom($event.target.value)" placeholder="Nom">
     </mat-form-field>
 
-    <mat-form-field class="example-margin">
+    <!-- <mat-form-field class="example-margin">
         <input matInput type="number" placeholder="Prix min" value="min">
     </mat-form-field>
 
     <mat-form-field class="example-margin">
         <input matInput type="number" placeholder="Prix max" value="max">
-    </mat-form-field>
+    </mat-form-field> -->
 </mat-card>
 
-<ng-container *ngIf='(loadedProducts | async) as products; else loading'>
+<ng-container *ngIf='(filteredProducts) as products; else loading'>
 <div class="grid-container">
     <mat-card *ngFor="let product of products" class="product-card grid-item">
 

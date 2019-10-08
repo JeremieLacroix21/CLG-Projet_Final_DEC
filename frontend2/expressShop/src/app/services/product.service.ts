@@ -20,6 +20,10 @@ export class ProductService {
     );
   }
 
+  getbyname(name:string){
+    return this.getAll().pipe(map(loadedProducts => loadedProducts.filter(load => load.nom === name)));
+  }
+
   search(/*search params*/) {
     // call api/SearchProducts
     return null;
