@@ -16,7 +16,7 @@ export class ProductService {
   getAll() {
     return this.http.get<Product[]>(
       `${config.apiUrl}/api/GetAllProducts`,
-      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') }
+      config.headerObject
     );
   }
 
@@ -31,18 +31,17 @@ export class ProductService {
     /*TODO*/
   
   }
+
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
     /*TODO*/
   }
+
   GetCart(iduser:number)
   {
     return this.http.get<productPanier[]>(
       `${config.apiUrl}/api/GetProduitPanier`,
-      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') }
+      config.headerObject
     );
   }
-
-
-
 }

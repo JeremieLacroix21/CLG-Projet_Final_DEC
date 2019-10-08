@@ -1,4 +1,4 @@
-<ng-container *ngIf='(loadedUsers | async) as users; else loading'>
+<ng-container *ngIf='(loadedUsers | async) as users'>
 <div class="container">
     <mat-card>
         <mat-form-field class="filter-form-field">
@@ -73,6 +73,3 @@
 </div>
 </ng-container>
 
-<ng-template #loading>
-    <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium"></ngx-spinner>
-</ng-template>

@@ -25,6 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route Profil
  Route::put('/profil','API\ProfilController@Updatepassword');
  Route::post('/profil','API\ProfilController@GetUser');
+ Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
+ Route::delete('DeleteUser','API\ProfilController@DeleteUser');
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
  });

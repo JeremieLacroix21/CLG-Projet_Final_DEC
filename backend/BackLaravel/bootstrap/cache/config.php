@@ -172,7 +172,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -311,12 +311,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\app',
+        'root' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\app/public',
+        'root' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\app/public',
         'url' => 'http://localhost:8000//storage',
         'visibility' => 'public',
       ),
@@ -362,13 +362,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -432,7 +432,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -511,7 +511,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -531,9 +531,32 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\resources\\views',
+      0 => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\config/../../app/app.component.html',
     ),
-    'compiled' => 'C:\\wamp64\\www\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\gabri\\source\\Angular\\Projet_Final_Technique\\backend\\BackLaravel\\storage\\framework\\views',
+  ),
+  'cors' => 
+  array (
+    'supportsCredentials' => false,
+    'allowedOrigins' => 
+    array (
+      0 => '*',
+    ),
+    'allowedOriginsPatterns' => 
+    array (
+    ),
+    'allowedHeaders' => 
+    array (
+      0 => '*',
+    ),
+    'allowedMethods' => 
+    array (
+      0 => '*',
+    ),
+    'exposedHeaders' => 
+    array (
+    ),
+    'maxAge' => 0,
   ),
   'flare' => 
   array (

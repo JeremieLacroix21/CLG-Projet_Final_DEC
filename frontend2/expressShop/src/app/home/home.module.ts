@@ -6,7 +6,7 @@ import { BrowseProductsComponent } from './browse-products/browse-products.compo
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
 import { HomeComponent } from './home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FournisseurListeComponent } from './fournisseur-liste/fournisseur-liste.component';
+import { BrowseSuppliersComponent } from './browse-suppliers/browse-supplierscomponent';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 
@@ -63,7 +63,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HomeComponent,
     BrowseProductsComponent,
     ModifProfileComponent,
-    FournisseurListeComponent,
+    BrowseSuppliersComponent,
     ShoppingCartComponent,
     AdminUsersComponent
   ],

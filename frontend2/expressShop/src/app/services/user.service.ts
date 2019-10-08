@@ -14,7 +14,19 @@ export class UserService {
   getAll() {
     return this.http.get<BD_User[]>(
       `${config.apiUrl}/api/GetAllUsers`,
-      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') }
+      config.headerObject
+    );
+  }
+
+  updateConfirmRegistration(iduser: number, confirmRegistration: boolean) {
+    const body = new HttpParams()
+      .set('iduser', iduser.toString())
+      .set('confirme', confirmRegistration.toString());
+
+    return this.http.put(
+      `${config.apiUrl}/api/UpdateConfirmRegistration`,
+      body.toString(),
+      config.headerObject
     );
   }
 }

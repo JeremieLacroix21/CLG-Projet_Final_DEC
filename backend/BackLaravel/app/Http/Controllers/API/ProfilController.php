@@ -11,6 +11,7 @@ use Validator;
 class ProfilController extends Controller
 {
     public $successStatus = 200;
+
     public function Update(Request $request)
     {
         $results = DB::table('user')->update(['votes' => 1])
@@ -21,6 +22,7 @@ class ProfilController extends Controller
               return response()->json(['success' => 'Tu es connecte'], $this->successStatus);
           }
     }
+
     public function GetUser(Request $request)
     {
         $user_ = DB::table('user')
@@ -38,6 +40,43 @@ class ProfilController extends Controller
                 //'phone' => $user_->addSelect('Prenom')->get()
             ]);
           }
+    }
+
+    public function UpdateConfirmRegistration(Request $request)
+    {
+        $confirmParam = $request->get('confirme');
+
+         // Check if confirme is valid
+        if (!is_null($confirmParam) && ($confirmParam === "true" || $confirmParam === "false")) {
+            $confirmParam = $confirmParam === "true" ? 1 : 0;
+        } else {
+            return response()->json(['error'=> 'confirme must be "true" or "false"'], 400);
+        }
+
+        $results = DB::table('users')
+            ->where('iduser', '=', $request->get('iduser'))
+            ->update(['confirme' => $confirmParam]);
+
+        return response()->json(['success' => ''], $this->successStatus);
+    }
+
+    public function DeleteUser(Request $request)
+    {
+        $user_is_admin = DB::table('users')
+            ->where('iduser', '=', $request->get('iduser'))
+            ->select('admin')
+            ->get()
+            ->first()
+            ->admin;
+
+        // Check if user is not an admin
+        if (!is_null($user_is_admin) && $user_is_admin == 0) {
+            DB::table('users')
+                ->where('iduser', '=', $request->get('iduser'))
+                ->delete();
+        }
+
+        return response()->json(['success' => ''], $this->successStatus);
     }
 }
 ?>

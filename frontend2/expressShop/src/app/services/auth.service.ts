@@ -30,10 +30,7 @@ export class AuthService {
     
       return this.http.post(`${config.apiUrl}/api/login`,
         body.toString(),
-        {
-          headers: new HttpHeaders()
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-        }
+        config.headerObject
       ); 
 
     }
