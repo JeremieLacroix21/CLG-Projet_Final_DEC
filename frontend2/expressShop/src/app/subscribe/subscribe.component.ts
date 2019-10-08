@@ -49,7 +49,8 @@ export class SubscribeComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    const file = event.target.files[0]
+    this.selectedfile = event.target.files[0]
+    this.onUpload();
   }
   
   onSubmit() {
