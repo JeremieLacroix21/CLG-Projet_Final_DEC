@@ -54,7 +54,7 @@
                     <textarea matInput placeholder="Description de votre compagnie"></textarea>
             </mat-form-field>
         </p>
-        <p><input type='file' class="upload"/></p>
+        <p><input type='file' class="upload" (change)="onFileChanged($event)"/></p>
     
         <div class="button_div">
             <button mat-button>Annuler</button>

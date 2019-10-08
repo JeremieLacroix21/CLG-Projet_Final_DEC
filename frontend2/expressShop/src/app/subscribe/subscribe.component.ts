@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
-//service
+import { subscribeservice } from '../services/subscribe.service';
 
 @Component({
   selector: 'app-subscribe',
@@ -26,6 +26,7 @@ export class SubscribeComponent implements OnInit {
   submitted = false;
   returnUrl: string
   invalidLogin: boolean;
+  selectedfile : File;
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -40,7 +41,7 @@ export class SubscribeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    //Service
+    private subscribeservice: subscribeservice
   ){ }
 
   ngOnInit() {
@@ -50,13 +51,25 @@ export class SubscribeComponent implements OnInit {
   onFileChanged(event) {
     const file = event.target.files[0]
   }
+  
   onSubmit() {
     this.submitted = true;
 
     if (this.form.invalid) {
+      this.onUpload();
       return;
     }
     this.loading = true;
+  }
+
+  onUpload() {
+    this.subscribeservice.uploadImage(this.selectedfile).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      })
   }
 
 }
