@@ -3,9 +3,9 @@ import { BD_User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { map, filter, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { NgxSpinnerService } from "ngx-spinner";
 import { MatTableDataSource, MatSort, MatSortModule, MatPaginator, MatSlideToggle } from '@angular/material';
 import { HomeComponent } from '../home.component';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-admin-users',
@@ -21,7 +21,7 @@ export class AdminUsersComponent implements OnInit {
   private dataSource: MatTableDataSource<BD_User>;
   private columnsToDisplay = ['iduser', 'TypeUser', 'nomutilisateur', 'prenom', 'nom', 'email', 'dateinscription', 'confirme', 'actions'];
 
-  constructor(private userService: UserService, private spinner: NgxSpinnerService) {
+  constructor(private userService: UserService, private loader: LoaderService) {
   }
 
   @ViewChild(MatSort, {static: false})
@@ -29,7 +29,7 @@ export class AdminUsersComponent implements OnInit {
       if (s && this.dataSource) {
         this.dataSource.sort = s;
         setTimeout(() => {
-          this.spinner.hide();
+          this.loader.hide();
         });
       }
     };
@@ -52,8 +52,7 @@ export class AdminUsersComponent implements OnInit {
   }
   
   requestAllUser() {
-    this.loadingText = "Chargement des utilisateurs...";
-    this.spinner.show();
+    this.loader.show("Chargement des utilisateurs...");
 
     this.loadedUsers = this.userService.getAll();
     this.loadedUsers.subscribe(data => {
@@ -81,12 +80,11 @@ export class AdminUsersComponent implements OnInit {
       let userIdToConfirm = event.source.id.split('-')[2];
 
       //this.spinner.show();
-      this.loadingText = "Mise à jour de l'utilisateur...";
-      this.spinner.show();
+      this.loader.show("Mise à jour de l'utilisateur...");
 
       // Call the api to update the user
       this.userService.updateConfirmRegistration(userIdToConfirm, event.checked).subscribe(data => {
-        this.spinner.hide();
+        this.loader.hide();
       });
 
       // Update the user locally
@@ -106,7 +104,12 @@ export class AdminUsersComponent implements OnInit {
       let senderBtn = document.getElementById(event.currentTarget.id);
       let userIdToDelete = parseInt(senderBtn.id.split('-')[2]);
       
-      // TODO: Call DeleteUser(userIdToDelete)
+      this.loader.show("Suppression de l'utilisateur...");
+
+      // Call the api to delete the user
+      this.userService.deleteUser(userIdToDelete).subscribe(data => {
+        this.loader.hide();
+      });
 
       // Delete the user locally
       this.dataSource.data = this.dataSource.data.filter(u => u.iduser != userIdToDelete);

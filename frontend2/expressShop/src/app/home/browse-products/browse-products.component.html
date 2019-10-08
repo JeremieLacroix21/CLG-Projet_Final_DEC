@@ -36,7 +36,7 @@
     </mat-form-field> -->
 </mat-card>
 
-<ng-container *ngIf='(filteredProducts) as products; else loading'>
+<ng-container *ngIf='(filteredProducts) as products'>
 <div class="grid-container">
     <mat-card *ngFor="let product of products" class="product-card grid-item">
 
@@ -68,9 +68,5 @@
     </mat-card>
 </div>
 </ng-container>
-
-<ng-template #loading>
-    <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium"></ngx-spinner>
-</ng-template>
 
 </div>

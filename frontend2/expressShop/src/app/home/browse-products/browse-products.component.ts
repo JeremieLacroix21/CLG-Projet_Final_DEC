@@ -8,6 +8,7 @@ import { Supplier } from 'src/app/models/supplier';
 import { first } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner";
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-browse-products',
@@ -27,14 +28,18 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
   // Example: supplierMap[products[0].idfournisseur].nomutilisateur
   //private supplierMap: { [key:number]:Supplier } = {};
 
-  constructor(private productService: ProductService, private spinner: NgxSpinnerService) {
-    this.subscription = this.productService.getAll()
-      .subscribe(products => this.filteredProducts = this.products = products );
+  constructor(private productService: ProductService, private loader: LoaderService) {
+    this.subscription = this.productService.getAll().subscribe(products => {
+      this.filteredProducts = this.products = products
+      setTimeout(() => {
+        this.loader.hide();
+      });
+    });
   }
 
   ngOnInit() {
     this.loadProducts();
-    this.spinner.show();
+    this.loader.show("Chargement des produits...");
   }
 
   ngOnDestroy(){

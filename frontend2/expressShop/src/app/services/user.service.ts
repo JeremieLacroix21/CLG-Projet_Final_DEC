@@ -29,4 +29,15 @@ export class UserService {
       config.headerObject
     );
   }
+
+  deleteUser(iduser: number) {
+    const body = new HttpParams()
+      .set('iduser', iduser.toString());
+
+    return this.http.put(
+      `${config.apiUrl}/api/DeleteUser`,
+      body.toString(),
+      config.headerObject
+    );
+  }
 }
