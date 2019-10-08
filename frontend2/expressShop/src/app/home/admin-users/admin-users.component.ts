@@ -56,7 +56,6 @@ export class AdminUsersComponent implements OnInit {
 
     this.loadedUsers = this.userService.getAll();
     this.loadedUsers.subscribe(data => {
-      console.log(data);
       this.dataSource = new MatTableDataSource(data);
     });
   }

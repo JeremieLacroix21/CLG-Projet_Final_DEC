@@ -55,13 +55,11 @@ export class LoginComponent implements OnInit {
             this.router.navigate([this.returnUrl]);
           },
           error => {
-            // COMMENT FOR DEBUG (or see app/models/DEBUG-LOGIN.ts)
             if (!DEBUGGING) {
               this.invalidLogin = true;
               this.loading = false; 
             }
 
-            //DEBUG UNCOMMENT TO GAIN ACCESS LOGIN --> HOME (or see app/models/DEBUG-LOGIN.ts)
             if (DEBUGGING) {
               localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
               this.router.navigate([this.returnUrl]);

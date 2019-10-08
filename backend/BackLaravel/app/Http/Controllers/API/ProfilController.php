@@ -64,10 +64,10 @@ class ProfilController extends Controller
     {
         $user_is_admin = DB::table('users')
             ->where('iduser', '=', $request->get('iduser'))
-            ->select('admin')
+            ->select('TypeUser')
             ->get()
             ->first()
-            ->admin;
+            ->TypeUser === 'Admin';
 
         // Check if user is not an admin
         if (!is_null($user_is_admin) && $user_is_admin == 0) {
