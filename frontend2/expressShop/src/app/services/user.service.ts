@@ -30,7 +30,7 @@ export class UserService {
     );
   }
 
-  deleteUser(iduser: number) {
+  deleteUser(iduser:number) {
     const body = new HttpParams()
       .set('iduser', iduser.toString());
 
@@ -40,4 +40,15 @@ export class UserService {
       config.headerObject
     );
   }
+  ModifyPassword(iduser:number,NouveauMotdePasse:number)
+  {
+const body = new HttpParams().set('iduser', iduser.toString()).set('nouveaumotdepasse',NouveauMotdePasse.toString());
+  return this.http.put(
+      `${config.apiUrl}/api/Modifypassword`,
+      body.toString(),
+      config.headerObject);
+  }
+
+
+
 }

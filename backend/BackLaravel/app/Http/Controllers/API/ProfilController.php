@@ -78,5 +78,18 @@ class ProfilController extends Controller
 
         return response()->json(['success' => ''], $this->successStatus);
     }
+
+
+
+    public function UpdatePassword(Request $request)
+    {
+        $results = DB::table('user')->update(['Motdepasse' => $request->get('nouveaumotdepasse')])
+        ->where('iduser','=',$request->get('iduser'));
+        if (is_null($results)) {
+            return response()->json(['error'=> 'User doesnt exist'], 401);
+          } else {
+              return response()->json(['success' => 'motdepassechangé'], $this->successStatus);
+          }
+    }
 }
 ?>
