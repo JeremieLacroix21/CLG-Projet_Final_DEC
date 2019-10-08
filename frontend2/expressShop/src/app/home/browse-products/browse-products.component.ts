@@ -17,28 +17,19 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class BrowseProductsComponent implements OnInit, OnDestroy
 {
-  /* max = 9999;
-  min = 0; */
   subscription: Subscription;
   products: Product[];
   filteredProducts: Product[];
 
-  private loadedProducts : Observable<Product[]>;
-  // Contains all the owners(suppliers) that own products in the array above
-  // Example: supplierMap[products[0].idfournisseur].nomutilisateur
-  //private supplierMap: { [key:number]:Supplier } = {};
-
   constructor(private productService: ProductService, private loader: LoaderService) {
-    this.subscription = this.productService.getAll().subscribe(products => {
-      this.filteredProducts = this.products = products
-      setTimeout(() => {
-        this.loader.hide();
-      });
+    this.subscription = this.productService.getAll().
+      subscribe( products => { this.filteredProducts = this.products = products
+          setTimeout(() => {  this.loader.hide();
+          });
     });
   }
 
   ngOnInit() {
-    this.loadProducts();
     this.loader.show("Chargement des produits...");
   }
 
@@ -46,20 +37,6 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
     this.subscription.unsubscribe();
   }
 
-  private loadProducts() {
-    this.loadedProducts = this.productService.getAll();
-
-    /*
-    // Get a list of all the products' owners and map them to their id
-    for(let product of this.loadedProducts) {
-      // Check if the supplier is already loaded
-      if (typeof this.supplierMap[product.idfournisseur] === 'undefined') {
-        // TODO: Call the API using `product.idfournisseur` to get the supplier
-        //this.supplierMap[product.idfournisseur] = LOADED_SUPPLIER;
-      }
-    }
-    */
-  }
   private AddProductToCart (id:number) {
 
   }
