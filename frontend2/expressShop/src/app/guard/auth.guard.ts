@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { DEBUGGING } from '../models/DEBUG-LOGIN';
+import { DEBUGGING } from '../models/tDEBUG-VALUES';
 
 import { AuthService } from '../services';
 
