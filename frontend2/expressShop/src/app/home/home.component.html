@@ -11,7 +11,7 @@
       <span class="menu-spacer"></span>
 
       <div>
-        <a mat-button [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
+        <a mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
     
     </mat-toolbar-row>

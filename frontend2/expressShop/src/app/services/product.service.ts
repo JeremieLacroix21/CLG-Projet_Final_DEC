@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { config } from '../../config';
 import { Product } from '../models/product';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { productPanier } from '../models/productPanier.entity';
 
@@ -10,6 +10,10 @@ import { productPanier } from '../models/productPanier.entity';
   providedIn: 'root'
 })
 export class ProductService {
+
+  private nbCartItemsSource = new Subject<number>();
+
+  nbCartItems = this.nbCartItemsSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -32,8 +36,8 @@ export class ProductService {
   
   AddProductToCart(iduser:number,idproduit:number,qty:number)
   { 
-      const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
-      return this.http.post(`${config.apiUrl}/api/AddProductToCart`, body.toString(), config.headerObject);
+        const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
+        return this.http.post(`${config.apiUrl}/api/AddProductToCart`, body.toString(), config.headerObject);
   }
 
   DeleteProductFromCart(iduser:number,idproduit:number)

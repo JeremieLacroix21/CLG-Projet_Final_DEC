@@ -125,4 +125,31 @@ class PassportController extends Controller
         }
         return json_encode($data);
     }
+
+    public function GetAllSuppliers()
+   {
+        $users = DB::table('fournisseurs')
+            ->join('users', 'fournisseurs.idFournisseur','=', 'users.iduser')
+            ->where('TypeUser', '<>', 'Admin')
+            ->select('iduser', 'nomutilisateur', 'nom', 'prenom', 'TypeUser', 'confirme', 'dateinscription', 'email')
+            
+            ->get();
+        
+        $data = [];
+        $i = 0;
+        foreach($users as $user) {
+            $data[$i] = [
+                'iduser'=>$user->iduser,
+                'nomutilisateur'=>$user->nomutilisateur,
+                'nom'=>$user->nom,
+                'prenom'=>$user->prenom,
+                'TypeUser'=>$user->TypeUser,
+                'confirme'=>$user->confirme,
+                'dateinscription'=>$user->dateinscription,
+                'email'=>$user->email
+            ];
+            ++$i;
+        }
+        return json_encode($data);
+    }
 }
