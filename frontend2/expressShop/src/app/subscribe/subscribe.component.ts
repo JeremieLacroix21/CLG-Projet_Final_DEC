@@ -27,6 +27,7 @@ export class SubscribeComponent implements OnInit {
   returnUrl: string
   invalidLogin: boolean;
   selectedfile : File;
+  PhotoProfil : string;
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -50,7 +51,6 @@ export class SubscribeComponent implements OnInit {
 
   onFileChanged(event) {
     this.selectedfile = event.target.files[0]
-    this.onUpload();
   }
   
   onSubmit() {
@@ -66,7 +66,7 @@ export class SubscribeComponent implements OnInit {
   onUpload() {
     this.subscribeservice.uploadImage(this.selectedfile).subscribe(
       (res) => {
-        console.log(res);
+        this.PhotoProfil = res.toString();
       },
       (err) => {
         console.log(err);

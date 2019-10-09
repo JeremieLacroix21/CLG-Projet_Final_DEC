@@ -11,9 +11,9 @@ export class subscribeservice {
   constructor(private http: HttpClient) {
 }
 
-  uploadImage(Image: File) {
-    const formData = new FormData();
-    formData.append('image', Image, Image.name);
-    return this.http.post(`${config.apiUrl}/api/AddImage`, formData);
+  uploadImage(Images: File) {
+    const Image = new FormData();
+    Image.append('Image', Images);
+    return this.http.post(`${config.apiUrl}/api/AddImage`, Image);
   }
 }
