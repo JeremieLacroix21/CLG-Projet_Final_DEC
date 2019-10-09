@@ -61,3 +61,8 @@ mat-card-content {
   filter: 'blur(4px)';
   -webkit-filter: 'blur(4px)';
   }
+  .tag{
+    min-width: 300px;
+    width: 90%;
+  }
+  
