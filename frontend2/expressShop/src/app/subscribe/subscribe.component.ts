@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { subscribeservice } from '../services/subscribe.service';
 import { errormessage } from '../models/error';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+import { Tags } from '../models/tags';
 
 @Component({
   selector: 'app-subscribe',
@@ -21,7 +24,8 @@ export class SubscribeComponent implements OnInit {
     email: new FormControl('', [Validators.required,Validators.email]),
     Telephone: new FormControl('', [Validators.required,Validators.pattern('[0-9]+'),Validators.maxLength(10)]),
     Image: new FormControl(''),
-    Description: new FormControl ('', Validators.required)
+    Description: new FormControl ('', Validators.required),
+    tags : new FormControl('', Validators.required)
   })
 
   popUpOpen = false;
@@ -44,6 +48,7 @@ export class SubscribeComponent implements OnInit {
   get Telephone() { return this.form.get('Telephone'); }
   get Image() { return this.form.get('Image'); }
   get Description() { return this.form.get('Description');}
+  get tags() { return this.form.get('tags');}
 
   constructor(
     private route: ActivatedRoute,
@@ -107,4 +112,35 @@ export class SubscribeComponent implements OnInit {
         console.log(err);
       })
   }
+
+
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tag: Tags[] = [];
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    // Add our tag
+    if ((value || '').trim()) {
+      this.tag.push({name: value.trim()});
+    }
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+  remove(fruit: Tags): void {
+    const index = this.tag.indexOf(fruit);
+
+    if (index >= 0) {
+      this.tag.splice(index, 1);
+    }
+  }
 }
+
+
