@@ -112,6 +112,24 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+
+
+
+
+
+  deleteProductFromCart()
+  {
+
+  }
+  setquantity(iduser:number,idproduit:number,quantity:number)
+  {
+
+  }
+
+  getcartfromid()
+  {
+
+  }
   
 }
 
