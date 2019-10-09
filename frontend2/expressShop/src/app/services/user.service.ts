@@ -40,11 +40,10 @@ export class UserService {
       config.headerObject
     );
   }
-  ModifyPassword(iduser:number,NouveauMotdePasse:number)
+  UpdatePassword(iduser:number,NouveauMotdePasse:number)
   {
-const body = new HttpParams().set('iduser', iduser.toString()).set('nouveaumotdepasse',NouveauMotdePasse.toString());
-  return this.http.put(
-      `${config.apiUrl}/api/Modifypassword`,
+      const body = new HttpParams().set('IdUser', iduser.toString()).set('NouveauMotDePasse',NouveauMotdePasse.toString());
+      return this.http.post(`${config.apiUrl}/api/UpdatePassword`,
       body.toString(),
       config.headerObject);
   }

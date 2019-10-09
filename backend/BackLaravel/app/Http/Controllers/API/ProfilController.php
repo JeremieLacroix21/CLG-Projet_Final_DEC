@@ -83,13 +83,31 @@ class ProfilController extends Controller
 
     public function UpdatePassword(Request $request)
     {
-        $results = DB::table('user')->update(['Motdepasse' => $request->get('nouveaumotdepasse')])
-        ->where('iduser','=',$request->get('iduser'));
+        //fonctionnel
+        $results = DB::table('users')
+        ->where('iduser','=',$request->get('IdUser'))
+        ->update(['Motdepasse' => $request->get('NouveauMotDePasse')])
+        ;
         if (is_null($results)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
           } else {
-              return response()->json(['success' => 'motdepassechangé'], $this->successStatus);
+              return response()->json(['success' => 'Password changed'], $this->successStatus);
           }
     }
+    public function UpdateEmail(Request $request)
+    {
+        //fonctionnel
+        $results = DB::table('users')
+        ->where('iduser','=',$request->get('IdUser'))
+        ->update(['Email' => $request->get('NouveauEmail')])
+        ;
+        if (is_null($results)) {
+            return response()->json(['error'=> 'User doesnt exist'], 401);
+          } else {
+              return response()->json(['success' => 'Email changed'], $this->successStatus);
+          }
+    }
+
+    
 }
 ?>

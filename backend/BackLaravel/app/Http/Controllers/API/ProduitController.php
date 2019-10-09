@@ -100,25 +100,28 @@ class ProduitController extends Controller
 
    public function AddProductToPanier(Request $request)
    {
+    //fonctionnel
     $input = $request->all();
     //Ajout du produit
     DB::table('panier')->insert(array(
-     'iduser' =>  $input['iduser'],
+    'iduser' =>  $input['iduser'],
      'idproduit' =>  $input['idproduit'],
      'quantity' =>  $input['quantity']
     ));
-    return response()->json(['sucess'=> 'produit insere'], 200);
+    return response()->json(['sucess'=> 'produit insere au panier'], 200);
    }
 
    public function GetpanierFromId(Request $request)
    {
+
+    //TODO
+
     $data = [];
     $produits = DB::table('panier')
     ->join('produits', 'panier.idproduit', '=', 'produits.idproduits')
     ->select('iduser','idproduit', 'nom', 'prix','imgGUID', 'quantity')
     //->where('iduser', '=', $request['iduser'])
     ->get();
-    
 
     $i = 0;
     foreach($produits as $produit)
@@ -135,6 +138,21 @@ class ProduitController extends Controller
        DB::table('panier')->where('idproduit', '=', $request['idproduit'])
        ->where('iduser', '=', $request['iduser'])
        ->delete();
+   }
+
+   public function UpdateQuantityPanier(Request $request)
+   {
+    //fonctionnel
+    $results = DB::table('panier')
+    ->where('iduser','=',$request->get('iduser'))
+    ->where('idproduit','=',$request->get(idproduits))
+    ->update(['quantity' => $request->get('quantity')])
+    ;
+    if (is_null($results)) {
+        return response()->json(['error'=> 'product doesnt exist'], 401);
+      } else {
+          return response()->json(['success' => 'quantity changed'], $this->successStatus);
+      }
    }
 
 
