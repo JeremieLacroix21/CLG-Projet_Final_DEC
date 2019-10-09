@@ -56,8 +56,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {
-            localStorage.setItem('currentUser', '1'/*JSON.stringify(data)*/);
-            console.log(localStorage.getItem('currentUser'));
+            localStorage.setItem('currentUser', JSON.stringify(data));
             this.router.navigate([this.returnUrl]);
           },
           err => {
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit {
             }
 
             if (DEBUGGING) {
-              localStorage.setItem('currentUser', JSON.stringify(this.form.controls.username.value));
+              localStorage.setItem('currentUser', JSON.stringify("visitor"));
               this.router.navigate([this.returnUrl]);
             }
           }
