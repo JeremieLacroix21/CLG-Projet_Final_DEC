@@ -15,9 +15,11 @@ export class LoginComponent implements OnInit {
   
   form = new FormGroup({
     username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  })
+    password: new FormControl('', Validators.required),
+    email : new FormControl('', Validators.required)
+    })
 
+  popUpOpen = false;
   loading = false;
   submitted = false;
   returnUrl: string
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
+  get email() { return this.form.get('email'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -41,9 +44,18 @@ export class LoginComponent implements OnInit {
   GoToSubscribe(){
     this.router.navigate(["/subscribe"]);
   }
+
+  DemandeUsername(){
+    this.popUpOpen = true;
+  }
+  DemandePassword(){
+    
+  }
+  cancelOption(){
+    this.popUpOpen = false;
+  }
   
   onSubmit() {
-    //console.log(this.form.controls.username.value);
     this.submitted = true;
     console.log("submit");
     if (this.form.invalid) {

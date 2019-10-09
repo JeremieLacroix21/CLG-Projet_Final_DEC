@@ -16,17 +16,36 @@
         <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Password" matInput formControlName="password" >
         <mat-error *ngIf="password.hasError('required')">Le mot de passe est obligatoire</mat-error>
     </mat-form-field></p>
+    <mat-checkbox >Se souvenir de moi</mat-checkbox><br>
+    <p style="height: 1%;"><a (onclick)='DemandeUsername()'>Nom d'utilisateur oublié?</a></p>
+    <p ><a (onclick)='DemandePassword()'>Mot de passe oublié?</a></p>
 
     <p *ngIf="invalidLogin" [innerHTML]="errormessages" class="error">{{errormessages.name}}</p>
 
-    <mat-checkbox>Se souvenir de moi</mat-checkbox>
     <div class="button_div">
         <button class="button_login" type="submit" mat-button>Se Connecter</button>
         <button (click)="GoToSubscribe()" mat-button> S'inscrire</button>
     </div>
-
 </form>
 </mat-card-content>
 </mat-card>
-
-</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<app-pop-up [isOpen]="popUpOpen">
+        <div>
+          <header>
+            <span><b>Demande de votre nom d'utilisateur</b></span>
+          </header>
+          <main>
+            <p style="height: 1%;">Veuillez entrer votre adresse mail:</p>
+            <mat-form-field>
+                <input type="text" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Adresse courriel" formControlName="email">
+                <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
+            </mat-form-field>
+          </main>
+          <footer>
+            <button (click)="cancelOption()" mat-button style="float: left">Envoyer</button>
+            <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
+          </footer>
+        </div>
+    </app-pop-up>
+</form>
