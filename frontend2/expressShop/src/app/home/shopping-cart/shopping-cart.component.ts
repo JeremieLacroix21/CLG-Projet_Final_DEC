@@ -34,17 +34,17 @@ export class ShoppingCartComponent implements OnInit {
 
 
   constructor(private productService: ProductService, private loader: LoaderService) { 
-        this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
-        this.filteredproducts = this.products = products
-        setTimeout(() => {
+    this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
+      this.filteredproducts = this.products = products
+      setTimeout(() => {
         this.TABelement = this.filteredproducts;
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
         this.Total();
         this.dataSource.paginator = this.paginator;
         console.log(this.TABelement)
         this.loader.hide();
-        });
       });
+    });
             
   }
   ngOnInit() {
