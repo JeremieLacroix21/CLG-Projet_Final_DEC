@@ -26,12 +26,26 @@ export class SubscribeComponent implements OnInit {
     Telephone: new FormControl('', [Validators.required,Validators.pattern('[0-9]+'),Validators.maxLength(10)]),
     Image: new FormControl(''),
     Description: new FormControl ('', Validators.required),
-    tags : new FormControl('', Validators.required)
+    tags: new FormControl('')
   })
+
+  get username() { return this.form.get('username'); }
+  get password() { return this.form.get('password'); }
+  get nom() { return this.form.get('nom'); }
+  get prenom() { return this.form.get('prenom'); }
+  get TypeUser() { return this.form.get('TypeUser'); }
+  get adresse() { return this.form.get('adresse'); }
+  get email() { return this.form.get('email'); }
+  get Telephone() { return this.form.get('Telephone'); }
+  get Image() { return this.form.get('Image'); }
+  get Description() { return this.form.get('Description'); }
+  get tags() { return this.form.get('tags'); }
+
 
   popUpOpen = false;
   loading = false;
   submitted = false;
+  EstFournisseur : boolean;
   returnUrl: string;
   TagChaine : string;
   invalidsubscribe: boolean;
@@ -45,18 +59,6 @@ export class SubscribeComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   tag: Tags[] = [];
-
-  get username() { return this.form.get('username'); }
-  get password() { return this.form.get('password'); }
-  get nom() { return this.form.get('nom'); }
-  get prenom() { return this.form.get('prenom'); }
-  get TypeUser() { return this.form.get('TypeUser'); }
-  get adresse() { return this.form.get('adresse'); }
-  get email() { return this.form.get('email'); }
-  get Telephone() { return this.form.get('Telephone'); }
-  get Image() { return this.form.get('Image'); }
-  get Description() { return this.form.get('Description');}
-  get tags() { return this.form.get('tags');}
 
   constructor(
     private route: ActivatedRoute,
@@ -76,8 +78,16 @@ export class SubscribeComponent implements OnInit {
     this.imageSrc = "campagne.jpg";
     this.form.controls.Image.setValue(this.imageSrc);
     this.form.controls.TypeUser.setValue("Fournisseur");
+    this.EstFournisseur = true;
   }
   selectChangeHandler (event: any) {
+    if(event.target.value == "Fournisseur")
+    {
+      this.EstFournisseur = true;
+    }
+    else{
+      this.EstFournisseur = false;
+    }
     this.form.controls.TypeUser.setValue(event.target.value);
   }
 
@@ -92,7 +102,6 @@ export class SubscribeComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
-      this.AjoutTags(this.tag);
       return;
     }
     else{

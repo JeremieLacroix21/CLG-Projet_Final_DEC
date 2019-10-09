@@ -132,13 +132,16 @@ class PassportController extends Controller
         //Ajout du tag
         $data = explode(";",$input["Tags"]);
         foreach ($data as $Tags) {
-        $TagExiste = DB::table('tags_fournisseur')
-        ->where('tag', '=', $Tags)
-        ->first();
-        if (is_null($TagExiste)) {
-            DB::table('tags_fournisseur')->insert(array(
-                'tag' => $Tags
-                ));
+            if($Tags != "")
+            {
+                $TagExiste = DB::table('tags_fournisseur')
+                ->where('tag', '=', $Tags)
+                ->first();
+                if (is_null($TagExiste)) {
+                    DB::table('tags_fournisseur')->insert(array(
+                        'tag' => $Tags
+                        ));
+            }
         }
         //Ajout du lien tag
         DB::select('Call InsertionLienTagsFournisseur(?)',array($Tags));
