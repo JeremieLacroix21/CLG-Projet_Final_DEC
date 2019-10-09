@@ -42,10 +42,10 @@ export class ProductService {
       return this.http.post(`${config.apiUrl}/api/DeleteProductFromCart`, body.toString(), config.headerObject);
   }
 
-  GetCart(iduser:number)
+  GetpanierFromId(iduser:number)
   {
     return this.http.get<productPanier[]>(
-      `${config.apiUrl}/api/GetProduitPanier`,config.headerObject);
+      `${config.apiUrl}/api/GetpanierFromId`,config.headerObject);
   }
   UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
   { 
