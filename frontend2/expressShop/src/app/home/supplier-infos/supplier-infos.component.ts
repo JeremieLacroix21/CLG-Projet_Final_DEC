@@ -37,7 +37,7 @@ export class SupplierInfosComponent implements OnInit {
     this.loadedSuppliers = this.userService.getAllSuppliers();
     this.loadedSuppliers.subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-      console.log(data);
+      console.log(this.dataSource.filteredData);
     });
   }
 }

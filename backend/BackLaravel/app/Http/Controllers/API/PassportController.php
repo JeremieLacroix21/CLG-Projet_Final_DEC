@@ -104,23 +104,23 @@ class PassportController extends Controller
    public function GetAllUsers()
    {
         $users = DB::table('users')
-            ->select('iduser', 'nomutilisateur', 'nom', 'prenom', 'TypeUser', 'confirme', 'dateinscription', 'email')
+            ->select(
+                'iduser',
+                'nomutilisateur',
+                'nom',
+                'prenom',
+                'TypeUser',
+                'confirme',
+                'dateinscription',
+                'email'
+            )
             ->where('TypeUser', '<>', 'Admin')
             ->get();
         
         $data = [];
         $i = 0;
         foreach($users as $user) {
-            $data[$i] = [
-                'iduser'=>$user->iduser,
-                'nomutilisateur'=>$user->nomutilisateur,
-                'nom'=>$user->nom,
-                'prenom'=>$user->prenom,
-                'TypeUser'=>$user->TypeUser,
-                'confirme'=>$user->confirme,
-                'dateinscription'=>$user->dateinscription,
-                'email'=>$user->email
-            ];
+            $data[$i] = $users;
             ++$i;
         }
         return json_encode($data);
@@ -129,25 +129,29 @@ class PassportController extends Controller
    public function GetAllSuppliers()
    {
         $users = DB::table('fournisseurs')
-            ->join('users', 'fournisseurs.idFournisseur','=', 'users.iduser')
+            ->join('users', 'fournisseurs.idFournisseur', '=', 'users.iduser')
             ->where('TypeUser', '<>', 'Admin')
-            ->select('iduser', 'nomutilisateur', 'nom', 'prenom', 'TypeUser', 'confirme', 'dateinscription', 'email')
-            
+            ->select(
+                'nbEtoiles',
+                'profit',
+                'iduser',
+                'nomutilisateur',
+                'nom',
+                'prenom',
+                'adresse',
+                'confirme',
+                'dateinscription',
+                'email',
+                'Téléphone',
+                'description',
+                'imgGUID'
+            )
             ->get();
         
         $data = [];
         $i = 0;
         foreach($users as $user) {
-            $data[$i] = [
-                'iduser'=>$user->iduser,
-                'nomutilisateur'=>$user->nomutilisateur,
-                'nom'=>$user->nom,
-                'prenom'=>$user->prenom,
-                'TypeUser'=>$user->TypeUser,
-                'confirme'=>$user->confirme,
-                'dateinscription'=>$user->dateinscription,
-                'email'=>$user->email
-            ];
+            $data[$i] = $user;
             ++$i;
         }
         return json_encode($data);

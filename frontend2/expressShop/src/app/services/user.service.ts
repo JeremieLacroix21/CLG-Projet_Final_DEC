@@ -21,7 +21,7 @@ export class UserService {
 
   getAllSuppliers() {
     return this.http.get<Supplier[]>(
-      `${config.apiUrl}/api/GetAllUsers`,
+      `${config.apiUrl}/api/GetAllSuppliers`,
       config.headerObject
     );
   }

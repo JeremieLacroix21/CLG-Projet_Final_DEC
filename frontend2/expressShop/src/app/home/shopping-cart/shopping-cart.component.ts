@@ -21,7 +21,7 @@ export class ShoppingCartComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) 
   paginator: MatPaginator;
 
-  displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité'/*, '-total'*/];
+  displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité', 'sous-total'];
   NOMPAGE = "Votre Panier";
 
   dataSource : MatTableDataSource<productPanier>;
@@ -29,54 +29,58 @@ export class ShoppingCartComponent implements OnInit {
 
   subscription: Subscription;
   products: productPanier[];
-  filteredproducts : productPanier[];
   TABelement : productPanier[];
 
 
-  constructor(private productService: ProductService, private loader: LoaderService) { 
-        this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
-        this.filteredproducts = this.products = products
-        setTimeout(() => {
-        this.TABelement = this.filteredproducts;
+  constructor(private productService: ProductService, private loader: LoaderService) {
+    this.getAllitems();
+  }
+
+  getAllitems() {
+    this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentuser')).subscribe(products => {
+      this.TABelement = this.products = products
+      setTimeout(() => {
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
         this.Total();
         this.dataSource.paginator = this.paginator;
         console.log(this.TABelement)
         this.loader.hide();
-        });
       });
-            
+    });
   }
+
   ngOnInit() {
     this.loader.show("Chargement des produits...");
-    
   }
+  
   increment(column)
   {
-    this.TABelement[column].quantity += 1;    
+    this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
       
   }
   decrement(column)
   {
-    if(this.TABelement[column].quantity - 1 == 0)
+    
+    if( this.TABelement.find((item => item.idproduit === column)).quantity   - 1 == 0)
     {
       this.delete(column);
     }
     else 
     {
-      this.TABelement[column].quantity -= 1;
+      this.TABelement.find((item => item.idproduit === column)).quantity -= 1;
     }
     this.Total();
   }
   delete(column)
   {
     delete this.TABelement[column];
-    document.getElementById("tr" + column).remove();
+    this.deleteProductFromCart(+localStorage.getItem('currentuser'),column);
+    this.getAllitems();
   }
   SousTotal(i) : string
   {
-    return (this.TABelement[i].prix * this.TABelement[i].quantity).toString();
+    return (this.TABelement.find((item => item.idproduit === i)).prix * this.TABelement.find((item => item.idproduit === i)).quantity).toString();
   }
   Total()
   {
@@ -94,7 +98,6 @@ export class ShoppingCartComponent implements OnInit {
   {
       this.productService.UpdateQuantityPanier(iduser,idproduit,quantity);
   }
-  
 }
 
 

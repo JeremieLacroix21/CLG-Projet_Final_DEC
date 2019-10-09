@@ -123,12 +123,7 @@ class ProduitController extends Controller
     $i = 0;
     foreach($produits as $produit)
     {
-        $data[$i] = [
-            'idproduit'=>$produit->idproduit,
-            'nom'=>$produit->nom,
-            'prix'=>$produit->prix,
-            'imgGUID'=>$produit->imgGUID, 
-            'quantity'=>$produit->quantity];
+        $data[$i] = $produit;
         ++$i;
     }
     return json_encode($data);
