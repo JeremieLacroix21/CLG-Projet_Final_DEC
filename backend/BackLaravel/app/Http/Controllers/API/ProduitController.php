@@ -105,13 +105,18 @@ class ProduitController extends Controller
    {
     //fonctionnel
     $input = $request->all();
+    
     //Ajout du produit
-    DB::table('panier')->insert(array(
+    $results =  DB::table('panier')->insert(array(
     'iduser' =>  $input['iduser'],
      'idproduit' =>  $input['idproduit'],
      'quantity' =>  $input['quantity']
     ));
-    return response()->json(['sucess'=> 'produit insere au panier'], 200);
+    if (is_null($results)) {
+            return response()->json(['error'=> 'product already in cart'], 401);
+       } else {
+            return response()->json(['success' => 'item added to cart'], 200);
+     }
    }
 
    public function GetpanierFromId(Request $request)
@@ -134,10 +139,14 @@ class ProduitController extends Controller
 
    public function DeleteProductFromPanier(Request $request)
    {
-       DB::table('panier')->where('idproduit', '=', $request['idproduit'])
+       $results = DB::table('panier')->where('idproduit', '=', $request['idproduit'])
        ->where('iduser', '=', $request['iduser'])
        ->delete();
-       //todo
+       if (is_null($results)) {
+        return response()->json(['error'=> 'product doesnt exist'], 401);
+       } else {
+           return response()->json(['success' => 'item deleted'], 200);
+     }
    }
 
    public function UpdateQuantityPanier(Request $request)
@@ -153,6 +162,21 @@ class ProduitController extends Controller
            return response()->json(['error'=> 'product doesnt exist'], 401);
           } else {
               return response()->json(['success' => 'quantity changed'], 200);
+        }
+    }
+
+
+    public function countItemFromid(Request $request)
+    {
+        $Data = [];
+        $Data = DB::table('panier')
+        ->where('iduser','=',$request->get('iduser'))
+        ->count();
+        if (is_null($Data)) {
+           return response()->json(['error'=> 'product doesnt exist'], 401);
+        } else {
+            // return response()->json(['success' => 'cout done'], 200);
+            return json_encode($Data);
         }
     }
 }
