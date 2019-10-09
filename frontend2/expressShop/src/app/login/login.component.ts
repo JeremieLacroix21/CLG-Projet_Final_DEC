@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from '../services';
 import { first } from 'rxjs/operators';
 import { DEBUGGING } from '../models/DEBUG-LOGIN';
+import { errormessage } from '../models/error';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string
   invalidLogin: boolean;
+  errormessages: errormessage[]
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -58,9 +60,10 @@ export class LoginComponent implements OnInit {
             console.log(localStorage.getItem('currentUser'));
             this.router.navigate([this.returnUrl]);
           },
-          error => {
+          err => {
             if (!DEBUGGING) {
               this.invalidLogin = true;
+              this.errormessages = err.error;
               this.loading = false; 
             }
 

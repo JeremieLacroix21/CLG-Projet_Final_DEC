@@ -17,7 +17,7 @@
         <mat-error *ngIf="password.hasError('required')">Le mot de passe est obligatoire</mat-error>
     </mat-form-field></p>
 
-    <p *ngIf="invalidLogin" class="error">Informations invalides</p>
+    <p *ngIf="invalidLogin" [innerHTML]="errormessages" class="error">{{errormessages.name}}</p>
 
     <mat-checkbox>Se souvenir de moi</mat-checkbox>
     <div class="button_div">

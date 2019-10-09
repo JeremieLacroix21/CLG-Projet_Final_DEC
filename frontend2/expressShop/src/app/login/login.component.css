@@ -16,11 +16,11 @@
   }
 
   .error {
-    padding: 16px;
-    width: 300px;
-    color: white;
-    background-color: red;
-  }  .button_div{
+    padding: 5px;
+    width: 100%;
+    color:  red;
+  }  
+  .button_div{
       padding-top: 20px;
   }
   .button_login {
