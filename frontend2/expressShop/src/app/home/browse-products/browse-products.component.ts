@@ -36,22 +36,18 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
     this.productService.AddProductToCart(iduser,idproduct,1);
   }
 
-  private FilterNom(chaine:string) {
+  private Filter(chaine:string, idf:string){
+    this.filteredProducts = this.products;
+
     console.log(this.filteredProducts)
 
-    if (chaine) {
-      this.filteredProducts = this.products.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase()));
-    } else {
-      this.filteredProducts = this.products;
-    }
+    this.filteredProducts = (chaine) ?
+      this.filteredProducts.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase())):
+          this.filteredProducts;
 
-   /* if (idf) {
-      this.filteredProducts = this.filteredProducts.filter(p => p.nomFournisseur.toLowerCase().includes(idf.toLowerCase()));
-    } else {
-      this.filteredProducts = this.filteredProducts;
-    }
-*/
-    console.log(this.filteredProducts);
+    this.filteredProducts = (idf) ?
+      this.filteredProducts.filter(p => p.nomFournisseur.toLowerCase().includes(idf.toLowerCase())):
+        this.filteredProducts;
   }
 
 
