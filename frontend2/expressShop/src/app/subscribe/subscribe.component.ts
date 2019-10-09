@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { subscribeservice } from '../services/subscribe.service';
+import { errormessage } from '../models/error';
 
 @Component({
   selector: 'app-subscribe',
@@ -30,6 +31,8 @@ export class SubscribeComponent implements OnInit {
   invalidsubscribe: boolean;
   selectedfile : File;
   imageSrc: string;
+  error : string;
+  errormessages: errormessage[]
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -76,8 +79,6 @@ export class SubscribeComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
-      this.invalidsubscribe = true;
-      console.log(this.form.controls.Image.value);
       return;
     }
     else{
@@ -87,16 +88,16 @@ export class SubscribeComponent implements OnInit {
         this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
         this.form.controls.Image.value,this.form.controls.Description.value).subscribe(
        (res) => {
-        console.log(res);
+        this.invalidsubscribe = false;
         this.popUpOpen = true;
       },
       (err) => {
-        console.log(err);
+        this.invalidsubscribe = true;
+        this.errormessages = err.error;
       }
   );
     }
   }
-
   onUpload() {
     this.subscribeservice.uploadImage(this.selectedfile).subscribe(
       (res) => {

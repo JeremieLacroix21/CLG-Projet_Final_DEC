@@ -39,6 +39,20 @@ class PassportController extends Controller
    public function register(Request $request)
    {
        $input = $request->all();
+       $user_favorites = DB::table('users')
+       ->where('nomutilisateur', '=', $input['name'])
+       ->first();
+       $useremail = DB::table('users')
+       ->where('email', '=', $input['email'])
+       ->first();
+       if(!is_null($user_favorites))
+       {
+        return response()->json([@"Le nom d'utilisateur est déja utilisé"], 401);
+       }
+       if(!is_null($useremail))
+       {
+        return response()->json([@"Le email est déja utilisé"], 401);
+       }
        DB::table('users')->insert(array(
         'nomutilisateur' =>  $input['name'],
         'email' => $input['email'],

@@ -56,6 +56,8 @@
             </mat-form-field>
         </p>
         <p><input type='file' class="upload" (change)="onFileChanged($event)"/></p>
+        <p *ngIf="invalidsubscribe" [innerHTML]="errormessages" class="error">{{errormessages.name}}</p>
+        
         <div class="button_div">
             <button type="submit" mat-button>S'inscrire</button>
             <button class="button_login" (click)="AnnunlerOption()" mat-button>Annuler</button>
@@ -71,7 +73,7 @@
           </header>
           <main style="text-align: center">
             <p>Votre demande d'inscription a été envoyé à notre équipe d'analyste</p>
-            <p>Vous receverez une confirmation d'ici peu!</p>
+            <p>Vous receverez une confirmation par email d'ici peu!</p>
           </main>
           <footer>
             <button (click)="cancelOption()" mat-button style="float: right">Retour au menu</button>
