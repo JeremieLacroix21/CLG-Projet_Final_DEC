@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner";
 import { LoaderService } from 'src/app/services/loader.service';
+import { productPanier } from 'src/app/models/productPanier.entity';
 
 @Component({
   selector: 'app-browse-products',
@@ -18,11 +19,11 @@ import { LoaderService } from 'src/app/services/loader.service';
 export class BrowseProductsComponent implements OnInit, OnDestroy
 {
   subscription: Subscription;
-  products: Product[];
-  filteredProducts: Product[];
+  products2: productPanier[];
+  filteredProducts2: productPanier[];
 
   constructor(private productService: ProductService, private loader: LoaderService) {
-    this.subscription = this.productService.getAll().
+    this.subscription = this.productService.GetpanierFromId().
       subscribe( products => { this.filteredProducts = this.products = products
           setTimeout(() => {  this.loader.hide();
           });

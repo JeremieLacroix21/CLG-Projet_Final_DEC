@@ -22,9 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::get('GetpanierFromId','API\ProduitController@GetpanierFromId');
  Route::post('AddProductToPanier','API\ProduitController@AddProductToPanier');
  Route::post('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
+ Route::post('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
 //Route Profil
- Route::put('/profil','API\ProfilController@Updatepassword');
  Route::post('/profil','API\ProfilController@GetUser');
+ Route::post('UpdatePassword','API\ProfilController@UpdatePassword');
+ Route::post('UpdateEmail','API\ProfilController@UpdateEmail');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
 //Route Middleware
