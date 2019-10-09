@@ -134,8 +134,8 @@ export class SubscribeComponent implements OnInit {
       input.value = '';
     }
   }
-  remove(fruit: Tags): void {
-    const index = this.tag.indexOf(fruit);
+  remove(tag: Tags): void {
+    const index = this.tag.indexOf(tag);
 
     if (index >= 0) {
       this.tag.splice(index, 1);
