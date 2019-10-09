@@ -11,22 +11,25 @@ import { subscribeservice } from '../services/subscribe.service';
 export class SubscribeComponent implements OnInit {
   
   form = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    nom: new FormControl('', Validators.required),
-    prenom: new FormControl('', Validators.required),
-    TypeUser: new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required,Validators.minLength(5)]),
+    password: new FormControl('', [Validators.required,Validators.minLength(5)]),
+    nom: new FormControl('', [Validators.required]),
+    prenom: new FormControl('', [Validators.required]),
+    TypeUser: new FormControl(''),
     adresse: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    Telephone: new FormControl('', Validators.required),
-    Image: new FormControl('', Validators.required)
+    email: new FormControl('', [Validators.required,Validators.email]),
+    Telephone: new FormControl('', [Validators.required,Validators.pattern('[0-9]+'),Validators.maxLength(10)]),
+    Image: new FormControl(''),
+    Description: new FormControl ('', Validators.required)
   })
 
   loading = false;
   submitted = false;
   returnUrl: string
-  invalidLogin: boolean;
+  invalidsubscribe: boolean;
   selectedfile : File;
+  PhotoProfil : string;
+  imageSrc: string;
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -37,6 +40,7 @@ export class SubscribeComponent implements OnInit {
   get email() { return this.form.get('email'); }
   get Telephone() { return this.form.get('Telephone'); }
   get Image() { return this.form.get('Image'); }
+  get Description() { return this.form.get('Description');}
 
   constructor(
     private route: ActivatedRoute,
@@ -44,21 +48,44 @@ export class SubscribeComponent implements OnInit {
     private subscribeservice: subscribeservice
   ){ }
 
+  popUpOpen = false;
+
+  cancelOption() {
+    this.popUpOpen = false;
+  }
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.imageSrc = "campagne.jpg";
   }
 
   onFileChanged(event) {
     this.selectedfile = event.target.files[0]
-    this.onUpload();
+    const reader = new FileReader();
+    reader.onload = e => this.imageSrc = reader.result;
+    reader.readAsDataURL(this.selectedfile);
   }
   
   onSubmit() {
     this.submitted = true;
 
     if (this.form.invalid) {
-      this.onUpload();
+      this.invalidsubscribe = true;
       return;
+    }
+    else{
+      this.onUpload();
+      this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value,
+        this.form.controls.prenom.value,this.form.controls.nom.value,this.form.controls.adresse.value,
+        this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
+        this.PhotoProfil,this.form.controls.Description.value).subscribe(
+       (res) => {
+        console.log(res);
+        this.popUpOpen = true;
+      },
+      (err) => {
+        console.log(err);
+      }
+  );
     }
     this.loading = true;
   }
@@ -66,11 +93,10 @@ export class SubscribeComponent implements OnInit {
   onUpload() {
     this.subscribeservice.uploadImage(this.selectedfile).subscribe(
       (res) => {
-        console.log(res);
+        this.PhotoProfil = res.toString();
       },
       (err) => {
         console.log(err);
       })
   }
-
 }

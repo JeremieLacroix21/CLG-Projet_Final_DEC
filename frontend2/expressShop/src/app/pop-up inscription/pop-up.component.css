@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+  .shade {
+    z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: transparent;
+  }
+  .pop-up {
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 1ch;
+    }  
+    .pop-up-box {
+      width: 40%;
+      height: 20%;
+      overflow-y: auto;
+      max-height: 870px;
+      margin: 0 auto;
+      padding: 1rem;
+      box-shadow: 3px 3px 3px #8d8b8b;
+      background: #ffffff;
+      color: #000000;
+    }
+
+  

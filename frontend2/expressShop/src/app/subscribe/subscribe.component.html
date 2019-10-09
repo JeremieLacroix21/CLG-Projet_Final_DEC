@@ -47,22 +47,35 @@
         </mat-form-field></p>
         
         <p class="upload">Photo de profil</p>
-        <p>
-            <img id="Image" src="campagne.jpg" class="IMG"/>
+        <p style="height: 155px">
+            <img id="Image" [src]="imageSrc" class="IMG"/>
             <mat-form-field appearance="outline" class="description-field">
                 <mat-label>Description</mat-label>
-                <textarea matInput placeholder="Description de votre compagnie"></textarea>
+                <textarea matInput placeholder="Description de votre compagnie" name="Description" formControlName="Description" id="inputDescription"></textarea>
+                <mat-error *ngIf="Description.hasError('required')">La description est obligatoire</mat-error>
             </mat-form-field>
         </p>
         <p><input type='file' class="upload" (change)="onFileChanged($event)"/></p>
-    
         <div class="button_div">
-            <button mat-button>Annuler</button>
-            <button class="button_login" type="submit" mat-button>S'inscrire</button>
+            <button type="submit" mat-button>S'inscrire</button>
+            <button class="button_login" mat-button>Annuler</button>
         </div>
     
     </form>
     </mat-card-content>
     </mat-card>
-    
+    <app-pop-up [isOpen]="popUpOpen">
+        <div class="blur">
+          <header>
+            <span class="title">Inscription Réussi!</span>
+          </header>
+          <main style="text-align: center">
+            <p>Votre demande d'inscription a été envoyé à notre équipe d'analyste</p>
+            <p>Vous receverez une confirmation d'ici peu!</p>
+          </main>
+          <footer>
+            <button (click)="cancelOption()" class="BTN_menu">Retour au menu</button>
+          </footer>
+        </div>
+      </app-pop-up>
     </div>

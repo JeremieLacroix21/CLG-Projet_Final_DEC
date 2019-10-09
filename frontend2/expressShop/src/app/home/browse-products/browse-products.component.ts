@@ -37,8 +37,8 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
     this.subscription.unsubscribe();
   }
 
-  private AddProductToCart (id:number) {
-
+  private AddProductToCart (idproduct:number,iduser:number) {
+    /*TODO */
   }
 
   private Filter(chaine:string, idf:string){

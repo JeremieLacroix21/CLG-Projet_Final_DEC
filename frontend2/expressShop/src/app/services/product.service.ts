@@ -32,20 +32,24 @@ export class ProductService {
   
   AddProductToCart(iduser:number,idproduit:number,qty:number)
   { 
-    /*TODO*/
-  
+      const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
+      return this.http.post(`${config.apiUrl}/api/AddProductToCart`, body.toString(), config.headerObject);
   }
 
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
-    /*TODO*/
+      const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString());
+      return this.http.post(`${config.apiUrl}/api/DeleteProductFromCart`, body.toString(), config.headerObject);
   }
 
-  GetCart(iduser:number)
+  GetpanierFromId(iduser:number)
   {
     return this.http.get<productPanier[]>(
-      `${config.apiUrl}/api/GetProduitPanier`,
-      config.headerObject
-    );
+      `${config.apiUrl}/api/GetpanierFromId`,config.headerObject);
+  }
+  UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
+  { 
+      const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
+      return this.http.post(`${config.apiUrl}/api/UpdateQuantityPanier`, body.toString(), config.headerObject);
   }
 }

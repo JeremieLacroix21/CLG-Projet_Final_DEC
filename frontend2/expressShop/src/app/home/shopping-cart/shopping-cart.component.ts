@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { productPanier } from 'src/app/models/productPanier.entity';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Product } from 'src/app/models/product';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
+import { ProductService } from 'src/app/services/product.service';
+import { LoaderService } from 'src/app/services/loader.service';
  //items = TABelement;
   
     
@@ -54,9 +56,20 @@ export class ShoppingCartComponent implements OnInit {
   total : number;
 
 
-  placeholder : string = "allo"
-  constructor() { 
+  placeholder : string = "allo";
+
+  subscription: Subscription;
+  products: productPanier[];
+  filteredProducts: productPanier[];
+
+  constructor(private productService: ProductService, private loader: LoaderService) { 
       this.Total();
+        this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentUser')).
+          subscribe( products => { this.filteredProducts = this.products = products
+              setTimeout(() => {  this.loader.hide();
+              });
+            });
+          
   }
   ngOnInit() {
 
@@ -112,6 +125,24 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+
+
+
+
+
+  deleteProductFromCart()
+  {
+
+  }
+  setquantity(iduser:number,idproduit:number,quantity:number)
+  {
+
+  }
+
+  getcartfromid()
+  {
+
+  }
   
 }
 
