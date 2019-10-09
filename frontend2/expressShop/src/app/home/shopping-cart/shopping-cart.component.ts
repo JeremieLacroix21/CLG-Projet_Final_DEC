@@ -126,22 +126,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
 
-
-
-
-
-  deleteProductFromCart()
+  deleteProductFromCart(iduser:number,idproduit:number)
   {
-
+      this.productService.DeleteProductFromCart(iduser,idproduit);
   }
   setquantity(iduser:number,idproduit:number,quantity:number)
   {
-
-  }
-
-  getcartfromid()
-  {
-
+      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity);
   }
   
 }
