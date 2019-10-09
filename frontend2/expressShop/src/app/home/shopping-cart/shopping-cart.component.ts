@@ -8,10 +8,6 @@ import { Product } from 'src/app/models/product';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
- //items = TABelement;
-  
-    
-    //var allo = new elements("1","img","allo",1);
 
 
 @Component({
@@ -19,7 +15,6 @@ import { LoaderService } from 'src/app/services/loader.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-
 
 export class ShoppingCartComponent implements OnInit {
   
@@ -40,12 +35,14 @@ export class ShoppingCartComponent implements OnInit {
   filteredProducts: productPanier[];
 
   constructor(private productService: ProductService, private loader: LoaderService) { 
-      
-        this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentUser')).
-          subscribe( products => { this.filteredProducts = this.products = products
-              setTimeout(() => {  this.loader.hide();
-              });
-            });
+      this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
+        this.filteredProducts = this.products = products
+        setTimeout(() => {
+          this.loader.hide();
+        });
+      });
+    
+        
 
             this.TABelement = this.filteredProducts;
             this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
