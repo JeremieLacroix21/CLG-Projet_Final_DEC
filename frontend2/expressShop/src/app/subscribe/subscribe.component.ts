@@ -29,6 +29,7 @@ export class SubscribeComponent implements OnInit {
   invalidsubscribe: boolean;
   selectedfile : File;
   PhotoProfil : string;
+  imageSrc: string;
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -47,18 +48,28 @@ export class SubscribeComponent implements OnInit {
     private subscribeservice: subscribeservice
   ){ }
 
+  popUpOpen = false;
+
+  cancelOption() {
+    this.popUpOpen = false;
+  }
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.imageSrc = "campagne.jpg";
   }
 
   onFileChanged(event) {
     this.selectedfile = event.target.files[0]
+    const reader = new FileReader();
+    reader.onload = e => this.imageSrc = reader.result;
+    reader.readAsDataURL(this.selectedfile);
   }
   
   onSubmit() {
     this.submitted = true;
 
     if (this.form.invalid) {
+      this.popUpOpen = true;
       this.invalidsubscribe = true;
       return;
     }

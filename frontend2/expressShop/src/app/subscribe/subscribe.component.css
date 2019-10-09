@@ -48,3 +48,16 @@ mat-card-content {
   bottom: 18px;
 }
 
+.BTN_menu{
+  background-color: white;
+  width: 30%;
+  height: 20%;
+  border: 0px;
+  color: darkgray;
+  float: right;
+}
+
+.blur{
+  filter: 'blur(4px)';
+  -webkit-filter: 'blur(4px)';
+  }
