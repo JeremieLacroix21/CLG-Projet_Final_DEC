@@ -1,6 +1,6 @@
 <div class="container">
 
-<mat-card class="filter-card">
+<mat-card class="filter-card" >
    <!--  <mat-form-field>
         <input matInput placeholder="Categorie" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
         <mat-autocomplete #auto="matAutocomplete">
@@ -24,7 +24,11 @@
     </mat-form-field> -->
 
     <mat-form-field>
-        <input matInput (keyup)="FilterNom($event.target.value)" placeholder="Nom">
+        <input matInput (keyup)="Filter(nom.value, idf.value)" placeholder="Nom" #nom>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput (keyup)="Filter(nom.value, idf.value)"placeholder="Fournisseur" #idf>
     </mat-form-field>
 
     <!-- <mat-form-field class="example-margin">
@@ -44,7 +48,7 @@
             <mat-card-title>{{product.nom}}</mat-card-title>
             <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->
             <!-- TODO: Get the supplier's name -->
-            <mat-card-subtitle>Offert par <a href="">Pom</a></mat-card-subtitle>
+            <mat-card-subtitle>Offert par <a href="">{{product.nomFournisseur}}</a></mat-card-subtitle>
             <!-- TODO: Load the supplier's logo -->
             <a href=""><img mat-card-avatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" /></a>
         </mat-card-title-group>
