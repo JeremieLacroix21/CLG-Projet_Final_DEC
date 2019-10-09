@@ -36,6 +36,7 @@ mat-card-content {
   min-width: 50px;
   height: 125px;
   margin-left:15px;
+  margin-bottom: 24px;
 }
 .upload{
   margin-left: 15px;

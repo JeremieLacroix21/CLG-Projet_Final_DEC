@@ -19,13 +19,14 @@ export class SubscribeComponent implements OnInit {
     adresse: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     Telephone: new FormControl('', Validators.required),
-    Image: new FormControl('', Validators.required)
+    Image: new FormControl('', Validators.required),
+    Description: new FormControl ('', Validators.required)
   })
 
   loading = false;
   submitted = false;
   returnUrl: string
-  invalidLogin: boolean;
+  invalidsubscribe: boolean;
   selectedfile : File;
   PhotoProfil : string;
 
@@ -38,6 +39,7 @@ export class SubscribeComponent implements OnInit {
   get email() { return this.form.get('email'); }
   get Telephone() { return this.form.get('Telephone'); }
   get Image() { return this.form.get('Image'); }
+  get Description() { return this.form.get('Description');}
 
   constructor(
     private route: ActivatedRoute,
@@ -57,8 +59,11 @@ export class SubscribeComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
-      this.onUpload();
+      this.invalidsubscribe = true;
       return;
+    }
+    else{
+      this.onUpload();
     }
     this.loading = true;
   }
