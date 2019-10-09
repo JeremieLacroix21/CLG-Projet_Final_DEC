@@ -115,7 +115,7 @@ class ProduitController extends Controller
     if (is_null($results)) {
             return response()->json(['error'=> 'product already in cart'], 401);
        } else {
-            return response()->json(['success' => 'item deleted'], 200);
+            return response()->json(['success' => 'item added to cart'], 200);
      }
    }
 
