@@ -3,7 +3,8 @@
     <mat-card-title-group>
         <mat-card-title>{{product.nom}}</mat-card-title>
         <mat-card-subtitle>{{product.prix}}$</mat-card-subtitle>
-        <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->
+        <!-- TODO: Redirect to supplier's profile page when clic
+            ing the name or the logo -->
         <mat-card-subtitle>Offert par <a href="">{{product.nomFournisseur}}</a></mat-card-subtitle>
         <!-- TODO: Load the supplier's logo -->
         <a href=""><img mat-card-avatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" /></a>
@@ -22,7 +23,11 @@
             <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
             <i class="material-icons mdc-icon-button__icon">star_border</i>
         </button>
+<<<<<<< HEAD
+        <button class="cart-btn" mat-icon-button  (click)="AddProductToCart({{product.idProduit}})"><mat-icon>add_shopping_cart</mat-icon></button>
+=======
         <button class="cart-btn" mat-icon-button (click)="AddProductToCart(product.idproduits)"><mat-icon>add_shopping_cart</mat-icon></button>
+>>>>>>> 2a647f9af35bcef0ef77083923e05aff4c5e4838
     </mat-card-actions>
 
 </mat-card>

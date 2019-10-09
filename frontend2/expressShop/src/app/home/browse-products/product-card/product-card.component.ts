@@ -21,7 +21,7 @@ export class ProductCardComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-      }); 
+      });
   }
 
   ngOnInit() {
