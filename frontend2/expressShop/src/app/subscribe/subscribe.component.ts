@@ -6,6 +6,7 @@ import { errormessage } from '../models/error';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { Tags } from '../models/tags';
+import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 @Component({
   selector: 'app-subscribe',
@@ -32,11 +33,18 @@ export class SubscribeComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  TagChaine : string;
   invalidsubscribe: boolean;
   selectedfile : File;
   imageSrc: string;
   error : string;
   errormessages: errormessage[]
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tag: Tags[] = [];
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -84,6 +92,7 @@ export class SubscribeComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
+      this.AjoutTags(this.tag);
       return;
     }
     else{
@@ -93,6 +102,10 @@ export class SubscribeComponent implements OnInit {
         this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
         this.form.controls.Image.value,this.form.controls.Description.value).subscribe(
        (res) => {
+         if(this.form.controls.TypeUser.value == "Fournisseur")
+         {
+            this.AjoutTags(this.tag);
+         }
         this.invalidsubscribe = false;
         this.popUpOpen = true;
       },
@@ -113,15 +126,6 @@ export class SubscribeComponent implements OnInit {
       })
   }
 
-
-
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tag: Tags[] = [];
-
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -140,6 +144,20 @@ export class SubscribeComponent implements OnInit {
     if (index >= 0) {
       this.tag.splice(index, 1);
     }
+  }
+
+  AjoutTags(tag){
+    this.TagChaine = "";
+   tag.forEach(element =>{
+    this.TagChaine += element.name + ";";
+   });
+   this.subscribeservice.AddTag(this.TagChaine).subscribe(
+    (res) => {
+      this.form.controls.tags.setValue(res.toString());
+    },
+    (err) => {
+      console.log(err);
+    })
   }
 }
 

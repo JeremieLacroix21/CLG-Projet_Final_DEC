@@ -30,4 +30,10 @@ export class subscribeservice {
     .set('dateinscription', formatDate(new Date(), 'yyyy/MM/dd', 'en'));
     return this.http.post(`${config.apiUrl}/api/register`,User.toString(),config.headerObject); 
   }
+
+  AddTag(TagFinal){
+    const tag = new HttpParams()
+    .set('Tags', TagFinal);
+    return this.http.post(`${config.apiUrl}/api/AddTag`,tag.toString(),config.headerObject); 
+  }
 }

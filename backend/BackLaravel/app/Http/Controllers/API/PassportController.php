@@ -125,4 +125,24 @@ class PassportController extends Controller
         }
         return json_encode($data);
     }
+
+    public function AddTag(Request $request)
+    {
+        $input = $request->all();
+        //Ajout du tag
+        $data = explode(";",$input["Tags"]);
+        foreach ($data as $Tags) {
+        $TagExiste = DB::table('tags_fournisseur')
+        ->where('tag', '=', $Tags)
+        ->first();
+        if (is_null($TagExiste)) {
+            DB::table('tags_fournisseur')->insert(array(
+                'tag' => $Tags
+                ));
+        }
+        //Ajout du lien tag
+        DB::select('Call InsertionLienTagsFournisseur(?)',array($Tags));
+        }
+        return response()->json(['sucess'=> 'tag insere'], 200);
+    }
 }
