@@ -17,11 +17,12 @@ export class ProductCardComponent implements OnInit {
     let iduser =  +localStorage.getItem('currentuser');
     this.productService.AddProductToCart(iduser,idproduct,1).subscribe(
       (res) => {
+        this.productService.RefreshCartItemCount(iduser);
         console.log(res);
       },
       (err) => {
         console.log(err);
-      });
+    });
   }
 
   ngOnInit() {
