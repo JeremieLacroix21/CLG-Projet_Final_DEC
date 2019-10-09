@@ -47,7 +47,4 @@ export class UserService {
       body.toString(),
       config.headerObject);
   }
-
-
-
 }
