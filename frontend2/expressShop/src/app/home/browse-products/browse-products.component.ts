@@ -41,9 +41,19 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
 
   }
 
-  private FilterNom(chaine:string){
+  private Filter(chaine:string, idf:string){
+    this.filteredProducts = this.products;
+
+    console.log(this.filteredProducts)
+
     this.filteredProducts = (chaine) ?
-      this.products.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase())):
-        this.products;
+      this.filteredProducts.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase())):
+        this.filteredProducts;
+    console.log()
+    this.filteredProducts = (idf) ?
+      this.filteredProducts.filter(p => p.nomFournisseur.toLowerCase().includes(idf.toLowerCase())):
+        this.filteredProducts;
   }
+
+
 }
