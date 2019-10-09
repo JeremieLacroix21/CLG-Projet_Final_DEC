@@ -11,9 +11,6 @@ class ProduitController extends Controller
 {
    public function GetAllProducts()
    {
-
-
-
         $produits = DB::table('produits')->get();
         $data = [];
         $i = 0;
