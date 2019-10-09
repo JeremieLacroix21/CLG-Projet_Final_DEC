@@ -15,7 +15,13 @@ export class ProductCardComponent implements OnInit {
 
 
   AddProductToCart(iduser:number,idproduct:number) {
-    this.productService.AddProductToCart(iduser,idproduct,1);
+    this.productService.AddProductToCart(iduser,idproduct,1)..subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      });
   }
   ngOnInit() {
   }
