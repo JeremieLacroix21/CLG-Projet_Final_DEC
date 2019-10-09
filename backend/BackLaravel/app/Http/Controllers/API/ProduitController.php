@@ -94,7 +94,7 @@ class ProduitController extends Controller
             return json_encode($data);
         }
         else{
-           return response()->json(['error'=> 'Nom dimage déja utilisé'], 401);
+            return json_encode($data);
         }
    }
 

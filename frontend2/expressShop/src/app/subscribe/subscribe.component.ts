@@ -11,15 +11,15 @@ import { subscribeservice } from '../services/subscribe.service';
 export class SubscribeComponent implements OnInit {
   
   form = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    nom: new FormControl('', Validators.required),
-    prenom: new FormControl('', Validators.required),
-    TypeUser: new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required,Validators.minLength(5)]),
+    password: new FormControl('', [Validators.required,Validators.minLength(5)]),
+    nom: new FormControl('', [Validators.required]),
+    prenom: new FormControl('', [Validators.required]),
+    TypeUser: new FormControl(''),
     adresse: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    Telephone: new FormControl('', Validators.required),
-    Image: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required,Validators.email]),
+    Telephone: new FormControl('', [Validators.required,Validators.pattern('[0-9]+'),Validators.maxLength(10)]),
+    Image: new FormControl(''),
     Description: new FormControl ('', Validators.required)
   })
 
@@ -69,12 +69,23 @@ export class SubscribeComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
-      this.popUpOpen = true;
       this.invalidsubscribe = true;
       return;
     }
     else{
       this.onUpload();
+      this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value,
+        this.form.controls.prenom.value,this.form.controls.nom.value,this.form.controls.adresse.value,
+        this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
+        this.PhotoProfil,this.form.controls.Description.value).subscribe(
+       (res) => {
+        console.log(res);
+        this.popUpOpen = true;
+      },
+      (err) => {
+        console.log(err);
+      }
+  );
     }
     this.loading = true;
   }
@@ -88,5 +99,4 @@ export class SubscribeComponent implements OnInit {
         console.log(err);
       })
   }
-
 }

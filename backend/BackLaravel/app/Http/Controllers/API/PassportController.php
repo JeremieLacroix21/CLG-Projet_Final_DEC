@@ -45,7 +45,10 @@ class PassportController extends Controller
         'adresse' => $input['adresse'],
         'admin' => $input['admin'],
         'confirme' => $input['confirme'],
-        'dateinscription' => $input['dateinscription']
+        'dateinscription' => $input['dateinscription'],
+        'Téléphone' => $input['telephone'],
+        'imgGUID' => $input['photo'],
+        'description' => $input['description']
        ));
        return response()->json(['success'=> 'User Created'], $this->successStatus);
    }
