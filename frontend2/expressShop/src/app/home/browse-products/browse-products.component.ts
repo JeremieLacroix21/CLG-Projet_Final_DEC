@@ -1,13 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { ProductService } from '../../services/product.service';
-import { map } from 'rxjs/operators';
 import { Product } from '../../models/product';
-import { Router, ActivatedRoute } from "@angular/router";
-import { Supplier } from 'src/app/models/supplier';
-import { first } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
-import { NgxSpinnerService } from "ngx-spinner";
+import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
@@ -22,10 +16,11 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
   filteredProducts: Product[];
 
   constructor(private productService: ProductService, private loader: LoaderService) {
-    this.subscription = this.productService.getAll().
-      subscribe( products => { this.filteredProducts = this.products = products
-          setTimeout(() => {  this.loader.hide();
-          });
+    this.subscription = this.productService.getAll().subscribe(products => {
+      this.filteredProducts = this.products = products
+      setTimeout(() => {
+        this.loader.hide();
+      });
     });
   }
 
@@ -42,8 +37,12 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
   }
 
   private FilterNom(chaine:string){
-    this.filteredProducts = (chaine) ?
-      this.products.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase())):
-        this.products;
+    if (chaine) {
+      this.filteredProducts = this.products.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase()));
+    } else {
+      this.filteredProducts = this.products;
+    }
+
+    console.log(this.filteredProducts);
   }
 }

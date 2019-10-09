@@ -11,31 +11,6 @@
     padding-top: 10px;
 }
 
-.product-img-card {
-    object-fit: cover;
-}
-
-.product-card-content {
-    text-align: justify;
-}
-
-.cart-btn {
-    float: right;
-}
-
-.mdc-icon-button {
-    padding: 0px;
-    padding-top: 4px;
-    top: 2.2px;
-    width: 38px;
-    height: 38px;
-}
-
-.mat-card-title {
-    font-size: 18px;
-    font-weight: 700;
-}
-
 /****************************************************************************************
     ADAPTING THE GRID TO DIFFERENT SIZES OF SCREENS
 

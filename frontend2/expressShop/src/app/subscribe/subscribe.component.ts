@@ -61,7 +61,7 @@ export class SubscribeComponent implements OnInit {
   onFileChanged(event) {
     this.selectedfile = event.target.files[0]
     const reader = new FileReader();
-    reader.onload = e => this.imageSrc = reader.result;
+    //reader.onload = e => this.imageSrc = reader.result;
     reader.readAsDataURL(this.selectedfile);
   }
   

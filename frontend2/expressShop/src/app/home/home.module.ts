@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowseSuppliersComponent } from './browse-suppliers/browse-supplierscomponent';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { SupplierInfosComponent } from './supplier-infos/supplier-infos.component';
+import { ProductCardComponent } from './browse-products/product-card/product-card.component';
 
 //Angular Material Components
 import {MatCheckboxModule} from '@angular/material';
@@ -65,7 +67,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ModifProfileComponent,
     BrowseSuppliersComponent,
     ShoppingCartComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    ProductCardComponent,
+    SupplierInfosComponent
   ],
   imports: [
     CommonModule,
@@ -118,6 +122,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
      CdkTreeModule,
      MatTreeModule,
      NgxSpinnerModule
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class HomeModule { }

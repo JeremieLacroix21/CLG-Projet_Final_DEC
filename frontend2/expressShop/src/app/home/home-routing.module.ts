@@ -7,6 +7,7 @@ import { BrowseSuppliersComponent } from './browse-suppliers/browse-supplierscom
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { SubscribeComponent } from '../subscribe/subscribe.component';
+import { SupplierInfosComponent } from './supplier-infos/supplier-infos.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
         path: 'admin-users',
         component: AdminUsersComponent
       },
+      {
+        path: 'supplierInfos',
+        component: SupplierInfosComponent
+      }
     ]
   }
 ];
