@@ -22,7 +22,7 @@
 <ng-container *ngIf='(filteredProducts) as products'>
     <div class="grid-container">
         <ng-container *ngFor="let product of products">
-            <app-product-card [product]="product" onclick=""></app-product-card>
+            <app-product-card [product]="product"></app-product-card>
         </ng-container>
     </div>
 </ng-container>

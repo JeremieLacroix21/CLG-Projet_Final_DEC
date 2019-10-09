@@ -8,10 +8,6 @@ import { Product } from 'src/app/models/product';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
- //items = TABelement;
-  
-    
-    //var allo = new elements("1","img","allo",1);
 
 
 @Component({
@@ -20,39 +16,15 @@ import { LoaderService } from 'src/app/services/loader.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 
-
 export class ShoppingCartComponent implements OnInit {
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité', 'sous-total'];
   NOMPAGE = "Votre Panier";
-  TABelement : productPanier[] = [
-    {
-      id: 1,
-      nom: "allo",
-      prix: 900,
-      photo:"allo.jpg",
-      qty: 10
-    },
-    {
-      id: 2,
-      nom: "allo2",
-      prix: 40,
-      photo:"allo.jpg",
-      qty: 10
-    },
-    {
-      id: 3,
-      nom: "allo3",
-      prix: 10,
-      photo:"allo.jpg",
-      qty: 10
-    },
+  TABelement : productPanier[];
+  dataSource : MatTableDataSource<productPanier>;
   
-  ];
-  
-  dataSource = new MatTableDataSource<productPanier>(this.TABelement);
   total : number;
 
 
@@ -63,28 +35,28 @@ export class ShoppingCartComponent implements OnInit {
   filteredProducts: productPanier[];
 
   constructor(private productService: ProductService, private loader: LoaderService) { 
-      this.Total();
-        this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentUser')).
-          subscribe( products => { this.filteredProducts = this.products = products
-              setTimeout(() => {  this.loader.hide();
-              });
-            });
-          
+      this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
+        this.filteredProducts = this.products = products
+        setTimeout(() => {
+          this.loader.hide();
+        });
+      });
+    
+        
+
+            this.TABelement = this.filteredProducts;
+            this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
+            this.Total();
   }
   ngOnInit() {
-
     this.dataSource.paginator = this.paginator;
   }
-
-
   increment(column)
   {
     this.TABelement[column].qty += 1;    
     this.Total();
       
   }
-
-
   decrement(column)
   {
     if(this.TABelement[column].qty - 1 == 0)
@@ -97,25 +69,15 @@ export class ShoppingCartComponent implements OnInit {
     }
     this.Total();
   }
-  set(i)  
-  {
-    
-  } 
-
-
   delete(column)
   {
     delete this.TABelement[column];
     document.getElementById("tr" + column).remove();
   }
-
-
   SousTotal(i) : string
   {
     return (this.TABelement[i].prix * this.TABelement[i].qty).toString();
   }
-
-
   Total()
   {
     this.total = 0;
@@ -124,8 +86,6 @@ export class ShoppingCartComponent implements OnInit {
         this.total += this.TABelement[i].prix * this.TABelement[i].qty;
     }
   }
-
-
   deleteProductFromCart(iduser:number,idproduit:number)
   {
       this.productService.DeleteProductFromCart(iduser,idproduit);
