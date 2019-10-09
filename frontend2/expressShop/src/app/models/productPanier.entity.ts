@@ -1,8 +1,8 @@
 export class productPanier
 {
-    id: number;
+    idproduit: number;
     nom: string;
     prix: number;
-    photo: string;
-    qty: number;
+    imgGUID: string;
+    quantity: number;
 }
