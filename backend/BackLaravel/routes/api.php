@@ -13,13 +13,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('RecoverUsername', 'API\PassportController@RecoverUsername');
  Route::post('RecoverPassword', 'API\PassportController@RecoverPassword');
  Route::get('GetAllUsers', 'API\PassportController@GetAllUsers');
+ Route::post('AddTag', 'API\PassportController@AddTag');
 //Route Produit
  Route::get('GetAllProducts','API\ProduitController@GetAllProducts');
  Route::post('SearchProducts','API\ProduitController@SearchProducts');
  Route::post('AddProduct','API\ProduitController@AddProduct');
  Route::post('AddImage', 'API\ProduitController@AddImage');
  //route panier
- Route::get('GetpanierFromId','API\ProduitController@GetpanierFromId');
+ Route::post('GetpanierFromId','API\ProduitController@GetpanierFromId');
  Route::post('AddProductToPanier','API\ProduitController@AddProductToPanier');
  Route::post('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
  Route::post('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');

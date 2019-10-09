@@ -18,54 +18,55 @@ import { LoaderService } from 'src/app/services/loader.service';
 
 export class ShoppingCartComponent implements OnInit {
   
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) 
+  paginator: MatPaginator;
 
-  displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité', 'sous-total'];
+  displayedColumns: string[] = ['image', 'id', 'nom', 'prix', 'quantité'/*, '-total'*/];
   NOMPAGE = "Votre Panier";
-  TABelement : productPanier[];
+
   dataSource : MatTableDataSource<productPanier>;
   
+  
+
   total : number;
-
-
-  placeholder : string = "allo";
 
   subscription: Subscription;
   products: productPanier[];
-  filteredProducts: productPanier[];
+  filteredproducts : productPanier[];
+  TABelement : productPanier[];
+
 
   constructor(private productService: ProductService, private loader: LoaderService) { 
-      this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
-        this.filteredProducts = this.products = products
+        this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
+        this.filteredproducts = this.products = products
         setTimeout(() => {
-          this.loader.hide();
+        this.TABelement = this.filteredproducts;
+        this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
+        console.log(this.TABelement)
+        this.loader.hide();
         });
       });
-    
-        
-
-            this.TABelement = this.filteredProducts;
-            this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
             this.Total();
   }
   ngOnInit() {
+    this.loader.show("Chargement des produits...");
     this.dataSource.paginator = this.paginator;
   }
   increment(column)
   {
-    this.TABelement[column].qty += 1;    
+    this.TABelement[column].quantity += 1;    
     this.Total();
       
   }
   decrement(column)
   {
-    if(this.TABelement[column].qty - 1 == 0)
+    if(this.TABelement[column].quantity - 1 == 0)
     {
       this.delete(column);
     }
     else 
     {
-      this.TABelement[column].qty -= 1;
+      this.TABelement[column].quantity -= 1;
     }
     this.Total();
   }
@@ -76,14 +77,14 @@ export class ShoppingCartComponent implements OnInit {
   }
   SousTotal(i) : string
   {
-    return (this.TABelement[i].prix * this.TABelement[i].qty).toString();
+    return (this.TABelement[i].prix * this.TABelement[i].quantity).toString();
   }
   Total()
   {
     this.total = 0;
     for(let i = 0;i<this.TABelement.length;i++)
     {
-        this.total += this.TABelement[i].prix * this.TABelement[i].qty;
+        this.total += this.TABelement[i].prix * this.TABelement[i].quantity;
     }
   }
   deleteProductFromCart(iduser:number,idproduit:number)

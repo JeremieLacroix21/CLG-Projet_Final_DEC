@@ -56,7 +56,7 @@
             </mat-form-field>
         </p>
         <p><input type='file' class="upload" (change)="onFileChanged($event)"/></p>
-        <p class="tag">
+        <p class="tag" *ngIf="EstFournisseur">
             <mat-form-field class="tag">
                    <mat-chip-list #chipList aria-label="Tags selection">
                      <mat-chip *ngFor="let tags of tag" [selectable]="selectable"
@@ -96,4 +96,7 @@
           </footer>
         </div>
       </app-pop-up>
+      <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
+        <p class="loadingText">Création de votre compte...</p>
+        </ngx-spinner>
     </div>
