@@ -39,21 +39,16 @@ export class ProductService {
     // call api/SearchProducts
     return null;
   }
-
-  
   AddProductToCart(iduser:number,idproduit:number,qty:number)
   {
       const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
       return this.http.post(`${config.apiUrl}/api/AddProductToPanier`, body.toString(), config.headerObject);
   }
-
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
       const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString());
       return this.http.post(`${config.apiUrl}/api/DeleteProductFromCart`, body.toString(), config.headerObject);
   }
-
-  
   UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
   { 
       const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());

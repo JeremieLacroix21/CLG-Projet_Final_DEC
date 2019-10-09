@@ -99,8 +99,7 @@ class ProfilController extends Controller
         //fonctionnel
         $results = DB::table('users')
         ->where('iduser','=',$request->get('IdUser'))
-        ->update(['Email' => $request->get('NouveauEmail')])
-        ;
+        ->update(['Email' => $request->get('NouveauEmail')]);
         if (is_null($results)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
           } else {
