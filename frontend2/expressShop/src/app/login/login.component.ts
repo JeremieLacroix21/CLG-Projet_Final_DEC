@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
             }
 
             if (DEBUGGING) {
-              localStorage.setItem('currentUser', '11'/*JSON.stringify("visitor")*/);
+              localStorage.setItem('currentUser', '0'/*JSON.stringify("visitor")*/);
               this.router.navigate([this.returnUrl]);
             }
           }
