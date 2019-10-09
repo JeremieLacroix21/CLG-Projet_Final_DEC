@@ -64,7 +64,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private productService: ProductService, private loader: LoaderService) { 
       this.Total();
-        this.subscription = this.productService.getAll().
+        this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentUser')).
           subscribe( products => { this.filteredProducts = this.products = products
               setTimeout(() => {  this.loader.hide();
               });
