@@ -31,7 +31,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
-  
+
   AddProductToCart(iduser:number,idproduct:number) {
     this.productService.AddProductToCart(iduser,idproduct,1);
   }
