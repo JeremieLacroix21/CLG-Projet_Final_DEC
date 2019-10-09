@@ -32,8 +32,10 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
     this.subscription.unsubscribe();
   }
 
-  private AddProductToCart (idproduct:number,iduser:number) {
-    /*TODO */
+  private AddProductToCart (iduser:number,idproduct:number) {
+    
+    this.productService.AddProductToCart(iduser,idproduct,1);
+
   }
 
   private FilterNom(chaine:string) {
@@ -45,12 +47,12 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
       this.filteredProducts = this.products;
     }
 
-    if (idf) {
+   /* if (idf) {
       this.filteredProducts = this.filteredProducts.filter(p => p.nomFournisseur.toLowerCase().includes(idf.toLowerCase()));
     } else {
       this.filteredProducts = this.filteredProducts;
     }
-
+*/
     console.log(this.filteredProducts);
   }
 

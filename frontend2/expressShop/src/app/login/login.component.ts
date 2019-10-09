@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {
-            localStorage.setItem('currentUser', JSON.stringify(data));
+            localStorage.setItem('currentUser', '1'/*JSON.stringify(data)*/);
             console.log(localStorage.getItem('currentUser'));
             this.router.navigate([this.returnUrl]);
           },
