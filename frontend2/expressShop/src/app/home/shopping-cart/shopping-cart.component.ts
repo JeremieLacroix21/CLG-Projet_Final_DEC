@@ -25,9 +25,6 @@ export class ShoppingCartComponent implements OnInit {
   NOMPAGE = "Votre Panier";
 
   dataSource : MatTableDataSource<productPanier>;
-  
-  
-
   total : number;
 
   subscription: Subscription;
@@ -42,15 +39,17 @@ export class ShoppingCartComponent implements OnInit {
         setTimeout(() => {
         this.TABelement = this.filteredproducts;
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
+        this.Total();
+        this.dataSource.paginator = this.paginator;
         console.log(this.TABelement)
         this.loader.hide();
         });
       });
-            this.Total();
+            
   }
   ngOnInit() {
     this.loader.show("Chargement des produits...");
-    this.dataSource.paginator = this.paginator;
+    
   }
   increment(column)
   {

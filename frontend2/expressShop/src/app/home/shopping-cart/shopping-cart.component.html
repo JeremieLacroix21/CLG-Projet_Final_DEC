@@ -32,9 +32,9 @@
       <ng-container matColumnDef="quantité">
         <th mat-header-cell *matHeaderCellDef>quantité</th>
         <td mat-cell *matCellDef="let product">
-           <button type="submit" (click)="this.increment(product.id - 1)" id="bt2plus">+</button>
-            <input type="number" min="0" id="text+i" (keyup)="0" (key.enter)="set(product.id - 1)"  placeholder="{{product.quantity}}">
-          <button type="submit" (click)="this.decrement(product.id - 1)" id="bt2moin">-</button>
+           <button type="submit" (click)="this.increment(product.id)" id="bt2plus">+</button>
+            <input type="number" min="0" id="text+i" (keyup)="0" (key.enter)="set(product.id)"  placeholder="{{product.quantity}}">
+          <button type="submit" (click)="this.decrement(product.id)" id="bt2moin">-</button>
         </td>
         <td mat-footer-cell *matFooterCellDef></td>
         
