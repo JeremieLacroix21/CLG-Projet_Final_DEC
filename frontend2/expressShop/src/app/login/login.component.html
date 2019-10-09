@@ -10,15 +10,13 @@
     <p><mat-form-field>
         <input type="username" id="inputUsername" name="username" ngModel class="form-control" matInput placeholder="Username" formControlName="username">
         <mat-error *ngIf="username.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
-    </mat-form-field></p>
-    <p><button mat-button (click)='DemandeUsername()'style="padding-left: 0px;">Nom d'utilisateur oublié?</button></p>
+    </mat-form-field></p><br>
 
     <p><mat-form-field>
         <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Password" matInput formControlName="password" >
         <mat-error *ngIf="password.hasError('required')">Le mot de passe est obligatoire</mat-error>
-    </mat-form-field></p>
-    <p ><button mat-button (click)='DemandeMotdepasse()' style="padding-left: 0px;">Mot de passe oublié?</button></p>
-    <mat-checkbox style="float: right;">Se souvenir de moi</mat-checkbox><br>
+    </mat-form-field></p><br>
+    <mat-checkbox style="float: right; margin-top: 15px;">Se souvenir de moi</mat-checkbox><br>
 
     <p *ngIf="invalidLogin" [innerHTML]="errormessages" class="error">{{errormessages.name}}</p>
 
@@ -28,6 +26,8 @@
     </div>
 </form>
 </mat-card-content>
+<button mat-button (click)='DemandeUsername()'class="BTN_User">Nom d'utilisateur oublié?</button>
+<button mat-button (click)='DemandeMotdepasse()' class="BTN_Pass">Mot de passe oublié?</button>
 </mat-card>
 <form [formGroup]="formUsername">
 <app-pop-up [isOpen]="popUpOpen">
@@ -41,6 +41,7 @@
                 <input type="text" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Adresse courriel" formControlName="email">
                 <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
             </mat-form-field>
+            <p *ngIf="ValideUsername" style="color:green">L'envoi du email à été effectué!</p>
           </main>
           <footer>
             <button (click)="SendEmailUser()" mat-button style="float: left">Envoyer</button>
@@ -48,22 +49,27 @@
           </footer>
         </div>
     </app-pop-up>
-    <app-pop-up [isOpen]="popUpOpenPassword">
-            <div>
-              <header>
-                <span><b>Demande de votre nom d'utilisateur</b></span>
-              </header>
-              <main>
-                <p style="height: 1%;">Veuillez entrer votre adresse mail:</p>
-                <mat-form-field>
-                    <input type="text" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Adresse courriel" formControlName="email">
-                    <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
-                </mat-form-field>
-              </main>
-              <footer>
-                <button (click)="SendEmailUser()" mat-button style="float: left">Envoyer</button>
-                <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
-              </footer>
-            </div>
-        </app-pop-up>
 </form>
+<form [formGroup]="formPassword">
+    <app-pop-up [isOpen]="popUpOpenPassword">
+                <div>
+                  <header>
+                    <span><b>Demande de votre mot de passe</b></span>
+                  </header>
+                  <main>
+                    <p style="height: 1%;">Veuillez entrer votre nom d'utilisateur:</p>
+                    <mat-form-field>
+                        <input type="text" id="inputemail" name="username" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username">
+                        <mat-error *ngIf="username2.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
+                    </mat-form-field>
+                    <p *ngIf="ValidePassword" style="color:green">L'envoi du email à été effectué!</p>
+                  </main>
+                  <footer>
+                    <button (click)="SendEmailPass()" mat-button style="float: left">Envoyer</button>
+                    <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
+                  </footer>
+                </div>
+            </app-pop-up>
+ </form>
+
+    

@@ -32,8 +32,16 @@ export class AuthService {
         body.toString(),
         config.headerObject
       ); 
-
     }
+
+  SendUsername(email){
+    const sendemail = new HttpParams().set('email', email);
+   return this.http.post(`${config.apiUrl}/api/RecoverUsername`,sendemail.toString(),config.headerObject); 
+  }
+  SendPassword(username){
+    const sendemail = new HttpParams().set('email', username);
+    return this.http.post(`${config.apiUrl}/api/RecoverPassword`,sendemail.toString(),config.headerObject); 
+  }
 
     logout() {
         // remove user from local storage to log user out
