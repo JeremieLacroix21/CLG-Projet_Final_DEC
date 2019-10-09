@@ -7,6 +7,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { Tags } from '../models/tags';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-subscribe',
@@ -61,6 +62,7 @@ export class SubscribeComponent implements OnInit {
   tag: Tags[] = [];
 
   constructor(
+    private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
     private router: Router,
     private subscribeservice: subscribeservice
@@ -105,6 +107,7 @@ export class SubscribeComponent implements OnInit {
       return;
     }
     else{
+      this.spinner.show();
       this.onUpload();
       this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value,
         this.form.controls.prenom.value,this.form.controls.nom.value,this.form.controls.adresse.value,
@@ -116,6 +119,7 @@ export class SubscribeComponent implements OnInit {
             this.AjoutTags(this.tag);
          }
         this.invalidsubscribe = false;
+        this.spinner.hide();
         this.popUpOpen = true;
       },
       (err) => {

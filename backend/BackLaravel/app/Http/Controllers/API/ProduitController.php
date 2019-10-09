@@ -17,7 +17,7 @@ class ProduitController extends Controller
         foreach($produits as $produit) 
         {
             $data[$i] = [
-                'idproduits'>$produit->idproduits,
+                'idproduits'=>$produit->idproduits,
                 'nom'=>$produit->nom,
                 'prix'=>$produit->prix, 
                 'idFournisseur'=>$produit->idFournisseur,
@@ -123,7 +123,12 @@ class ProduitController extends Controller
     $i = 0;
     foreach($produits as $produit)
     {
-        $data[$i] = [$produit->idproduit,$produit->nom,$produit->prix,$produit->imgGUID, $produit->quantity];
+        $data[$i] = [
+            'idproduit'=>$produit->idproduit,
+            'nom'=>$produit->nom,
+            'prix'=>$produit->prix,
+            'imgGUID'=>$produit->imgGUID, 
+            'quantity'=>$produit->quantity];
         ++$i;
     }
     return json_encode($data);
@@ -150,8 +155,5 @@ class ProduitController extends Controller
           return response()->json(['success' => 'quantity changed'], $this->successStatus);
       }
    }
-
-
-
 }
 ?>

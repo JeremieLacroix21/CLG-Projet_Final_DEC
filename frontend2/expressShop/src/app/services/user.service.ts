@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError, of, Subscriber } from 'rxjs';
 import { BD_User } from '../models/user';
 import { config } from '../../config';
+import { Supplier } from '../models/supplier';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,13 @@ export class UserService {
 
   getAll() {
     return this.http.get<BD_User[]>(
+      `${config.apiUrl}/api/GetAllUsers`,
+      config.headerObject
+    );
+  }
+
+  getAllSuppliers() {
+    return this.http.get<Supplier[]>(
       `${config.apiUrl}/api/GetAllUsers`,
       config.headerObject
     );
@@ -40,6 +48,7 @@ export class UserService {
       config.headerObject
     );
   }
+
   UpdatePassword(iduser:number,NouveauMotdePasse:number)
   {
       const body = new HttpParams().set('IdUser', iduser.toString()).set('NouveauMotDePasse',NouveauMotdePasse.toString());

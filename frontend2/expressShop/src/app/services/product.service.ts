@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { config } from '../../config';
 import { Product } from '../models/product';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { productPanier } from '../models/productPanier.entity';
 
@@ -11,6 +11,10 @@ import { productPanier } from '../models/productPanier.entity';
 })
 export class ProductService {
 
+  private nbCartItemsSource = new Subject<number>();
+
+  nbCartItems = this.nbCartItemsSource.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getAll() {
@@ -18,6 +22,13 @@ export class ProductService {
       `${config.apiUrl}/api/GetAllProducts`,
       config.headerObject
     );
+  }
+  GetpanierFromId(iduser:number)
+  {
+    const body = new HttpParams().set('iduser', iduser.toString());
+    return this.http.post<productPanier[]>(
+      `${config.apiUrl}/api/GetpanierFromId`, body.toString(),
+      config.headerObject);
   }
 
   getbyname(name:string){
@@ -31,9 +42,9 @@ export class ProductService {
 
   
   AddProductToCart(iduser:number,idproduit:number,qty:number)
-  { 
+  {
       const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
-      return this.http.post(`${config.apiUrl}/api/AddProductToCart`, body.toString(), config.headerObject);
+      return this.http.post(`${config.apiUrl}/api/AddProductToPanier`, body.toString(), config.headerObject);
   }
 
   DeleteProductFromCart(iduser:number,idproduit:number)
@@ -42,11 +53,7 @@ export class ProductService {
       return this.http.post(`${config.apiUrl}/api/DeleteProductFromCart`, body.toString(), config.headerObject);
   }
 
-  GetpanierFromId(iduser:number)
-  {
-    return this.http.get<productPanier[]>(
-      `${config.apiUrl}/api/GetpanierFromId`,config.headerObject);
-  }
+  
   UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
   { 
       const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());

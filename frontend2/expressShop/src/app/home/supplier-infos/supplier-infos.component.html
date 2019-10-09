@@ -1,3 +1,23 @@
-<mat-card>
-    
+<div class="container">
+
+<mat-card *ngIf="(loadedUsers | async) as users">
+    <mat-form-field class="filter-form-field">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter par mots-clés...">
+    </mat-form-field>
+
+    <ng-container *ngFor="let user of dataSource.filteredData">
+        <p>{{user.nom}}</p>
+    </ng-container>
 </mat-card>
+
+<mat-card *ngIf="(loadedSuppliers | async) as suppliers">
+    <mat-form-field class="filter-form-field">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter par mots-clés...">
+    </mat-form-field>
+
+    <ng-container *ngFor="let supplier of dataSource.filteredData">
+        <p>{{supplier.nom}}</p>
+    </ng-container>
+</mat-card>
+
+</div>
