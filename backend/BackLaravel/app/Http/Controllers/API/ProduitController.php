@@ -113,7 +113,7 @@ class ProduitController extends Controller
      'quantity' =>  $input['quantity']
     ));
     if (is_null($results)) {
-            return response()->json(['error'=> 'product doesnt exist'], 401);
+            return response()->json(['error'=> 'product already in cart'], 401);
        } else {
             return response()->json(['success' => 'item deleted'], 200);
      }
