@@ -29,15 +29,13 @@ export class ShoppingCartComponent implements OnInit {
 
   subscription: Subscription;
   products: productPanier[];
-  filteredproducts : productPanier[];
   TABelement : productPanier[];
 
 
   constructor(private productService: ProductService, private loader: LoaderService) { 
-        this.subscription = this.productService.GetpanierFromId(11).subscribe(products => {
-        this.filteredproducts = this.products = products
+        this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentuser')).subscribe(products => {
+          this.TABelement = this.products = products
         setTimeout(() => {
-        this.TABelement = this.filteredproducts;
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
         this.Total();
         this.dataSource.paginator = this.paginator;
