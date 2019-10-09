@@ -3,20 +3,20 @@
 <mat-card class="filter-card" >
 
     <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value)" placeholder="Nom" #nom>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)" placeholder="Nom" #nom>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value)"placeholder="Fournisseur" #idf>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)"placeholder="Fournisseur" #idf>
     </mat-form-field>
 
-    <!-- <mat-form-field class="example-margin">
-        <input matInput type="number" placeholder="Prix min" value="min">
+    <mat-form-field>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)" placeholder="Prix min" #pmin>
     </mat-form-field>
 
-    <mat-form-field class="example-margin">
-        <input matInput type="number" placeholder="Prix max" value="max">
-    </mat-form-field> -->
+    <mat-form-field >
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)" type="number" placeholder="Prix max" #pmax>
+    </mat-form-field>
 </mat-card>
 
 <ng-container *ngIf='(filteredProducts) as products'>

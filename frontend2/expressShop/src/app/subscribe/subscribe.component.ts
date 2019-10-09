@@ -6,6 +6,7 @@ import { errormessage } from '../models/error';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { Tags } from '../models/tags';
+import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 @Component({
   selector: 'app-subscribe',
@@ -25,18 +26,8 @@ export class SubscribeComponent implements OnInit {
     Telephone: new FormControl('', [Validators.required,Validators.pattern('[0-9]+'),Validators.maxLength(10)]),
     Image: new FormControl(''),
     Description: new FormControl ('', Validators.required),
-    tags : new FormControl('', Validators.required)
+    tags: new FormControl('')
   })
-
-  popUpOpen = false;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  invalidsubscribe: boolean;
-  selectedfile : File;
-  imageSrc: string;
-  error : string;
-  errormessages: errormessage[]
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
@@ -47,8 +38,27 @@ export class SubscribeComponent implements OnInit {
   get email() { return this.form.get('email'); }
   get Telephone() { return this.form.get('Telephone'); }
   get Image() { return this.form.get('Image'); }
-  get Description() { return this.form.get('Description');}
-  get tags() { return this.form.get('tags');}
+  get Description() { return this.form.get('Description'); }
+  get tags() { return this.form.get('tags'); }
+
+
+  popUpOpen = false;
+  loading = false;
+  submitted = false;
+  EstFournisseur : boolean;
+  returnUrl: string;
+  TagChaine : string;
+  invalidsubscribe: boolean;
+  selectedfile : File;
+  imageSrc: string;
+  error : string;
+  errormessages: errormessage[]
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tag: Tags[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -68,8 +78,16 @@ export class SubscribeComponent implements OnInit {
     this.imageSrc = "campagne.jpg";
     this.form.controls.Image.setValue(this.imageSrc);
     this.form.controls.TypeUser.setValue("Fournisseur");
+    this.EstFournisseur = true;
   }
   selectChangeHandler (event: any) {
+    if(event.target.value == "Fournisseur")
+    {
+      this.EstFournisseur = true;
+    }
+    else{
+      this.EstFournisseur = false;
+    }
     this.form.controls.TypeUser.setValue(event.target.value);
   }
 
@@ -93,6 +111,10 @@ export class SubscribeComponent implements OnInit {
         this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
         this.form.controls.Image.value,this.form.controls.Description.value).subscribe(
        (res) => {
+         if(this.form.controls.TypeUser.value == "Fournisseur")
+         {
+            this.AjoutTags(this.tag);
+         }
         this.invalidsubscribe = false;
         this.popUpOpen = true;
       },
@@ -113,15 +135,6 @@ export class SubscribeComponent implements OnInit {
       })
   }
 
-
-
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tag: Tags[] = [];
-
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -140,6 +153,20 @@ export class SubscribeComponent implements OnInit {
     if (index >= 0) {
       this.tag.splice(index, 1);
     }
+  }
+
+  AjoutTags(tag){
+    this.TagChaine = "";
+   tag.forEach(element =>{
+    this.TagChaine += element.name + ";";
+   });
+   this.subscribeservice.AddTag(this.TagChaine).subscribe(
+    (res) => {
+      this.form.controls.tags.setValue(res.toString());
+    },
+    (err) => {
+      console.log(err);
+    })
   }
 }
 
