@@ -16,9 +16,12 @@ export class LoginComponent implements OnInit {
   form = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
+    })
+  formUsername = new FormGroup({
     email : new FormControl('', Validators.required)
     })
 
+  popUpOpenPassword = false;
   popUpOpen = false;
   loading = false;
   submitted = false;
@@ -28,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
-  get email() { return this.form.get('email'); }
+  get email() { return this.formUsername.get('email'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -49,19 +52,18 @@ export class LoginComponent implements OnInit {
     this.popUpOpen = true;
   }
   DemandePassword(){
-    
+    this.popUpOpenPassword = true
   }
   cancelOption(){
     this.popUpOpen = false;
+    this.popUpOpenPassword = false;
   }
   
   onSubmit() {
     this.submitted = true;
-    console.log("submit");
     if (this.form.invalid) {
       return;
     }
-
     this.loading = true;
     this.authenticationService
       .login(this.form.controls.username.value, this.form.controls.password.value)
