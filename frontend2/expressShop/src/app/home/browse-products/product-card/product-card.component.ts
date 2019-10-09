@@ -14,14 +14,15 @@ export class ProductCardComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
 
-  AddProductToCart(iduser:number,idproduct:number) {
-    this.productService.AddProductToCart(iduser,idproduct,1).subscribe(
+  AddProductToCart(idproduct:number) {
+    console.log(JSON.parse(localStorage.getItem('currentUser')))
+    /* this.productService.AddProductToCart( ,idproduct,1).subscribe(
       (res) => {
         console.log(res);
       },
       (err) => {
         console.log(err);
-      });
+      }); */
   }
   ngOnInit() {
   }
