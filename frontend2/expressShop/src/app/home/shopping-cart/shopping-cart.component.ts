@@ -32,30 +32,27 @@ export class ShoppingCartComponent implements OnInit {
   TABelement : productPanier[];
 
 
-  constructor(private productService: ProductService, private loader: LoaderService) { 
-        this.getAllitems();
+  constructor(private productService: ProductService, private loader: LoaderService) {
+    this.getAllitems();
   }
 
-
-
-  getAllitems()
-  {
+  getAllitems() {
     this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentuser')).subscribe(products => {
       this.TABelement = this.products = products
-    setTimeout(() => {
-    this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
-    this.Total();
-    this.dataSource.paginator = this.paginator;
-    console.log(this.TABelement)
-    this.loader.hide();
+      setTimeout(() => {
+        this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
+        this.Total();
+        this.dataSource.paginator = this.paginator;
+        console.log(this.TABelement)
+        this.loader.hide();
+      });
     });
-  });
-
   }
+
   ngOnInit() {
     this.loader.show("Chargement des produits...");
-    
   }
+  
   increment(column)
   {
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
