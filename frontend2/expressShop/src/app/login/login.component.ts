@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
     email : new FormControl('', [Validators.required,Validators.email])
     })
   formPassword = new FormGroup({
-      username : new FormControl('', Validators.required)
+    username2 : new FormControl('', Validators.required)
     })
-
+    
+  InValideUsername= false;
+  InValidePassword = false;
   ValidePassword = false;
   ValideUsername = false;
   popUpOpenPassword = false;
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
   get email() { return this.formUsername.get('email'); }
-  get username2() { return this.formPassword.get('username'); }
+  get username2() { return this.formPassword.get('username2'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -70,17 +72,17 @@ export class LoginComponent implements OnInit {
         this.ValideUsername = true;
       },
       err => {
-       console.log(err);
+        this.InValideUsername = true;
         }
     );
   }
   SendEmailPass(){
     this.authenticationService.SendPassword(this.formPassword.controls.username2.value).subscribe(
       data => {
-        
+        this.ValidePassword = true;
       },
       err => {
-       
+        this.InValidePassword = true;
         }
     );
   }

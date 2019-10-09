@@ -39,7 +39,7 @@ export class AuthService {
    return this.http.post(`${config.apiUrl}/api/RecoverUsername`,sendemail.toString(),config.headerObject); 
   }
   SendPassword(username){
-    const sendemail = new HttpParams().set('email', username);
+    const sendemail = new HttpParams().set('nomutilisateur', username);
     return this.http.post(`${config.apiUrl}/api/RecoverPassword`,sendemail.toString(),config.headerObject); 
   }
 

@@ -42,6 +42,7 @@
                 <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
             </mat-form-field>
             <p *ngIf="ValideUsername" style="color:green">L'envoi du email à été effectué!</p>
+            <p *ngIf="InValideUsername" style="color:red">Aucun compte ne correspondent à ce email</p>
           </main>
           <footer>
             <button (click)="SendEmailUser()" mat-button style="float: left">Envoyer</button>
@@ -59,17 +60,18 @@
                   <main>
                     <p style="height: 1%;">Veuillez entrer votre nom d'utilisateur:</p>
                     <mat-form-field>
-                        <input type="text" id="inputemail" name="username" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username">
+                        <input type="text" id="inputemail" name="username2" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username2">
                         <mat-error *ngIf="username2.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
                     </mat-form-field>
                     <p *ngIf="ValidePassword" style="color:green">L'envoi du email à été effectué!</p>
+                    <p *ngIf="InValidePassword" style="color:red">Aucun compte ne correspondent à ce nom d'utilisateur</p>
                   </main>
                   <footer>
                     <button (click)="SendEmailPass()" mat-button style="float: left">Envoyer</button>
                     <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
                   </footer>
                 </div>
-            </app-pop-up>
+     </app-pop-up>
  </form>
 
     
