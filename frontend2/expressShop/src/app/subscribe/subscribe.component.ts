@@ -23,12 +23,12 @@ export class SubscribeComponent implements OnInit {
     Description: new FormControl ('', Validators.required)
   })
 
+  popUpOpen = false;
   loading = false;
   submitted = false;
-  returnUrl: string
+  returnUrl: string;
   invalidsubscribe: boolean;
   selectedfile : File;
-  PhotoProfil : string;
   imageSrc: string;
 
   get username() { return this.form.get('username'); }
@@ -48,14 +48,15 @@ export class SubscribeComponent implements OnInit {
     private subscribeservice: subscribeservice
   ){ }
 
-  popUpOpen = false;
-
   cancelOption() {
     this.popUpOpen = false;
   }
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.imageSrc = "campagne.jpg";
+  }
+  selectChangeHandler (event: any) {
+    this.form.controls.TypeUser.setValue(event.target.value);
   }
 
   onFileChanged(event) {
@@ -70,6 +71,7 @@ export class SubscribeComponent implements OnInit {
 
     if (this.form.invalid) {
       this.invalidsubscribe = true;
+      console.log(this.form.controls.Image.value);
       return;
     }
     else{
@@ -77,7 +79,7 @@ export class SubscribeComponent implements OnInit {
       this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value,
         this.form.controls.prenom.value,this.form.controls.nom.value,this.form.controls.adresse.value,
         this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
-        this.PhotoProfil,this.form.controls.Description.value).subscribe(
+        this.form.controls.Image.value,this.form.controls.Description.value).subscribe(
        (res) => {
         console.log(res);
         this.popUpOpen = true;
@@ -93,7 +95,7 @@ export class SubscribeComponent implements OnInit {
   onUpload() {
     this.subscribeservice.uploadImage(this.selectedfile).subscribe(
       (res) => {
-        this.PhotoProfil = res.toString();
+        this.form.controls.Image.setValue(res.toString());
       },
       (err) => {
         console.log(err);
