@@ -40,7 +40,7 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Type du compte</mat-label>
-            <select matNativeControl>
+            <select (change)="selectChangeHandler($event)" matNativeControl>
                 <option value="Fournisseur">Fournisseur</option>
                 <option value="Distributeur">Distributeur</option>
             </select>

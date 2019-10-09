@@ -1,6 +1,6 @@
 <div class="container">
 
-<mat-card class="filter-card">
+<mat-card class="filter-card" >
    <!--  <mat-form-field>
         <input matInput placeholder="Categorie" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
         <mat-autocomplete #auto="matAutocomplete">
@@ -24,7 +24,11 @@
     </mat-form-field> -->
 
     <mat-form-field>
-        <input matInput (keyup)="FilterNom($event.target.value)" placeholder="Nom">
+        <input matInput (keyup)="Filter(nom.value, idf.value)" placeholder="Nom" #nom>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput (keyup)="Filter(nom.value, idf.value)"placeholder="Fournisseur" #idf>
     </mat-form-field>
 
     <!-- <mat-form-field class="example-margin">
@@ -37,11 +41,11 @@
 </mat-card>
 
 <ng-container *ngIf='(filteredProducts) as products'>
-<div class="grid-container">
-    <ng-container *ngFor="let product of products">
-        <app-product-card [product]="product"></app-product-card>
-    </ng-container>
-</div>
+    <div class="grid-container">
+        <ng-container *ngFor="let product of products">
+            <app-product-card [product]="product"></app-product-card>
+        </ng-container>
+    </div>
 </ng-container>
 
 </div>
