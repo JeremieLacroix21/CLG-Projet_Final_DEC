@@ -50,10 +50,16 @@ export class SubscribeComponent implements OnInit {
 
   cancelOption() {
     this.popUpOpen = false;
+    this.router.navigate(["/absolute"]);
+  }
+  AnnunlerOption() {
+    this.router.navigate([this.returnUrl]);
   }
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.imageSrc = "campagne.jpg";
+    this.form.controls.Image.setValue(this.imageSrc);
+    this.form.controls.TypeUser.setValue("Fournisseur");
   }
   selectChangeHandler (event: any) {
     this.form.controls.TypeUser.setValue(event.target.value);
@@ -62,7 +68,7 @@ export class SubscribeComponent implements OnInit {
   onFileChanged(event) {
     this.selectedfile = event.target.files[0]
     const reader = new FileReader();
-    //reader.onload = e => this.imageSrc = reader.result;
+    reader.onload = e => this.imageSrc = reader.result.toString();
     reader.readAsDataURL(this.selectedfile);
   }
   
@@ -89,7 +95,6 @@ export class SubscribeComponent implements OnInit {
       }
   );
     }
-    this.loading = true;
   }
 
   onUpload() {

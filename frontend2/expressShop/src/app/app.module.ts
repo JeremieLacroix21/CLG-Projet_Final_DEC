@@ -44,7 +44,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatDividerModule} from '@angular/material/divider';
-import { PopUpModule } from './pop-up inscription/pop-up.module';
+import { PopUpModule } from './pop-up component/pop-up.module';
 
 //other
 import {A11yModule} from '@angular/cdk/a11y';

@@ -58,7 +58,7 @@
         <p><input type='file' class="upload" (change)="onFileChanged($event)"/></p>
         <div class="button_div">
             <button type="submit" mat-button>S'inscrire</button>
-            <button class="button_login" mat-button>Annuler</button>
+            <button class="button_login" (click)="AnnunlerOption()" mat-button>Annuler</button>
         </div>
     
     </form>
@@ -74,7 +74,7 @@
             <p>Vous receverez une confirmation d'ici peu!</p>
           </main>
           <footer>
-            <button (click)="cancelOption()" class="BTN_menu">Retour au menu</button>
+            <button (click)="cancelOption()" mat-button style="float: right">Retour au menu</button>
           </footer>
         </div>
       </app-pop-up>

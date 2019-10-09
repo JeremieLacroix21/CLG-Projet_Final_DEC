@@ -36,6 +36,10 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  GoToSubscribe(){
+    this.router.navigate(["/subscribe"]);
+  }
+  
   onSubmit() {
     //console.log(this.form.controls.username.value);
     this.submitted = true;
@@ -43,7 +47,7 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    
+
     this.loading = true;
     this.authenticationService
       .login(this.form.controls.username.value, this.form.controls.password.value)
