@@ -50,7 +50,7 @@ export class SubscribeComponent implements OnInit {
 
   cancelOption() {
     this.popUpOpen = false;
-    this.router.navigate(["/absolute"]);
+    this.router.navigate(["/home/browseProduct"]);
   }
   AnnunlerOption() {
     this.router.navigate([this.returnUrl]);

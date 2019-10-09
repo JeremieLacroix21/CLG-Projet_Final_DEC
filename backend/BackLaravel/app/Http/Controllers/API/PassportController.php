@@ -22,9 +22,13 @@ class PassportController extends Controller
     ->where('motdepasse', '=', $request->get('password'))
     ->first();
     if (is_null($user_favorites)) {
-      return response()->json(['error'=> 'User doesnt exist'], 401);
+      return response()->json(['error'=> @"L'utilisateur n'existe pas"], 401);
     } else {
-        return response()->json(['success' => 'Tu es connecte'], $this->successStatus);
+        if($user_favorites->confirme == 0)
+        {
+            return response()->json(['error'=> @"L'utilisateur n'est pas confirmé"], 401);
+        }
+        return json_encode($user_favorites->iduser);
     }
    }
    /**
