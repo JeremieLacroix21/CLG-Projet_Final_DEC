@@ -11,6 +11,9 @@ class ProduitController extends Controller
 {
    public function GetAllProducts()
    {
+
+
+
         $produits = DB::table('produits')->get();
         $data = [];
         $i = 0;
@@ -134,21 +137,23 @@ class ProduitController extends Controller
        DB::table('panier')->where('idproduit', '=', $request['idproduit'])
        ->where('iduser', '=', $request['iduser'])
        ->delete();
+       //todo
    }
 
    public function UpdateQuantityPanier(Request $request)
    {
-    //fonctionnel
-    $results = DB::table('panier')
-    ->where('iduser','=',$request->get('iduser'))
-    ->where('idproduit','=',$request->get(idproduits))
-    ->update(['quantity' => $request->get('quantity')])
-    ;
-    if (is_null($results)) {
-        return response()->json(['error'=> 'product doesnt exist'], 401);
-      } else {
-          return response()->json(['success' => 'quantity changed'], $this->successStatus);
-      }
-   }
+        //fonctionnel
+        $results = DB::table('panier')
+        ->where([
+            ['iduser','=',$request->get('iduser')],
+            ['idproduit','=',$request->get('idproduit')]
+        ])
+        ->update(['quantity' => $request->get('quantity')]);
+        if (is_null($results)) {
+           return response()->json(['error'=> 'product doesnt exist'], 401);
+          } else {
+              return response()->json(['success' => 'quantity changed'], 200);
+        }
+    }
 }
 ?>

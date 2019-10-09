@@ -57,18 +57,21 @@ export class ShoppingCartComponent implements OnInit {
   {
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
-      
+    this.setquantity(+localStorage.getItem('currentuser'),column,this.TABelement.find(item => item.idproduit === column).quantity);
   }
   decrement(column)
   {
     
-    if( this.TABelement.find((item => item.idproduit === column)).quantity   - 1 == 0)
+    if( this.TABelement.find((item => item.idproduit === column)).quantity  - 1 == 0)
     {
       this.delete(column);
     }
     else 
     {
       this.TABelement.find((item => item.idproduit === column)).quantity -= 1;
+      let user = +localStorage.getItem('currentuser');
+      let qty = this.TABelement.find(item => item.idproduit === column).quantity;
+      this.setquantity(user,column,qty);
     }
     this.Total();
   }

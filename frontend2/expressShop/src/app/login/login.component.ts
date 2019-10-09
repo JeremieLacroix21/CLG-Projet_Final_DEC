@@ -105,7 +105,6 @@ export class LoginComponent implements OnInit {
               this.errormessages = err.error;
               this.loading = false; 
             }
-
             if (DEBUGGING) {
               localStorage.setItem('currentUser', '0'/*JSON.stringify("visitor")*/);
               this.router.navigate([this.returnUrl]);
