@@ -37,12 +37,39 @@ class PassportController extends Controller
                 'imgGUID'
             )
             ->first();
-            
+        
         if (is_null($user)) {
             return response()->json([@"Informations invalides"], 401);
         } else if ($user->confirme == 0) {
             return response()->json([@"Le compte est en attente de confirmation par un administrateur"], 401);
         } else {
+            $propertiesFromUserType = null;
+            if ($user->TypeUser === "Fournisseur") {
+                $propertiesFromUserType = DB::table('fournisseurs')
+                    ->where('idFournisseur', '=', $user->iduser)
+                    ->get()
+                    ->first();
+            } else if ($user->TypeUser === "Distributeur") {
+                $propertiesFromUserType = DB::table('distributeurs')
+                    ->where($user->iduser, '=', 'idDistributeur')
+                    ->get()
+                    ->first();
+            }
+            // TODO : Move cart inside "Distributeur" if above this line once everything is setup properly
+            $cart = DB::table('panier')
+                ->where('iduser', '=', $user->iduser)
+                ->join('produits', 'panier.idproduit','=', 'produits.idproduits')
+                ->select('produits.*', 'quantity')
+                ->get();
+            if (!is_null($cart)) {
+                $propertiesFromUserType = (object)array_merge((array)$propertiesFromUserType, array("cart"=>$cart));
+            }
+            
+            if (!is_null($propertiesFromUserType)) {
+                // Merge the data from users with the data from fournisseurs/distributeurs
+                $user = (object)array_merge((array)$user, (array)$propertiesFromUserType);
+            }
+            
             return json_encode($user);
         }
     }
