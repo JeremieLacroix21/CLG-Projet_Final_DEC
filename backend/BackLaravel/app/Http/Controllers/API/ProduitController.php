@@ -141,9 +141,9 @@ class ProduitController extends Controller
        ->delete();
        if (is_null($results)) {
         return response()->json(['error'=> 'product doesnt exist'], 401);
-       } else {
+        } else {
            return response()->json(['success' => 'item deleted'], 200);
-     }
+        }
    }
 
    public function UpdateQuantityPanier(Request $request)

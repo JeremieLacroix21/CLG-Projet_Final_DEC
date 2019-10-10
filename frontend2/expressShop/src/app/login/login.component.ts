@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean;
   errormessages: errormessage[]
 
-  get username() { return this.form.get('username'); }
-  get password() { return this.form.get('password'); }
-  get email() { return this.formUsername.get('email'); }
-  get username2() { return this.formPassword.get('username2'); }
+  get username()  { return this.form.get('username');}
+  get password()  { return this.form.get('password');}
+  get email()     { return this.formUsername.get('email');}
+  get username2() { return this.formPassword.get('username2');}
 
   constructor(
     private route: ActivatedRoute,
@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
               this.loading = false; 
             }
             if (DEBUGGING) {
-              localStorage.setItem(config.storedUser, '0'/*JSON.stringify("visitor")*/);
+              localStorage.setItem(config.storedUser, JSON.stringify("visitor"));
               this.router.navigate([this.returnUrl]);
             }
           }

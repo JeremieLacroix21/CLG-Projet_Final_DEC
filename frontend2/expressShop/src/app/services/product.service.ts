@@ -53,6 +53,7 @@ export class ProductService {
   AddProductToCart(iduser:number,idproduit:number,qty:number)
   {
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
+    
     return this.http.post(
       `${config.apiUrl}/api/AddProductToPanier`,
       body.toString(),
