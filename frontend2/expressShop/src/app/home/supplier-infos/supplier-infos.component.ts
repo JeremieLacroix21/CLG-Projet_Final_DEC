@@ -40,4 +40,17 @@ export class SupplierInfosComponent implements OnInit {
       console.log(this.dataSource.filteredData);
     });
   }
+
+  onClickCollapseBtn(event) {
+    let btnId = event.currentTarget.id;
+    let btn = document.getElementById(btnId);
+
+    // Rotate the icon
+    for(var i = 0; i < btn.children.length; ++i) {
+      btn.children[i].classList.toggle('rotatedIcon');
+    }
+
+    // Toggle the favorite attribute
+    btn.attributes['collapsed'].value = (btn.attributes['collapsed'].value === 'false' ? 'true' : 'false');
+  }
 }

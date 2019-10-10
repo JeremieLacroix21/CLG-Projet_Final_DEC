@@ -11,9 +11,6 @@ class ProduitController extends Controller
 {
    public function GetAllProducts()
    {
-
-
-
         $produits = DB::table('produits')->get();
         $data = [];
         $i = 0;
@@ -105,13 +102,18 @@ class ProduitController extends Controller
    {
     //fonctionnel
     $input = $request->all();
+    
     //Ajout du produit
-    DB::table('panier')->insert(array(
+    $results =  DB::table('panier')->insert(array(
     'iduser' =>  $input['iduser'],
      'idproduit' =>  $input['idproduit'],
      'quantity' =>  $input['quantity']
     ));
-    return response()->json(['sucess'=> 'produit insere au panier'], 200);
+    if (is_null($results)) {
+            return response()->json(['error'=> 'product already in cart'], 401);
+       } else {
+            return response()->json(['success' => 'item added to cart'], 200);
+     }
    }
 
    public function GetpanierFromId(Request $request)
