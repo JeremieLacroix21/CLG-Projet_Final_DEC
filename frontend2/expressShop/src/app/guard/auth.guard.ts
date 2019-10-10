@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { DEBUGGING } from '../models/DEBUG-LOGIN';
 
 import { AuthService } from '../services';
+import { config } from 'src/config';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -12,7 +13,7 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const currentUser = localStorage.getItem('currentUser');
+        const currentUser = localStorage.getItem(config.storedUser);
 
         if (currentUser || DEBUGGING) {
             return true;
