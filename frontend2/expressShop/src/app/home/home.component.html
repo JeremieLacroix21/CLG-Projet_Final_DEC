@@ -11,6 +11,7 @@
       <span class="menu-spacer"></span>
 
       <div>
+          <button mat-icon-button [routerLink]="''"><mat-icon (click)="callLogout()">power_off</mat-icon></button>
         <a mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
     

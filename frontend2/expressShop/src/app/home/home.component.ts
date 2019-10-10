@@ -3,6 +3,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { LoaderService } from '../services/loader.service';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../services/product.service';
+import { AuthService } from '../services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +18,13 @@ export class HomeComponent implements OnInit {
   private nbCartItems: number;
   private nbCartItemsSubscription: Subscription;
 
-  constructor(private loader: LoaderService, private spinner: NgxSpinnerService, private productsService: ProductService) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private loader: LoaderService,
+    private spinner: NgxSpinnerService,
+    private productsService: ProductService
+  ) { }
 
   ngOnInit() {
     this.loaderSubscription = this.loader.text.subscribe(data => {
@@ -36,5 +44,10 @@ export class HomeComponent implements OnInit {
   ngOnDestroy() {
     this.loaderSubscription.unsubscribe();
     this.nbCartItemsSubscription.unsubscribe();
+  }
+
+  callLogout() {
+    this.auth.logout();
+    this.router.navigate(['login']);
   }
 }

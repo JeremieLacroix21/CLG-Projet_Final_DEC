@@ -17,19 +17,9 @@
     We want N items of the same width, and we want a gap equal to 1% of the container's width between each item.
     For N items, we always have (N - 1) gaps, so the width of an item can be calculated as follows : (100% - (N - 1)%) / N%
 ****************************************************************************************/
-@media only screen and (max-width: 900px) {
-    .product-img-card {
-        max-height: 250px;
-    }
-}
-
 @media only screen and (min-width: 800px) {
     .grid-container {
         grid-template-columns: 24.25% 24.25% 24.25% 24.25%;
-    }
-
-    .product-img-card {
-        max-height: 300px;
     }
 }
 

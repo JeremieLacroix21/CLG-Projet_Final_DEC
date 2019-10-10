@@ -32,17 +32,8 @@ export class ProductService {
       config.headerObject);
   }
 
-  RefreshCartItemCount(iduser: number) {
-    const body = new HttpParams()
-      .set('iduser', iduser.toString());
-
-    this.http.post<number>(
-      `${config.apiUrl}/api/countItemFromid`,
-      body.toString(),
-      config.headerObject
-    ).subscribe(count => {
-      this.nbCartItemsSource.next(count);
-    });
+  RefreshCartItemCount(nbItems: number) {
+    this.nbCartItemsSource.next(nbItems);
   }
 
   getbyname(name:string){
@@ -54,9 +45,13 @@ export class ProductService {
     return null;
   }
 
-  AddProductToCart(iduser:number,idproduit:number,qty:number)
+  AddProductToCart(iduser:number, idproduit:number, qty:number)
   {
-    const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
+    const body = new HttpParams()
+      .set('iduser', iduser.toString())
+      .set('idproduit',idproduit.toString())
+      .set('quantity',qty.toString());
+    
     return this.http.post(
       `${config.apiUrl}/api/AddProductToPanier`,
       body.toString(),
@@ -66,7 +61,10 @@ export class ProductService {
 
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
-    const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString());
+    const body = new HttpParams()
+      .set('iduser', iduser.toString())
+      .set('idproduit',idproduit.toString());
+
     return this.http.put(
       `${config.apiUrl}/api/DeleteProductFromPanier`,
       body.toString(),
@@ -76,7 +74,11 @@ export class ProductService {
 
   UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
   { 
-    const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
+    const body = new HttpParams()
+      .set('iduser', iduser.toString())
+      .set('idproduit',idproduit.toString())
+      .set('quantity',qty.toString());
+
     return this.http.put(
       `${config.apiUrl}/api/UpdateQuantityPanier`,
       body.toString(),
