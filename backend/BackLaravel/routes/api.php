@@ -24,9 +24,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  //route panier
  Route::post('GetpanierFromId','API\ProduitController@GetpanierFromId');
  Route::post('AddProductToPanier','API\ProduitController@AddProductToPanier');
- Route::post('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
- Route::post('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
  Route::post('countItemFromid','API\ProduitController@countItemFromid');
+ Route::put('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
+ Route::put('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
 //Route Profil
  Route::post('/profil','API\ProfilController@GetUser');
  Route::post('UpdatePassword','API\ProfilController@UpdatePassword');

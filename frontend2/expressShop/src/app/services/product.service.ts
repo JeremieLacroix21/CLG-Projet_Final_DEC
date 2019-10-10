@@ -57,7 +57,6 @@ export class ProductService {
   AddProductToCart(iduser:number,idproduit:number,qty:number)
   {
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
-    
     return this.http.post(
       `${config.apiUrl}/api/AddProductToPanier`,
       body.toString(),
@@ -68,8 +67,8 @@ export class ProductService {
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString());
-    return this.http.post(
-      `${config.apiUrl}/api/DeleteProductFromCart`,
+    return this.http.put(
+      `${config.apiUrl}/api/DeleteProductFromPanier`,
       body.toString(),
       config.headerObject
     );
@@ -78,7 +77,7 @@ export class ProductService {
   UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
   { 
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
-    return this.http.post(
+    return this.http.put(
       `${config.apiUrl}/api/UpdateQuantityPanier`,
       body.toString(),
       config.headerObject
