@@ -78,9 +78,6 @@ class ProfilController extends Controller
 
         return response()->json(['success' => ''], $this->successStatus);
     }
-
-
-
     public function UpdatePassword(Request $request)
     {
         //fonctionnel
@@ -106,7 +103,5 @@ class ProfilController extends Controller
               return response()->json(['success' => 'Email changed'], $this->successStatus);
           }
     }
-
-    
 }
 ?>

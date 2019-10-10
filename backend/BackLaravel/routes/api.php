@@ -20,11 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('SearchProducts','API\ProduitController@SearchProducts');
  Route::post('AddProduct','API\ProduitController@AddProduct');
  Route::post('AddImage', 'API\ProduitController@AddImage');
+ Route::post('EnvoieCommande', 'API\ProduitController@EnvoieCommande');
  //route panier
  Route::post('GetpanierFromId','API\ProduitController@GetpanierFromId');
  Route::post('AddProductToPanier','API\ProduitController@AddProductToPanier');
  Route::put('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
  Route::put('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
+ Route::get('countItemFromid','API\ProduitController@countItemFromid');
 //Route Profil
  Route::post('/profil','API\ProfilController@GetUser');
  Route::post('UpdatePassword','API\ProfilController@UpdatePassword');

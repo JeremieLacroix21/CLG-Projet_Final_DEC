@@ -1,23 +1,31 @@
-<div class="container">
+<ng-container *ngIf="(loadedSuppliers | async) as users">
+<mat-drawer-container class="container">
 
-<mat-card *ngIf="(loadedUsers | async) as users">
-    <mat-form-field class="filter-form-field">
+<mat-drawer #browserSection class="browse-section" mode="side" opened>
+    <mat-form-field class="filter-form-field" appearance="outline">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter par mots-clés...">
     </mat-form-field>
 
-    <ng-container *ngFor="let user of dataSource.filteredData">
-        <p>{{user.nom}}</p>
+    <ng-container >
+        <mat-list>
+            <h3 mat-subheader>Folders</h3>
+            <mat-list-item *ngFor="let supplier of dataSource.filteredData">
+                <img src="supplier.imgGUID" />
+                <h4 mat-line>{{supplier.nomutilisateur}}</h4>
+                <p mat-line class="demo-2">{{supplier.nom}}</p>
+                <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
     </ng-container>
-</mat-card>
+</mat-drawer>
 
-<mat-card *ngIf="(loadedSuppliers | async) as suppliers">
-    <mat-form-field class="filter-form-field">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter par mots-clés...">
-    </mat-form-field>
+<mat-drawer-content class="profile-section">
+    <button id="collapseBtn" class="mdc-icon-button" collapsed="false" (click)="onClickCollapseBtn($event)" (click)="browserSection.toggle()">
+            <i class="material-icons mdc-icon-button__icon">forward</i>
+    </button>
+    Content
+</mat-drawer-content>
 
-    <ng-container *ngFor="let supplier of dataSource.filteredData">
-        <p>{{supplier.nom}}</p>
-    </ng-container>
-</mat-card>
-
-</div>
+</mat-drawer-container>
+</ng-container>

@@ -5,6 +5,7 @@ import { AuthService } from '../services';
 import { first } from 'rxjs/operators';
 import { DEBUGGING } from '../models/DEBUG-LOGIN';
 import { errormessage } from '../models/error';
+import { config } from 'src/config';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,16 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
     })
   formUsername = new FormGroup({
-    email : new FormControl('', Validators.required)
+    email : new FormControl('', [Validators.required,Validators.email])
     })
-
+  formPassword = new FormGroup({
+    username2 : new FormControl('', Validators.required)
+    })
+    
+  InValideUsername= false;
+  InValidePassword = false;
+  ValidePassword = false;
+  ValideUsername = false;
   popUpOpenPassword = false;
   popUpOpen = false;
   loading = false;
@@ -32,6 +40,7 @@ export class LoginComponent implements OnInit {
   get username() { return this.form.get('username'); }
   get password() { return this.form.get('password'); }
   get email() { return this.formUsername.get('email'); }
+  get username2() { return this.formPassword.get('username2'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -51,12 +60,32 @@ export class LoginComponent implements OnInit {
   DemandeUsername(){
     this.popUpOpen = true;
   }
-  DemandePassword(){
+  DemandeMotdepasse(){
     this.popUpOpenPassword = true
   }
   cancelOption(){
     this.popUpOpen = false;
     this.popUpOpenPassword = false;
+  }
+  SendEmailUser(){
+    this.authenticationService.SendUsername(this.formUsername.controls.email.value).subscribe(
+      data => {
+        this.ValideUsername = true;
+      },
+      err => {
+        this.InValideUsername = true;
+        }
+    );
+  }
+  SendEmailPass(){
+    this.authenticationService.SendPassword(this.formPassword.controls.username2.value).subscribe(
+      data => {
+        this.ValidePassword = true;
+      },
+      err => {
+        this.InValidePassword = true;
+        }
+    );
   }
   
   onSubmit() {
@@ -70,7 +99,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {
-            localStorage.setItem('currentUser', JSON.stringify(data));
+            localStorage.setItem(config.storedUser, JSON.stringify(data));
             this.router.navigate([this.returnUrl]);
           },
           err => {
@@ -80,7 +109,7 @@ export class LoginComponent implements OnInit {
               this.loading = false; 
             }
             if (DEBUGGING) {
-              localStorage.setItem('currentUser', '0'/*JSON.stringify("visitor")*/);
+              localStorage.setItem(config.storedUser, '0'/*JSON.stringify("visitor")*/);
               this.router.navigate([this.returnUrl]);
             }
           }

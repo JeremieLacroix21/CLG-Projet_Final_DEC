@@ -26,3 +26,14 @@
   .button_login {
       float: right;
   }
+  .BTN_User{
+    position: relative;
+    float: left;
+    left: 10px;
+    bottom: 240px;
+  }
+  .BTN_Pass{
+    position: relative;
+    right: 176px;
+    bottom: 140px;
+  }
