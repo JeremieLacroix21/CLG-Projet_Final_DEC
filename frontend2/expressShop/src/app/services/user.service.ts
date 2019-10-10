@@ -51,9 +51,24 @@ export class UserService {
 
   UpdatePassword(iduser:number,NouveauMotdePasse:number)
   {
-      const body = new HttpParams().set('IdUser', iduser.toString()).set('NouveauMotDePasse',NouveauMotdePasse.toString());
+      const body = new HttpParams()
+      .set('IdUser', iduser.toString())
+      .set('NouveauMotDePasse',NouveauMotdePasse.toString());
       return this.http.post(`${config.apiUrl}/api/UpdatePassword`,
       body.toString(),
-      config.headerObject);
+      config.headerObject).subscribe();
+  }
+
+  UpdateUser(iduser:number,nomutilisateur:string,courriel:string,téléphone:string,description:string)
+  {
+    const body = new HttpParams()
+    .set('iduser',iduser.toString())
+    .set('nomutilisateur',nomutilisateur.toString())
+    .set('courriel',courriel.toString())
+    .set('téléphone',iduser.toString())
+    .set('description',iduser.toString());
+    return this.http.post(`${config.apiUrl}/api/UpdateUser`,
+    body.toString(),
+    config.headerObject).subscribe();
   }
 }

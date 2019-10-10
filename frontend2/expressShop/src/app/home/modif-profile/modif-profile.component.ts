@@ -66,6 +66,9 @@ export class ModifProfileComponent implements OnInit {
     window.alert('Your password was changed');
   }
 
+  
+
+
 
 
   
