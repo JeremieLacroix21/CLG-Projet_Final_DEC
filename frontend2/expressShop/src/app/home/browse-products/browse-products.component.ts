@@ -4,6 +4,7 @@ import { Product } from '../../models/product';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { map } from 'rxjs/operators';
+import { AuthService } from 'src/app/services';
 
 @Component({
   selector: 'app-browse-products',
@@ -20,7 +21,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private productService: ProductService, private loader: LoaderService) {
+  constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) {
     this.subscription = this.productService.getAll().subscribe(products => {
       this.filteredProducts = this.products = products
       setTimeout(() => {
@@ -31,6 +32,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loader.show("Chargement des produits...");
+    console.log(localStorage.getItem("currentUser"));
   }
 
   ngOnDestroy() {

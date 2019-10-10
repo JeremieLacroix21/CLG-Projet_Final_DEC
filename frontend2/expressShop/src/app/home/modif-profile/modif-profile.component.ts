@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services';
 
 @Component({
   selector: 'app-modif-profile',
@@ -30,7 +31,7 @@ export class ModifProfileComponent implements OnInit {
     mask: ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   };
 
-  constructor() {}
+  constructor(private UserService : UserService) {}
 
   ngOnInit() {
   }
@@ -54,22 +55,22 @@ export class ModifProfileComponent implements OnInit {
     if (!confirmMatches) {
       confirm.setErrors({notMatching: true});
     }
-    
     return null;
   }
-
-  onClickModifyProfile() {
+  onClickModifyProfile()
+  {
     window.alert('Your profile was modified');
   }
-
-  onClickChangePassword() {
+  onClickChangePassword()
+  {
     window.alert('Your password was changed');
   }
-
-  
-
-
-
-
-  
+  UpdateUser(iduser:number,nomutilisateur:string,courriel:string,téléphone:string,description:string)
+  {
+      this.UserService.UpdateUser(iduser,nomutilisateur,courriel,téléphone,description).subscribe();
+  }
+  UpdatePassword(iduser:number,NouveauMotdePasse:number)
+  {
+      this.UserService.UpdatePassword(iduser,NouveauMotdePasse).subscribe();
+  }
 }

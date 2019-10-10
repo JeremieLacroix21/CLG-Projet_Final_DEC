@@ -19,7 +19,11 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <button favorite="false" (click)="onClickFavoriteBtn($event)" id="add-to-favorites-{{product.idproduits}}" class="mdc-icon-button">
+        <button class="mdc-icon-button" favorite="false" (click)="onClickFavoriteBtn($event)">
+            <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+            <i class="material-icons mdc-icon-button__icon">star_border</i>
+        </button>
+        <button class="mdc-icon-button cart-btn" inCart="false" (click)="onClickCartBtn($event)" >
             <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
             <i class="material-icons mdc-icon-button__icon">star_border</i>
         </button>

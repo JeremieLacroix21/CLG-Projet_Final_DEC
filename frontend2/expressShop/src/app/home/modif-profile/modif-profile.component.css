@@ -13,3 +13,17 @@
 .btn-container {
     text-align: center;
 }
+.upload{
+    margin-left: 15px;
+    color: darkgray;
+}
+.IMG{
+    border: 1px solid  darkgray;
+    border-radius: 4px;
+    padding: 5px;
+    width: 125px;
+    min-width: 50px;
+    height: 125px;
+    margin-left:15px;
+    margin-bottom: 24px;
+  }

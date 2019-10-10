@@ -46,14 +46,5 @@ class EmailSender extends Mailable
             ->subject($subject)
             ->with([ 'messages' =>  $this->data['message'] ]);
         }
-        else{
-            return $this->view('email.RecoverPassword')
-            ->from($address, $name)
-            ->cc($address, $name)
-            ->bcc($address, $name)
-            ->replyTo($address, $name)
-            ->subject($subject)
-            ->with([ 'messages' =>  $this->data['message'] ]);
-        }
     }
 }
