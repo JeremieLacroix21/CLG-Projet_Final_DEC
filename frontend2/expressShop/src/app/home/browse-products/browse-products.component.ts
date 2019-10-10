@@ -29,6 +29,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
 
   ngOnInit() {
     this.loader.show("Chargement des produits...");
+    console.log(localStorage.getItem("currentUser"));
   }
 
   ngOnDestroy(){

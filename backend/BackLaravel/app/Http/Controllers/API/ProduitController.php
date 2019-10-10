@@ -178,22 +178,38 @@ class ProduitController extends Controller
     }
 
     //*****************************COMMANDE****************** */
-    public function InsertCommandeInfo(Request $request)
+    public function InsertCommande(Request $request)
     {
+        //Une commande par Fournisseur
         $input = $request->all();
-        DB::table('commandes_info')->insert(array(
-         'idCommande' =>  $input['idCommande'],
-         'idProduits	' => $input['idProduits'],
-         'quantite' => $input['quantite']
+        DB::table('commandes')->insert(array(
+         'idDistributeur' => $input['idDistributeur'],
+         'dateCreation' => $input['dateCreation'],
+         'complete' => $input['complete'],
+         'idFournisseur' => $input['idFournisseur']
         ));
+        $Data = DB::select('Call GetLastInsertedCommande()');
+        return json_encode($Data);
     }
-    public function InsertCommandeFinal(Request $request)
-    {
-    
+    public function InsertCommandeItems(Request $request)
+    {   
+        //Un item par commande de items
+        $input = $request->all();
+        DB::table('commandeItems')->insert(array(
+         'idCommande' => $input['idCommande'],
+         'idProduit' => $input['idProduit'],
+         'quantite' => $input['quantite'],
+        ));
+        return json_encode($input['idCommande']);  
     }
     public function EnvoieCommande(Request $request)
     {
-        
+        $User = DB::table('users')->select('*')->where('idusers', $request['idFournisseur'])->first();
+        //Select tout les produits
+        //S
+        $message =  $request['idFournisseur'];
+        Mail::to($User->email)->send(new EmailSender($data, $number));
+        return response()->json(['success'=> 'email sent'], $this->successStatus);
     }
 }
 ?>
