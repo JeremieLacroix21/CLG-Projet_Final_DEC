@@ -24,7 +24,6 @@ export class ProductCardComponent implements OnInit {
       this.productService.RefreshCartItemCount(currUserId);
     });
   }
-
   onClickRemoveFromCart(idproduct:number) {
     let iduser = +localStorage.getItem(config.storedUser);
     

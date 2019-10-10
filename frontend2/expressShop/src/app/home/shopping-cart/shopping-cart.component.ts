@@ -31,6 +31,8 @@ export class ShoppingCartComponent implements OnInit {
   subscription: Subscription;
   products: productPanier[];
   TABelement : productPanier[];
+  popUpOpen = false;
+  router: any;
 
 
   constructor(private productService: ProductService, private loader: LoaderService) {
@@ -52,6 +54,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.loader.show("Chargement des produits...");
+    this.popUpOpen = false;
   }
   
   increment(column)
@@ -109,6 +112,12 @@ export class ShoppingCartComponent implements OnInit {
   UpdateQuantityPanier(iduser:number,idproduit:number,quantity:number)
   {
       this.productService.UpdateQuantityPanier(iduser,idproduit,quantity).subscribe();
+  }
+
+
+  ValidateCommande()
+  {
+    this.popUpOpen = true;
   }
 }
 
