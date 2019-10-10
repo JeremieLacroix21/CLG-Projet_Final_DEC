@@ -165,10 +165,9 @@ class ProduitController extends Controller
 
     public function countItemFromid(Request $request)
     {
-        $Data = [];
         $Data = DB::table('panier')
-        ->where('iduser','=',$request->get('iduser'))
-        ->count();
+            ->where('iduser','=',$request->get('iduser'))
+            ->count();
         if (is_null($Data)) {
            return response()->json(['error'=> 'product doesnt exist'], 401);
         } else {
