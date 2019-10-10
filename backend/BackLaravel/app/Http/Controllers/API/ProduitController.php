@@ -174,5 +174,24 @@ class ProduitController extends Controller
             return json_encode($Data);
         }
     }
+
+    //*****************************COMMANDE****************** */
+    public function InsertCommandeInfo(Request $request)
+    {
+        $input = $request->all();
+        DB::table('commandes_info')->insert(array(
+         'idCommande' =>  $input['idCommande'],
+         'idProduits	' => $input['idProduits'],
+         'quantite' => $input['quantite']
+        ));
+    }
+    public function InsertCommandeFinal(Request $request)
+    {
+    
+    }
+    public function EnvoieCommande(Request $request)
+    {
+        
+    }
 }
 ?>
