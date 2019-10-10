@@ -220,20 +220,16 @@ class ProduitController extends Controller
         $Fournisseur = DB::table('users')->select('*')->where('iduser', $request['idFournisseur'])->first();
         //Select tout les produits
         $arrayNomPrenom = array($Fournisseur);
-        $produits = DB::table('commandes')
-        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
-        ->select('*')->where('idFournisseur', '=', $request['idFournisseur'])->get();
+        $produits = DB::table('produits')
+        ->join('commandeItems', 'produits.idproduits','=', 'commandeItems.idProduit')
+        ->join('commandes', 'commandeItems.idCommande','=', 'commandes.idCommande')
+        ->select('imgGUID','prix','nom','description', 'quantite','dateCreation')->where('commandes.idFournisseur', '=', $request['idFournisseur'])->get();
         //Met les produits dans un array
         $arrayProduit = array($produits);
-        //Select la quantité et date
-        $Commande= DB::table('commandes')
-        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
-        ->select('quantite','dateCreation')->where('idFournisseur', '=', $request['idFournisseur'])->get();
-        $arrayCommande = array($Commande);
         //Select le nom du distruteur
         $Distributeur = DB::table('users')->select('nomutilisateur')->where('iduser', $request['idDistributeur'])->first();
-        Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit,$arrayCommande));
-        return response()->json(['success'=> 'email sent'], $this->successStatus);
+        Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit));
+        return response()->json(['success'=> 'email sent'],200);
     }
 }
 ?>

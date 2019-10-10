@@ -14,14 +14,12 @@ class CommandSender extends Mailable
     public $Distributeur;
     public $Fournisseur;
     public $arrayProduit;
-    public $Commande;
 
-    public function __construct($Fournisseur, $Distributeur, $arrayProduit, $Commande)
+    public function __construct($Fournisseur, $Distributeur, $arrayProduit)
     {
         $this->Distributeur = $Distributeur;
         $this->Fournisseur = $Fournisseur;
         $this->arrayProduit = $arrayProduit;
-        $this->Commande = $Commande;
     }
 
     public function build()
@@ -36,6 +34,6 @@ class CommandSender extends Mailable
         ->bcc($address, $name)
         ->replyTo($address, $name)
         ->subject($subject)
-        ->with($this->arrayProduit , $this->Fournisseur, $this->Commande,  $this->Distributeur);
+        ->with($this->arrayProduit , $this->Fournisseur,  $this->Distributeur);
     }
 }

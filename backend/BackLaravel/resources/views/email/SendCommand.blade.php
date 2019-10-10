@@ -211,16 +211,18 @@
                 <td class="wrapper">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
+                    @foreach ($Fournisseur as $fournini)
                       <td>
-                        <p>Bonjour {{ $Destinataire->prenom }} {{ $Destinataire->nom }},</p>
-                        <p>Vous avez recu une commande de {{ $Fournisseur }}</p>
+                        <p>Bonjour {{ $fournini->prenom }} {{ $fournini->nom }},</p>
+                        <p>Vous avez recu une commande de {{ $Distributeur }}</p>
                         <p>Voici les produits commandé: <b></p>
                       </td>
+                      @endforeach
                     </tr>
-                    @foreach ($data as $datas)
+                    @foreach ($arrayProduit as $datas)
                     <tr class="Produit">
                     <td>
-                    <img src="{{$Produits->imgGUID}}">
+                    <img src="{{$datas->imgGUID}}">
                     </td>
                     <td>
                     <p>{{ $datas->prix }}</p>
