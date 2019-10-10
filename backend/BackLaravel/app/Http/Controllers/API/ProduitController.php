@@ -11,25 +11,32 @@ use App\Mail\CommandSender;
 
 class ProduitController extends Controller
 {
-   public function GetAllProducts()
+    public function GetAllProducts()
    {
-        $produits = DB::table('produits')->get();
-        $data = [];
-        $i = 0;
-        foreach($produits as $produit) 
-        {
-            $data[$i] = [
-                'idproduits'=>$produit->idproduits,
-                'nom'=>$produit->nom,
-                'prix'=>$produit->prix, 
-                'idFournisseur'=>$produit->idFournisseur,
-                'enStock'=>$produit->enStock,
-                'imgGUID'=>$produit->imgGUID,
-                'description'=>$produit->description
-            ];
-            ++$i;
-        }
-        return json_encode($data);
+    $produits = DB::table('produits')
+    ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
+    ->select('produits.*', 'users.nomutilisateur')
+    ->get();
+
+    $array = [];
+    $data = [];
+    $i = 0;
+    foreach($produits as $produit)
+    {
+        $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
+        $data[$i] = [
+            'idproduits'>$produit->idproduits,
+            'nom'=>$produit->nom,
+            'prix'=>$produit->prix,
+            'nomFournisseur'=>$produit->nomutilisateur,
+            'enStock'=>$produit->enStock,
+            'imgGUID'=>$produit->imgGUID,
+            'description'=>$produit->description,
+            'tags'=>$array,
+        ];
+        ++$i;
+    }
+    return json_encode($data);
     }
 
     public function SearchProducts(Request $request)
