@@ -42,10 +42,10 @@ export class ShoppingCartComponent implements OnInit {
       this.TABelement = this.products = products
       setTimeout(() => {
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
-        this.Total();
         this.dataSource.paginator = this.paginator;
         console.log(this.TABelement)
         this.loader.hide();
+        this.Total();
       });
     });
   }
@@ -56,10 +56,13 @@ export class ShoppingCartComponent implements OnInit {
   
   increment(column)
   {
+    console.log(column);
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
     this.setquantity(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
   }
+
+
   decrement(column)
   {
     
@@ -76,6 +79,7 @@ export class ShoppingCartComponent implements OnInit {
     }
     this.Total();
   }
+
   delete(column)
   {
     delete this.TABelement[column];
@@ -94,6 +98,7 @@ export class ShoppingCartComponent implements OnInit {
         this.total += this.TABelement[i].prix * this.TABelement[i].quantity;
     }
   }
+
   deleteProductFromCart(iduser:number,idproduit:number)
   {
       this.productService.DeleteProductFromCart(iduser,idproduit);
