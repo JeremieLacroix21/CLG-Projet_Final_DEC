@@ -8,6 +8,7 @@ import { Product } from 'src/app/models/product';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { config } from 'src/config';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getAllitems() {
-    this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentuser')).subscribe(products => {
+    this.subscription = this.productService.GetpanierFromId(+localStorage.getItem(config.storedUser)).subscribe(products => {
       this.TABelement = this.products = products
       setTimeout(() => {
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
@@ -57,7 +58,7 @@ export class ShoppingCartComponent implements OnInit {
   {
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
-    this.setquantity(+localStorage.getItem('currentuser'),column,this.TABelement.find(item => item.idproduit === column).quantity);
+    this.setquantity(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
   }
   decrement(column)
   {
@@ -69,7 +70,7 @@ export class ShoppingCartComponent implements OnInit {
     else 
     {
       this.TABelement.find((item => item.idproduit === column)).quantity -= 1;
-      let user = +localStorage.getItem('currentuser');
+      let user = +localStorage.getItem(config.storedUser);
       let qty = this.TABelement.find(item => item.idproduit === column).quantity;
       this.setquantity(user,column,qty);
     }
@@ -78,7 +79,7 @@ export class ShoppingCartComponent implements OnInit {
   delete(column)
   {
     delete this.TABelement[column];
-    this.deleteProductFromCart(+localStorage.getItem('currentuser'),column);
+    this.deleteProductFromCart(+localStorage.getItem(config.storedUser),column);
     this.getAllitems();
   }
   SousTotal(i) : string
