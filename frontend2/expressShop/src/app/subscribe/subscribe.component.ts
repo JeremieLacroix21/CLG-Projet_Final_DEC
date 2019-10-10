@@ -123,6 +123,7 @@ export class SubscribeComponent implements OnInit {
         this.popUpOpen = true;
       },
       (err) => {
+        this.spinner.hide();
         this.invalidsubscribe = true;
         this.errormessages = err.error;
       }

@@ -1,6 +1,4 @@
 <h1>{{this.NOMPAGE}}</h1>
-
-
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
         
@@ -56,8 +54,16 @@
   
   <div class="PanierButtonDiv">
       <a routerLink="/home"><button mat-raised-button color="primary" class="PanierButton">retourner au browser</button></a>
-          
-        
-    
-    <button mat-raised-button color="primary" class="PanierButton">Passer la commande</button>
+    <button mat-raised-button color="primary" class="PanierButton" (click)="ValidateCommande()">Passer la commande</button>
   </div>
+
+
+  <app-pop-up [isOpen]="false">
+      <div>
+        <header>
+          <span><b>Envoyer la commande?</b></span>
+        </header>
+        <button mat-raised-button color="primary" class="PanierButton">annuler</button>
+        <button mat-raised-button color="primary" class="PanierButton">confirmer</button>
+      </div>
+  </app-pop-up>

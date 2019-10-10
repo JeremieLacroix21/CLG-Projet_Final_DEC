@@ -6,28 +6,37 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Produit;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use App\Mail\CommandSender;
 
 class ProduitController extends Controller
 {
-   public function GetAllProducts()
+    public function GetAllProducts()
    {
-        $produits = DB::table('produits')->get();
-        $data = [];
-        $i = 0;
-        foreach($produits as $produit) 
-        {
-            $data[$i] = [
-                'idproduits'=>$produit->idproduits,
-                'nom'=>$produit->nom,
-                'prix'=>$produit->prix, 
-                'idFournisseur'=>$produit->idFournisseur,
-                'enStock'=>$produit->enStock,
-                'imgGUID'=>$produit->imgGUID,
-                'description'=>$produit->description
-            ];
-            ++$i;
-        }
-        return json_encode($data);
+    $produits = DB::table('produits')
+    ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
+    ->select('produits.*', 'users.nomutilisateur')
+    ->get();
+
+    $array = [];
+    $data = [];
+    $i = 0;
+    foreach($produits as $produit)
+    {
+        $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
+        $data[$i] = [
+            'idproduits'>$produit->idproduits,
+            'nom'=>$produit->nom,
+            'prix'=>$produit->prix,
+            'nomFournisseur'=>$produit->nomutilisateur,
+            'enStock'=>$produit->enStock,
+            'imgGUID'=>$produit->imgGUID,
+            'description'=>$produit->description,
+            'tags'=>$array,
+        ];
+        ++$i;
+    }
+    return json_encode($data);
     }
 
     public function SearchProducts(Request $request)
@@ -178,22 +187,49 @@ class ProduitController extends Controller
     }
 
     //*****************************COMMANDE****************** */
-    public function InsertCommandeInfo(Request $request)
+    public function InsertCommande(Request $request)
     {
+        //Une commande par Fournisseur
         $input = $request->all();
-        DB::table('commandes_info')->insert(array(
-         'idCommande' =>  $input['idCommande'],
-         'idProduits	' => $input['idProduits'],
-         'quantite' => $input['quantite']
+        DB::table('commandes')->insert(array(
+         'idDistributeur' => $input['idDistributeur'],
+         'dateCreation' => $input['dateCreation'],
+         'complete' => $input['complete'],
+         'idFournisseur' => $input['idFournisseur']
         ));
+        $Data = DB::select('Call GetLastInsertedCommande()');
+        return json_encode($Data);
     }
-    public function InsertCommandeFinal(Request $request)
-    {
-    
+    public function InsertCommandeItems(Request $request)
+    {   
+        //Un item par commande de items
+        $input = $request->all();
+        DB::table('commandeItems')->insert(array(
+         'idCommande' => $input['idCommande'],
+         'idProduit' => $input['idProduit'],
+         'quantite' => $input['quantite'],
+        ));
+        return json_encode($input['idCommande']);  
     }
     public function EnvoieCommande(Request $request)
     {
-        
+        $Fournisseur = DB::table('users')->select('*')->where('iduser', $request['idFournisseur'])->first();
+        //Select tout les produits
+        $arrayNomPrenom = array($Fournisseur);
+        $produits = DB::table('commandes')
+        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
+        ->select('*')->where('idFournisseur', '=', $request['idFournisseur'])->get();
+        //Met les produits dans un array
+        $arrayProduit = array($produits);
+        //Select la quantité et date
+        $Commande= DB::table('commandes')
+        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
+        ->select('quantite','dateCreation')->where('idFournisseur', '=', $request['idFournisseur'])->get();
+        $arrayCommande = array($Commande);
+        //Select le nom du distruteur
+        $Distributeur = DB::table('users')->select('nomutilisateur')->where('iduser', $request['idDistributeur'])->first();
+        Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit,$arrayCommande));
+        return response()->json(['success'=> 'email sent'], $this->successStatus);
     }
 }
 ?>

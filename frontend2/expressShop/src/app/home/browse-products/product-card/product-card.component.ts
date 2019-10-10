@@ -15,6 +15,7 @@ export class ProductCardComponent implements OnInit {
 
   constructor(private auth: AuthService, private productService: ProductService) { }
 
+
   ngOnInit() {
   }
 
@@ -27,9 +28,20 @@ export class ProductCardComponent implements OnInit {
       //this.auth.currentUserValue.cart
     });
   }
-/*
-  private onClickFavoriteBtn(event, idProduct: number) {
-    let btn = document.getElementById(event.currentTarget.id);
+
+  onClickRemoveFromCart(event, idproduct:number) {
+    let iduser = +localStorage.getItem(config.storedUser);
+    
+    this.productService.AddProductToCart(iduser, idproduct, 1).subscribe(() => {
+      this.productService.RefreshCartItemCount(iduser);
+    });
+  }
+
+  private onClickFavoriteBtn(event, idproduct:number) {
+    let btnId = event.currentTarget.id;
+    let btn = document.getElementById(btnId);
+    let splitBtnId = btnId.split('-');
+    let productId = splitBtnId[splitBtnId.length-1];
 
     // Switch the displayed icon
     for(var i = 0; i < btn.children.length; ++i) {
@@ -40,14 +52,13 @@ export class ProductCardComponent implements OnInit {
     btn.attributes['inCart'].value = (btn.attributes['inCart'].value === 'false' ? 'true' : 'false');
 
     // Update the product locally
-
-
+    /*
     // TODO: Update the product (replace alerts below)
-    
     if (newFavoriteValue) {
       window.alert(this.loadedProducts[i].nom_produit + ' has been added to your favorites')
     } else {
       window.alert(this.loadedProducts[i].nom_produit + ' has been removed from your favorites')
-    }
-  }*/
+    }*/
+  }
+
 }
