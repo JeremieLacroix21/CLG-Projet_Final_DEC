@@ -13,9 +13,11 @@ class ProduitController extends Controller
    {
         $produits = DB::table('produits')->get();
         $data = [];
+        $array = [];
         $i = 0;
         foreach($produits as $produit) 
         {
+            $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
             $data[$i] = [
                 'idproduits'=>$produit->idproduits,
                 'nom'=>$produit->nom,
@@ -23,7 +25,8 @@ class ProduitController extends Controller
                 'idFournisseur'=>$produit->idFournisseur,
                 'enStock'=>$produit->enStock,
                 'imgGUID'=>$produit->imgGUID,
-                'description'=>$produit->description
+                'description'=>$produit->description,
+                'tags'=>$array,
             ];
             ++$i;
         }

@@ -3,19 +3,23 @@
 <mat-card class="filter-card" >
 
     <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)" placeholder="Nom" #nom>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" placeholder="Nom" #nom>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)"placeholder="Fournisseur" #idf>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)"placeholder="Fournisseur" #idf>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)" OnlyNumber="true"placeholder="Prix min" #pmin>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" OnlyNumber="true"placeholder="Prix min" #pmin>
     </mat-form-field>
 
     <mat-form-field >
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value)" OnlyNumber="true" placeholder="Prix max" #pmax>
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" OnlyNumber="true" placeholder="Prix max" #pmax>
+    </mat-form-field>
+
+    <mat-form-field >
+        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" placeholder="Mots cles" #tag1>
     </mat-form-field>
 </mat-card>
 
