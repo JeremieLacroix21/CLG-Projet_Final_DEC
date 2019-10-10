@@ -12,31 +12,31 @@ use App\Mail\CommandSender;
 class ProduitController extends Controller
 {
     public function GetAllProducts()
-   {
-    $produits = DB::table('produits')
-    ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
-    ->select('produits.*', 'users.nomutilisateur')
-    ->get();
-
-    $array = [];
-    $data = [];
-    $i = 0;
-    foreach($produits as $produit)
     {
-        $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
-        $data[$i] = [
-            'idproduits'>$produit->idproduits,
-            'nom'=>$produit->nom,
-            'prix'=>$produit->prix,
-            'nomFournisseur'=>$produit->nomutilisateur,
-            'enStock'=>$produit->enStock,
-            'imgGUID'=>$produit->imgGUID,
-            'description'=>$produit->description,
-            'tags'=>$array,
-        ];
-        ++$i;
-    }
-    return json_encode($data);
+        $produits = DB::table('produits')
+        ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
+        ->select('produits.*', 'users.nomutilisateur')
+        ->get();
+
+        $array = [];
+        $data = [];
+        $i = 0;
+        foreach($produits as $produit)
+        {
+            $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
+            $data[$i] = [
+                'idproduits'=>$produit->idproduits,
+                'nom'=>$produit->nom,
+                'prix'=>$produit->prix,
+                'nomFournisseur'=>$produit->nomutilisateur,
+                'enStock'=>$produit->enStock,
+                'imgGUID'=>$produit->imgGUID,
+                'description'=>$produit->description,
+                'tags'=>$array,
+            ];
+            ++$i;
+        }
+        return json_encode($data);
     }
 
     public function SearchProducts(Request $request)
@@ -109,20 +109,22 @@ class ProduitController extends Controller
 
    public function AddProductToPanier(Request $request)
    {
-    //fonctionnel
-    $input = $request->all();
-    
-    //Ajout du produit
-    $results =  DB::table('panier')->insert(array(
-    'iduser' =>  $input['iduser'],
-     'idproduit' =>  $input['idproduit'],
-     'quantity' =>  $input['quantity']
-    ));
-    if (is_null($results)) {
+        //fonctionnel
+        $input = $request->all();
+
+        //Ajout du produit
+        $results =  DB::table('panier')
+            ->insert(array(
+                'iduser' =>  $input['iduser'],
+                'idproduit' =>  $input['idproduit'],
+                'quantity' =>  $input['quantity']
+            ));
+
+        if (is_null($results)) {
             return response()->json(['error'=> 'product already in cart'], 401);
-       } else {
+        } else {
             return response()->json(['success' => 'item added to cart'], 200);
-     }
+        }
    }
 
    public function GetpanierFromId(Request $request)
@@ -130,10 +132,10 @@ class ProduitController extends Controller
     //TODO
     $data = [];
     $produits = DB::table('panier')
-    ->join('produits', 'panier.idproduit','=', 'produits.idproduits')
-    ->select('idproduit','nom','prix','imgGUID','quantity')
-    ->where('iduser', '=', $request['iduser'])
-    ->get();
+        ->join('produits', 'panier.idproduit','=', 'produits.idproduits')
+        ->select('idproduit','nom','prix','imgGUID','quantity')
+        ->where('iduser', '=', $request['iduser'])
+        ->get();
     $i = 0;
     foreach($produits as $produit)
     {
@@ -147,41 +149,43 @@ class ProduitController extends Controller
 
    public function DeleteProductFromPanier(Request $request)
    {
-       $results = DB::table('panier')->where('idproduit', '=', $request['idproduit'])
-       ->where('iduser', '=', $request['iduser'])
-       ->delete();
-       if (is_null($results)) {
-        return response()->json(['error'=> 'product doesnt exist'], 401);
+        $results = DB::table('panier')->where('idproduit', '=', $request['idproduit'])
+            ->where('iduser', '=', $request['iduser'])
+            ->delete();
+
+        if (is_null($results)) {
+            return response()->json(['error'=> 'product doesnt exist'], 401);
         } else {
-           return response()->json(['success' => 'item deleted'], 200);
+            return response()->json(['success' => 'item deleted'], 200);
         }
    }
+
    public function UpdateQuantityPanier(Request $request)
    {
         //fonctionnel
         $results = DB::table('panier')
         ->where([
-            ['iduser','=',$request->get('iduser')],
-            ['idproduit','=',$request->get('idproduit')]
+            ['iduser', '=', $request->get('iduser')],
+            ['idproduit', '=', $request->get('idproduit')]
         ])
         ->update(['quantity' => $request->get('quantity')]);
+
         if (is_null($results)) {
-           return response()->json(['error'=> 'product doesnt exist'], 401);
+           return response()->json(['error' => 'product doesnt exist'], 401);
           } else {
               return response()->json(['success' => 'quantity changed'], 200);
         }
     }
 
-
     public function countItemFromid(Request $request)
     {
         $Data = DB::table('panier')
-            ->where('iduser','=',$request->get('iduser'))
+            ->where('iduser', '=', $request->get('iduser'))
             ->count();
+        
         if (is_null($Data)) {
            return response()->json(['error'=> 'product doesnt exist'], 401);
         } else {
-            // return response()->json(['success' => 'cout done'], 200);
             return json_encode($Data);
         }
     }

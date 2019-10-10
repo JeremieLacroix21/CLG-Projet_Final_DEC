@@ -60,7 +60,7 @@
                   <main>
                     <p style="height: 1%;">Veuillez entrer votre nom d'utilisateur:</p>
                     <mat-form-field>
-                        <input type="text" id="inputemail" name="username2" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username2">
+                        <input type="text" id="inputemailPop" name="username2" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username2">
                         <mat-error *ngIf="username2.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
                     </mat-form-field>
                     <p *ngIf="ValidePassword" style="color:green">L'envoi du email à été effectué!</p>

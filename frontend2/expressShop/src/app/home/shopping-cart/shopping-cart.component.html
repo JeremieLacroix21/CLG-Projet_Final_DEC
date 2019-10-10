@@ -1,4 +1,4 @@
-<h1>{{this.NOMPAGE}}</h1>
+<h1>Votre Panier</h1>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
         
@@ -11,7 +11,7 @@
       <!-- id -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>id</th>
-        <td mat-cell *matCellDef="let product">{{product.idproduit}}</td>
+        <td mat-cell *matCellDef="let product">{{product.idproduits}}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <!-- nom -->
@@ -30,9 +30,9 @@
       <ng-container matColumnDef="quantité">
         <th mat-header-cell *matHeaderCellDef>quantité</th>
         <td mat-cell *matCellDef="let product">
-           <button type="submit" (click)="this.increment(product.idproduit)" id="bt2plus">+</button>
-            <input type="number" min="0" id="text+i" (keyup)="0" (key.enter)="set(product.idproduit)"  placeholder="{{product.quantity}}">
-          <button type="submit" (click)="decrement(product.idproduit)" id="bt2moin">-</button>
+           <button type="submit" (click)="this.increment(product.idproduits)" id="bt2plus">+</button>
+            <input type="number" min="0" id="text+i" (keyup)="0" (key.enter)="set(product.idproduits)"  placeholder="{{product.quantity}}">
+          <button type="submit" (click)="decrement(product.idproduits)" id="bt2moin">-</button>
         </td>
         <td mat-footer-cell *matFooterCellDef></td>
         
@@ -40,8 +40,8 @@
       <!--sous total -->
       <ng-container matColumnDef="sous-total">
         <th mat-header-cell *matHeaderCellDef>sous-total</th>
-        <td mat-cell *matCellDef="let product">{{this.SousTotal(product.idproduit)}}</td>
-        <td mat-footer-cell *matFooterCellDef>{{this.total}}$CAD</td>
+        <td mat-cell *matCellDef="let product">{{product.prix * product.quantity}}</td>
+        <td mat-footer-cell *matFooterCellDef>{{total}}$CAD</td>
       </ng-container> 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

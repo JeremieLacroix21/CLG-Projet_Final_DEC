@@ -1,5 +1,5 @@
 export class productPanier {
-    idproduit: number;
+    idproduits: number;
     nom: string;
     prix: number;
     imgGUID: string;

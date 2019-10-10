@@ -32,22 +32,21 @@ export class BrowseProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loader.show("Chargement des produits...");
-    console.log(localStorage.getItem("currentUser"));
+    console.log(this.auth.currentUserValue);
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  AddProductToCart(iduser: number, idproduct: number) {
-    this.productService.AddProductToCart(iduser, idproduct, 1);
+  AddProductToCart(idproduct: number) {
+    this.productService.AddProductToCart(this.auth.currentUserValue.iduser, idproduct, 1);
   }
 
 
   private Filter(chaine: string, idf: string, pmin: number, pmax: number, tagS: string) {
     this.filteredProducts = this.products;
     var newArray = new Array();
-    console.log(this.filteredProducts)
 
     this.filteredProducts = (chaine) ?
       this.filteredProducts.filter(p => p.nom.toLowerCase().includes(chaine.toLowerCase())) :
@@ -85,7 +84,6 @@ export class BrowseProductsComponent implements OnInit, OnDestroy {
       for (var i = 0; i < this.filteredProducts.length; i++) {
         let x = false;
         this.ArrayTags = this.filteredProducts[i].tags.map(function (item) { return item['tag'] });
-        console.log(this.ArrayTags)
         this.ArrayTags.forEach(tag => {
           if (tag.toLowerCase().includes(tagS.toLowerCase())) {
             x = true;
