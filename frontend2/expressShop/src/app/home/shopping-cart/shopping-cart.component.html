@@ -1,4 +1,6 @@
 <h1>{{this.NOMPAGE}}</h1>
+
+<div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
         
@@ -58,7 +60,7 @@
   </div>
 
 
-  <app-pop-up [isOpen]="false">
+  <app-pop-up [isOpen]="popUp">
       <div>
         <header>
           <span><b>Envoyer la commande?</b></span>
@@ -67,3 +69,4 @@
         <button mat-raised-button color="primary" class="PanierButton">confirmer</button>
       </div>
   </app-pop-up>
+</div>
