@@ -8,6 +8,7 @@ import { Product } from 'src/app/models/product';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { config } from 'src/config';
 
 
 @Component({
@@ -30,6 +31,8 @@ export class ShoppingCartComponent implements OnInit {
   subscription: Subscription;
   products: productPanier[];
   TABelement : productPanier[];
+  popUpOpen = false;
+  router: any;
 
 
   constructor(private productService: ProductService, private loader: LoaderService) {
@@ -37,54 +40,61 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getAllitems() {
-    this.subscription = this.productService.GetpanierFromId(+localStorage.getItem('currentuser')).subscribe(products => {
+    this.subscription = this.productService.GetpanierFromId(+localStorage.getItem(config.storedUser)).subscribe(products => {
       this.TABelement = this.products = products
       setTimeout(() => {
         this.dataSource = new MatTableDataSource<productPanier>(this.TABelement);
-        this.Total();
         this.dataSource.paginator = this.paginator;
         console.log(this.TABelement)
         this.loader.hide();
+        this.Total();
       });
     });
   }
 
   ngOnInit() {
     this.loader.show("Chargement des produits...");
+    this.popUpOpen = false;
   }
   
   increment(column)
   {
+    console.log("increment idProduit: "+column);
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
-    this.setquantity(+localStorage.getItem('currentuser'),column,this.TABelement.find(item => item.idproduit === column).quantity);
+    this.UpdateQuantityPanier(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
   }
   decrement(column)
   {
-    
+    console.log("decrement idProduit: "+column);
     if( this.TABelement.find((item => item.idproduit === column)).quantity  - 1 == 0)
     {
+      console.log("decrement is ready to call delete");
       this.delete(column);
     }
     else 
     {
       this.TABelement.find((item => item.idproduit === column)).quantity -= 1;
-      let user = +localStorage.getItem('currentuser');
+      let user = +localStorage.getItem(config.storedUser);
       let qty = this.TABelement.find(item => item.idproduit === column).quantity;
-      this.setquantity(user,column,qty);
+      this.UpdateQuantityPanier(user,column,qty);
     }
     this.Total();
   }
+
   delete(column)
   {
     delete this.TABelement[column];
-    this.deleteProductFromCart(+localStorage.getItem('currentuser'),column);
-    this.getAllitems();
+    this.productService.DeleteProductFromCart(+localStorage.getItem(config.storedUser), column).subscribe();
+    // Delete the user locally
+    this.dataSource.data = this.dataSource.data.filter(u => u.idproduit != column);
   }
+
   SousTotal(i) : string
   {
     return (this.TABelement.find((item => item.idproduit === i)).prix * this.TABelement.find((item => item.idproduit === i)).quantity).toString();
   }
+
   Total()
   {
     this.total = 0;
@@ -93,13 +103,21 @@ export class ShoppingCartComponent implements OnInit {
         this.total += this.TABelement[i].prix * this.TABelement[i].quantity;
     }
   }
-  deleteProductFromCart(iduser:number,idproduit:number)
+
+  DeleteProductFromCart(iduser:number,idproduit:number)
   {
-      this.productService.DeleteProductFromCart(iduser,idproduit);
+      this.productService.DeleteProductFromCart(iduser,idproduit).subscribe();
   }
-  setquantity(iduser:number,idproduit:number,quantity:number)
+
+  UpdateQuantityPanier(iduser:number,idproduit:number,quantity:number)
   {
-      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity);
+      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity).subscribe();
+  }
+
+
+  ValidateCommande()
+  {
+    this.popUpOpen = true;
   }
 }
 

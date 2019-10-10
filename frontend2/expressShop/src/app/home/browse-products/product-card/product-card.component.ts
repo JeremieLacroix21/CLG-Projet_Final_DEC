@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../../models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { config } from 'src/config';
 
 @Component({
   selector: 'app-product-card',
@@ -11,21 +12,53 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {}
 
-  AddProductToCart(idproduct:number) {
-    let iduser =  +localStorage.getItem('currentuser');
-    this.productService.AddProductToCart(iduser,idproduct,1).subscribe(
-      (res) => {
-        this.productService.RefreshCartItemCount(iduser);
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
+  ngOnInit() {
+  }
+
+  onClickCartBtn(event, idProduct: number) {
+    let currUserId = +localStorage.getItem(config.storedUser);
+    
+    this.productService.AddProductToCart(currUserId, idProduct, 1).subscribe(() => {
+      this.productService.RefreshCartItemCount(currUserId);
+    });
+  }
+  onClickRemoveFromCart(idproduct:number) {
+    let iduser = +localStorage.getItem(config.storedUser);
+    
+    this.productService.AddProductToCart(iduser, idproduct, 1).subscribe(() => {
+      this.productService.RefreshCartItemCount(iduser);
     });
   }
 
-  ngOnInit() {
-    
-  }
+  // private onClickFavoriteBtn(event) {
+  //   let btnId = event.currentTarget.id;
+  //   let btn = document.getElementById(btnId);
+  //   let splitBtnId = btnId.split('-');
+  //   let productId = splitBtnId[splitBtnId.length-1];
+
+  //   // Switch the displayed icon
+  //   for(var i = 0; i < btn.children.length; ++i) {
+  //     btn.children[i].classList.toggle('mdc-icon-button__icon--on');
+  //   }
+
+  //   // Toggle the favorite attribute
+  //   btn.attributes['favorite'].value = (btn.attributes['favorite'].value === 'false' ? 'true' : 'false');
+
+  //   let newFavoriteValue = false;
+  //   for(var i = 0; i < this.loadedProducts.length; ++i) {
+  //     if (this.loadedProducts[i].idproduits == productId) {
+  //       newFavoriteValue = (btn.attributes['favorite'].value === 'true');
+  //       break;
+  //     }
+  //   }
+
+  //   // TODO: Update the product (replace alerts below)
+  //   if (newFavoriteValue) {
+  //     window.alert(this.loadedProducts[i].nom_produit + ' has been added to your favorites')
+  //   } else {
+  //     window.alert(this.loadedProducts[i].nom_produit + ' has been removed from your favorites')
+  //   }
+  // }
 }

@@ -134,6 +134,8 @@ class ProduitController extends Controller
     return json_encode($data);
    }
 
+
+
    public function DeleteProductFromPanier(Request $request)
    {
        $results = DB::table('panier')->where('idproduit', '=', $request['idproduit'])
@@ -141,11 +143,10 @@ class ProduitController extends Controller
        ->delete();
        if (is_null($results)) {
         return response()->json(['error'=> 'product doesnt exist'], 401);
-       } else {
+        } else {
            return response()->json(['success' => 'item deleted'], 200);
-     }
+        }
    }
-
    public function UpdateQuantityPanier(Request $request)
    {
         //fonctionnel
@@ -165,10 +166,9 @@ class ProduitController extends Controller
 
     public function countItemFromid(Request $request)
     {
-        $Data = [];
         $Data = DB::table('panier')
-        ->where('iduser','=',$request->get('iduser'))
-        ->count();
+            ->where('iduser','=',$request->get('iduser'))
+            ->count();
         if (is_null($Data)) {
            return response()->json(['error'=> 'product doesnt exist'], 401);
         } else {

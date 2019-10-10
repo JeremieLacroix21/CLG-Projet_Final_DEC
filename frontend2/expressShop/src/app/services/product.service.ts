@@ -33,8 +33,12 @@ export class ProductService {
   }
 
   RefreshCartItemCount(iduser: number) {
-    this.http.get<number>(
+    const body = new HttpParams()
+      .set('iduser', iduser.toString());
+
+    this.http.post<number>(
       `${config.apiUrl}/api/countItemFromid`,
+      body.toString(),
       config.headerObject
     ).subscribe(count => {
       this.nbCartItemsSource.next(count);
@@ -63,8 +67,8 @@ export class ProductService {
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString());
-    return this.http.post(
-      `${config.apiUrl}/api/DeleteProductFromCart`,
+    return this.http.put(
+      `${config.apiUrl}/api/DeleteProductFromPanier`,
       body.toString(),
       config.headerObject
     );
@@ -73,7 +77,7 @@ export class ProductService {
   UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
   { 
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString()).set('quantity',qty.toString());
-    return this.http.post(
+    return this.http.put(
       `${config.apiUrl}/api/UpdateQuantityPanier`,
       body.toString(),
       config.headerObject
