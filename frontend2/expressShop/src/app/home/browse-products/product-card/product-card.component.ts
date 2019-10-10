@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../../models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { config } from 'src/config';
 
 @Component({
   selector: 'app-product-card',
@@ -14,7 +15,7 @@ export class ProductCardComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   AddProductToCart(idproduct:number) {
-    let iduser = +localStorage.getItem('currentUser');
+    let iduser = +localStorage.getItem(config.storedUser);
     this.productService.AddProductToCart(iduser,idproduct,1).subscribe(
       (res) => {
         this.productService.RefreshCartItemCount(iduser);
