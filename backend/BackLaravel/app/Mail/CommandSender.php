@@ -29,8 +29,6 @@ class CommandSender extends Mailable
         $address = 'ExpressShop.Recovery@hotmail.com';
         $subject = 'Vous avez reçu une commande';
         $name = 'Express Shop';
-        $data=array('arrayProduit'=>$arrayProduit, 'Commande'=>$Commande);
-        $Fournisseur=array('Fournisseur'=>$Fournisseur);
         
         return $this->view('email.SendCommand')
         ->from($address, $name)
@@ -38,6 +36,6 @@ class CommandSender extends Mailable
         ->bcc($address, $name)
         ->replyTo($address, $name)
         ->subject($subject)
-        ->with( $data, $Distributeur, ['Distributeur' =>  $this->Distributeur['Distributeur']]);
+        ->with($this->arrayProduit , $this->Fournisseur, $this->Commande,  $this->Distributeur);
     }
 }
