@@ -5,6 +5,7 @@ import { AuthService } from '../services';
 import { first } from 'rxjs/operators';
 import { DEBUGGING } from '../models/DEBUG-LOGIN';
 import { errormessage } from '../models/error';
+import { config } from 'src/config';
 
 @Component({
   selector: 'app-login',
@@ -98,7 +99,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {
-            localStorage.setItem('currentUser', JSON.stringify(data));
+            localStorage.setItem(config.storedUser, JSON.stringify(data));
             this.router.navigate([this.returnUrl]);
           },
           err => {
@@ -108,7 +109,7 @@ export class LoginComponent implements OnInit {
               this.loading = false; 
             }
             if (DEBUGGING) {
-              localStorage.setItem('currentUser', '0'/*JSON.stringify("visitor")*/);
+              localStorage.setItem(config.storedUser, '0'/*JSON.stringify("visitor")*/);
               this.router.navigate([this.returnUrl]);
             }
           }

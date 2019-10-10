@@ -14,7 +14,7 @@ export class ProductCardComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   AddProductToCart(idproduct:number) {
-    let iduser =  +localStorage.getItem('currentuser');
+    let iduser = +localStorage.getItem('currentUser');
     this.productService.AddProductToCart(iduser,idproduct,1).subscribe(
       (res) => {
         this.productService.RefreshCartItemCount(iduser);
