@@ -59,10 +59,8 @@ export class ShoppingCartComponent implements OnInit {
     console.log("increment idProduit: "+column);
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
-    this.setquantity(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
+    this.UpdateQuantityPanier(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
   }
-
-
   decrement(column)
   {
     console.log("decrement idProduit: "+column);
@@ -76,7 +74,7 @@ export class ShoppingCartComponent implements OnInit {
       this.TABelement.find((item => item.idproduit === column)).quantity -= 1;
       let user = +localStorage.getItem(config.storedUser);
       let qty = this.TABelement.find(item => item.idproduit === column).quantity;
-      this.setquantity(user,column,qty);
+      this.UpdateQuantityPanier(user,column,qty);
     }
     this.Total();
   }
@@ -88,6 +86,7 @@ export class ShoppingCartComponent implements OnInit {
     // Delete the user locally
     this.dataSource.data = this.dataSource.data.filter(u => u.idproduit != column);
   }
+
   SousTotal(i) : string
   {
     return (this.TABelement.find((item => item.idproduit === i)).prix * this.TABelement.find((item => item.idproduit === i)).quantity).toString();
@@ -102,9 +101,14 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  setquantity(iduser:number,idproduit:number,quantity:number)
+  DeleteProductFromCart(iduser:number,idproduit:number)
   {
-      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity);
+      this.productService.DeleteProductFromCart(iduser,idproduit).subscribe();
+  }
+
+  UpdateQuantityPanier(iduser:number,idproduit:number,quantity:number)
+  {
+      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity).subscribe();
   }
 }
 

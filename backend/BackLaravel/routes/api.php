@@ -29,8 +29,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::put('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
 //Route Profil
  Route::post('/profil','API\ProfilController@GetUser');
- Route::post('UpdatePassword','API\ProfilController@UpdatePassword');
- Route::post('UpdateEmail','API\ProfilController@UpdateEmail');
+ Route::put('UpdatePassword','API\ProfilController@UpdatePassword');
+ Route::put('UpdateUser','API\ProfilController@UpdateUser');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
 //Route Middleware
