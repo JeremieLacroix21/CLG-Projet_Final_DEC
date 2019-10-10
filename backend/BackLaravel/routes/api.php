@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('AddImage', 'API\ProduitController@AddImage');
  Route::post('InsertCommande', 'API\ProduitController@InsertCommande');
  Route::post('InsertCommandeItems', 'API\ProduitController@InsertCommandeItems');
+ Route::post('EnvoieCommande', 'API\ProduitController@EnvoieCommande');
  //route panier
  Route::post('GetpanierFromId','API\ProduitController@GetpanierFromId');
  Route::post('AddProductToPanier','API\ProduitController@AddProductToPanier');

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Produit;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use App\Mail\CommandSender;
 
 class ProduitController extends Controller
 {
@@ -204,11 +206,22 @@ class ProduitController extends Controller
     }
     public function EnvoieCommande(Request $request)
     {
-        $User = DB::table('users')->select('*')->where('idusers', $request['idFournisseur'])->first();
+        $Fournisseur = DB::table('users')->select('*')->where('iduser', $request['idFournisseur'])->first();
         //Select tout les produits
-        //S
-        $message =  $request['idFournisseur'];
-        Mail::to($User->email)->send(new EmailSender($data, $number));
+        $arrayNomPrenom = array($Fournisseur);
+        $produits = DB::table('commandes')
+        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
+        ->select('*')->where('idFournisseur', '=', $request['idFournisseur'])->get();
+        //Met les produits dans un array
+        $arrayProduit = array($produits);
+        //Select la quantité et date
+        $Commande= DB::table('commandes')
+        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
+        ->select('quantite','dateCreation')->where('idFournisseur', '=', $request['idFournisseur'])->get();
+        $arrayCommande = array($Commande);
+        //Select le nom du distruteur
+        $Distributeur = DB::table('users')->select('nomutilisateur')->where('iduser', $request['idDistributeur'])->first();
+        Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit,$arrayCommande));
         return response()->json(['success'=> 'email sent'], $this->successStatus);
     }
 }

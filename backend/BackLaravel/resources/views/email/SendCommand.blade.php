@@ -212,7 +212,7 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Bonjour {{ $Destinataire }},</p>
+                        <p>Bonjour {{ $Destinataire->prenom }} {{ $Destinataire->nom }},</p>
                         <p>Vous avez recu une commande de {{ $Fournisseur }}</p>
                         <p>Voici les produits commandé: <b></p>
                       </td>

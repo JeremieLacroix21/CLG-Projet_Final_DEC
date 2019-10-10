@@ -11,16 +11,16 @@ class CommandSender extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $Destinataire;
+    public $Distributeur;
     public $Fournisseur;
-    public $JsonProduit;
+    public $arrayProduit;
     public $Commande;
 
-    public function __construct($Distributeur, $Fournisseur, $Produit, $Commande)
+    public function __construct($Fournisseur, $Distributeur, $arrayProduit, $Commande)
     {
-        $this->Destinataire = $Destinataire;
+        $this->Distributeur = $Distributeur;
         $this->Fournisseur = $Fournisseur;
-        $this->Produit = $Produit;
+        $this->arrayProduit = $arrayProduit;
         $this->Commande = $Commande;
     }
 
@@ -29,7 +29,8 @@ class CommandSender extends Mailable
         $address = 'ExpressShop.Recovery@hotmail.com';
         $subject = 'Vous avez reçu une commande';
         $name = 'Express Shop';
-        $data=array('Produit'=>$Produit, 'Commande'=>$Commande);
+        $data=array('arrayProduit'=>$arrayProduit, 'Commande'=>$Commande);
+        $Fournisseur=array('Fournisseur'=>$Fournisseur);
         
         return $this->view('email.SendCommand')
         ->from($address, $name)
@@ -37,7 +38,6 @@ class CommandSender extends Mailable
         ->bcc($address, $name)
         ->replyTo($address, $name)
         ->subject($subject)
-        ->with( $data, [ 'Destinataire' =>  $this->Destinataire['Destinataire'],
-        'Fournisseur' =>  $this->Fournisseur['Fournisseur']]);
+        ->with( $data, $Distributeur, ['Distributeur' =>  $this->Distributeur['Distributeur']]);
     }
 }
