@@ -59,14 +59,13 @@ export class ShoppingCartComponent implements OnInit {
     console.log(column);
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
-    this.setquantity(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
+    this.UpdateQuantityPanier(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
   }
-
 
   decrement(column)
   {
     
-    if( this.TABelement.find((item => item.idproduit === column)).quantity  - 1 == 0)
+    if( this.TABelement.find((item => item.idproduit === column)).quantity -1 == 0)
     {
       this.delete(column);
     }
@@ -75,21 +74,23 @@ export class ShoppingCartComponent implements OnInit {
       this.TABelement.find((item => item.idproduit === column)).quantity -= 1;
       let user = +localStorage.getItem(config.storedUser);
       let qty = this.TABelement.find(item => item.idproduit === column).quantity;
-      this.setquantity(user,column,qty);
+      this.UpdateQuantityPanier(user,column,qty);
     }
     this.Total();
   }
 
   delete(column)
   {
-    delete this.TABelement[column];
-    this.deleteProductFromCart(+localStorage.getItem(config.storedUser),column);
+    delete this.dataSource[column];
+    this.DeleteProductFromCart(+localStorage.getItem(config.storedUser),column);
     this.getAllitems();
   }
+
   SousTotal(i) : string
   {
     return (this.TABelement.find((item => item.idproduit === i)).prix * this.TABelement.find((item => item.idproduit === i)).quantity).toString();
   }
+
   Total()
   {
     this.total = 0;
@@ -99,13 +100,14 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  deleteProductFromCart(iduser:number,idproduit:number)
+  DeleteProductFromCart(iduser:number,idproduit:number)
   {
-      this.productService.DeleteProductFromCart(iduser,idproduit);
+      this.productService.DeleteProductFromCart(iduser,idproduit).subscribe();
   }
-  setquantity(iduser:number,idproduit:number,quantity:number)
+
+  UpdateQuantityPanier(iduser:number,idproduit:number,quantity:number)
   {
-      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity);
+      this.productService.UpdateQuantityPanier(iduser,idproduit,quantity).subscribe();
   }
 }
 
