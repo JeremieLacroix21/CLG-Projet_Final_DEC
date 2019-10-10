@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { AuthService } from 'src/app/services';
 
 @Component({
   selector: 'app-browse-products',
@@ -18,7 +19,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
   Tproducts: Product[];
   filteredProducts: Product[];
 
-  constructor(private productService: ProductService, private loader: LoaderService) {
+  constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) {
     this.subscription = this.productService.getAll().subscribe(products => {
       this.filteredProducts = this.products = products
       setTimeout(() => {
@@ -34,11 +35,6 @@ export class BrowseProductsComponent implements OnInit, OnDestroy
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
-
-  AddProductToCart(iduser:number,idproduct:number) {
-    this.productService.AddProductToCart(iduser,idproduct,1);
-  }
-  
 
   private Filter(chaine:string, idf:string, pmin:number, pmax:number){
     this.filteredProducts = this.products;

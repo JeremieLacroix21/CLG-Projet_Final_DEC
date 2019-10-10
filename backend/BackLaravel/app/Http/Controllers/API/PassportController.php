@@ -10,50 +10,65 @@ use App\Mail\EmailSender;
 
 class PassportController extends Controller
 {
-   public $successStatus = 200;
-   /**
+    public $successStatus = 200;
+    /**
     * login api
     *
     * @return \Illuminate\Http\Response
     */
-   public function login(Request $request){
-    $user_favorites = DB::table('users')
-    ->where('nomutilisateur', '=', $request->get('name'))
-    ->where('motdepasse', '=', $request->get('password'))
-    ->first();
-    if (is_null($user_favorites)) {
-        return response()->json([@"Infomations invalide"], 401);
-    } else {
-        if($user_favorites->confirme == 0)
-        {
-            return response()->json([@"Votre compte n'est pas encore confirmé"], 401);
+    public function login(Request $request)
+    {
+        $user = DB::table('users')
+            ->where('nomutilisateur', '=', $request->get('name'))
+            ->where('motdepasse', '=', $request->get('password'))
+            ->select(
+                'iduser',
+                'nomutilisateur',
+                'nom',
+                'prenom',
+                'TypeUser',
+                'adresse',
+                'admin',
+                'confirme',
+                'dateinscription',
+                'email',
+                'Téléphone',
+                'description',
+                'imgGUID'
+            )
+            ->first();
+            
+        if (is_null($user)) {
+            return response()->json([@"Informations invalides"], 401);
+        } else if ($user->confirme == 0) {
+            return response()->json([@"Le compte est en attente de confirmation par un administrateur"], 401);
+        } else {
+            return json_encode($user);
         }
-        return json_encode($user_favorites->iduser);
     }
-   }
-   /**
+    /**
     * Register api
     *
     * @return \Illuminate\Http\Response
     */
-   public function register(Request $request)
-   {
-       $input = $request->all();
-       $user_favorites = DB::table('users')
-       ->where('nomutilisateur', '=', $input['name'])
-       ->first();
-       $useremail = DB::table('users')
-       ->where('email', '=', $input['email'])
-       ->first();
-       if(!is_null($user_favorites))
-       {
+    public function register(Request $request)
+    {
+        $input = $request->all();
+        $user_favorites = DB::table('users')
+        ->where('nomutilisateur', '=', $input['name'])
+        ->first();
+        $useremail = DB::table('users')
+        ->where('email', '=', $input['email'])
+        ->first();
+        if(!is_null($user_favorites))
+        {
         return response()->json([@"Le nom d'utilisateur est déja utilisé"], 401);
-       }
-       if(!is_null($useremail))
-       {
+        }
+        if(!is_null($useremail))
+        {
         return response()->json([@"Le email est déja utilisé"], 401);
-       }
-       DB::table('users')->insert(array(
+        }
+        DB::table('users')->insert(array(
         'nomutilisateur' =>  $input['name'],
         'email' => $input['email'],
         'motdepasse' => $input['password'],
@@ -67,12 +82,12 @@ class PassportController extends Controller
         'Téléphone' => $input['telephone'],
         'imgGUID' => $input['photo'],
         'description' => $input['description']
-       ));
-       return response()->json(['success'=> 'User Created'], $this->successStatus);
-   }
+        ));
+        return response()->json(['success'=> 'User Created'], $this->successStatus);
+    }
 
-   public function RecoverUsername(Request $request)
-   {
+    public function RecoverUsername(Request $request)
+    {
         $number = 1;
         $User = DB::table('users')->select('*')->where('email', $request['email'])->first();
         if (is_null($User)) {
@@ -84,10 +99,10 @@ class PassportController extends Controller
             Mail::to($User->email)->send(new EmailSender($data, $number));
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
-   }
+    }
 
-   public function RecoverPassword(Request $request)
-   {
+    public function RecoverPassword(Request $request)
+    {
         $number = 2;
         $User = DB::table('users')->select('*')->where('nomutilisateur', $request['nomutilisateur'])->first();
         if (is_null($User)) {
@@ -99,10 +114,10 @@ class PassportController extends Controller
             Mail::to($User->email)->send(new EmailSender($data, $number));
             return response()->json(['success'=> 'email sent'], $this->successStatus);
         } 
-   }
+    }
 
-   public function GetAllUsers()
-   {
+    public function GetAllUsers()
+    {
         $users = DB::table('users')
             ->select(
                 'iduser',
@@ -126,8 +141,8 @@ class PassportController extends Controller
         return json_encode($data);
     }
 
-   public function GetAllSuppliers()
-   {
+    public function GetAllSuppliers()
+    {
         $users = DB::table('fournisseurs')
             ->join('users', 'fournisseurs.idFournisseur', '=', 'users.iduser')
             ->where('TypeUser', '<>', 'Admin')
