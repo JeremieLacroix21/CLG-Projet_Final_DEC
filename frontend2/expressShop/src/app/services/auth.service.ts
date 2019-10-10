@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { User } from '../models';
 import { config } from '../../config';
 import { BD_User } from '../models/user';
+import { Supplier } from '../models/supplier';
+import { Distributor } from '../models/distributor';
 
 
 @Injectable({
@@ -12,10 +14,10 @@ import { BD_User } from '../models/user';
 })
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<BD_User>;
+  private currentUserSubject: BehaviorSubject<any>;
   private errorMessageSource = new Subject<any[]>();
 
-  public currentUser: Observable<BD_User>;
+  public currentUser: Observable<any>;
   public errorMessage = this.errorMessageSource.asObservable();
 
   constructor(private http: HttpClient) {
@@ -27,11 +29,11 @@ export class AuthService {
       this.login(loggedUserNameAndPwd.nomutilisateur, loggedUserNameAndPwd.pwd);
     }
     
-    this.currentUserSubject = new BehaviorSubject<BD_User>(null);
+    this.currentUserSubject = new BehaviorSubject<any>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): BD_User {
+  public get currentUserValue(): BD_User|Supplier|Distributor {
     return this.currentUserSubject.value;
   }
 
@@ -40,7 +42,7 @@ export class AuthService {
       .set('name', username)
       .set('password', password);
   
-    let request = this.http.post<BD_User>(
+    let request = this.http.post<BD_User|Supplier|Distributor>(
       `${config.apiUrl}/api/login`,
       body.toString(),
       config.headerObject
