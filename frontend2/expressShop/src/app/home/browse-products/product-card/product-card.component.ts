@@ -16,6 +16,7 @@ export class ProductCardComponent implements OnInit {
 
   AddProductToCart(idproduct:number) {
     let iduser = +localStorage.getItem(config.storedUser);
+    
     this.productService.AddProductToCart(iduser,idproduct,1).subscribe(
       (res) => {
         this.productService.RefreshCartItemCount(iduser);
@@ -23,7 +24,7 @@ export class ProductCardComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-    });
+      });
   }
 
   ngOnInit() {

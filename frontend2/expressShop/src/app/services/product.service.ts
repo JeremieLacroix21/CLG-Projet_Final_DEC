@@ -33,8 +33,12 @@ export class ProductService {
   }
 
   RefreshCartItemCount(iduser: number) {
-    this.http.get<number>(
+    const body = new HttpParams()
+      .set('iduser', iduser.toString());
+
+    this.http.post<number>(
       `${config.apiUrl}/api/countItemFromid`,
+      body.toString(),
       config.headerObject
     ).subscribe(count => {
       this.nbCartItemsSource.next(count);
