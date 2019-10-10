@@ -56,7 +56,7 @@ export class ShoppingCartComponent implements OnInit {
   
   increment(column)
   {
-    console.log(column);
+    console.log("increment idProduit: "+column);
     this.TABelement.find((item => item.idproduit === column)).quantity += 1;   
     this.Total();
     this.setquantity(+localStorage.getItem(config.storedUser),column,this.TABelement.find(item => item.idproduit === column).quantity);
@@ -65,9 +65,10 @@ export class ShoppingCartComponent implements OnInit {
 
   decrement(column)
   {
-    
+    console.log("decrement idProduit: "+column);
     if( this.TABelement.find((item => item.idproduit === column)).quantity  - 1 == 0)
     {
+      console.log("decrement is ready to call delete");
       this.delete(column);
     }
     else 
@@ -83,13 +84,15 @@ export class ShoppingCartComponent implements OnInit {
   delete(column)
   {
     delete this.TABelement[column];
-    this.deleteProductFromCart(+localStorage.getItem(config.storedUser),column);
-    this.getAllitems();
+    this.productService.DeleteProductFromCart(+localStorage.getItem(config.storedUser), column).subscribe();
+    // Delete the user locally
+    this.dataSource.data = this.dataSource.data.filter(u => u.idproduit != column);
   }
   SousTotal(i) : string
   {
     return (this.TABelement.find((item => item.idproduit === i)).prix * this.TABelement.find((item => item.idproduit === i)).quantity).toString();
   }
+
   Total()
   {
     this.total = 0;
@@ -99,10 +102,6 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  deleteProductFromCart(iduser:number,idproduit:number)
-  {
-      this.productService.DeleteProductFromCart(iduser,idproduit);
-  }
   setquantity(iduser:number,idproduit:number,quantity:number)
   {
       this.productService.UpdateQuantityPanier(iduser,idproduit,quantity);

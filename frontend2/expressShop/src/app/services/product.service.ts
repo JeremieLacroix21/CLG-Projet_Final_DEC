@@ -66,6 +66,8 @@ export class ProductService {
 
   DeleteProductFromCart(iduser:number,idproduit:number)
   {
+    console.log("DeleteProductFromCart received " + iduser + " and " + idproduit);
+
     const body = new HttpParams().set('iduser', iduser.toString()).set('idproduit',idproduit.toString());
     return this.http.put(
       `${config.apiUrl}/api/DeleteProductFromPanier`,
