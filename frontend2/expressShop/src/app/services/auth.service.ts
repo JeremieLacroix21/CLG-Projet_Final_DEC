@@ -25,14 +25,17 @@ export class AuthService {
     console.log("auth service constructor called");
 
     // TODO : Figure out tokens
-    let loggedUserJSON = localStorage.getItem(config.storedUser);
-    let loggedUserNameAndPwd = JSON.parse(loggedUserJSON);
-
-    if (loggedUserNameAndPwd) {
-      this.login(loggedUserNameAndPwd.nomutilisateur, loggedUserNameAndPwd.pwd);
+    let storedUser = JSON.parse(sessionStorage.getItem(config.storedUser));
+    if (!storedUser) {
+      let loggedUserJSON = localStorage.getItem(config.storedUser);
+      let loggedUserNameAndPwd = JSON.parse(loggedUserJSON);
+  
+      if (loggedUserNameAndPwd) {
+        this.login(loggedUserNameAndPwd.nomutilisateur, loggedUserNameAndPwd.pwd);
+      }
     }
 
-    this.currentUserSubject = new BehaviorSubject<any>(null);
+    this.currentUserSubject = new BehaviorSubject<any>(storedUser);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -65,8 +68,11 @@ export class AuthService {
     request.subscribe(
       user => {
         this.spinner.hide();
-        localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
+
         this.currentUserSubject.next(user);
+
+        localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
+        sessionStorage.setItem(config.storedUser, JSON.stringify(this.currentUserSubject.value));
       },
       err => {
         this.spinner.hide();
@@ -95,8 +101,9 @@ export class AuthService {
 
   logout() {
     console.log("logout called");
-    // remove user from local storage to log user out
+
     localStorage.removeItem(config.storedUser);
+    sessionStorage.removeItem(config.storedUser);
     this.currentUserSubject.next(null);
   }
 }

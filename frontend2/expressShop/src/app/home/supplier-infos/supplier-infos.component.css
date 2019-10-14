@@ -16,3 +16,8 @@
 #collapseBtn .rotatedIcon {
     transform: rotate(0deg);
 }
+
+.tags-display {
+    color: rgba(0,0,0,.54);
+    font-size: 12px;
+}

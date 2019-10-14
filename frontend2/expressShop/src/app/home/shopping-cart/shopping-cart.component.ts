@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     //this.loader.show("Chargement des produits...");
-    console.log(this.auth.currDistributor.cart)
+    //console.log(this.auth.currDistributor.cart)
     this.popUpOpen = false;
   }
   

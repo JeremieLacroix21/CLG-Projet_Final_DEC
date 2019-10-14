@@ -17,13 +17,15 @@ export class SupplierInfosComponent implements OnInit {
   private loadedSuppliers: Observable<Supplier[]>;
   private dataSource: MatTableDataSource<Supplier>;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private userService: UserService) {
+    console.log(sessionStorage);
+  }
 
   ngOnInit() {
     this.route.queryParams
       .pipe(filter(params => params.s))
       .subscribe(params => {
-        console.log(params);
+        //console.log(params);
         this.supplierId = params.s;
       });
     this.requestAllUser();

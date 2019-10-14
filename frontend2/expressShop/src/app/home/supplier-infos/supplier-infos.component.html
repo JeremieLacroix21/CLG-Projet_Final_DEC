@@ -10,9 +10,9 @@
         <mat-list>
             <h3 mat-subheader>Folders</h3>
             <mat-list-item *ngFor="let supplier of dataSource.filteredData">
-                <img src="supplier.imgGUID" />
+                <img matListAvatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
                 <h4 mat-line>{{supplier.nomutilisateur}}</h4>
-                <p mat-line class="demo-2">{{supplier.nom}}</p>
+                <p mat-line class="tags-display"><ng-container *ngFor="let tag of supplier.tags">{{tag}}, </ng-container></p>
                 <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
             </mat-list-item>
             <mat-divider></mat-divider>

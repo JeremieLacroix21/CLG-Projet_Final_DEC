@@ -49,6 +49,16 @@ class PassportController extends Controller
                     ->where('idFournisseur', '=', $user->iduser)
                     ->get()
                     ->first();
+                /*
+                $tags = DB::table('lien_fournisseurs_tags')
+                    ->where('lien_fournisseurs_tags.idFournisseur', '=', $propertiesFromUserType->idFournisseur)
+                    ->join('tags_fournisseur', 'tags_fournisseur.idTag', '=', 'lien_fournisseurs_tags.idTags')
+                    ->select('tag')
+                    ->get();
+                if (!is_null($tags)) {
+                    $propertiesFromUserType = (object)array_merge((array)$propertiesFromUserType, array("tags"=>$tags));
+                }
+                */
             } else if ($user->TypeUser === "Distributeur") {
                 $propertiesFromUserType = DB::table('distributeurs')
                     ->where($user->iduser, '=', 'idDistributeur')
@@ -193,6 +203,21 @@ class PassportController extends Controller
         $data = [];
         $i = 0;
         foreach($users as $user) {
+            $tags = DB::table('lien_fournisseurs_tags')
+                ->where('lien_fournisseurs_tags.idFournisseur', '=', $user->iduser)
+                ->join('tags_fournisseur', 'tags_fournisseur.idTag', '=', 'lien_fournisseurs_tags.idTags')
+                ->select('tag')
+                ->get();
+        
+            $tags_str = [];
+            $j = 0;
+            foreach($tags as $tag) {
+                $tags_str[$j] = $tag->tag;
+                ++$j;
+            }
+
+            $user = (object)array_merge((array)$user, array("tags"=>$tags_str));
+
             $data[$i] = $user;
             ++$i;
         }
