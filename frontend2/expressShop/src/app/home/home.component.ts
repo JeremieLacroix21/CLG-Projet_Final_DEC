@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   ngOnDestroy() {
     this.loaderSubscription.unsubscribe();
     this.nbCartItemsSubscription.unsubscribe();
+    console.log("home destroyed")
   }
 
   callLogout() {

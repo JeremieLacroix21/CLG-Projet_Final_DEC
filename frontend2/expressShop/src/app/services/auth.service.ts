@@ -7,6 +7,7 @@ import { config } from '../../config';
 import { BD_User } from '../models/user';
 import { Supplier } from '../models/supplier';
 import { Distributor } from '../models/distributor';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Injectable({
@@ -20,7 +21,9 @@ export class AuthService {
   public currentUser: Observable<any>;
   public errorMessage = this.errorMessageSource.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
+    console.log("auth service constructor called");
+
     // TODO : Figure out tokens
     let loggedUserJSON = localStorage.getItem(config.storedUser);
     let loggedUserNameAndPwd = JSON.parse(loggedUserJSON);
@@ -28,16 +31,26 @@ export class AuthService {
     if (loggedUserNameAndPwd) {
       this.login(loggedUserNameAndPwd.nomutilisateur, loggedUserNameAndPwd.pwd);
     }
-    
+
     this.currentUserSubject = new BehaviorSubject<any>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): BD_User|Supplier|Distributor {
-    return this.currentUserSubject.value;
+  public get currUser(): BD_User {
+    return this.currentUserSubject.value as BD_User;
+  }
+
+  public get currSupplier(): Supplier {
+    return this.currentUserSubject.value as Supplier;
+  }
+
+  public get currDistributor(): Distributor {
+    return this.currentUserSubject.value as Distributor;
   }
 
   login(username: string, password: string) {
+    console.log("login called");
+
     const body = new HttpParams()
       .set('name', username)
       .set('password', password);
@@ -48,12 +61,15 @@ export class AuthService {
       config.headerObject
     );
 
+    this.spinner.show();
     request.subscribe(
       user => {
+        this.spinner.hide();
         localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
         this.currentUserSubject.next(user);
       },
       err => {
+        this.spinner.hide();
         this.errorMessageSource.next(err.error);
       }
     );
@@ -78,6 +94,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log("logout called");
     // remove user from local storage to log user out
     localStorage.removeItem(config.storedUser);
     this.currentUserSubject.next(null);

@@ -30,20 +30,20 @@ export class ShoppingCartComponent implements OnInit {
   popUpOpen = false;
 
   constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) {
-    this.dataSource = new MatTableDataSource<productPanier>(this.auth.currentUserValue.cart);
+    this.dataSource = new MatTableDataSource<productPanier>(this.auth.currDistributor.cart);
     this.dataSource.paginator = this.paginator;
     this.Total();
   }
 
   ngOnInit() {
     //this.loader.show("Chargement des produits...");
-    console.log(this.auth.currentUserValue.cart)
+    console.log(this.auth.currDistributor.cart)
     this.popUpOpen = false;
   }
   
   increment(idProduit: number) {
     let currQtt = this.dataSource.filteredData.find(item => item.idproduits === idProduit).quantity += 1;
-    this.productService.UpdateQuantityPanier(this.auth.currentUserValue.iduser, idProduit, currQtt);
+    this.productService.UpdateQuantityPanier(this.auth.currUser.iduser, idProduit, currQtt);
 
     this.Total();
   }
@@ -53,14 +53,14 @@ export class ShoppingCartComponent implements OnInit {
     if (currQtt == 0) {
       this.delete(idProduit);
     } else {
-      this.productService.UpdateQuantityPanier(this.auth.currentUserValue.iduser, idProduit, currQtt).subscribe();
+      this.productService.UpdateQuantityPanier(this.auth.currUser.iduser, idProduit, currQtt).subscribe();
     }
 
     this.Total();
   }
 
   delete(idProduit: number) {
-    this.productService.DeleteProductFromCart(this.auth.currentUserValue.iduser, idProduit).subscribe();
+    this.productService.DeleteProductFromCart(this.auth.currUser.iduser, idProduit).subscribe();
     // Delete the user locally
     this.dataSource.data = this.dataSource.data.filter(u => u.idproduits != idProduit);
   }

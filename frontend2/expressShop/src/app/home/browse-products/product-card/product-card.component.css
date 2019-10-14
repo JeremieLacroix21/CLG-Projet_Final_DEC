@@ -2,6 +2,10 @@
     object-fit: cover;
 }
 
+app-product-card {
+    display: inline-grid;
+}
+
 .product-card-content {
     text-align: justify;
 }

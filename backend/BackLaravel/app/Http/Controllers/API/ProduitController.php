@@ -28,6 +28,7 @@ class ProduitController extends Controller
                 'idproduits'=>$produit->idproduits,
                 'nom'=>$produit->nom,
                 'prix'=>$produit->prix,
+                'idFournisseur'=>$produit->idFournisseur,
                 'nomFournisseur'=>$produit->nomutilisateur,
                 'enStock'=>$produit->enStock,
                 'imgGUID'=>$produit->imgGUID,

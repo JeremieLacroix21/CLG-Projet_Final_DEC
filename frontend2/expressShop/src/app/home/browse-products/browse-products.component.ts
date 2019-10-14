@@ -32,7 +32,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loader.show("Chargement des produits...");
-    console.log(this.auth.currentUserValue);
+    console.log(this.auth.currUser);
   }
 
   ngOnDestroy() {
@@ -40,7 +40,7 @@ export class BrowseProductsComponent implements OnInit, OnDestroy {
   }
 
   AddProductToCart(idproduct: number) {
-    this.productService.AddProductToCart(this.auth.currentUserValue.iduser, idproduct, 1);
+    this.productService.AddProductToCart(this.auth.currUser.iduser, idproduct, 1);
   }
 
 
