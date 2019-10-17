@@ -44,4 +44,5 @@ mat-list-item:hover {
 mat-list {
     overflow: overlay;
     height: calc(100% - 118px);
+    padding-top: 0px;
 }
