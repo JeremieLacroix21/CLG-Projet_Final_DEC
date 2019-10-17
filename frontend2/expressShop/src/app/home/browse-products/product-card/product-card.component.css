@@ -3,11 +3,23 @@
 }
 
 app-product-card {
-    display: inline-grid;
+    /*display: inline-grid;*/
+}
+
+.supplier-name {
+    width: max-content;
+}
+
+.price-text {
+    display: inline-block;
+    margin: 0px;
+    width: calc(100% - 38px - 38px);
+    text-align: center;
 }
 
 .product-card-content {
     text-align: justify;
+    max-height: 34px;
 }
 
 .cart-btn {
@@ -30,6 +42,10 @@ app-product-card {
 @media only screen and (max-width: 900px) {
     .product-img-card {
         max-height: 250px;
+    }
+
+    .supplier-name {
+        font-size: 12px;
     }
 }
 

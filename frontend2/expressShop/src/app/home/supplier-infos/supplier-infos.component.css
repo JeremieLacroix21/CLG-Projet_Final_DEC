@@ -7,6 +7,10 @@
     left: -20px;
 }
 
+#collapseBtn::before {
+    opacity: 0.09;
+}
+
 #collapseBtn .material-icons {
     margin-left: 7px;
     transform: rotate(180deg);
@@ -20,4 +24,24 @@
 .tags-display {
     color: rgba(0,0,0,.54);
     font-size: 12px;
+    width: 160px;
+    text-overflow: ellipsis;
+}
+
+.filter-form-field {
+    width: 228px;
+    margin: 10px;
+}
+
+.results-found-text {
+    font-size: 12px;
+}
+
+mat-list-item:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+mat-list {
+    overflow: overlay;
+    height: calc(100% - 118px);
 }

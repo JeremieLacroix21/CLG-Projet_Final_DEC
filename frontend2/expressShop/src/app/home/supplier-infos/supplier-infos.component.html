@@ -2,27 +2,29 @@
 <mat-drawer-container class="container">
 
 <mat-drawer #browserSection class="browse-section" mode="side" opened>
-    <mat-form-field class="filter-form-field" appearance="outline">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter par mots-clés...">
+    <mat-form-field class="filter-form-field" appearance="outline" [floatLabel]="never">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Chercher un fournisseur"/>
+        <mat-hint>{{dataSource.filteredData.length}} résultats correspondent</mat-hint>
     </mat-form-field>
 
-    <ng-container >
-        <mat-list>
-            <h3 mat-subheader>Folders</h3>
-            <mat-list-item *ngFor="let supplier of dataSource.filteredData">
-                <img matListAvatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
-                <h4 mat-line>{{supplier.nomutilisateur}}</h4>
-                <p mat-line class="tags-display"><ng-container *ngFor="let tag of supplier.tags">{{tag}}, </ng-container></p>
-                <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </mat-list>
-    </ng-container>
+    <mat-divider></mat-divider>
+    
+    <mat-list>
+        <mat-list-item *ngFor="let supplier of dataSource.filteredData; last as isLastSupplier" (click)="onClickSupplier(supplier)">
+            <img matListAvatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
+            <h4 mat-line>{{supplier.nomutilisateur}}</h4>
+            <p mat-line class="tags-display">
+                <ng-container *ngFor="let tag of supplier.tags; last as isLastTag">{{tag}}<ng-container *ngIf="!isLastTag">, </ng-container></ng-container>
+            </p>
+            <mat-divider [inset]="true" *ngIf="!isLastSupplier"></mat-divider>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
 </mat-drawer>
 
 <mat-drawer-content class="profile-section">
     <button id="collapseBtn" class="mdc-icon-button" collapsed="false" (click)="onClickCollapseBtn($event)" (click)="browserSection.toggle()">
-            <i class="material-icons mdc-icon-button__icon">forward</i>
+        <i class="material-icons mdc-icon-button__icon">forward</i>
     </button>
     Content
 </mat-drawer-content>

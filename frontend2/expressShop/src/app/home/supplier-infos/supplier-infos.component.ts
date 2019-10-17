@@ -18,7 +18,6 @@ export class SupplierInfosComponent implements OnInit {
   private dataSource: MatTableDataSource<Supplier>;
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
-    console.log(sessionStorage);
   }
 
   ngOnInit() {
@@ -31,6 +30,10 @@ export class SupplierInfosComponent implements OnInit {
     this.requestAllUser();
   }
 
+  onClickSupplier(supplier: Supplier) {
+    console.log("Display profile in content for " + supplier.nomutilisateur);
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -39,7 +42,6 @@ export class SupplierInfosComponent implements OnInit {
     this.loadedSuppliers = this.userService.getAllSuppliers();
     this.loadedSuppliers.subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-      console.log(this.dataSource.filteredData);
     });
   }
 
