@@ -114,6 +114,7 @@
         border: 1px solid black;
         text-align: center;
         height:100px;
+        vertical-align: middle;
       }
 
       /* -------------------------------------
@@ -241,7 +242,7 @@
                     @foreach ($arrayProduit as $key =>$value)
                     <tr>
                     <td class="Produit">
-                    <img src="campagne.jpg" style="width:20%;">
+                    <img src="http://l.yimg.com/a/i/ww/met/yahoo_logo_in_061509.png" style="width:50px;">
                     </td>
                     <td class="Produit" style="width:10%;">
                     <p>{{$value->prix}}</p>
