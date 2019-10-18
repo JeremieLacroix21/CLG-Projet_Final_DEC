@@ -111,7 +111,9 @@
       }
 
       .Produit{
-        border: 3px solid black;
+        border: 1px solid black;
+        text-align: center;
+        height:100px;
       }
 
       /* -------------------------------------
@@ -209,32 +211,49 @@
             <table role="presentation" class="main">
               <tr>
                 <td class="wrapper">
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                  <table role="presentation" cellpadding="0" cellspacing="0">
                     <tr>
                     @foreach ($Fournisseur as $fournini)
                       <td>
-                        <p>Bonjour {{ $fournini->prenom }} {{ $fournini->nom }},</p>
-                        <p>Vous avez recu une commande de {{ $Distributeur }}</p>
+                        <p>Bonjour <b>{{ $fournini->prenom }} {{ $fournini->nom }}</b>,</p>
+                        <p>Vous avez recu une commande de <b>{{ $Distributeur }}</b></p>
                         <p>Voici les produits commandé: <b></p>
                       </td>
                       @endforeach
                     </tr>
-                    @foreach ($arrayProduit as $datas)
-                    <tr class="Produit">
-                    <td>
-                    <img src="{{$datas->imgGUID}}">
+                    <tr>
+                    <td class="Produit" style="height:50px">
+                    <p>Image du produit:</p>
                     </td>
-                    <td>
-                    <p>{{ $datas->prix }}</p>
+                    <td class="Produit" style="width:10%; height:50px">
+                    <p>Prix:</p>
                     </td>
-                    <td>
-                    <p>{{ $datas->nom }}</p>
+                    <td class="Produit" style="width:20%;height:50px">
+                    <p>Nom du produit:</p>
                     </td>
-                    <td>
-                    <p>{{ $datas->description }}</p>
+                    <td class="Produit" style="width:30%;height:50px">
+                    <p>Description:</p>
                     </td>
-                    <td>
-                    <p>{{ $datas->quantite }}</p>
+                    <td class="Produit" style="width:20%;height:50px">
+                    <p>Quantité commandé:</p>
+                    </td>
+                    </tr>
+                    @foreach ($arrayProduit as $key =>$value)
+                    <tr>
+                    <td class="Produit">
+                    <img src="campagne.jpg" style="width:20%;">
+                    </td>
+                    <td class="Produit" style="width:10%;">
+                    <p>{{$value->prix}}</p>
+                    </td>
+                    <td class="Produit" style="width:20%;">
+                    <p>{{$value->nom}}</p>
+                    </td>
+                    <td class="Produit" style="width:30%;">
+                    <p>{{$value->description}}</p>
+                    </td>
+                    <td class="Produit" style="width:20%;">
+                    <p>{{$value->quantite}}</p>
                     </td>
                     </tr>
                     @endforeach

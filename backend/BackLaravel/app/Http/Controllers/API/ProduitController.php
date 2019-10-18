@@ -226,7 +226,22 @@ class ProduitController extends Controller
         ->join('commandes', 'commandeItems.idCommande','=', 'commandes.idCommande')
         ->select('imgGUID','prix','nom','description', 'quantite','dateCreation')->where('commandes.idFournisseur', '=', $request['idFournisseur'])->get();
         //Met les produits dans un array
-        $arrayProduit = array($produits);
+        $i = 0;
+        $arrayProduit = array("");
+        foreach($produits as $produit)
+        {
+            $a = array($i);
+            //wtf tbk
+            $arrayProduittest = array_combine($a ,array($produit));
+                    if (array_key_exists($i, $arrayProduittest)) {
+                        $c[$i] = $arrayProduittest[$i];
+                    }
+                    else{
+                        $c[$i] = $arrayProduit;
+                    }
+            $arrayProduit = $c;
+            $i++;
+        }
         //Select le nom du distruteur
         $Distributeur = DB::table('users')->select('nomutilisateur')->where('iduser', $request['idDistributeur'])->first();
         Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit));
