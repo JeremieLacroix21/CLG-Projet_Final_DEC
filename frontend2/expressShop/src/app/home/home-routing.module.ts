@@ -8,6 +8,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { SubscribeComponent } from '../subscribe/subscribe.component';
 import { SupplierInfosComponent } from './supplier-infos/supplier-infos.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'supplierInfos',
         component: SupplierInfosComponent
+      },
+      {
+        path: 'add-product',
+        component: AddProductComponent
       }
     ]
   }
