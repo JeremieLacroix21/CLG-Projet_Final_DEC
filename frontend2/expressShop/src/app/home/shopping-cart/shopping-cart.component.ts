@@ -27,6 +27,7 @@ export class ShoppingCartComponent implements OnInit {
 
   dataSource : MatTableDataSource<productPanier>;
   total : number;
+  Fournini :String; 
   popUpOpen = false;
 
   constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) {
@@ -38,6 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     //this.loader.show("Chargement des produits...");
     //console.log(this.auth.currDistributor.cart)
+    console.log(this.popUpOpen.toString());
     this.popUpOpen = false;
   }
   
@@ -74,5 +76,21 @@ export class ShoppingCartComponent implements OnInit {
 
   ValidateCommande() {
     this.popUpOpen = true;
+  }
+  ClosePopUp() {
+    this.popUpOpen = false;
+  }
+  SendCommande() {
+    for(let i = 0; i < this.dataSource.filteredData.length; ++i) {
+      this.Fournini += this.dataSource.filteredData[i].idproduits.toString() + ";";
+    }
+    this.productService.AddComande(this.Fournini).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

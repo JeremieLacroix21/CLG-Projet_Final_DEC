@@ -61,13 +61,15 @@
   </div>
 
 
-  <app-pop-up [isOpen]="popUp">
-      <div>
+  <app-pop-up [isOpen]="popUpOpen">
+      <div style="text-align: center">
         <header>
-          <span><b>Envoyer la commande?</b></span>
+          <span><b>Envoyer la ou les commande(s) au(x) fournisseur(s)?</b></span>
         </header>
-        <button mat-raised-button color="primary" class="PanierButton">annuler</button>
-        <button mat-raised-button color="primary" class="PanierButton">confirmer</button>
+        <main style="margin-top: 20px">
+        <button mat-raised-button color="primary" class="PanierButton" (click)="SendCommande()">confirmer</button>
+        <button mat-raised-button color="primary" class="PanierButton" (click)="ClosePopUp()">annuler</button>      
+        </main>
       </div>
   </app-pop-up>
 </div>

@@ -85,4 +85,15 @@ export class ProductService {
       config.headerObject
     );
   }
+
+  AddComande(idproduit)
+  {
+    const body = new HttpParams()
+      .set('idproduits', idproduit.toString())
+      return this.http.post(
+        `${config.apiUrl}/api/GetProduitsFromPanier`,
+        body.toString(),
+        config.headerObject
+      );
+  }
 }

@@ -6,8 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [PopUpComponent],
   imports: [
-    CommonModule,
-    BrowserAnimationsModule,
+    CommonModule
   ],
   exports: [PopUpComponent]
 })

@@ -11,6 +11,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { SupplierInfosComponent } from './supplier-infos/supplier-infos.component';
 import { ProductCardComponent } from './browse-products/product-card/product-card.component';
+import { PopUpModule } from '../pop-up component/pop-up.module';
 
 //Angular Material Components
 import {MatCheckboxModule} from '@angular/material';
@@ -58,6 +59,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    PopUpModule,
 
      // material
      MatBadgeModule,
@@ -121,7 +125,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
      CdkTableModule,
      CdkTreeModule,
      MatTreeModule,
-     NgxSpinnerModule
+     NgxSpinnerModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

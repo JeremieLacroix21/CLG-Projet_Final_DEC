@@ -147,7 +147,24 @@ class ProduitController extends Controller
     return json_encode($data);
    }
 
-
+   public function GetFournisseurParCommande(Request $request)
+   {
+        //Get chacun des produits
+        $arrayProduit = [];
+        $data = explode(";",$request["idproduits"]);
+        $i = 0;
+        foreach ($data as $idproduit) {
+            if($idproduit != "")
+            {
+                $arrayProduit[$i] = DB::table('produits')->select('idFournisseur')
+                ->where('idproduits', '=', $idproduit)->get();
+                $i++;
+            }
+        }
+        //remove les duplicates (wow)
+        $Fourni = array_unique($arrayProduit);
+        return json_encode($Fourni);
+        }
 
    public function DeleteProductFromPanier(Request $request)
    {
