@@ -212,25 +212,22 @@
             <table role="presentation" class="main">
               <tr>
                 <td class="wrapper">
-                  <table role="presentation" cellpadding="0" cellspacing="0">
-                    <tr>
+                <tr stlye="width:100%">
                     @foreach ($Fournisseur as $fournini)
-                      <td>
+                      <td >
                         <p>Bonjour <b>{{ $fournini->prenom }} {{ $fournini->nom }}</b>,</p>
                         <p>Vous avez recu une commande de <b>{{ $Distributeur }}</b></p>
                         <p>Voici les produits commandé: <b></p>
                       </td>
                       @endforeach
                     </tr>
+                  <table role="presentation" cellpadding="0" cellspacing="0">
                     <tr>
-                    <td class="Produit" style="height:50px">
-                    <p>Image du produit:</p>
-                    </td>
-                    <td class="Produit" style="width:10%; height:50px">
-                    <p>Prix:</p>
-                    </td>
-                    <td class="Produit" style="width:20%;height:50px">
+                    <td class="Produit" style="width:20%; height:50px">
                     <p>Nom du produit:</p>
+                    </td>
+                    <td class="Produit" style="width:10%;height:50px">
+                    <p>Prix par produit(s):</p>
                     </td>
                     <td class="Produit" style="width:30%;height:50px">
                     <p>Description:</p>
@@ -241,14 +238,11 @@
                     </tr>
                     @foreach ($arrayProduit as $key =>$value)
                     <tr>
-                    <td class="Produit">
-                    <img src="http://l.yimg.com/a/i/ww/met/yahoo_logo_in_061509.png" style="width:50px;">
-                    </td>
                     <td class="Produit" style="width:10%;">
-                    <p>{{$value->prix}}</p>
+                    <p>{{$value->nom}}</p>
                     </td>
                     <td class="Produit" style="width:20%;">
-                    <p>{{$value->nom}}</p>
+                    <p>{{$value->prix}}$</p>
                     </td>
                     <td class="Produit" style="width:30%;">
                     <p>{{$value->description}}</p>
