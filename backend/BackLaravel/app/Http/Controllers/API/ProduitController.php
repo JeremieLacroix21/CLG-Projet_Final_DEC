@@ -164,7 +164,7 @@ class ProduitController extends Controller
         //remove les duplicates (wow)
         $Fourni = array_unique($arrayProduit);
         return json_encode($Fourni);
-        }
+    }
 
    public function DeleteProductFromPanier(Request $request)
    {

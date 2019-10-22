@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
 import { config } from '../../config';
 import { Product } from '../models/product';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { productPanier } from '../models/productPanier.entity';
+import {formatDate} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -86,14 +87,53 @@ export class ProductService {
     );
   }
 
-  AddComande(idproduit)
+  GetFournisseurPanier(idproduit)
   {
     const body = new HttpParams()
       .set('idproduits', idproduit.toString())
       return this.http.post(
-        `${config.apiUrl}/api/GetProduitsFromPanier`,
+        `${config.apiUrl}/api/GetFournisseurParCommande`,
         body.toString(),
         config.headerObject
       );
+  }
+
+  CreationCommmande(idFournisseur, idDistributeur)
+  {
+    const body = new HttpParams()
+      .set('idFournisseur', idFournisseur.toString())
+      .set('idDistributeur', idDistributeur.toString())
+      .set('complete', "0")
+      .set('dateCreation', formatDate(new Date(), 'yyyy/MM/dd', 'en'))
+      return this.http.post(
+        `${config.apiUrl}/api/InsertCommande`,
+        body.toString(),
+        config.headerObject
+      );
+  }
+
+  CreationCommandeItems(idCommande,idproduit,quantite)
+  {
+    const body = new HttpParams()
+    .set('idCommande', idCommande.toString())
+    .set('idProduit', idproduit.toString())
+    .set('quantite', quantite.toString())
+    return this.http.post(
+      `${config.apiUrl}/api/InsertCommandeItems`,
+      body.toString(),
+      config.headerObject
+    );
+  }
+
+  EnvoieCommande(idFournisseur, idDistributeur)
+  {
+    const body = new HttpParams()
+    .set('idFournisseur', idFournisseur.toString())
+    .set('idDistributeur', idDistributeur.toString())
+    return this.http.post(
+      `${config.apiUrl}/api/EnvoieCommande`,
+      body.toString(),
+      config.headerObject
+    );
   }
 }

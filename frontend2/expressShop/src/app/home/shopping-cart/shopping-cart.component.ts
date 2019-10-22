@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { config } from 'src/config';
 import { AuthService } from 'src/app/services';
+import { FournisseurTrouve } from '../../models/Fournisseur';
 
 
 @Component({
@@ -81,15 +82,35 @@ export class ShoppingCartComponent implements OnInit {
     this.popUpOpen = false;
   }
   SendCommande() {
+    var ProduitArray = new Array();
+    var quantiteArray = new Array();
     for(let i = 0; i < this.dataSource.filteredData.length; ++i) {
+      this.Fournini = "";
+      quantiteArray[i] = this.dataSource.filteredData[i].quantity.toString();
+      ProduitArray[i] = this.dataSource.filteredData[i].idproduits.toString();
       this.Fournini += this.dataSource.filteredData[i].idproduits.toString() + ";";
     }
-    this.productService.AddComande(this.Fournini).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
+    this.productService.GetFournisseurPanier(this.Fournini).subscribe(
+      (idFournisseur : String[]) => {
+          for (var i = 0; i < idFournisseur.length; i++) {
+            idFournisseur.forEach(iduser => {
+            //Crée une commande par fournisseur
+             this.productService.CreationCommmande(iduser[i]['idFournisseur'], 33/*this.auth.currUser.iduser*/).subscribe(
+              (idCommande : String[])  => {
+                for (var i = 0; i < ProduitArray.length; i++) {
+                 ProduitArray.forEach(idproduit => {
+                     //Crée les items commandes
+                     this.productService.CreationCommandeItems(idCommande[i]['MAX(idCommande)'],idproduit,quantiteArray[i]).subscribe(
+                       (res) =>{
+                          console.log(res);
+                       });
+                  })
+              }
+              //Envoyer les commandes
+              this.productService.EnvoieCommande(iduser[i]['idFournisseur'],33/*this.auth.currUser.iduser*/)
+            });
+            });
+          }
       }
     );
   }
