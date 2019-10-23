@@ -13,12 +13,12 @@
 
 #collapseBtn .material-icons {
     margin-left: 7px;
-    transform: rotate(180deg);
-    transition: transform .4s ease-in;
+    transform: rotate(0deg);
+    transition: transform .4s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
 #collapseBtn .rotatedIcon {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
 }
 
 .tags-display {
@@ -45,4 +45,13 @@ mat-list {
     overflow: overlay;
     height: calc(100% - 118px);
     padding-top: 0px;
+}
+
+.temp-div {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 10px;
+    box-shadow:
+      inset 0 -0.47em 0 -0.35em rgba(0,0,0,0.17), 0 2px 1px -1px rgba(0,0,0,.2),
+      0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 }

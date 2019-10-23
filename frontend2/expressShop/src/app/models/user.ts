@@ -7,4 +7,5 @@ export class BD_User {
     public confirme: boolean;
     public dateinscription: string;
     public email: string;
+    public telephone: string;
 }
