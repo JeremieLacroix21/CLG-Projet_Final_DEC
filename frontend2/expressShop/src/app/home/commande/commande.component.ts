@@ -36,11 +36,11 @@ export class CommandeComponent implements OnInit {
           this.CommandesEnCour[i].nomFournisseur = fournisseur[0]['nomutilisateur'];
           i++;
         });
-      this.dataSource.data =  this.CommandesEnCour;
       j++;
       });
       setTimeout(() => {
         this.loader.hide()
+        this.dataSource.data =  this.CommandesEnCour;
       },this.WaitingTime);
     });
   }
