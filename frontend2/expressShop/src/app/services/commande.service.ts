@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Commandes } from '../models//commandes';
 import {formatDate} from '@angular/common';
+import { Fournisseur } from 'src/app/models/Fournisseur';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,15 @@ export class CommandeService {
         const body = new HttpParams().set('idDistributeur', idDistributeur.toString())
         .set('Encours', Encours);
     return this.http.post<Commandes[]>(
-      `${config.apiUrl}/api/GetCommandes`, body.toString(),
+      `${config.apiUrl}/api/GetCommandeDistributeur`, body.toString(),
       config.headerObject);
     }
+
+    
+    GetFournisseur(idFournisseur){
+      const body = new HttpParams().set('idFournisseur', idFournisseur.toString())
+  return this.http.post(
+    `${config.apiUrl}/api/GetFournisseur`, body.toString(),
+    config.headerObject);
+  }
 }
