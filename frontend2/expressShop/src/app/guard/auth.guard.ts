@@ -1,28 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, UrlSegmentGroup, CanDeactivate, CanActivateChild } from '@angular/router';
 import { DEBUGGING } from '../models/DEBUG-LOGIN';
 
 import { AuthService } from '../services';
 import { config } from 'src/config';
+import { LoginComponent } from '../login/login.component';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-    constructor(
-        private router: Router,
-        private authenticationService: AuthService
-    ) { }
+export class AuthGuard implements CanActivate, CanActivateChild {
+    constructor(private router: Router, private authenticationService: AuthService) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        console.log("canActivate is called");
-        let currentUser = this.authenticationService.currUser;
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(childRoute, state);
+    }
 
-        if (currentUser) {
-            //this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
-            return true;
-        } else {
-            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        console.log("Checking Auth...");
+        let canActivate = true;
+
+        if (this.authenticationService.currUser) {
+            if (state.url === '/login' || state.url === '/subscribe') {
+                console.log("Redirecting to home...");
+                this.router.navigate(['/home']);
+                canActivate = false;
+            }
+        } else if (state.url !== '/login' && state.url !== '/subscribe') {
+            console.log("Redirecting to login...");
+            this.router.navigate(['/login']);
+            canActivate = false;
         }
 
-        return false;
+        return canActivate;
     }
 }
