@@ -1,16 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { productPanier } from 'src/app/models/productPanier.entity';
-import { combineLatest, Subscription } from 'rxjs';
-import {MatButtonModule} from '@angular/material/button';
+import { Router, ActivatedRoute } from "@angular/router";
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { Product } from 'src/app/models/product';
-import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { config } from 'src/config';
 import { AuthService } from 'src/app/services';
-import { FournisseurTrouve } from '../../models/Fournisseur';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -30,13 +26,17 @@ export class ShoppingCartComponent implements OnInit {
   total : number;
   Fournini :String;
   filter = 'blur(2px)'; 
+  localres = "";
   isBlur = false;
   popUpOpen = false;
+  popUpEmail = false;
   
 
-  constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) {
+  constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService, private spinner: NgxSpinnerService, private route: ActivatedRoute,
+    private router: Router,) {
     this.dataSource = new MatTableDataSource<productPanier>(this.auth.currDistributor.cart);
     this.dataSource.paginator = this.paginator;
+    
     this.Total();
   }
 
@@ -86,7 +86,14 @@ export class ShoppingCartComponent implements OnInit {
     this.isBlur = false;
     this.popUpOpen = false;
   }
+  ReturnMenu(){
+    this.isBlur = false;
+    this.popUpEmail = false;
+    this.router.navigate(["/home/browseProduct"]);
+  }
   SendCommande() {
+    this.isBlur = false;
+    this.popUpOpen = false;
     var ProduitArray = new Array();
     var quantiteArray = new Array();
     this.Fournini = "";
@@ -98,6 +105,7 @@ export class ShoppingCartComponent implements OnInit {
     this.productService.GetFournisseurPanier(this.Fournini).subscribe(
       (idFournisseur : String[]) => {
             idFournisseur.forEach(iduser => {
+              this.spinner.show();
             //Crée une commande par fournisseur
              this.productService.CreationCommmande(iduser[0]['idFournisseur'], 33/*this.auth.currUser.iduser*/).subscribe(
               (idCommande : String[])  => {
@@ -108,7 +116,14 @@ export class ShoppingCartComponent implements OnInit {
             //Envoyer les commandes
             this.productService.EnvoieCommande(iduser[0]['idFournisseur'],33/*this.auth.currUser.iduser*/,).subscribe(
               (res) =>{
-                console.log(res);
+                this.localres = res + this.localres;
+                console.log(this.localres.length);
+                if(this.localres.length > iduser.length * 15)
+                {
+                  this.spinner.hide();
+                  this.popUpEmail = true;
+                  this.BlurBackground();
+                }
               }
             );
             });

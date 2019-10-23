@@ -59,6 +59,9 @@
       <a routerLink="/home"><button mat-raised-button color="primary" class="PanierButton">retourner au browser</button></a>
     <button mat-raised-button color="primary" class="PanierButton" (click)="ValidateCommande()">Passer la commande</button>
   </div>
+  <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
+    <p class="loadingText">Création de votre commande...</p>
+  </ngx-spinner>
 </div>
 <app-pop-up [isOpen]="popUpOpen">
   <div style="text-align: center">
@@ -68,6 +71,16 @@
     <main style="margin-top: 20px">
     <button mat-raised-button color="primary" class="PanierButton" (click)="SendCommande()">confirmer</button>
     <button mat-raised-button color="primary" class="PanierButton" (click)="ClosePopUp()">annuler</button>      
+    </main>
+  </div>
+</app-pop-up>
+<app-pop-up [isOpen]="popUpEmail">
+  <div style="text-align: center">
+    <header>
+      <span><b>Commande(s) envoyée(s) au(x) fournisseur(s)!</b></span>
+    </header>
+    <main style="margin-top: 20px">
+    <button mat-raised-button color="primary" class="PanierButton" (click)="ReturnMenu()">retourner au menu</button>      
     </main>
   </div>
 </app-pop-up>
