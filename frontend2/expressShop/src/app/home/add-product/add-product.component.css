@@ -13,3 +13,7 @@ mat-card{
     margin-right: 5%;
     margin-top: 5%;
 }
+
+mat-form-field{
+  width: 70%;
+}
