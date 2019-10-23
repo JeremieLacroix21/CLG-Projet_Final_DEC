@@ -57,6 +57,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -64,7 +65,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
   declarations: [
     AppComponent,
     LoginComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

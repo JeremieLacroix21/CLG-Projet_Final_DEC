@@ -39,6 +39,7 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
+
   public get currUser(): BD_User {
     return this.currentUserSubject.value as BD_User;
   }

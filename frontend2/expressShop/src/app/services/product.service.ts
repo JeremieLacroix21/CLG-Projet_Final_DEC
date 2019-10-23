@@ -136,4 +136,22 @@ export class ProductService {
       config.headerObject
     );
   }
+
+  AddProduct(nom:string,prix:number,idFournisseur:number,enStock:number,imgGuid:string,
+    description:string,tags:string){
+      const body = new HttpParams()
+    .set('nom', nom.toString())
+    .set('prix', prix.toString())
+    .set('idFournisseur', idFournisseur.toString())
+    .set('enStock', enStock.toString())
+    .set('imgGUID', imgGuid.toString())
+    .set('description', description.toString())
+    .set('Tags', tags.toString())
+    return this.http.post(
+      `${config.apiUrl}/api/AddProduct`,
+      body.toString(),
+      config.headerObject
+    );
+
+  }
 }
