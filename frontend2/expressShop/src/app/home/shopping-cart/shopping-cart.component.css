@@ -23,3 +23,4 @@ table {
   padding: 10px;
   text-align: center;
 }
+.filter { filter: blur(3px);  } 

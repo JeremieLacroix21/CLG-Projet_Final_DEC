@@ -225,24 +225,20 @@ class ProduitController extends Controller
     }
     public function InsertCommandeItems(Request $request)
     {   
-        //Un item par commande de items
-        $input = $request->all();
-        DB::table('commandeItems')->insert(array(
-         'idCommande' => $input['idCommande'],
-         'idProduit' => $input['idProduit'],
-         'quantite' => $input['quantite'],
-        ));
-        return json_encode($input['idCommande']);  
+        $produit = DB::select('Call InsertCommandeItems(?,?,?)',array($request["idCommande"],$request["idProduit"],$request['quantite']));
     }
     public function EnvoieCommande(Request $request)
     {
         $Fournisseur = DB::table('users')->select('*')->where('iduser', $request['idFournisseur'])->first();
+        $idcommande = DB::select('Call GetLastInsertedCommandByFournisseur(?)',array($request["idFournisseur"]));
         //Select tout les produits
         $arrayNomPrenom = array($Fournisseur);
+        $occupation = array_column($idcommande, 'MAX(idCommande)');
+        $matchThese = ['commandes.idFournisseur' => $request['idFournisseur'], 'commandes.idCommande' => $occupation];
         $produits = DB::table('produits')
         ->join('commandeItems', 'produits.idproduits','=', 'commandeItems.idProduit')
         ->join('commandes', 'commandeItems.idCommande','=', 'commandes.idCommande')
-        ->select('prix','nom','description', 'quantite','dateCreation')->where('commandes.idFournisseur', '=', $request['idFournisseur'])->get();
+        ->select('prix','nom','description', 'quantite','dateCreation')->where($matchThese)->get();
         //Met les produits dans un array
         $i = 0;
         $arrayProduit = array("");

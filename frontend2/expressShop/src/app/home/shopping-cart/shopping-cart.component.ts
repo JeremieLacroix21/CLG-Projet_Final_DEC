@@ -28,8 +28,11 @@ export class ShoppingCartComponent implements OnInit {
 
   dataSource : MatTableDataSource<productPanier>;
   total : number;
-  Fournini :String; 
+  Fournini :String;
+  filter = 'blur(2px)'; 
+  isBlur = false;
   popUpOpen = false;
+  
 
   constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) {
     this.dataSource = new MatTableDataSource<productPanier>(this.auth.currDistributor.cart);
@@ -76,42 +79,45 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ValidateCommande() {
+    this.BlurBackground();
     this.popUpOpen = true;
   }
   ClosePopUp() {
+    this.isBlur = false;
     this.popUpOpen = false;
   }
   SendCommande() {
     var ProduitArray = new Array();
     var quantiteArray = new Array();
+    this.Fournini = "";
     for(let i = 0; i < this.dataSource.filteredData.length; ++i) {
-      this.Fournini = "";
       quantiteArray[i] = this.dataSource.filteredData[i].quantity.toString();
       ProduitArray[i] = this.dataSource.filteredData[i].idproduits.toString();
       this.Fournini += this.dataSource.filteredData[i].idproduits.toString() + ";";
     }
     this.productService.GetFournisseurPanier(this.Fournini).subscribe(
       (idFournisseur : String[]) => {
-          for (var i = 0; i < idFournisseur.length; i++) {
             idFournisseur.forEach(iduser => {
             //Crée une commande par fournisseur
-             this.productService.CreationCommmande(iduser[i]['idFournisseur'], 33/*this.auth.currUser.iduser*/).subscribe(
+             this.productService.CreationCommmande(iduser[0]['idFournisseur'], 33/*this.auth.currUser.iduser*/).subscribe(
               (idCommande : String[])  => {
-                for (var i = 0; i < ProduitArray.length; i++) {
                  ProduitArray.forEach(idproduit => {
                      //Crée les items commandes
-                     this.productService.CreationCommandeItems(idCommande[i]['MAX(idCommande)'],idproduit,quantiteArray[i]).subscribe(
-                       (res) =>{
-                          console.log(res);
-                       });
-                  })
+                     this.productService.CreationCommandeItems(idCommande[0]['MAX(idCommande)'],idproduit,quantiteArray[0]).subscribe();
+            })
+            //Envoyer les commandes
+            this.productService.EnvoieCommande(iduser[0]['idFournisseur'],33/*this.auth.currUser.iduser*/,).subscribe(
+              (res) =>{
+                console.log(res);
               }
-              //Envoyer les commandes
-              this.productService.EnvoieCommande(iduser[i]['idFournisseur'],33/*this.auth.currUser.iduser*/)
-            });
+            );
             });
           }
-      }
     );
+  });
+}
+
+  BlurBackground(){
+     this.isBlur = true;
   }
 }
