@@ -2,12 +2,16 @@
 
     <mat-card-title-group>
         <mat-card-title>{{product.nom}}</mat-card-title>
-        <mat-card-subtitle>{{product.prix}}$</mat-card-subtitle>
-        <!-- TODO: Redirect to supplier's profile page when clic
-            ing the name or the logo -->
-        <mat-card-subtitle>Offert par <a href="">{{product.nomFournisseur}}</a></mat-card-subtitle>
+        <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->
+        <mat-card-subtitle class="supplier-name">Offert par 
+        <a [routerLink]="'/home/supplierInfos'" [queryParams]="{ s: product.idFournisseur }">
+            {{product.nomFournisseur}}
+        </a>
+        </mat-card-subtitle>
         <!-- TODO: Load the supplier's logo -->
-        <a href=""><img mat-card-avatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" /></a>
+        <a [routerLink]="'/home/supplierInfos'" [queryParams]="{ s: product.idFournisseur }">
+            <img mat-card-avatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
+        </a>
     </mat-card-title-group>
 
     <!-- TODO: Load the product's image -->
@@ -22,6 +26,7 @@
         <button id="favorite-{{product.idproduits}}" class="mdc-icon-button" (click)="onClickFavoriteBtn()">
             <i class="material-icons mdc-icon-button__icon">{{isInFavorites ? 'star' : 'star_border'}}</i>
         </button>
+        <mat-card-subtitle class="price-text">${{product.prix}}</mat-card-subtitle>
         <button id="cart-{{product.idproduits}}" class="mdc-icon-button cart-btn" (click)="onClickCartBtn()">
             <i class="material-icons mdc-icon-button__icon">{{isInCart ? 'remove_shopping_cart' : 'add_shopping_cart'}}</i>
         </button>

@@ -53,14 +53,13 @@ export class LoginComponent implements OnInit {
   ){ }
 
   ngOnInit() {
+    console.log("login page init");
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     if (DEBUGGING) {
       localStorage.setItem(config.storedUser, JSON.stringify({nomutilisateur:"test", pwd:"Qwerty123!"}));
       this.router.navigate([this.returnUrl]);
     } else {
-    this.authenticationService.logout();
-
       this.errorMessageSub = this.authenticationService.errorMessage.subscribe(err => {
         console.log(err);
         this.invalidLogin = true;
@@ -117,6 +116,7 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit() {
+    console.log("login page submit");
     this.submitted = true;
     if (this.form.invalid) {
       return;

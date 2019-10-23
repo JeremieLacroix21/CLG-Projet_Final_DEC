@@ -39,11 +39,14 @@ export class HomeComponent implements OnInit {
     this.nbCartItemsSubscription = this.productsService.nbCartItems.subscribe(data => {
       this.nbCartItems = data;
     });
+
+    this.productsService.RefreshCartItemCount(this.auth.currDistributor.cart.length);
   }
 
   ngOnDestroy() {
     this.loaderSubscription.unsubscribe();
     this.nbCartItemsSubscription.unsubscribe();
+    console.log("home destroyed")
   }
 
   callLogout() {

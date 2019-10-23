@@ -8,6 +8,7 @@ use App\Produit;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use App\Mail\CommandSender;
+use Aws\S3\S3Client;
 
 class ProduitController extends Controller
 {
@@ -28,6 +29,7 @@ class ProduitController extends Controller
                 'idproduits'=>$produit->idproduits,
                 'nom'=>$produit->nom,
                 'prix'=>$produit->prix,
+                'idFournisseur'=>$produit->idFournisseur,
                 'nomFournisseur'=>$produit->nomutilisateur,
                 'enStock'=>$produit->enStock,
                 'imgGUID'=>$produit->imgGUID,
@@ -145,7 +147,24 @@ class ProduitController extends Controller
     return json_encode($data);
    }
 
-
+   public function GetFournisseurParCommande(Request $request)
+   {
+        //Get chacun des produits
+        $arrayProduit = [];
+        $data = explode(";",$request["idproduits"]);
+        $i = 0;
+        foreach ($data as $idproduit) {
+            if($idproduit != "")
+            {
+                $arrayProduit[$i] = DB::table('produits')->select('idFournisseur')
+                ->where('idproduits', '=', $idproduit)->get();
+                $i++;
+            }
+        }
+        //remove les duplicates (wow)
+        $Fourni = array_unique($arrayProduit);
+        return json_encode($Fourni);
+    }
 
    public function DeleteProductFromPanier(Request $request)
    {
@@ -206,26 +225,37 @@ class ProduitController extends Controller
     }
     public function InsertCommandeItems(Request $request)
     {   
-        //Un item par commande de items
-        $input = $request->all();
-        DB::table('commandeItems')->insert(array(
-         'idCommande' => $input['idCommande'],
-         'idProduit' => $input['idProduit'],
-         'quantite' => $input['quantite'],
-        ));
-        return json_encode($input['idCommande']);  
+        $produit = DB::select('Call InsertCommandeItems(?,?,?)',array($request["idCommande"],$request["idProduit"],$request['quantite']));
     }
     public function EnvoieCommande(Request $request)
     {
         $Fournisseur = DB::table('users')->select('*')->where('iduser', $request['idFournisseur'])->first();
+        $idcommande = DB::select('Call GetLastInsertedCommandByFournisseur(?)',array($request["idFournisseur"]));
         //Select tout les produits
         $arrayNomPrenom = array($Fournisseur);
+        $occupation = array_column($idcommande, 'MAX(idCommande)');
+        $matchThese = ['commandes.idFournisseur' => $request['idFournisseur'], 'commandes.idCommande' => $occupation];
         $produits = DB::table('produits')
         ->join('commandeItems', 'produits.idproduits','=', 'commandeItems.idProduit')
         ->join('commandes', 'commandeItems.idCommande','=', 'commandes.idCommande')
-        ->select('imgGUID','prix','nom','description', 'quantite','dateCreation')->where('commandes.idFournisseur', '=', $request['idFournisseur'])->get();
+        ->select('prix','nom','description', 'quantite','dateCreation')->where($matchThese)->get();
         //Met les produits dans un array
-        $arrayProduit = array($produits);
+        $i = 0;
+        $arrayProduit = array("");
+        foreach($produits as $produit)
+        {
+            $a = array($i);
+            //wtf tbk
+            $arrayProduittest = array_combine($a ,array($produit));
+                    if (array_key_exists($i, $arrayProduittest)) {
+                        $c[$i] = $arrayProduittest[$i];
+                    }
+                    else{
+                        $c[$i] = $arrayProduit;
+                    }
+            $arrayProduit = $c;
+            $i++;
+        }
         //Select le nom du distruteur
         $Distributeur = DB::table('users')->select('nomutilisateur')->where('iduser', $request['idDistributeur'])->first();
         Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit));

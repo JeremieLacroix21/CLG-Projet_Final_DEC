@@ -22,21 +22,21 @@ export class ProductCardComponent implements OnInit {
   constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) { }
 
   ngOnInit() {
-    this.isInCart = (this.auth.currentUserValue.cart.findIndex(p => p.idproduits == this.product.idproduits) > -1);
+    this.isInCart = (this.auth.currDistributor.cart.findIndex(p => p.idproduits == this.product.idproduits) > -1);
     this.isInFavorites = false;
   }
 
   private onClickCartBtn(event) {
     this.loader.show("Modification du panier en cours...");
-    let currUserId = this.auth.currentUserValue.iduser;
-    let foundIndexInCart = this.auth.currentUserValue.cart.findIndex(p => p.idproduits == this.product.idproduits);
+    let currUserId = this.auth.currUser.iduser;
+    let foundIndexInCart = this.auth.currDistributor.cart.findIndex(p => p.idproduits == this.product.idproduits);
 
     if (foundIndexInCart > -1) {
       this.productService.DeleteProductFromCart(currUserId, this.product.idproduits).subscribe(() => {
-        delete this.auth.currentUserValue.cart[foundIndexInCart];
-        this.auth.currentUserValue.cart.splice(foundIndexInCart, 1);
+        delete this.auth.currDistributor.cart[foundIndexInCart];
+        this.auth.currDistributor.cart.splice(foundIndexInCart, 1);
 
-        this.productService.RefreshCartItemCount(this.auth.currentUserValue.cart.length);
+        this.productService.RefreshCartItemCount(this.auth.currDistributor.cart.length);
         this.isInCart = false;
         this.loader.hide();
       });
@@ -49,9 +49,9 @@ export class ProductCardComponent implements OnInit {
         p.prix = this.product.prix;
         p.quantity = 1;
 
-        this.auth.currentUserValue.cart.push(p);
+        this.auth.currDistributor.cart.push(p);
 
-        this.productService.RefreshCartItemCount(this.auth.currentUserValue.cart.length);
+        this.productService.RefreshCartItemCount(this.auth.currDistributor.cart.length);
         this.isInCart = true;
         this.loader.hide();
       });

@@ -1,0 +1,19 @@
+.product-card{
+    margin: 25px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+mat-form-field{
+  width: 70%;
+}

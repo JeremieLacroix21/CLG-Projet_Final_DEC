@@ -7,6 +7,7 @@ import { config } from '../../config';
 import { BD_User } from '../models/user';
 import { Supplier } from '../models/supplier';
 import { Distributor } from '../models/distributor';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Injectable({
@@ -20,24 +21,40 @@ export class AuthService {
   public currentUser: Observable<any>;
   public errorMessage = this.errorMessageSource.asObservable();
 
-  constructor(private http: HttpClient) {
-    // TODO : Figure out tokens
-    let loggedUserJSON = localStorage.getItem(config.storedUser);
-    let loggedUserNameAndPwd = JSON.parse(loggedUserJSON);
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
+    console.log("auth service constructor called");
 
-    if (loggedUserNameAndPwd) {
-      this.login(loggedUserNameAndPwd.nomutilisateur, loggedUserNameAndPwd.pwd);
+    // TODO : Figure out tokens
+    let storedUser = JSON.parse(sessionStorage.getItem(config.storedUser));
+    if (!storedUser) {
+      let loggedUserJSON = localStorage.getItem(config.storedUser);
+      let loggedUserNameAndPwd = JSON.parse(loggedUserJSON);
+  
+      if (loggedUserNameAndPwd) {
+        this.login(loggedUserNameAndPwd.nomutilisateur, loggedUserNameAndPwd.pwd);
+      }
     }
-    
-    this.currentUserSubject = new BehaviorSubject<any>(null);
+
+    this.currentUserSubject = new BehaviorSubject<any>(storedUser);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): Distributor {
-    return this.currentUserSubject.value;
+
+  public get currUser(): BD_User {
+    return this.currentUserSubject.value as BD_User;
+  }
+
+  public get currSupplier(): Supplier {
+    return this.currentUserSubject.value as Supplier;
+  }
+
+  public get currDistributor(): Distributor {
+    return this.currentUserSubject.value as Distributor;
   }
 
   login(username: string, password: string) {
+    console.log("login called");
+
     const body = new HttpParams()
       .set('name', username)
       .set('password', password);
@@ -48,12 +65,18 @@ export class AuthService {
       config.headerObject
     );
 
+    this.spinner.show();
     request.subscribe(
       user => {
-        localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
+        this.spinner.hide();
+
         this.currentUserSubject.next(user);
+
+        localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
+        sessionStorage.setItem(config.storedUser, JSON.stringify(this.currentUserSubject.value));
       },
       err => {
+        this.spinner.hide();
         this.errorMessageSource.next(err.error);
       }
     );
@@ -78,8 +101,10 @@ export class AuthService {
   }
 
   logout() {
-    // remove user from local storage to log user out
+    console.log("logout called");
+
     localStorage.removeItem(config.storedUser);
+    sessionStorage.removeItem(config.storedUser);
     this.currentUserSubject.next(null);
   }
 }
