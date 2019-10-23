@@ -1,3 +1,5 @@
+import { CommandesItems } from './commandesItems';
+
 export class Commandes {
     idCommande : number;
     idFournisseur: number;
@@ -6,6 +8,7 @@ export class Commandes {
     DateCreation: string;
     complete: number;
     EstOuvert : boolean;
-    EmailFournisseur : string
-    telephone : string
+    EmailFournisseur : string;
+    telephone : string;
+    TableItem : CommandesItems[]
 }
