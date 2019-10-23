@@ -61,6 +61,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './add-product/add-product.component'
+import { CommandeComponent } from './commande/commande.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { AddProductComponent } from './add-product/add-product.component'
     AdminUsersComponent,
     ProductCardComponent,
     SupplierInfosComponent,
-    AddProductComponent
+    AddProductComponent,
+    CommandeComponent
   ],
   imports: [
     CommonModule,

@@ -96,6 +96,7 @@ export class ShoppingCartComponent implements OnInit {
     this.popUpOpen = false;
     var ProduitArray = new Array();
     var quantiteArray = new Array();
+    this.spinner.show();
     this.Fournini = "";
     for(let i = 0; i < this.dataSource.filteredData.length; ++i) {
       quantiteArray[i] = this.dataSource.filteredData[i].quantity.toString();
@@ -105,7 +106,6 @@ export class ShoppingCartComponent implements OnInit {
     this.productService.GetFournisseurPanier(this.Fournini).subscribe(
       (idFournisseur : String[]) => {
             idFournisseur.forEach(iduser => {
-              this.spinner.show();
             //Crée une commande par fournisseur
              this.productService.CreationCommmande(iduser[0]['idFournisseur'], 33/*this.auth.currUser.iduser*/).subscribe(
               (idCommande : String[])  => {
