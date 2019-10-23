@@ -1,34 +1,39 @@
 <div class="container">
 
-<mat-card class="filter-card" >
+    <mat-card class="filter-card">
 
-    <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" placeholder="Nom" #nom>
-    </mat-form-field>
+        <mat-form-field>
+            <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" placeholder="Nom"
+                #nom>
+        </mat-form-field>
 
-    <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)"placeholder="Fournisseur" #idf>
-    </mat-form-field>
+        <mat-form-field>
+            <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)"
+                placeholder="Fournisseur" #idf>
+        </mat-form-field>
 
-    <mat-form-field>
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" OnlyNumber="true"placeholder="Prix min" #pmin>
-    </mat-form-field>
+        <mat-form-field>
+            <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" OnlyNumber="true"
+                placeholder="Prix min" #pmin>
+        </mat-form-field>
 
-    <mat-form-field >
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" OnlyNumber="true" placeholder="Prix max" #pmax>
-    </mat-form-field>
+        <mat-form-field>
+            <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" OnlyNumber="true"
+                placeholder="Prix max" #pmax>
+        </mat-form-field>
 
-    <mat-form-field >
-        <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)" placeholder="Mots cles" #tag1>
-    </mat-form-field>
-</mat-card>
+        <mat-form-field>
+            <input matInput (keyup)="Filter(nom.value, idf.value, pmin.value, pmax.value, tag1.value)"
+                placeholder="Mots cles" #tag1>
+        </mat-form-field>
+    </mat-card>
 
-<ng-container *ngIf='(filteredProducts) as products'>
-    <div class="grid-container">
-        <ng-container *ngFor="let product of products">
-            <app-product-card [product]="product"></app-product-card>
-        </ng-container>
-    </div>
-</ng-container>
+    <ng-container *ngIf='(filteredProducts) as products'>
+        <div class="grid-container">
+            <ng-container *ngFor="let product of products">
+                <app-product-card [product]="product"></app-product-card>
+            </ng-container>
+        </div>
+    </ng-container>
 
 </div>

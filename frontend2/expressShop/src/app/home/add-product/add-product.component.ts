@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { v4 as uuid } from 'uuid';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
-
-
 
 export interface tag {
   name: string;
@@ -19,8 +17,6 @@ export interface tag {
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-
-  
 
   productForm = new FormGroup({
     nom: new FormControl('', Validators.required),
@@ -43,7 +39,7 @@ export class AddProductComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   tags: tag[] = [];
   tagarray: string[];
-  TagChaine : string;
+  TagChaine: string;
 
   constructor(private productService: ProductService, private auth: AuthService, private loader: LoaderService) { }
 
@@ -55,7 +51,7 @@ export class AddProductComponent implements OnInit {
     const value = event.value;
 
     if ((value || '').trim()) {
-      this.tags.push({name: value.trim()});
+      this.tags.push({ name: value.trim() });
     }
     if (input) {
       input.value = '';
@@ -69,33 +65,33 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-
   onSubmit() {
-    console.log(this.productForm.controls.nom.value);
-    console.log(this.productForm.controls.description.value);
-    console.log(this.productForm.controls.prix.value);
-    console.log(this.productForm.controls.quantite.value);
-    console.log(this.tags)
-    this.TagChaine= "";
 
-    this.tags.forEach(element =>{
-      this.TagChaine += element.name + ";";
-    });
+    if (this.productForm.invalid) {
+      return;
+    }
+    else {
+      this.TagChaine = "";
+      this.tags.forEach(element => {
+        this.TagChaine += element.name + ";";
+      });
 
-    this.productService.AddProduct(this.productForm.controls.nom.value,
-      this.productForm.controls.prix.value,
-      this.auth.currUser.iduser,
-      this.productForm.controls.quantite.value,
-      uuid(),
-      this.productForm.controls.description.value,
-      this.TagChaine
-    ).subscribe(
-      (res) => {
-        
-      },
-      (err) => {
+      this.productService.AddProduct(this.productForm.controls.nom.value,
+        this.productForm.controls.prix.value,
+        this.auth.currUser.iduser,
+        this.productForm.controls.quantite.value,
+        uuid(),
+        this.productForm.controls.description.value,
+        this.TagChaine
+      ).subscribe(
+        (res) => {
+          this.productForm.reset()
+          this.tags = new Array();
+        },
+        (err) => {
 
-      }
-    );
+        }
+      );
+    }
   }
 }

@@ -1,44 +1,52 @@
 <mat-card class="product-mat-card">
-    <mat-card-title>Ajouter Produit</mat-card-title>
-    <mat-card-content>
-            <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-card">
-                    
-                <p>
-                    <mat-form-field >
-                      <input matInput placeholder="Nom" formControlName="nom">
-                    </mat-form-field>
-                    <mat-form-field >
-                            <input matInput placeholder="definition" formControlName="description">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Prix" type="number" class="example-right-align" formControlName="prix">
-                        <span matPrefix>$&nbsp;</span>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                            <input matInput placeholder="Quantité" type="number" class="example-right-align" formControlName="quantite">
-                    </mat-form-field>
-                    <mat-form-field class="example-chip-list">
-                            <mat-chip-list #chipList aria-label="Fruit selection">
-                              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
-                                       [removable]="removable" (removed)="remove(tag)">
-                                {{tag.name}}
-                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                              </mat-chip>
-                              <input placeholder="New tag..."
-                                     [matChipInputFor]="chipList"
-                                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                     [matChipInputAddOnBlur]="addOnBlur"
-                                     (matChipInputTokenEnd)="add($event)">
-                            </mat-chip-list>
-                          </mat-form-field>
-                </p>
-                <label class="image-upload-container btn btn-bwm">
-                    <span>Select Image</span>
-                    <input #imageInput type="file" accept="image/*">
-                </label>
-                <button mat-button>Ajouter</button>
-            </form>
-            
-    </mat-card-content>
+  <mat-card-title>Ajouter Produit</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-card">
+      <div id="left">
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="Nom" formControlName="nom">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="definition" formControlName="description">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="Prix" type="number" class="example-right-align" formControlName="prix">
+            <span matPrefix>$&nbsp;</span>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="Quantité" type="number" class="example-right-align" formControlName="quantite">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New tag..." [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </p>
+      </div>
+      <div id="right">
+        <p class="upload">Photo de profil</p>
+        <p style="height: 155px">
+          <img id="Image" [src]="imageSrc" class="IMG" />
+        </p>
+        <p><input type='file' class="upload" (change)="onFileChanged($event)" /></p>
+      </div>
+      <button mat-button type="submit">Ajouter</button>
+    </form>
+  </mat-card-content>
 </mat-card>
