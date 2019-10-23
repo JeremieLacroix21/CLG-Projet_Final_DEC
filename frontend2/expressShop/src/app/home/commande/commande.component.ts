@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Commandes } from '../../models/commandes';
+import { CommandesItems } from '../../models/commandesItems';
 import { AuthService } from 'src/app/services';
 import { Subscription } from 'rxjs';
 import { CommandeService } from '../../services/commande.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatTableDataSource } from '@angular/material';
 import { Fournisseur } from 'src/app/models/Fournisseur';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-commande',
   templateUrl: './commande.component.html',
-  styleUrls: ['./commande.component.css']
+  styleUrls: ['./commande.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class CommandeComponent implements OnInit {
 
@@ -22,7 +31,8 @@ export class CommandeComponent implements OnInit {
 
   subscription: Subscription;
   public dataSource = new MatTableDataSource<Commandes>();
-  public displayedColumns = ['Id', 'date', 'NomFournisseur', 'Détails'];
+  public dataitems = new MatTableDataSource<CommandesItems>();
+  public displayedColumns = ['idCommande', 'DateCreation', 'nomFournisseur', 'EmailFournisseur','telephone'];
 
   constructor(private auth: AuthService, private commandeService: CommandeService, private loader: LoaderService) {
     let i = 0;
@@ -34,6 +44,8 @@ export class CommandeComponent implements OnInit {
         this.CommandesEnCour[j].DateCreation = Nom['dateCreation']
         this.commandeService.GetFournisseur(Nom['idFournisseur']).subscribe(fournisseur =>{
           this.CommandesEnCour[i].nomFournisseur = fournisseur[0]['nomutilisateur'];
+          this.CommandesEnCour[i].EmailFournisseur = fournisseur[0]['email'];
+          this.CommandesEnCour[i].telephone = "+1 " + fournisseur[0]['Téléphone'];
           i++;
         });
       j++;

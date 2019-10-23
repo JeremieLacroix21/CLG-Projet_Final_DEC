@@ -1,4 +1,4 @@
-export class Commandes {
+export class CommandesItems {
     idCommande : number;
     idFournisseur: number;
     nomFournisseur: string;

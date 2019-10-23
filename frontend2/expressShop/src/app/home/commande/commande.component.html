@@ -1,22 +1,34 @@
-<div class="container">
+<!--<div class="container">
     <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
 
     <ng-container matColumnDef="Id">
         <mat-header-cell *matHeaderCellDef>Numéro de la commande</mat-header-cell>
-        <mat-cell *matCellDef="let commande">{{commande.idCommande}}</mat-cell>
+        <mat-cell *matCellDef="let commande">{{commande.idCommande}}
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef>Date de la commande</mat-header-cell>
         <mat-cell class="date-cell"
                   *matCellDef="let commande">{{commande.DateCreation}}</mat-cell>
-
     </ng-container>
 
     <ng-container matColumnDef="NomFournisseur">
         <mat-header-cell *matHeaderCellDef>Nom du fournisseur</mat-header-cell>
         <mat-cell class="NomFournisseur-cell"
                   *matCellDef="let commande">{{commande.nomFournisseur}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>email du fournisseur</mat-header-cell>
+        <mat-cell class="email-cell"
+                  *matCellDef="let commande">{{commande.EmailFournisseur}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telephone">
+        <mat-header-cell *matHeaderCellDef>Telephone du fournisseur</mat-header-cell>
+        <mat-cell class="telephone-cell"
+                  *matCellDef="let commande">{{commande.telephone}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Détails">
@@ -30,7 +42,51 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"> 
+    </mat-row>
 
 </mat-table>
-</div>
+</div>-->
+
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let commande"> {{commande[column]}} </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let commande" [attr.colspan]="displayedColumns.length">
+      <div class="example-element-detail"
+           [@detailExpand]="commande == expandedElement ? 'expanded' : 'collapsed'">
+        <table mat-table [dataSource]="dataSource">
+            <tr>Image du produit</tr>
+            <td>
+                 <img src="campagne.jpg"  style="min-width: 80px; height: 104px;" >
+            </td>
+            <td>
+                    {{commande.idCommande}}
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </table>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
