@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Supplier } from 'src/app/models/supplier';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators/';
 import { UserService } from 'src/app/services';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-supplier-infos',
@@ -14,24 +15,25 @@ import { UserService } from 'src/app/services';
 export class SupplierInfosComponent implements OnInit {
 
   private supplierId: number;
+  private profileToShow: Supplier;
   private loadedSuppliers: Observable<Supplier[]>;
   private dataSource: MatTableDataSource<Supplier>;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private loader: LoaderService) {
   }
 
   ngOnInit() {
     this.route.queryParams
       .pipe(filter(params => params.s))
       .subscribe(params => {
-        //console.log(params);
         this.supplierId = params.s;
       });
     this.requestAllUser();
   }
 
-  onClickSupplier(supplier: Supplier) {
-    console.log("Display profile in content for " + supplier.nomutilisateur);
+  changeQuery(supplier: Supplier) {
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: { s: supplier.iduser }});
+    this.profileToShow = supplier;
   }
 
   applyFilter(filterValue: string) {
@@ -39,15 +41,22 @@ export class SupplierInfosComponent implements OnInit {
   }
   
   requestAllUser() {
+    this.loader.show("Chargement des fournisseurs...");
     this.loadedSuppliers = this.userService.getAllSuppliers();
     this.loadedSuppliers.subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
+      if (this.supplierId)
+        this.profileToShow = this.dataSource.data.find(s => s.iduser == this.supplierId);
+      this.loader.hide();
     });
   }
 
+  onClickSupplier(supplier: Supplier) {
+    this.changeQuery(supplier);
+  }
+
   onClickCollapseBtn(event) {
-    let btnId = event.currentTarget.id;
-    let btn = document.getElementById(btnId);
+    let btn = document.getElementById('collapseBtn');
 
     // Rotate the icon
     for(var i = 0; i < btn.children.length; ++i) {

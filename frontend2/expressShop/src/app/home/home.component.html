@@ -24,6 +24,7 @@
     
     <mat-nav-list>
       <a mat-list-item [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</a>
+      <a mat-list-item [routerLink]="'supplierInfos'" routerLinkActive="active">Fournisseurs</a>
       <a mat-list-item [routerLink]="'browseProduct'" routerLinkActive="active">Produits</a>
       <a mat-list-item [routerLink]="'shoppingCart'" routerLinkActive="active">Panier d'achat</a>
       <a mat-list-item [routerLink]="'add-product'" routerLinkActive="active">Ajouter Produit</a>
@@ -33,6 +34,10 @@
   
   <mat-sidenav-content>
       <router-outlet></router-outlet>
+
+      <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium">
+        <p class="loadingText">{{loaderText}}</p>
+      </ngx-spinner>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
