@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
-import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services';
+import { SUPPLIER } from '../..//models/user';
 
 @Component({
   selector: 'app-browse-products',

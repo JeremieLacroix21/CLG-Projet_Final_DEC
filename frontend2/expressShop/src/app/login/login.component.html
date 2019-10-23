@@ -3,76 +3,88 @@
 <h1 align="center">Express Shop</h1>
 
 <mat-card>
-    <mat-card-title>Connexion</mat-card-title>
-<mat-card-content>
-<form [formGroup]="form">
+  <mat-card-title>Connexion</mat-card-title>
 
-    <p><mat-form-field>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <p><mat-form-field>
         <input type="username" id="inputUsername" name="username" ngModel class="form-control" matInput placeholder="Username" formControlName="username">
         <mat-error *ngIf="username.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
-    </mat-form-field></p><br>
+      </mat-form-field></p>
+      <br>
 
-    <p><mat-form-field>
+      <p><mat-form-field>
         <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Password" matInput formControlName="password" >
         <mat-error *ngIf="password.hasError('required')">Le mot de passe est obligatoire</mat-error>
-    </mat-form-field></p><br>
-    <mat-checkbox style="float: right; margin-top: 15px;">Se souvenir de moi</mat-checkbox><br>
+      </mat-form-field></p>
+      <br>
 
-    <p *ngIf="invalidLogin" [innerHTML]="errormessages" class="error">{{errormessages.name}}</p>
+      <mat-checkbox style="float: right; margin-top: 15px;">Se souvenir de moi</mat-checkbox>
+      <br>
 
-    <div class="button_div">
-        <button type="submit" (click)="onSubmit()" class="button_login"  mat-button>Se Connecter</button>
-        <button (click)="GoToSubscribe()" mat-button> S'inscrire</button>
-    </div>
-</form>
-</mat-card-content>
-<button mat-button (click)='DemandeUsername()'class="BTN_User">Nom d'utilisateur oublié?</button>
-<button mat-button (click)='DemandeMotdepasse()' class="BTN_Pass">Mot de passe oublié?</button>
+      <p *ngIf="invalidLogin" [innerHTML]="errormessages" class="error">{{errormessages.name}}</p>
+
+      <div class="button_div">
+        <button type="submit" (click)="onSubmit(false)" class="button_login" mat-button>Se Connecter</button>
+        <button (click)="GoToSubscribe()" mat-button>S'inscrire</button>
+        <button (click)="onSubmit(true)" mat-button>Visiter sans compte</button>
+      </div>
+    </form>
+  </mat-card-content>
+  
+  <button mat-button (click)='DemandeUsername()'class="BTN_User">Nom d'utilisateur oublié?</button>
+  <button mat-button (click)='DemandeMotdepasse()' class="BTN_Pass">Mot de passe oublié?</button>
 </mat-card>
-<form [formGroup]="formUsername">
-<app-pop-up [isOpen]="popUpOpen">
-        <div>
-          <header>
-            <span><b>Demande de votre nom d'utilisateur</b></span>
-          </header>
-          <main>
-            <p style="height: 1%;">Veuillez entrer votre adresse mail:</p>
-            <mat-form-field>
-                <input type="text" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Adresse courriel" formControlName="email">
-                <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
-            </mat-form-field>
-            <p *ngIf="ValideUsername" style="color:green">L'envoi du email à été effectué!</p>
-            <p *ngIf="InValideUsername" style="color:red">Aucun compte ne correspondent à ce email</p>
-          </main>
-          <footer>
-            <button (click)="SendEmailUser()" mat-button style="float: left">Envoyer</button>
-            <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
-          </footer>
-        </div>
-    </app-pop-up>
-</form>
-<form [formGroup]="formPassword">
-    <app-pop-up [isOpen]="popUpOpenPassword">
-                <div>
-                  <header>
-                    <span><b>Demande de votre mot de passe</b></span>
-                  </header>
-                  <main>
-                    <p style="height: 1%;">Veuillez entrer votre nom d'utilisateur:</p>
-                    <mat-form-field>
-                        <input type="text" id="inputemailPop" name="username2" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username2">
-                        <mat-error *ngIf="username2.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
-                    </mat-form-field>
-                    <p *ngIf="ValidePassword" style="color:green">L'envoi du email à été effectué!</p>
-                    <p *ngIf="InValidePassword" style="color:red">Aucun compte ne correspondent à ce nom d'utilisateur</p>
-                  </main>
-                  <footer>
-                    <button (click)="SendEmailPass()" mat-button style="float: left">Envoyer</button>
-                    <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
-                  </footer>
-                </div>
-     </app-pop-up>
- </form>
+
+<form [formGroup]="formUsername"> <app-pop-up [isOpen]="popUpOpen">
+  <div>
+
+    <header>
+      <span><b>Demande de votre nom d'utilisateur</b></span>
+    </header>
+
+    <main>
+      <p style="height: 1%;">Veuillez entrer votre adresse mail:</p>
+      <mat-form-field>
+        <input type="text" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Adresse courriel" formControlName="email">
+        <mat-error *ngIf="email.hasError('required')">L'adresse courriel est obligatoire</mat-error>
+      </mat-form-field>
+      <p *ngIf="ValideUsername" style="color:green">L'envoi du email à été effectué!</p>
+      <p *ngIf="InValideUsername" style="color:red">Aucun compte ne correspondent à ce email</p>
+    </main>
+
+    <footer>
+      <button (click)="SendEmailUser()" mat-button style="float: left">Envoyer</button>
+      <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
+    </footer>
+
+  </div>
+</app-pop-up> </form>
+
+<form [formGroup]="formPassword"> <app-pop-up [isOpen]="popUpOpenPassword">
+  <div>
+
+    <header>
+      <span><b>Demande de votre mot de passe</b></span>
+    </header>
+
+    <main>
+      <p style="height: 1%;">Veuillez entrer votre nom d'utilisateur:</p>
+      <mat-form-field>
+        <input type="text" id="inputemailPop" name="username2" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username2">
+        <mat-error *ngIf="username2.hasError('required')">Le nom d'utilisateur est obligatoire</mat-error>
+      </mat-form-field>
+      <p *ngIf="ValidePassword" style="color:green">L'envoi du email à été effectué!</p>
+      <p *ngIf="InValidePassword" style="color:red">Aucun compte ne correspondent à ce nom d'utilisateur</p>
+    </main>
+
+    <footer>
+      <button (click)="SendEmailPass()" mat-button style="float: left">Envoyer</button>
+      <button (click)="cancelOption()" mat-button style="float: right">Annuler</button>
+    </footer>
+
+  </div>
+</app-pop-up> </form>
 
 <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
   <p class="loadingText">Connection en cours...</p>

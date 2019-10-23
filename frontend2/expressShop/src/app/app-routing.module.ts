@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './guard';
+import { AuthGuard } from './guard/auth.guard';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '404', component: PageNotFoundComponent },
-  //{ path: '**', redirectTo: '404' },
   {
     canActivate: [AuthGuard],
     path: 'home',
@@ -22,7 +22,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     path: 'subscribe',
     component: SubscribeComponent,
-  }
+  },
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({

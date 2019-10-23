@@ -40,7 +40,9 @@ export class HomeComponent implements OnInit {
       this.nbCartItems = data;
     });
 
-    this.productsService.RefreshCartItemCount(this.auth.currDistributor.cart.length);
+    if (this.auth.currUser.TypeUser === this.auth.D) {
+      this.productsService.RefreshCartItemCount(this.auth.currDistributor.cart.length);
+    }
   }
 
   ngOnDestroy() {

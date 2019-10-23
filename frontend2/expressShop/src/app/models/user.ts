@@ -1,6 +1,7 @@
 export const SUPPLIER = "Fournisseur";
 export const DISTRIB = "Distributeur";
 export const ADMIN = "Admin";
+export const VISIT = "Visiteur";
 
 export class BD_User {
     public iduser: number;

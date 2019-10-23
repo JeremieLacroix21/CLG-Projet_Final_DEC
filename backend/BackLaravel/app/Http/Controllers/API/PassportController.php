@@ -61,7 +61,7 @@ class PassportController extends Controller
                 */
             } else if ($user->TypeUser === "Distributeur") {
                 $propertiesFromUserType = DB::table('distributeurs')
-                    ->where($user->iduser, '=', 'idDistributeur')
+                    ->where('idDistributeur', '=', $user->iduser)
                     ->get()
                     ->first();
             }
