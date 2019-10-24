@@ -52,6 +52,10 @@ export class AuthService {
     return this.currentUserSubject.value as Distributor;
   }
 
+  public updateCurrUser(user) {
+    this.currentUserSubject.next(user);
+}
+
   login(username: string, password: string) {
     console.log("login called");
 

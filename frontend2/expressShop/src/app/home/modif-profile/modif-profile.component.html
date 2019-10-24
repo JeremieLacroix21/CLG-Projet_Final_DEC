@@ -12,7 +12,7 @@
     </mat-form-field></p>
 
     <p><mat-form-field>
-        <input type="email" matInput placeholder="Courriel" [formControl]="email">
+        <input type="email" matInput placeholder="Courriel" [formControl] ="email">
         <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">Veuillez entrer une addresse courriel valide</mat-error>
         <mat-error *ngIf="email.hasError('required')">Le courriel est obligatoire</mat-error>
     </mat-form-field></p>
@@ -30,7 +30,7 @@
 
     <p><mat-form-field appearance="outline" class="description-field">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Description de votre compagnie" [formControl]="description"></textarea>
+        <textarea matInput [formControl]="description"></textarea>
     </mat-form-field></p>
 
     <!-- TODO: Add/Remove Tags (https://www.google.com/search?q=youtube+tags&sxsrf=ACYBGNQrpy2igjoIgql048fJKLUoI7ew-g:1569376391098&source=lnms&tbm=isch&sa=X&ved=0ahUKEwikrr3S7urkAhUhTt8KHdfCAdcQ_AUIEigB&biw=1440&bih=799#imgrc=KyZffDHBnFvYwM:)

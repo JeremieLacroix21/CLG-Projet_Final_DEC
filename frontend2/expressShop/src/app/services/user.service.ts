@@ -65,12 +65,24 @@ export class UserService {
     const body = new HttpParams()
     .set('iduser',iduser.toString())
     .set('nomutilisateur',nomutilisateur.toString())
-    .set('courriel',courriel.toString())
-    .set('téléphone',téléphone.toString())
+    .set('email',courriel.toString())
+    .set('Telephone',téléphone.toString())
     .set('description',description.toString());
-    return this.http.post(`${config.apiUrl}/api/UpdateUser`,
+    return this.http.post(`${config.apiUrl} /api/UpdateUser`,
     body.toString(),
     config.headerObject
+    );
+    
+  }
+
+  GetUserInformation(iduser:number)
+  {
+    const body = new HttpParams()
+    .set('iduser',iduser.toString());
+    return this.http.put<BD_User[]>(
+      `${config.apiUrl}/api/GetUserInformation`,
+      body.toString(),
+      config.headerObject
     );
   }
 }

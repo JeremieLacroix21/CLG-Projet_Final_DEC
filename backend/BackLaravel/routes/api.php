@@ -32,10 +32,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::put('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
 //Route Profil
  Route::post('/profil','API\ProfilController@GetUser');
+ Route::post('GetUserInformation','API\ProfilController@GetUserInformation');
  Route::put('UpdatePassword','API\ProfilController@UpdatePassword');
- Route::put('UpdateUser','API\ProfilController@UpdateUser');
+ Route::post('UpdateUser','API\ProfilController@UpdateUser');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
+
+
  //Route Produit
  Route::post('GetCommandeDistributeur','API\CommandeController@GetCommandeDistributeur');
  Route::post('GetCommandeFournisseur','API\CommandeController@GetCommandeFournisseur');

@@ -32,7 +32,7 @@ class PassportController extends Controller
                 'confirme',
                 'dateinscription',
                 'email',
-                'Téléphone',
+                'Telephone',
                 'description',
                 'imgGUID'
             )
