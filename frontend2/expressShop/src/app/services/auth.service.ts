@@ -68,33 +68,31 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    if (!this.currUser) {
-      const body = new HttpParams()
+    const body = new HttpParams()
       .set('name', username)
       .set('password', password);
   
-      let request = this.http.post<BD_User|Supplier|Distributor>(
-        `${config.apiUrl}/api/login`,
-        body.toString(),
-        config.headerObject
-      );
+    let request = this.http.post<BD_User|Supplier|Distributor>(
+      `${config.apiUrl}/api/login`,
+      body.toString(),
+      config.headerObject
+    );
 
-      this.spinner.show();
-      request.subscribe(
-        user => {
-          this.spinner.hide();
+    this.spinner.show();
+    request.subscribe(
+      user => {
+        this.spinner.hide();
 
-          this.currentUserSubject.next(user);
+        this.currentUserSubject.next(user);
 
-          localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
-          sessionStorage.setItem(config.storedUser, JSON.stringify(this.currentUserSubject.value));
-        },
-        err => {
-          this.spinner.hide();
-          this.errorMessageSource.next(err.error);
-        }
-      );
-    }
+        localStorage.setItem(config.storedUser, JSON.stringify({"nomutilisateur":username, "pwd":password}));
+        sessionStorage.setItem(config.storedUser, JSON.stringify(this.currentUserSubject.value));
+      },
+      err => {
+        this.spinner.hide();
+        this.errorMessageSource.next(err.error);
+      }
+    );
   }
 
   SendUsername(email){

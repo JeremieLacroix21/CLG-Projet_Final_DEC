@@ -29,19 +29,20 @@
     </button>
     
     <ng-container *ngIf="profileToShow">
-        <img src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
-        <h1>{{profileToShow.nomutilisateur}}</h1>
-
-        <div class="temp-div"> <h2>Contact</h2>
+        <div class="username-block">
+            <h1>{{profileToShow.nomutilisateur}}</h1>
+            <div class="info-block"> <h3>Infos</h3>
+                <p>Description : {{profileToShow.description}}</p>
+                <p>Tags : {{profileToShow.tags}}</p>
+            </div>
+            <img class="shown-logo" src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
+        </div>
+        <div class="contact-block"> <h3>Contact</h3>
             <p>Adresse : {{profileToShow.adresse}}</p>
             <p>Telephone : {{profileToShow.telephone}}</p>
             <p>Email : {{profileToShow.email}}</p>
         </div>
-
-        <div class="temp-div"> <h2>Infos</h2>
-            <p>Description : {{profileToShow.description}}</p>
-            <p>Tags : {{profileToShow.tags}}</p>
-        </div>
+        
     </ng-container>
 </mat-drawer-content>
 
