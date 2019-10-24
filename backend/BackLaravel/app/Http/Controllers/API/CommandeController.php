@@ -25,7 +25,7 @@ class CommandeController extends Controller
     public function GetFournisseur(Request $request)
     {
         $Fournisseur = DB::table('users')
-        ->select('iduser','nomutilisateur','adresse','email','Téléphone')->where('iduser', '=', $request['idFournisseur'])->get();
+        ->select('iduser','nomutilisateur','adresse','email','Telephone')->where('iduser', '=', $request['idFournisseur'])->get();
         return json_encode($Fournisseur);
     }
     public function GetItems(Request $request)

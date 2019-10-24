@@ -116,7 +116,7 @@ class PassportController extends Controller
         'admin' => $input['admin'],
         'confirme' => $input['confirme'],
         'dateinscription' => $input['dateinscription'],
-        'Téléphone' => $input['telephone'],
+        'Telephone' => $input['telephone'],
         'imgGUID' => $input['photo'],
         'description' => $input['description']
         ));
@@ -194,7 +194,7 @@ class PassportController extends Controller
                 'confirme',
                 'dateinscription',
                 'email',
-                'telephone',
+                'Telephone',
                 'description',
                 'imgGUID'
             )
