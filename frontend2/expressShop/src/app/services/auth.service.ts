@@ -29,7 +29,10 @@ export class AuthService {
   public get currType(): string {
     return this.currUser.TypeUser;
   }
-
+  
+  public updateSessionStorage() {
+    sessionStorage.setItem(config.storedUser, JSON.stringify(this.currentUserSubject.value));
+}
   constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
     // TODO : Figure out tokens
     let storedUser = JSON.parse(sessionStorage.getItem(config.storedUser));
@@ -64,9 +67,7 @@ export class AuthService {
     this.currentUserSubject.next(user);
 }
 
-  login(username: string, password: string) {
-    console.log("login called");
-
+ 
   loginAsVisitor() {
     if (!this.currUser) {
       let visitor = new BD_User();

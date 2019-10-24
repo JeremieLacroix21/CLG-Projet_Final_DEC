@@ -100,8 +100,8 @@ export class ModifProfileComponent implements OnInit {
     updatedUser.description = description;
     // Update the user
    this.AuthService.updateCurrUser(updatedUser);
+   this.AuthService.updateSessionStorage();
       console.log(this.AuthService.currUser.nomutilisateur);
-      
       console.log("alo");
   }
   UpdatePassword(iduser:number,NouveauMotdePasse:number)
