@@ -57,11 +57,8 @@
   
   <div class="PanierButtonDiv">
       <a routerLink="/home"><button mat-raised-button color="primary" class="PanierButton">retourner au browser</button></a>
-    <button mat-raised-button color="primary" class="PanierButton" (click)="ValidateCommande()">Passer la commande</button>
+      <button *ngIf="!EstVide" mat-raised-button color="primary" class="PanierButton" (click)="ValidateCommande()">Passer la commande</button>
   </div>
-  <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
-    <p class="loadingText">Création de votre commande...</p>
-  </ngx-spinner>
 </div>
 <app-pop-up [isOpen]="popUpOpen">
   <div style="text-align: center">

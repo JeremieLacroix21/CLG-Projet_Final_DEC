@@ -30,6 +30,7 @@ export class ShoppingCartComponent implements OnInit {
   isBlur = false;
   popUpOpen = false;
   popUpEmail = false;
+  EstVide = false;
   
 
   constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService, private spinner: NgxSpinnerService, private route: ActivatedRoute,
@@ -41,10 +42,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.loader.show("Chargement des produits...");
-    //console.log(this.auth.currDistributor.cart)
-    console.log(this.popUpOpen.toString());
-    this.popUpOpen = false;
+    if(this.dataSource.filteredData.length == 0)
+    {
+      this.EstVide = true;
+    }
   }
   
   increment(idProduit: number) {
@@ -92,44 +93,42 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigate(["/home/browseProduct"]);
   }
   SendCommande() {
-    this.isBlur = false;
-    this.popUpOpen = false;
-    var ProduitArray = new Array();
-    var quantiteArray = new Array();
-    this.spinner.show();
-    this.Fournini = "";
-    for(let i = 0; i < this.dataSource.filteredData.length; ++i) {
-      quantiteArray[i] = this.dataSource.filteredData[i].quantity.toString();
-      ProduitArray[i] = this.dataSource.filteredData[i].idproduits.toString();
-      this.Fournini += this.dataSource.filteredData[i].idproduits.toString() + ";";
-    }
-    this.productService.GetFournisseurPanier(this.Fournini).subscribe(
-      (idFournisseur : String[]) => {
-            idFournisseur.forEach(iduser => {
-            //Crée une commande par fournisseur
-             this.productService.CreationCommmande(iduser[0]['idFournisseur'], 33/*this.auth.currUser.iduser*/).subscribe(
-              (idCommande : String[])  => {
-                 ProduitArray.forEach(idproduit => {
-                     //Crée les items commandes
-                     this.productService.CreationCommandeItems(idCommande[0]['MAX(idCommande)'],idproduit,quantiteArray[0]).subscribe();
-            })
-            //Envoyer les commandes
-            this.productService.EnvoieCommande(iduser[0]['idFournisseur'],33/*this.auth.currUser.iduser*/,).subscribe(
-              (res) =>{
-                this.localres = res + this.localres;
-                console.log(this.localres.length);
-                if(this.localres.length > iduser.length * 15)
-                {
-                  this.spinner.hide();
+    if(!this.EstVide)
+    {
+      this.isBlur = false;
+      this.popUpOpen = false;
+      var ProduitArray = new Array();
+      var quantiteArray = new Array();
+      this.loader.show("Envoi de votre commande...");
+      this.Fournini = "";
+      for(let i = 0; i < this.dataSource.filteredData.length; ++i) {
+        quantiteArray[i] = this.dataSource.filteredData[i].quantity.toString();
+        ProduitArray[i] = this.dataSource.filteredData[i].idproduits.toString();
+        this.Fournini += this.dataSource.filteredData[i].idproduits.toString() + ";";
+      }
+      this.productService.GetFournisseurPanier(this.Fournini).subscribe(
+        (idFournisseur : String[]) => {
+              idFournisseur.forEach(iduser => {
+              //Crée une commande par fournisseur
+               this.productService.CreationCommmande(iduser[0]['idFournisseur'], this.auth.currUser.iduser).subscribe(
+                (idCommande : String[])  => {
+                   ProduitArray.forEach(idproduit => {
+                       //Crée les items commandes
+                       this.productService.CreationCommandeItems(idCommande[0]['MAX(idCommande)'],idproduit,quantiteArray[0]).subscribe();
+              })
+              //Envoyer les commandes
+              this.productService.EnvoieCommande(iduser[0]['idFournisseur'],this.auth.currUser.iduser).subscribe(
+                (res) =>{
+                  this.loader.hide();
                   this.popUpEmail = true;
                   this.BlurBackground();
                 }
-              }
-            );
-            });
-          }
-    );
-  });
+              );
+              });
+            }
+      );
+    });
+    }
 }
 
   BlurBackground(){

@@ -38,7 +38,7 @@ export class CommandeComponent implements OnInit {
   constructor(private auth: AuthService, private commandeService: CommandeService, private loader: LoaderService) {
     let i = 0;
     let j = 0;
-    this.commandeService.GetCommande(33/*this.auth.currUser*/,'0').subscribe(commandes => {
+    this.commandeService.GetCommande(this.auth.currUser.iduser,'0').subscribe(commandes => {
      this.WaitingTime = commandes.length * 800;
       commandes.forEach(Nom => {
         this.CommandesEnCour = commandes;
