@@ -17,7 +17,7 @@
             <button mat-menu-item>Item 2</button>
           </mat-menu>
         <button mat-icon-button [routerLink]="''"><mat-icon (click)="callLogout()">power_off</mat-icon></button>
-        <a mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
+        <a [allowUserTypes]="[auth.D]" mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
     
     </mat-toolbar-row>

@@ -28,4 +28,12 @@ class CommandeController extends Controller
         ->select('iduser','nomutilisateur','adresse','email','Téléphone')->where('iduser', '=', $request['idFournisseur'])->get();
         return json_encode($Fournisseur);
     }
+    public function GetItems(Request $request)
+    {
+        $Fournisseur = DB::table('commandes')
+        ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
+        ->join('produits', 'commandeItems.idproduit','=', 'produits.idproduits')
+        ->select('imgGUID','nom','prix','quantite','description')->where('commandes.idCommande', '=', $request['idCommande'])->get();
+        return json_encode($Fournisseur);
+    }
 }

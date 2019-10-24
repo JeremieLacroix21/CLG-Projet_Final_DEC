@@ -22,8 +22,10 @@ export class ProductCardComponent implements OnInit {
   constructor(private auth: AuthService, private productService: ProductService, private loader: LoaderService) { }
 
   ngOnInit() {
-    this.isInCart = (this.auth.currDistributor.cart.findIndex(p => p.idproduits == this.product.idproduits) > -1);
-    this.isInFavorites = false;
+    if (this.auth.currType == this.auth.D) {
+      this.isInCart = (this.auth.currDistributor.cart.findIndex(p => p.idproduits == this.product.idproduits) > -1);
+      this.isInFavorites = false;
+    }
   }
 
   private onClickCartBtn(event) {

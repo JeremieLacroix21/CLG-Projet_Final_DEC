@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from '../services';
-import { first } from 'rxjs/operators';
 import { DEBUGGING } from '../models/DEBUG-LOGIN';
 import { errormessage } from '../models/error';
 import { config } from 'src/config';
@@ -115,15 +114,16 @@ export class LoginComponent implements OnInit {
     );
   }
   
-  onSubmit() {
-    console.log("login page submit");
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
+  onSubmit(loginAsVisitor: boolean) {
+    if (loginAsVisitor) {
+      this.authenticationService.loginAsVisitor();
+    } else {
+      this.submitted = true;
+      if (!this.form.invalid) {
+        this.loading = true;
+        this.authenticationService.login(this.form.controls.username.value, this.form.controls.password.value);
+      }
     }
-    
-    this.loading = true;
-    this.authenticationService.login(this.form.controls.username.value, this.form.controls.password.value);
   }
 
 }

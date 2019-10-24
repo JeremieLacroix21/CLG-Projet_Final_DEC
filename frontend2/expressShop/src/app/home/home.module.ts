@@ -62,7 +62,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './add-product/add-product.component'
 import { CommandeComponent } from './commande/commande.component';
-
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -83,6 +83,7 @@ import { CommandeComponent } from './commande/commande.component';
     ReactiveFormsModule,
     HttpClientModule,
     PopUpModule,
+    DirectivesModule,
 
      // material
      MatBadgeModule,

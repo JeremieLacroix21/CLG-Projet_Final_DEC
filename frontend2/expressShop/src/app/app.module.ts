@@ -59,8 +59,6 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
