@@ -79,7 +79,7 @@ export class SubscribeComponent implements OnInit {
   }
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.imageSrc = "campagne.jpg";
+    this.imageSrc = "assets/img/campagne.jpg";
     this.form.controls.Image.setValue(this.imageSrc);
     this.form.controls.TypeUser.setValue("Fournisseur");
     this.EstFournisseur = true;
