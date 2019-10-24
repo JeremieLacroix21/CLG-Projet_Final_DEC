@@ -1,6 +1,32 @@
 table {
     width: 100%;
   }
+
+  .image{
+    width: 15%;
+    height: 100px;
+    margin: 5px;
+  }
+  .prix{
+    width: 15%;
+    outline : thin solid #777;
+  }
+  .description{
+    width: 40%;
+  }
+  .tableproduit{
+    border: #777 1px solid;
+  }
+
+  table > th{
+    text-align: center;
+    outline: thin solid #777;
+  }
+  .tableelement{
+    text-align: center;
+    outline: thin solid #777;
+  }
+
   
   tr.example-detail-row {
     height: 0;

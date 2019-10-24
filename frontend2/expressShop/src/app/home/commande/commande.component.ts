@@ -50,7 +50,7 @@ export class CommandeComponent implements OnInit {
         this.commandeService.GetFournisseur(Nom['idFournisseur']).subscribe(fournisseur =>{
           this.CommandesEnCour[i].nomFournisseur = fournisseur[0]['nomutilisateur'];
           this.CommandesEnCour[i].EmailFournisseur = fournisseur[0]['email'];
-          this.CommandesEnCour[i].telephone = "+1 " + fournisseur[0]['Téléphone'];
+          this.CommandesEnCour[i].telephone = "+1 " + fournisseur[0]['Telephone'];
             i++;
         });
       j++;
