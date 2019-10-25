@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Commandes } from '../../models/commandes';
 import { CommandesItems } from '../../models/commandesItems';
 import { AuthService } from 'src/app/services';
@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 import { CommandeService } from '../../services/commande.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatTableDataSource, getMatFormFieldMissingControlError } from '@angular/material';
-import { Fournisseur } from 'src/app/models/Fournisseur';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -22,6 +23,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class CommandeComponent implements OnInit {
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
 
   CommandesEnCour: Commandes[];
   CommandesTerminé: Commandes[];
@@ -65,10 +70,20 @@ export class CommandeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.selectedrow = "0";
     this.lastrow = parseInt(this.selectedrow);
     this.loader.show("Chargement des commandes...");
     this.EstOuvert =0;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ChangeRow(){
@@ -76,7 +91,7 @@ export class CommandeComponent implements OnInit {
     if(this.lastrow != parseInt(this.selectedrow))
     {
       this.lastrow = parseInt(this.selectedrow);
-      
+
     }
   }
 

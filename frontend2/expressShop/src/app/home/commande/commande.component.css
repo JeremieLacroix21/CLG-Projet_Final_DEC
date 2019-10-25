@@ -78,3 +78,8 @@ table {
     top: 30px;
     padding: 5px;
   }
+  .filter{
+    position: relative;
+    left: 15%;
+    padding: 5px;
+  }
