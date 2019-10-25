@@ -1,3 +1,4 @@
+<h1 class="titre">Vos commandes</h1>
 <!-- nav table -->
 <mat-form-field class="Nav">
   <mat-label>Choisir le type de commande</mat-label>
@@ -7,10 +8,9 @@
   </mat-select>
 </mat-form-field>
 <!-- filter -->
-<mat-form-field class="Nav" style="width: 20%; left:7%">
+<mat-form-field class="Nav" style="width: 15%; left:7%">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
 </mat-form-field>
-
 <div class="Nav" style="width: 90%;">
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
