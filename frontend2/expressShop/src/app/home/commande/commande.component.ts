@@ -28,6 +28,8 @@ export class CommandeComponent implements OnInit {
   Products : CommandesItems[];
   WaitingTime : number;
   EstOuvert = 0;
+  selectedrow : string;
+  lastrow : number;
 
   subscription: Subscription;
   public dataSource = new MatTableDataSource<Commandes>();
@@ -63,25 +65,20 @@ export class CommandeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //loader les commandes
+    this.selectedrow = "0";
+    this.lastrow = parseInt(this.selectedrow);
     this.loader.show("Chargement des commandes...");
     this.EstOuvert =0;
   }
 
-  GetItems(){
-  
+  ChangeRow(){
+    console.log(parseInt(this.selectedrow));
+    if(this.lastrow != parseInt(this.selectedrow))
+    {
+      this.lastrow = parseInt(this.selectedrow);
+      
+    }
   }
 
-  OpenDropDown(idcommande){
-    let currcommande = this.dataSource.filteredData.find(commande => commande.idCommande === idcommande);
-    if(currcommande.EstOuvert)
-    {
-      currcommande.EstOuvert = false;
-    }
-    else{
-      currcommande.EstOuvert = true;
-    }
-    
-  }
- 
+  
 }
