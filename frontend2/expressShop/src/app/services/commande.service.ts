@@ -15,9 +15,8 @@ export class CommandeService {
 
     constructor(private http: HttpClient) {}
 
-    GetCommande(idDistributeur, Encours){
-        const body = new HttpParams().set('idDistributeur', idDistributeur.toString())
-        .set('Encours', Encours);
+    GetCommande(idDistributeur){
+        const body = new HttpParams().set('idDistributeur', idDistributeur.toString());
     return this.http.post<Commandes[]>(
       `${config.apiUrl}/api/GetCommandeDistributeur`, body.toString(),
       config.headerObject);
@@ -30,11 +29,4 @@ export class CommandeService {
     `${config.apiUrl}/api/GetFournisseur`, body.toString(),
     config.headerObject);
   }
-
-  GetItems(idcommande){
-    const body = new HttpParams().set('idCommande', idcommande.toString())
-return this.http.post<CommandesItems[]>(
-  `${config.apiUrl}/api/GetItems`, body.toString(),
-  config.headerObject);
-}
 }

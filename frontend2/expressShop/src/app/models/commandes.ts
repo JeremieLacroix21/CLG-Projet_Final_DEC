@@ -11,4 +11,6 @@ export class Commandes {
     EmailFournisseur : string;
     telephone : string;
     TableItem : CommandesItems[]
+    constructor() { 
+    }
 }

@@ -29,7 +29,7 @@ export class CommandeComponent implements OnInit {
 
 
   CommandesEnCour: Commandes[];
-  CommandesTerminé: Commandes[];
+  TabCommande: Commandes[];
   Products : CommandesItems[];
   WaitingTime : number;
   EstOuvert = 0;
@@ -38,34 +38,22 @@ export class CommandeComponent implements OnInit {
 
   subscription: Subscription;
   public dataSource = new MatTableDataSource<Commandes>();
-  public dataitems = new MatTableDataSource<CommandesItems>();
-  public displayedColumns = ['idCommande', 'DateCreation', 'nomFournisseur', 'EmailFournisseur','telephone'];
+  public displayedColumns = ['idCommande', 'dateCreation', 'nomFournisseur', 'EmailFournisseur','telephone'];
   public itemsColumns = ['nom', 'prix', 'quantite','description'];
 
   constructor(private auth: AuthService, private commandeService: CommandeService, private loader: LoaderService) {
     let i = 0;
-    let j = 0;
-    this.commandeService.GetCommande(this.auth.currUser.iduser,'0').subscribe(commandes => {
-     this.WaitingTime = commandes.length * 800;
-      commandes.forEach(Nom => {
-        this.CommandesEnCour = commandes;
-        this.commandeService.GetItems(this.CommandesEnCour[j].idCommande).subscribe(TableauItems =>{
-          this.CommandesEnCour[i].TableItem =  TableauItems;
-        }
-          );
-        this.CommandesEnCour[j].DateCreation = Nom['dateCreation']
-        this.commandeService.GetFournisseur(Nom['idFournisseur']).subscribe(fournisseur =>{
-          this.CommandesEnCour[i].nomFournisseur = fournisseur[0]['nomutilisateur'];
-          this.CommandesEnCour[i].EmailFournisseur = fournisseur[0]['email'];
-          this.CommandesEnCour[i].telephone = "+1 " + fournisseur[0]['Telephone'];
-            i++;
-        });
-      j++;
+    this.commandeService.GetCommande(this.auth.currUser.iduser).subscribe(commandes => {
+      this.CommandesEnCour = commandes;
+      commandes.forEach(Numcommande => {
+        console.log(Numcommande.complete);
+        this.CommandesEnCour[i].telephone=  "+1 " + Numcommande.telephone;
+        //this.CommandesEnCour[i].DateCreation=  Numcommande.DateCreation.toLocaleString();
+        i++;
       });
-      setTimeout(() => {
-        this.loader.hide()
-        this.dataSource.data =  this.CommandesEnCour;
-      },this.WaitingTime);
+      this.dataSource.data =  this.CommandesEnCour;
+      this.dataSource.data = this.dataSource.data.filter(u => u.complete == 0);
+      this.loader.hide();
     });
   }
 
@@ -87,11 +75,17 @@ export class CommandeComponent implements OnInit {
   }
 
   ChangeRow(){
-    console.log(parseInt(this.selectedrow));
     if(this.lastrow != parseInt(this.selectedrow))
     {
+      this.dataSource.data =this.CommandesEnCour;
       this.lastrow = parseInt(this.selectedrow);
-
+      if(this.selectedrow == "0")
+      {
+        this.dataSource.data = this.dataSource.data.filter(u => u.complete == 0);
+      }
+      else{
+        this.dataSource.data = this.dataSource.data.filter(u => u.complete == 1);
+      }
     }
   }
 
