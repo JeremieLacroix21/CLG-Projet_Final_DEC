@@ -35,6 +35,7 @@ export class CommandeComponent implements OnInit {
   EstOuvert = 0;
   selectedrow : string;
   lastrow : number;
+  date :Date;
 
   subscription: Subscription;
   public dataSource = new MatTableDataSource<Commandes>();
@@ -46,9 +47,9 @@ export class CommandeComponent implements OnInit {
     this.commandeService.GetCommande(this.auth.currUser.iduser).subscribe(commandes => {
       this.CommandesEnCour = commandes;
       commandes.forEach(Numcommande => {
-        console.log(Numcommande.complete);
         this.CommandesEnCour[i].telephone=  "+1 " + Numcommande.telephone;
-        //this.CommandesEnCour[i].DateCreation=  Numcommande.DateCreation.toLocaleString();
+        this.date = new Date(this.CommandesEnCour[i].dateCreation);
+        this.CommandesEnCour[i].dateCreation= this.date.toDateString();
         i++;
       });
       this.dataSource.data =  this.CommandesEnCour;

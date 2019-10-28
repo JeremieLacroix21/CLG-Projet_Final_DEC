@@ -5,7 +5,7 @@ export class Commandes {
     idFournisseur: number;
     nomFournisseur: string;
     idDistributeur: number;
-    DateCreation: string;
+    dateCreation: string;
     complete: number;
     EstOuvert : boolean;
     EmailFournisseur : string;
