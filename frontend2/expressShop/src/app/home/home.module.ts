@@ -62,6 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './add-product/add-product.component'
 import { CommandeComponent } from './commande/commande.component';
 import { DirectivesModule } from '../directives/directives.module';
+import { Aboutcomponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { DirectivesModule } from '../directives/directives.module';
     ProductCardComponent,
     SupplierInfosComponent,
     AddProductComponent,
-    CommandeComponent
+    CommandeComponent,
+    Aboutcomponent
   ],
   imports: [
     CommonModule,
