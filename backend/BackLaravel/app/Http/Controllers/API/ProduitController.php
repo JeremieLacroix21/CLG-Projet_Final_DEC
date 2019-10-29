@@ -41,6 +41,36 @@ class ProduitController extends Controller
         return json_encode($data);
     }
 
+    public function GetProductsByFournisseur(Request $request)
+    {
+        $produits = DB::table('produits')
+        ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
+        ->select('produits.*', 'users.nomutilisateur')
+        ->where('idFournisseur', '=', $request['idFournisseur'])
+        ->get();
+
+        $array = [];
+        $data = [];
+        $i = 0;
+        foreach($produits as $produit)
+        {
+            $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
+            $data[$i] = [
+                'idproduits'=>$produit->idproduits,
+                'nom'=>$produit->nom,
+                'prix'=>$produit->prix,
+                'idFournisseur'=>$produit->idFournisseur,
+                'nomFournisseur'=>$produit->nomutilisateur,
+                'enStock'=>$produit->enStock,
+                'imgGUID'=>$produit->imgGUID,
+                'description'=>$produit->description,
+                'tags'=>$array,
+            ];
+            ++$i;
+        }
+        return json_encode($data);
+    }
+
     public function SearchProducts(Request $request)
     {
         $data = [];

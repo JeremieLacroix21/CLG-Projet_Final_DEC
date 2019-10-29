@@ -25,6 +25,14 @@ export class ProductService {
     );
   }
 
+  getProduitByFournisseur(id:number) {
+    const body = new HttpParams().set('idFournisseur', id.toString());
+    return this.http.get<Product[]>(
+      `${config.apiUrl}/api/GetProductsByFournisseur`,
+      config.headerObject
+    );
+  }
+
   GetpanierFromId(iduser:number)
   {
     const body = new HttpParams().set('iduser', iduser.toString());
