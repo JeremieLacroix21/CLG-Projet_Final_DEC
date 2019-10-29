@@ -88,3 +88,13 @@ mat-list {
 
     margin-top: 10px;
 }
+/*maps*/
+agm-map{
+    height: 300px;
+    width:100%;
+    padding: 10px;
+}
+.map_container{
+    position: relative;
+    width: calc(100% - 68px);
+}

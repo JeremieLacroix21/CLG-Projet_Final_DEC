@@ -64,7 +64,8 @@ import { CommandeComponent } from './commande/commande.component';
 import { DirectivesModule } from '../directives/directives.module';
 import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
-
+//google map
+import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -133,6 +134,9 @@ import { InventaireComponent } from './inventaire/inventaire.component';
      CdkTreeModule,
      MatTreeModule,
      NgxSpinnerModule,
+     AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB23aRLsMN0fgjxGHsf-PyXC8EHtgznvg8'
+    })
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

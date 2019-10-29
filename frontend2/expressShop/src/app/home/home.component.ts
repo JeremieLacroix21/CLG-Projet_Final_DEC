@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ProductService } from '../services/product.service';
 import { AuthService } from '../services';
 import { Router } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'app-home',

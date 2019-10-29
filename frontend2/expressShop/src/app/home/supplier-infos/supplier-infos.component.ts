@@ -6,13 +6,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators/';
 import { UserService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
+
 
 @Component({
   selector: 'app-supplier-infos',
   templateUrl: './supplier-infos.component.html',
   styleUrls: ['./supplier-infos.component.css']
 })
+
+
+
 export class SupplierInfosComponent implements OnInit {
+
+ // google maps zoom level
+ zoom: number = 8;
+  
+ // initial center position for the map
+ lat: number = 45.864635;
+ lng: number = -70.857655;
+  
 
   private supplierId: number;
   private profileToShow: Supplier;

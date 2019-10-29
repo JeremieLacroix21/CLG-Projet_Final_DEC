@@ -58,7 +58,8 @@ import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+//google map
+import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +120,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CdkTreeModule,
     MatTreeModule,
     TextMaskModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB23aRLsMN0fgjxGHsf-PyXC8EHtgznvg8'
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

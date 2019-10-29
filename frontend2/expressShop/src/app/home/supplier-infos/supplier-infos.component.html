@@ -41,10 +41,21 @@
             <p>Adresse : {{profileToShow.adresse}}</p>
             <p>Telephone : {{profileToShow.telephone}}</p>
             <p>Email : {{profileToShow.email}}</p>
+            <div class="map_container">
+                    <agm-map 
+                    [latitude]="lat"
+                    [longitude]="lng"
+                    [zoom]="zoom"
+                    [disableDefaultUI]="false"
+                    [zoomControl]="false">
+                  </agm-map></div>
         </div>
         
     </ng-container>
+    
 </mat-drawer-content>
 
 </mat-drawer-container>
 </ng-container>
+
+
