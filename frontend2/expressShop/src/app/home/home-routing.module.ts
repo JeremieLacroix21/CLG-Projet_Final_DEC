@@ -12,6 +12,7 @@ import { UserTypeGuard } from '../guard/user-type.guard';
 import { ADMIN, SUPPLIER, DISTRIB } from '../models/user';
 import { AuthGuard } from '../guard/auth.guard';
 import { Aboutcomponent } from './about/about.component';
+import { InventaireComponent } from './inventaire/inventaire.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'supplierInfos', component: SupplierInfosComponent, data: {allowed: [DISTRIB, SUPPLIER, ADMIN]} },
       { path: 'add-product', component: AddProductComponent, data: {allowed: [SUPPLIER, ADMIN]} },
       { path: 'commande', component: CommandeComponent, data: {allowed: [SUPPLIER, DISTRIB]} },
+      { path: 'inventaire', component: InventaireComponent, data: {allowed: [SUPPLIER]} },
       { path: 'about', component: Aboutcomponent}
     ]
   },

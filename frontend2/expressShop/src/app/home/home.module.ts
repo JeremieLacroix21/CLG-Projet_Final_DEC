@@ -63,6 +63,7 @@ import { AddProductComponent } from './add-product/add-product.component'
 import { CommandeComponent } from './commande/commande.component';
 import { DirectivesModule } from '../directives/directives.module';
 import { Aboutcomponent } from './about/about.component';
+import { InventaireComponent } from './inventaire/inventaire.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { Aboutcomponent } from './about/about.component';
     SupplierInfosComponent,
     AddProductComponent,
     CommandeComponent,
-    Aboutcomponent
+    Aboutcomponent,
+    InventaireComponent
   ],
   imports: [
     CommonModule,
