@@ -1,0 +1,34 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-card">
+    <mat-form-field>
+        <input matInput formControlName="nom" placeholder="Nom">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="prix" placeholder="Prix">
+        <span matPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="New tag..." [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="enStock" placeholder="Enstock">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="description" placeholder="Description">
+    </mat-form-field>
+
+    <button mat-button type="submit">Save</button>
+    <button mat-button>Delete</button>
+</form>
