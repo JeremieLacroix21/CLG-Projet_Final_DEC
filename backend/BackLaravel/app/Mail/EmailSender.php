@@ -22,7 +22,7 @@ class EmailSender extends Mailable
 
     public function build()
     {
-        $address = 'ExpressShop.Recovery@hotmail.com';
+        $address = 'express.shop.company@gmail.com';
         $subject = 'Express Shop recovery system';
         $name = 'Express Shop';
         

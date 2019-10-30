@@ -8,7 +8,6 @@ use App\Produit;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use App\Mail\CommandSender;
-use Aws\S3\S3Client;
 
 class ProduitController extends Controller
 {

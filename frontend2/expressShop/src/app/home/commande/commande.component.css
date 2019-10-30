@@ -88,3 +88,16 @@ table {
     left: 5%;
     top: 10px;
   }
+  .buttonterminé{
+    position: relative;
+    font-size: larger;
+    right: 15px;
+  }
+  p{
+    position: relative;
+    top: 4px;
+  }
+  mat-icon{
+    position: relative;
+    top: 5px;
+  }
