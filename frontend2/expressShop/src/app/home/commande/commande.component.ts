@@ -146,10 +146,27 @@ export class CommandeComponent implements OnInit {
     }
   }
   CompleteCommande(idCommande){
+    this.loader.show("Achèvement de votre commande...");
     this.commandeService.CompleteCommande(idCommande).subscribe( res=>
       {
+        this.updatecommandelist();
+        this.loader.hide();
         console.log(res);
       });
+  }
+  updatecommandelist(){
+    let i = 0;
+    this.commandeService.GetCommandeFournisseur(this.auth.currUser.iduser).subscribe(commandes => {
+      this.CommandesFournisseur = commandes;
+      commandes.forEach(Numcommande => {
+        this.CommandesFournisseur[i].telephone=  "+1 " + Numcommande.telephone;
+        this.date = new Date(this.CommandesFournisseur[i].dateCreation);
+        this.CommandesFournisseur[i].dateCreation= this.date.toDateString();
+        i++;
+      });
+      this.dataSourceFournisseur.data =  this.CommandesFournisseur;
+      this.dataSourceFournisseur.data = this.dataSourceFournisseur.data.filter(u => u.complete == 0);
+    });
   }
   
 }

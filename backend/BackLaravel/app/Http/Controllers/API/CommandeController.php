@@ -71,6 +71,15 @@ class CommandeController extends Controller
         return json_encode($data);
     }
 
+    public function CompleteCommande(Request $request) {
+        $results = DB::table('commandes')
+        ->where([
+            ['idCommande', '=', $request['idCommande']]
+        ])
+        ->update(['complete' => '1']);
+        return json_encode($results);
+    }
+
     public function GetLogs() {
         $request = DB::table('log_activites')
             ->select('username', 'type', 'timestamp', 'data')

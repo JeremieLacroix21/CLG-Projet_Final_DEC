@@ -42,6 +42,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
  //Route Commande
  Route::post('GetCommandeDistributeur','API\CommandeController@GetCommandeDistributeur');
+ Route::post('CompleteCommande','API\CommandeController@CompleteCommande');
  Route::post('GetCommandeFournisseur','API\CommandeController@GetCommandeFournisseur');
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
