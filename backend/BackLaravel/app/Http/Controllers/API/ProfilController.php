@@ -27,7 +27,7 @@ class ProfilController extends Controller
     {
         $user_ = DB::table('users')
         ->where('iduser', '=', $request->get('iduser'))
-        ->select('iduser','nomutilisateur','nom','prenom','TypeUser','confirme','dateinscription','email','Téléphone','description')
+        ->select('iduser','nomutilisateur','nom','prenom','TypeUser','confirme','dateinscription','email','Telephone','description')
         ->get();
         if (is_null($user_)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
@@ -45,7 +45,7 @@ class ProfilController extends Controller
                 'confirme'=> $user->prenom,
                 'dateinscription'=> $user->prenom,
                 'email' => $user->email,
-                'telephone' => $user->Téléphone,
+                'Telephone' => $user->Téléphone,
                 'description' => $user->description
             ];
             return json_encode($data);
@@ -171,20 +171,34 @@ class ProfilController extends Controller
     }
 
 
+    public function AddFavoriteSuppliers(Request $request)
+    { 
+        $result = DB::Table('fournisseur_fav')
+        ->insert(['iduser' => $request->get('iduser'), 'idfournisseur' => $request->get('idfournisseur')]);
+    }
+
+    public function deleteFavoriteSuppliers(Request $request)
+    {
+        $result = DB::Table('fournisseur_fav')
+        ->where(['idfournisseur', '=', $request->get('idfournisseur')],['iduser', '=', $request->get('iduser')])
+        ->delete();
+    }
+
     public function GetFavoriteSuppliers(Request $request)
     { 
-        $user_ = DB::table('fournisseurs')
-        ->where('iduser', '=', $request->get('iduser'))
-        ->select('iduser','nomutilisateur','nom','prenom','TypeUser','confirme','dateinscription','email','Téléphone','description')
+        $user_ = DB::table('fournisseur_fav')
+        ->join('users', 'fournisseur_fav.idfournisseur', '=','users.iduser')
+        ->where('fournisseur_fav.iduser', '=', $request->get('iduser'))
+        ->select('users.iduser','nomutilisateur','nom','prenom','TypeUser','confirme','dateinscription','email','Telephone','description')
         ->get();
         if (is_null($user_)) {
             return response()->json(['error'=> 'User doesnt exist'], 401);
           } else {
-
             $data = [];
+            $i = 0;
             foreach($user_ as $user)
             {
-            $data = [
+            $data[$i] = [
                 'iduser' => $user->iduser,
                 'nomutilisateur' => $user->nomutilisateur,
                 'nom'=> $user->nom,
@@ -193,11 +207,15 @@ class ProfilController extends Controller
                 'confirme'=> $user->prenom,
                 'dateinscription'=> $user->prenom,
                 'email' => $user->email,
-                'telephone' => $user->Téléphone,
+                'Telephone' => $user->Telephone,
                 'description' => $user->description
             ];
+            ++$i;
+            }
             return json_encode($data);
-    }
+            }
+        }   
+
 
 }
 ?>
