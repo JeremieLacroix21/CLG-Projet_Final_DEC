@@ -93,7 +93,8 @@ export class AdminUsersComponent implements OnInit {
     this.loadedLogs.subscribe(data => {
       this.dataSourceLog = new MatTableDataSource(data);
       this.dataSourceLog.filterPredicate = (data: LogItem, filter: string) => {
-        return filter.trim().toLowerCase().includes(this.formatLog(data).trim().toLowerCase());
+        console.log('big nigga');
+        return this.formatLog(data).trim().toLowerCase().includes(filter.trim().toLowerCase());
       };
     });
   }
