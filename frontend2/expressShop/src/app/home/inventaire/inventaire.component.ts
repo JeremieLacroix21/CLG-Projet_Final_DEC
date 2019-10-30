@@ -4,11 +4,19 @@ import { Product } from 'src/app/models/product';
 import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-inventaire',
   templateUrl: './inventaire.component.html',
-  styleUrls: ['./inventaire.component.css']
+  styleUrls: ['./inventaire.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class InventaireComponent implements OnInit, OnDestroy {
 
