@@ -321,7 +321,7 @@ class ProduitController extends Controller
         ->update(['enStock' => $request->get('enStock')]);
         ->update(['description' => $request->get('description')]);
 
-        $data = explode(";",$input["Tags"]);
+        $data = explode(";",$results->get("tags"));
        foreach ($data as $Tags) {
         $TagExiste = DB::table('tags_produit')
         ->where('tag', '=', $Tags)
