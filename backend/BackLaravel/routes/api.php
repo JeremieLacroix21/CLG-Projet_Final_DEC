@@ -40,6 +40,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('UpdateUser','API\ProfilController@UpdateUser');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
+ Route::post('UpdateRating','API\ProfilController@UpdateRating');
 
 
  //Route Produit

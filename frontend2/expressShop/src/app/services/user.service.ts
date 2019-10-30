@@ -92,4 +92,17 @@ export class UserService {
       config.headerObject
     )
   }
+
+  UpdateRating(iduser:number,idfournisseur:number,rating:number)
+  {
+    console.log("update");
+    const body = new HttpParams()
+    .set('iduser',iduser.toString())
+    .set('idfournisseur',idfournisseur.toString())
+    .set('rating',rating.toString());
+    return this.http.post(`${config.apiUrl}/api/UpdateRating`,
+    body.toString(),
+    config.headerObject
+    );
+  }
 }

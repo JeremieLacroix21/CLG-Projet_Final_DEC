@@ -38,13 +38,17 @@
                 
             <h1>{{profileToShow.nomutilisateur}}</h1>
             <div class="boutton_messagerie">
-                    <button mat-raised-button color="primary" >Envoyer un message</button>
-                    <button mat-raised-button color="primary" (click)="onClickNoterCompagnie(1)">Noter la compagnie</button>
+                    <button mat-raised-button color="primary">Envoyer un message</button>
+                    <button mat-raised-button color="primary" (click)="openPopUp()">Noter la compagnie</button>
                 </div>
             
             <div class="info-block"> <h3>Infos</h3>
                 <p>Description : {{profileToShow.description}}</p>
                 <p>Tags : {{profileToShow.tags}}</p>
+                <p>Nombre d'étoiles : {{rating}}
+                <star-rating [value]="rating" checkedcolor="yellow" uncheckedcolor="black" size="30px" [readonly]="ratingreadonly">
+                </star-rating></p>
+                
             </div>
             <img class="shown-logo" src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
         </div>
@@ -74,12 +78,13 @@
 <app-pop-up [isOpen]="popupvisible">
         <div style="text-align: center">
           <header>
-            <span><b>Envoyer la ou les commande(s) au(x) fournisseur(s)?</b></span>
+            <span><b>Noter la compagnie:</b></span>
           </header>
           <main style="margin-top: 20px">
-            <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
-          <button mat-raised-button color="primary" class="PanierButton" (click)="SendCommande()">confirmer</button>
-          <button mat-raised-button color="primary" class="PanierButton" (click)="ClosePopUp()">annuler</button>      
+            <star-rating [value]="newnewrating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)" readonly>
+            </star-rating>
+          <button mat-raised-button color="primary" class="PanierButton" (click)="onClickNoterCompagnie()">confirmer</button>
+          <button mat-raised-button color="primary" class="PanierButton" (click)="closePopUp()">annuler</button>      
           </main>
         </div>
       </app-pop-up>
