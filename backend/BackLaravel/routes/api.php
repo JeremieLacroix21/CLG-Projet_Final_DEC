@@ -40,13 +40,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('UpdateUser','API\ProfilController@UpdateUser');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
-
-
- //Route Produit
+ //Route Commande
  Route::post('GetCommandeDistributeur','API\CommandeController@GetCommandeDistributeur');
  Route::post('GetCommandeFournisseur','API\CommandeController@GetCommandeFournisseur');
- Route::post('GetFournisseur','API\CommandeController@GetFournisseur');
- Route::post('GetItems','API\CommandeController@GetItems');
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
  });
