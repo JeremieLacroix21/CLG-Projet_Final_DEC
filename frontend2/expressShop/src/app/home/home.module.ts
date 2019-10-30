@@ -66,6 +66,7 @@ import { InventaireComponent } from './inventaire/inventaire.component';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RatingModule } from 'ng-starrating';
+import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { RatingModule } from 'ng-starrating';
     AddProductComponent,
     CommandeComponent,
     Aboutcomponent,
-    InventaireComponent
+    InventaireComponent,
+    FavoriteSupplierComponent
   ],
   imports: [
     CommonModule,

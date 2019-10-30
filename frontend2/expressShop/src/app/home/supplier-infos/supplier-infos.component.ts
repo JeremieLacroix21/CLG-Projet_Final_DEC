@@ -12,6 +12,7 @@ import { ConcatSource } from 'webpack-sources';
 import { StarRatingComponent } from 'ng-starrating';
 import { AuthService } from 'src/app/services';
 
+
 @Component({
   selector: 'app-supplier-infos',
   templateUrl: './supplier-infos.component.html',

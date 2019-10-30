@@ -9,17 +9,16 @@
       </a>
 
       <span class="menu-spacer"></span>
-
       <div>
         <button mat-button [matMenuTriggerFor]="menu">{{nomutilisateur}}</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [allowUserTypes]="[auth.S]" [routerLink]="'inventaire'" routerLinkActive="active">inventaire</button>
           <button mat-menu-item [allowUserTypes]="[auth.D, auth.S, auth.A]" [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</button>
+          <button mat-menu-item [allowUserTypes]="[auth.D]" [routerLink]="'Favoritesupplier'" routerLinkActive="active">Founisseur(s) favori(s)</button>
         </mat-menu>
         <button mat-icon-button><mat-icon (click)="callLogout()">power_off</mat-icon></button>
         <a [allowUserTypes]="[auth.D]" mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
-    
     </mat-toolbar-row>
 </mat-toolbar>
 
