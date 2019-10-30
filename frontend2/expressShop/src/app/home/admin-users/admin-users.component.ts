@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BD_User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { map, filter, switchMap } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { MatTableDataSource, MatSort, MatSortModule, MatPaginator, MatSlideToggle } from '@angular/material';
 import { HomeComponent } from '../home.component';
 import { LoaderService } from 'src/app/services/loader.service';
+import { LogItem } from 'src/app/models/log-item';
 
 @Component({
   selector: 'app-admin-users',
@@ -16,18 +17,26 @@ import { LoaderService } from 'src/app/services/loader.service';
 export class AdminUsersComponent implements OnInit {
 
   private loadedUsers: Observable<BD_User[]>;
-  public loadingText: string;
+  private dataSourceUsers: MatTableDataSource<BD_User>;
+  private columnsToDisplayUsers = ['iduser', 'TypeUser', 'nomutilisateur', 'prenom', 'nom', 'email', 'dateinscription', 'confirme', 'actions'];
 
-  private dataSource: MatTableDataSource<BD_User>;
-  private columnsToDisplay = ['iduser', 'TypeUser', 'nomutilisateur', 'prenom', 'nom', 'email', 'dateinscription', 'confirme', 'actions'];
+  private loadedLogs: Observable<LogItem[]>;
+  private dataSourceLog: MatTableDataSource<LogItem>;
+  private columnsToDisplayLog = ['date', 'log'];
+
+  private logsAreShown = false;
 
   constructor(private userService: UserService, private loader: LoaderService) {
   }
 
   @ViewChild(MatSort, {static: false})
     set findSort(s: MatSort) {
-      if (s && this.dataSource) {
-        this.dataSource.sort = s;
+      if (s && this.dataSourceUsers) {
+        if (this.logsAreShown && this.dataSourceLog) {
+          this.dataSourceLog.sort = s;
+        } else {
+          this.dataSourceUsers.sort = s;
+        }
         setTimeout(() => {
           this.loader.hide();
         });
@@ -38,7 +47,7 @@ export class AdminUsersComponent implements OnInit {
   // See : this.onChangeConfirmRegistration()
   @ViewChild(MatSlideToggle, {static: false})
     set findMatSlideToggle(s: MatSlideToggle) {
-      if (s && s.checked) {
+      if (!this.logsAreShown &&  s && s.checked) {
         document.getElementById(s.id).classList.add('isChecked');
       }
     };
@@ -47,17 +56,51 @@ export class AdminUsersComponent implements OnInit {
     this.requestAllUser();
   }
 
+  ngOnDestroy() {
+  }
+
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceUsers.filter = filterValue.trim().toLowerCase();
+    this.dataSourceLog.filter = filterValue.trim().toLowerCase();
   }
   
+  formatLog(item: LogItem) {
+    let format = "";
+    
+    if (item.type == 0) {
+      format = 'Le compte ' + item.username + ' a été créé';
+    } else if (item.type == 1) {
+      format = "L'utilisateur " + item.username + " a passé une commande au fournisseur " + item.data;
+    } else if (item.type == 2) {
+      format = "L'utilisateur " + item.username + " a ajouter le produit " + item.data + " à son inventaire";
+    } else if (item.type == 3) {
+      format = "L'utilisateur " + item.username + " a retirer le produit " + item.data + " de son inventaire";
+    }
+
+    return format;
+  }
+
+  requestLogs() {
+    this.logsAreShown = !this.logsAreShown;
+
+    if (this.dataSourceLog) {
+      return;
+    }
+
+    this.loader.show("Chargement des activités...");
+    
+    this.loadedLogs = this.userService.getLogs();
+    this.loadedLogs.subscribe(data => {
+      this.dataSourceLog = new MatTableDataSource(data);
+    });
+  }
+
   requestAllUser() {
     this.loader.show("Chargement des utilisateurs...");
 
     this.loadedUsers = this.userService.getAll();
     this.loadedUsers.subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      console.log(this.dataSource.filteredData);
+      this.dataSourceUsers = new MatTableDataSource(data);
     });
   }
 
@@ -89,7 +132,7 @@ export class AdminUsersComponent implements OnInit {
       });
 
       // Update the user locally
-      this.dataSource.data.find(u => u.iduser == userIdToConfirm).confirme = event.checked;
+      this.dataSourceUsers.data.find(u => u.iduser == userIdToConfirm).confirme = event.checked;
     } else {
       sourceAsElement.classList.toggle('isChecked');
       event.source.checked = !newCheckedValue;
@@ -113,7 +156,7 @@ export class AdminUsersComponent implements OnInit {
       });
 
       // Delete the user locally
-      this.dataSource.data = this.dataSource.data.filter(u => u.iduser != userIdToDelete);
+      this.dataSourceUsers.data = this.dataSourceUsers.data.filter(u => u.iduser != userIdToDelete);
     }
   }
 }

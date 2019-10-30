@@ -52,4 +52,12 @@ class CommandeController extends Controller
         ->select('iduser','nomutilisateur','adresse','email','Telephone')->where('iduser', '=', $request['idFournisseur'])->get();
         return json_encode($Fournisseur);
     }
+
+    public function GetLogs() {
+        $request = DB::table('log_activites')
+            ->select('username', 'type', 'timestamp', 'data')
+            ->get();
+        
+        return json_encode($request);
+    }
 }

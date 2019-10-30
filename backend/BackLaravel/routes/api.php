@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
  });
+// Route Commande
+ Route::get('GetLogs', 'API\CommandeController@GetLogs');
+
  //Route User
  Route::post('login', 'API\PassportController@login');
  Route::post('register', 'API\PassportController@register');
