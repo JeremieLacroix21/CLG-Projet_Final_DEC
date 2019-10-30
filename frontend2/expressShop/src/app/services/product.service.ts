@@ -16,7 +16,7 @@ export class ProductService {
 
   nbCartItems = this.nbCartItemsSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll() {
     return this.http.get<Product[]>(
@@ -25,16 +25,15 @@ export class ProductService {
     );
   }
 
-  getProduitByFournisseur(id:number) {
+  getProduitByFournisseur(id: number) {
     const body = new HttpParams().set('id', id.toString());
     return this.http.post<Product[]>(
-      `${config.apiUrl}/api/GetProductsByFournisseur`,body.toString(),
+      `${config.apiUrl}/api/GetProductsByFournisseur`, body.toString(),
       config.headerObject
     );
   }
 
-  GetpanierFromId(iduser:number)
-  {
+  GetpanierFromId(iduser: number) {
     const body = new HttpParams().set('iduser', iduser.toString());
     return this.http.post<productPanier[]>(
       `${config.apiUrl}/api/GetpanierFromId`, body.toString(),
@@ -45,7 +44,7 @@ export class ProductService {
     this.nbCartItemsSource.next(nbItems);
   }
 
-  getbyname(name:string){
+  getbyname(name: string) {
     return this.getAll().pipe(map(loadedProducts => loadedProducts.filter(load => load.nom === name)));
   }
 
@@ -54,13 +53,12 @@ export class ProductService {
     return null;
   }
 
-  AddProductToCart(iduser:number, idproduit:number, qty:number)
-  {
+  AddProductToCart(iduser: number, idproduit: number, qty: number) {
     const body = new HttpParams()
       .set('iduser', iduser.toString())
-      .set('idproduit',idproduit.toString())
-      .set('quantity',qty.toString());
-    
+      .set('idproduit', idproduit.toString())
+      .set('quantity', qty.toString());
+
     return this.http.post(
       `${config.apiUrl}/api/AddProductToPanier`,
       body.toString(),
@@ -68,11 +66,10 @@ export class ProductService {
     );
   }
 
-  DeleteProductFromCart(iduser:number,idproduit:number)
-  {
+  DeleteProductFromCart(iduser: number, idproduit: number) {
     const body = new HttpParams()
       .set('iduser', iduser.toString())
-      .set('idproduit',idproduit.toString());
+      .set('idproduit', idproduit.toString());
 
     return this.http.put(
       `${config.apiUrl}/api/DeleteProductFromPanier`,
@@ -81,12 +78,11 @@ export class ProductService {
     );
   }
 
-  UpdateQuantityPanier(iduser:number,idproduit:number,qty:number)
-  { 
+  UpdateQuantityPanier(iduser: number, idproduit: number, qty: number) {
     const body = new HttpParams()
       .set('iduser', iduser.toString())
-      .set('idproduit',idproduit.toString())
-      .set('quantity',qty.toString());
+      .set('idproduit', idproduit.toString())
+      .set('quantity', qty.toString());
 
     return this.http.put(
       `${config.apiUrl}/api/UpdateQuantityPanier`,
@@ -106,27 +102,25 @@ export class ProductService {
     );
   }
 
-  CreationCommmande(idFournisseur, idDistributeur)
-  {
+  CreationCommmande(idFournisseur, idDistributeur) {
     const body = new HttpParams()
       .set('idFournisseur', idFournisseur.toString())
       .set('idDistributeur', idDistributeur.toString())
       .set('complete', "0")
       .set('dateCreation', formatDate(new Date(), 'yyyy/MM/dd', 'en'))
 
-      return this.http.post(
-        `${config.apiUrl}/api/InsertCommande`,
-        body.toString(),
-        config.headerObject
-      );
+    return this.http.post(
+      `${config.apiUrl}/api/InsertCommande`,
+      body.toString(),
+      config.headerObject
+    );
   }
 
-  CreationCommandeItems(idCommande,idproduit,quantite)
-  {
+  CreationCommandeItems(idCommande, idproduit, quantite) {
     const body = new HttpParams()
-    .set('idCommande', idCommande.toString())
-    .set('idProduit', idproduit.toString())
-    .set('quantite', quantite.toString())
+      .set('idCommande', idCommande.toString())
+      .set('idProduit', idproduit.toString())
+      .set('quantite', quantite.toString())
 
     return this.http.post(
       `${config.apiUrl}/api/InsertCommandeItems`,
@@ -147,16 +141,16 @@ export class ProductService {
     );
   }
 
-  AddProduct(nom:string,prix:number,idFournisseur:number,enStock:number,imgGuid:string,
-    description:string,tags:string){
-      const body = new HttpParams()
-    .set('nom', nom.toString())
-    .set('prix', prix.toString())
-    .set('idFournisseur', idFournisseur.toString())
-    .set('enStock', enStock.toString())
-    .set('imgGUID', imgGuid.toString())
-    .set('description', description.toString())
-    .set('Tags', tags.toString())
+  AddProduct(nom: string, prix: number, idFournisseur: number, enStock: number, imgGuid: string,
+    description: string, tags: string) {
+    const body = new HttpParams()
+      .set('nom', nom.toString())
+      .set('prix', prix.toString())
+      .set('idFournisseur', idFournisseur.toString())
+      .set('enStock', enStock.toString())
+      .set('imgGUID', imgGuid.toString())
+      .set('description', description.toString())
+      .set('Tags', tags.toString())
     return this.http.post(
       `${config.apiUrl}/api/AddProduct`,
       body.toString(),
@@ -164,4 +158,21 @@ export class ProductService {
     );
 
   }
+
+  UpdateProduct(idProduit: number, nom: string, prix:number, tags:string, enStock: number, description:string) {
+    const body = new HttpParams()
+      .set('idProduit', idProduit.toString())
+      .set('nom', nom.toString())
+      .set('prix', prix.toString())
+      .set('tags', tags.toString())
+      .set('enStock', enStock.toString())
+      .set('description', description.toString());
+
+    return this.http.put(
+      `${config.apiUrl}/api/UpdateProduct`,
+      body.toString(),
+      config.headerObject
+    );
+  }
 }
+

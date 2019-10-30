@@ -128,6 +128,8 @@ class ProfilController extends Controller
           }
     }
 
+
+
     public function UpdateRating(Request $request)
     {
         if($request->get('rating') <= 5 && $request->get('rating') > 0)
@@ -167,5 +169,35 @@ class ProfilController extends Controller
             return response()->json(['error'=> 'value ou of bound'], 401);
         }
     }
+
+
+    public function GetFavoriteSuppliers(Request $request)
+    { 
+        $user_ = DB::table('fournisseurs')
+        ->where('iduser', '=', $request->get('iduser'))
+        ->select('iduser','nomutilisateur','nom','prenom','TypeUser','confirme','dateinscription','email','Téléphone','description')
+        ->get();
+        if (is_null($user_)) {
+            return response()->json(['error'=> 'User doesnt exist'], 401);
+          } else {
+
+            $data = [];
+            foreach($user_ as $user)
+            {
+            $data = [
+                'iduser' => $user->iduser,
+                'nomutilisateur' => $user->nomutilisateur,
+                'nom'=> $user->nom,
+                'prenom'=> $user->prenom,
+                'TypeUser'=> $user->prenom,
+                'confirme'=> $user->prenom,
+                'dateinscription'=> $user->prenom,
+                'email' => $user->email,
+                'telephone' => $user->Téléphone,
+                'description' => $user->description
+            ];
+            return json_encode($data);
+    }
+
 }
 ?>
