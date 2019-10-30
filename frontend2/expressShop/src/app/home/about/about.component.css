@@ -88,3 +88,13 @@ table.gridtable {
   height: 100%;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 2000px) {
+  .fonctions {
+    margin-top: 30%;
+  }
+}
+
+.row{
+  padding-top: 40px;
+}
