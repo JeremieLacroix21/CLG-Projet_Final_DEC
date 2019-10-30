@@ -47,3 +47,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
  });
+
+
+ Route::post('GetProductsByFournisseur','API\ProduitController@GetProductsByFournisseur');
