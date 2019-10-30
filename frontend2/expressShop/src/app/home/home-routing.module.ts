@@ -31,7 +31,6 @@ const routes: Routes = [
       { path: 'inventaire', component: InventaireComponent, data: {allowed: [SUPPLIER]} },
       { path: 'about', component: Aboutcomponent},
       { path: 'Favoritesupplier', component: FavoriteSupplierComponent, data: {allowed: [DISTRIB]} }
-
     ]
   },
   { path: '**', redirectTo: '404' }
