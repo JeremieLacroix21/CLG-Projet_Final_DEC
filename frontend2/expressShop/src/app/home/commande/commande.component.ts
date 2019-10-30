@@ -145,13 +145,12 @@ export class CommandeComponent implements OnInit {
       }
     }
   }
-  CompleteCommande(idCommande){
+  CompleteCommande(event : UIEvent, idCommande){
+    event.stopPropagation();
     this.loader.show("Achèvement de votre commande...");
     this.commandeService.CompleteCommande(idCommande).subscribe( res=>
       {
         this.updatecommandelist();
-        this.loader.hide();
-        console.log(res);
       });
   }
   updatecommandelist(){
@@ -166,6 +165,7 @@ export class CommandeComponent implements OnInit {
       });
       this.dataSourceFournisseur.data =  this.CommandesFournisseur;
       this.dataSourceFournisseur.data = this.dataSourceFournisseur.data.filter(u => u.complete == 0);
+      this.loader.hide();
     });
   }
   
