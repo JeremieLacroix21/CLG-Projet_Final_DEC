@@ -26,9 +26,9 @@ export class ProductService {
   }
 
   getProduitByFournisseur(id:number) {
-    const body = new HttpParams().set('idFournisseur', id.toString());
-    return this.http.get<Product[]>(
-      `${config.apiUrl}/api/GetProductsByFournisseur`,
+    const body = new HttpParams().set('id', id.toString());
+    return this.http.post<Product[]>(
+      `${config.apiUrl}/api/GetProductsByFournisseur`,body.toString(),
       config.headerObject
     );
   }

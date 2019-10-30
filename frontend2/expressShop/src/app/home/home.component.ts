@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   private loaderSubscription: Subscription;
   private nbCartItems: number;
   private nbCartItemsSubscription: Subscription;
+  private nomutilisateur:string;
 
   constructor(
     private router: Router,
@@ -25,7 +26,11 @@ export class HomeComponent implements OnInit {
     private loader: LoaderService,
     private spinner: NgxSpinnerService,
     private productsService: ProductService
-  ) { }
+
+  ) { 
+
+    this.nomutilisateur = auth.currUser.nomutilisateur;
+  }
 
   ngOnInit() {
     this.loaderSubscription = this.loader.text.subscribe(data => {
