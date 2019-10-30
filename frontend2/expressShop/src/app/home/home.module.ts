@@ -66,6 +66,7 @@ import { InventaireComponent } from './inventaire/inventaire.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddProductComponent,
     CommandeComponent,
     Aboutcomponent,
-    InventaireComponent
+    InventaireComponent,
+    ExpandedPanelComponent
   ],
   imports: [
     CommonModule,

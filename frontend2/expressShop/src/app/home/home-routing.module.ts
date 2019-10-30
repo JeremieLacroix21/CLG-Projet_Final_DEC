@@ -28,7 +28,7 @@ const routes: Routes = [
       { path: 'supplierInfos', component: SupplierInfosComponent, data: {allowed: [DISTRIB, SUPPLIER, ADMIN]} },
       { path: 'add-product', component: AddProductComponent, data: {allowed: [SUPPLIER, ADMIN]} },
       { path: 'commande', component: CommandeComponent, data: {allowed: [SUPPLIER, DISTRIB]} },
-      { path: 'inventaire', component: InventaireComponent, data: {allowed: [SUPPLIER]} },
+      { path: 'inventaire', component: InventaireComponent, data: {allowed: [SUPPLIER, ADMIN]} },
       { path: 'about', component: Aboutcomponent}
     ]
   },
