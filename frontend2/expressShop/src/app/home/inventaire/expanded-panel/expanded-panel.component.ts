@@ -80,7 +80,7 @@ export class ExpandedPanelComponent implements OnInit {
   }
 
   onSubmit() {
-    /* if (this.productForm.invalid) {
+    if (this.productForm.invalid) {
       return;
     }
     else {
@@ -89,13 +89,19 @@ export class ExpandedPanelComponent implements OnInit {
         this.TagChaine += element.name + ";";
       });
 
-      this.productService.UpdateProduct().subscribe(
+      this.productService.UpdateProduct(this.item.idproduits,
+         this.productForm.controls.nom.value,
+         this.productForm.controls.prix.value,
+         this.TagChaine,
+         this.productForm.controls.enStock.value,
+         this.productForm.controls.description.value
+          ).subscribe(
         (res) => {
         },
         (err) => {
 
         }
       );
-    } */
+    }
   }
 }

@@ -22,7 +22,7 @@ export class AdminUsersComponent implements OnInit {
 
   private loadedLogs: Observable<LogItem[]>;
   private dataSourceLog: MatTableDataSource<LogItem>;
-  private columnsToDisplayLog = ['date', 'log'];
+  private columnsToDisplayLog = ['timestamp', 'log'];
 
   private logsAreShown = false;
 
@@ -47,7 +47,7 @@ export class AdminUsersComponent implements OnInit {
   // See : this.onChangeConfirmRegistration()
   @ViewChild(MatSlideToggle, {static: false})
     set findMatSlideToggle(s: MatSlideToggle) {
-      if (!this.logsAreShown &&  s && s.checked) {
+      if (!this.logsAreShown && s && s.checked) {
         document.getElementById(s.id).classList.add('isChecked');
       }
     };
@@ -92,6 +92,9 @@ export class AdminUsersComponent implements OnInit {
     this.loadedLogs = this.userService.getLogs();
     this.loadedLogs.subscribe(data => {
       this.dataSourceLog = new MatTableDataSource(data);
+      this.dataSourceLog.filterPredicate = (data: LogItem, filter: string) => {
+        return filter.trim().toLowerCase().includes(this.formatLog(data).trim().toLowerCase());
+      };
     });
   }
 
