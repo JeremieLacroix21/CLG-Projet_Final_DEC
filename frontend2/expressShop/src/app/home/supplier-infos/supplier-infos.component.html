@@ -39,7 +39,7 @@
             <h1>{{profileToShow.nomutilisateur}}</h1>
             <div class="boutton_messagerie">
                     <button mat-raised-button color="primary" >Envoyer un message</button>
-                    <button mat-raised-button color="primary" >Noter la compagnie</button>
+                    <button mat-raised-button color="primary" (click)="onClickNoterCompagnie(1)">Noter la compagnie</button>
                 </div>
             
             <div class="info-block"> <h3>Infos</h3>
@@ -71,5 +71,16 @@
 
 </mat-drawer-container>
 </ng-container>
-
+<app-pop-up [isOpen]="popupvisible">
+        <div style="text-align: center">
+          <header>
+            <span><b>Envoyer la ou les commande(s) au(x) fournisseur(s)?</b></span>
+          </header>
+          <main style="margin-top: 20px">
+            <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+          <button mat-raised-button color="primary" class="PanierButton" (click)="SendCommande()">confirmer</button>
+          <button mat-raised-button color="primary" class="PanierButton" (click)="ClosePopUp()">annuler</button>      
+          </main>
+        </div>
+      </app-pop-up>
 

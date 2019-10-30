@@ -30,10 +30,9 @@ export class SupplierInfosComponent implements OnInit {
   private profileToShow: Supplier;
   private loadedSuppliers: Observable<Supplier[]>;
   private dataSource: MatTableDataSource<Supplier>;
-  popupvisible: boolean;
+  popupvisible = false;
 
   constructor(private ref: ChangeDetectorRef,private geocodeService : GeocodeService,private router: Router, private route: ActivatedRoute, private userService: UserService, private loader: LoaderService) {
-  this.popupvisible = false;
   }
 
   ngOnInit() {
@@ -105,7 +104,10 @@ export class SupplierInfosComponent implements OnInit {
     this.popupvisible = true;
     this.updateNbEtoile(3);
   }
-
+  ClosePopUp()
+  {
+    this.popupvisible = false;
+  }
 
   updateNbEtoile(number:number)
   {
