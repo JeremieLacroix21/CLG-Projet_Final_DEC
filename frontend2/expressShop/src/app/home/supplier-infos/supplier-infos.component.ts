@@ -30,11 +30,14 @@ export class SupplierInfosComponent implements OnInit {
   private profileToShow: Supplier;
   private loadedSuppliers: Observable<Supplier[]>;
   private dataSource: MatTableDataSource<Supplier>;
+  popupvisible: boolean;
 
   constructor(private ref: ChangeDetectorRef,private geocodeService : GeocodeService,private router: Router, private route: ActivatedRoute, private userService: UserService, private loader: LoaderService) {
+  this.popupvisible = false;
   }
 
   ngOnInit() {
+
     this.route.queryParams
       .pipe(filter(params => params.s))
       .subscribe(params => {
@@ -95,6 +98,12 @@ export class SupplierInfosComponent implements OnInit {
       }      
     );       
     console.log(this.address);
+  }
+
+  onClickNoterCompagnie()
+  {
+    this.popupvisible = true;
+    this.updateNbEtoile(3);
   }
 
 

@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { productPanier } from 'src/app/models/productPanier.entity';
 import { Router, ActivatedRoute } from "@angular/router";
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from 'src/app/services/product.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { AuthService } from 'src/app/services';
+import { Distributor } from 'src/app/models/distributor';
+
 
 
 @Component({
@@ -34,7 +36,8 @@ export class ShoppingCartComponent implements OnInit {
     private auth: AuthService,
     private productService: ProductService,
     private loader: LoaderService,
-    private router: Router
+    private router: Router,
+    private currentdistributor: Distributor 
   ) {}
 
   ngOnInit() {
@@ -60,10 +63,22 @@ export class ShoppingCartComponent implements OnInit {
     this.Total();
   }
 
-  delete(idProduit: number) {
-    this.productService.DeleteProductFromCart(this.auth.currUser.iduser, idProduit).subscribe();
+  delete(IdProduit: number) {
+    this.productService.DeleteProductFromCart(this.auth.currUser.iduser, IdProduit).subscribe();
     // Delete the user locally
-    this.dataSource.data = this.dataSource.data.filter(u => u.idproduits != idProduit);
+    this.dataSource.data = this.dataSource.data.filter(u => u.idproduits != IdProduit);
+
+    this.currentdistributor = this.auth.currDistributor;
+
+    const index = this.currentdistributor.cart.findIndex(item => item.idproduits === IdProduit);
+if (index > -1) {
+  this.currentdistributor.cart.splice(index, 1);
+}
+    
+    this.auth.updateCurrUser(this.currentdistributor);
+    if (this.auth.currUser.TypeUser === this.auth.D) {
+      this.productService.RefreshCartItemCount(this.auth.currDistributor.cart.length);
+    }
   }
 
   Total() {
