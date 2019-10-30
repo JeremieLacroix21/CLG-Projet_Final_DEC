@@ -65,6 +65,7 @@ import { InventaireComponent } from './inventaire/inventaire.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
 import { RatingModule } from 'ng-starrating';
 import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
 
@@ -83,6 +84,7 @@ import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier
     Aboutcomponent,
     InventaireComponent,
     FavoriteSupplierComponent
+    ExpandedPanelComponent
   ],
   imports: [
     CommonModule,

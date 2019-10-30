@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-inventaire',
@@ -12,12 +13,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./inventaire.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
+
 export class InventaireComponent implements OnInit, OnDestroy {
 
   public dataSource = new MatTableDataSource<Product>();
@@ -25,19 +27,13 @@ export class InventaireComponent implements OnInit, OnDestroy {
   products: Product[];
   resultsLength = 0;
 
-  public displayedColumns = ['nom', 'prix', 'tags' ,'enStock', 'description'];
+  public displayedColumns = ['nom', 'prix', 'tags', 'enStock', 'description'];
 
-  
-  constructor(private productService: ProductService, private auth: AuthService) { 
-    this.subscription = this.productService.getProduitByFournisseur(auth.currUser.iduser).subscribe(products => 
-      {
-        this.dataSource.data = this.products = products
-        this.resultsLength = products.length;
-
-        console.log(this.products);
+  constructor(private productService: ProductService, private auth: AuthService) {
+    this.subscription = this.productService.getProduitByFournisseur(auth.currUser.iduser).subscribe(products => {
+      this.dataSource.data = this.products = products
+      this.resultsLength = products.length;
     });
-
-    
   }
 
   ngOnInit() {

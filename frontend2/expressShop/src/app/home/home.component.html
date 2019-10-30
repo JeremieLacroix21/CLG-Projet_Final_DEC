@@ -12,7 +12,7 @@
       <div>
         <button mat-button [matMenuTriggerFor]="menu">{{nomutilisateur}}</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item [allowUserTypes]="[auth.S]" [routerLink]="'inventaire'" routerLinkActive="active">inventaire</button>
+          <button mat-menu-item [allowUserTypes]="[auth.S, auth.A]" [routerLink]="'inventaire'" routerLinkActive="active">inventaire</button>
           <button mat-menu-item [allowUserTypes]="[auth.D, auth.S, auth.A]" [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</button>
           <button mat-menu-item [allowUserTypes]="[auth.D]" [routerLink]="'Favoritesupplier'" routerLinkActive="active">Founisseur(s) favori(s)</button>
         </mat-menu>
@@ -41,7 +41,7 @@
   <mat-sidenav-content>
     <router-outlet></router-outlet>
 
-    <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium">
+    <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
       <p class="loadingText">{{loaderText}}</p>
     </ngx-spinner>
   </mat-sidenav-content>
