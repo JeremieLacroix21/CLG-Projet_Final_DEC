@@ -312,27 +312,37 @@ class ProduitController extends Controller
     public function UpdateProduct(Request $request)
    {
         //fonctionnel
-        $results = DB::table('produits')
-        ->where(
-            ['idproduits', '=', $request->get('idProduit')]
-        ])
-        ->update(['nom' => $request->get('quantity')]);
-        ->update(['prix' => $request->get('quantity')]);
-        ->update(['enStock' => $request->get('enStock')]);
-        ->update(['description' => $request->get('description')]);
+        $input = $request->all();
 
-        $data = explode(";",$results->get("tags"));
-       foreach ($data as $Tags) {
-        $TagExiste = DB::table('tags_produit')
-        ->where('tag', '=', $Tags)
-        ->first();
-        if (is_null($TagExiste)) {
-            DB::table('tags_produit')->insert(array(
-                'tag' => $Tags
-               ));
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request->get('idProduit'))
+        ->update(['nom' => $request->get('nom')]);
+
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request->get('idProduit'))
+        ->update(['prix' => $request->get('prix')]);
+
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request->get('idProduit'))
+        ->update(['enStock' => $request->get('enStock')]);
+
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request->get('idProduit'))
+        ->update(['description' => $request->get('description')]);        
+
+        $data = explode(";",$input["Tags"]);
+        foreach ($data as $Tags) {
+         $TagExiste = DB::table('tags_produit')
+         ->where('tag', '=', $Tags)
+         ->first();
+         if (is_null($TagExiste)) {
+             DB::table('tags_produit')->insert(array(
+                 'tag' => $Tags
+                ));
+         }
+         //Ajout du lien tag
+         DB::select('Call InsertionLienTagsProduit(?)',array($Tags));
         }
-        //Ajout du lien tag
-        DB::select('Call InsertionLienTagsProduit(?)',array($Tags));
 
         if (is_null($results)) {
            return response()->json(['error' => 'product doesnt exist'], 401);

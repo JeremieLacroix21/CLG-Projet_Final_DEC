@@ -43,9 +43,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
  Route::post('UpdateRating','API\ProfilController@UpdateRating');
 
-
  //Route Produit
-
+ Route::put('UpdateProduct','API\ProduitController@UpdateProduct');
  //Route Commande
 
  Route::post('GetCommandeDistributeur','API\CommandeController@GetCommandeDistributeur');
