@@ -11,11 +11,11 @@
       <span class="menu-spacer"></span>
 
       <div>
-        <!--<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+        <button mat-button [matMenuTriggerFor]="menu">{{nomutilisateur}}</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-        </mat-menu>-->
+          <button mat-menu-item [allowUserTypes]="[auth.S]" [routerLink]="'inventaire'" routerLinkActive="active">inventaire</button>
+          <button mat-menu-item [allowUserTypes]="[auth.D, auth.S, auth.A]" [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</button>
+        </mat-menu>
         <button mat-icon-button><mat-icon (click)="callLogout()">power_off</mat-icon></button>
         <a [allowUserTypes]="[auth.D]" mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>
       </div>
@@ -28,14 +28,12 @@
   <mat-sidenav #sidenav>
     
     <mat-nav-list>
-      <a [allowUserTypes]="[auth.D, auth.S, auth.A]" mat-list-item [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</a>
       <a [allowUserTypes]="[auth.D, auth.S, auth.A]" mat-list-item [routerLink]="'supplierInfos'" routerLinkActive="active">Fournisseurs</a>
       <a mat-list-item [routerLink]="'browseProduct'" routerLinkActive="active">Produits</a>
       <a [allowUserTypes]="[auth.D]" mat-list-item [routerLink]="'shoppingCart'" routerLinkActive="active">Panier d'achat</a>
       <a [allowUserTypes]="[auth.S]" mat-list-item [routerLink]="'add-product'" routerLinkActive="active">Ajouter Produit</a>
       <a [allowUserTypes]="[auth.S, auth.D]" mat-list-item [routerLink]="'commande'" routerLinkActive="active">Voir vos commandes</a>
       <a [allowUserTypes]="[auth.A]" mat-list-item [routerLink]="'admin-users'" routerLinkActive="active">Gérer les utilisateurs</a>
-      <a [allowUserTypes]="[auth.S]" mat-list-item [routerLink]="'inventaire'" routerLinkActive="active">inventaire</a>
       <a mat-list-item [routerLink]="'about'" routerLinkActive="active">À propos</a>
     </mat-nav-list>
     
