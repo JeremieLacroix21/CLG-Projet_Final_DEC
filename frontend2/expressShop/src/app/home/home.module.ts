@@ -65,11 +65,7 @@ import { InventaireComponent } from './inventaire/inventaire.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
-<<<<<<< HEAD
-import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
-=======
 import { RatingModule } from 'ng-starrating';
->>>>>>> 5b98c18d358df474698a19816346fdacd098786e
 
 
 @NgModule({
@@ -84,8 +80,7 @@ import { RatingModule } from 'ng-starrating';
     AddProductComponent,
     CommandeComponent,
     Aboutcomponent,
-    InventaireComponent,
-    ExpandedPanelComponent
+    InventaireComponent
   ],
   imports: [
     CommonModule,
