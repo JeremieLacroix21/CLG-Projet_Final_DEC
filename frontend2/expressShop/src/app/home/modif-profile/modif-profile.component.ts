@@ -86,6 +86,8 @@ export class ModifProfileComponent implements OnInit {
   onClickChangePassword()
   {
     window.alert('Your password was changed');
+    let id = this.AuthService.currUser.iduser;
+    this.UpdatePassword(id, this.passwordForm.controls.newPassword.value);
   }
   UpdateUser(iduser:number,nomutilisateur:string,courriel:string,téléphone:string,description:string)
   {

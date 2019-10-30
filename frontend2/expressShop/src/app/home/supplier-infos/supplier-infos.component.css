@@ -98,3 +98,8 @@ agm-map{
     position: relative;
     width: calc(100% - 68px);
 }
+
+.boutton_messagerie{
+    position: relative;
+   padding: 1px;
+}

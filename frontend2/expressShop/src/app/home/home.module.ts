@@ -58,14 +58,16 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { HttpClientModule } from '@angular/common/http';
-import { AddProductComponent } from './add-product/add-product.component'
+import { AddProductComponent } from './add-product/add-product.component';
 import { CommandeComponent } from './commande/commande.component';
 import { DirectivesModule } from '../directives/directives.module';
 import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     HomeComponent,

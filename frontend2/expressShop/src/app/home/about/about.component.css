@@ -1,3 +1,5 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
 .header{
   width: 100%;
   height: 40%;
@@ -5,7 +7,8 @@
 }
 .container{
   width: 100%;
-  height: 60%;
+  margin-top: 50px;
+  height: 45%;
   text-align: center;
 }
 .ImagePrincipal{
@@ -20,7 +23,7 @@
   font-weight: bold;
   font-size: 60px;
   position: relative;
-  bottom: 50px;
+  top: 20px;
 }
 
 .logoES {
@@ -37,14 +40,11 @@
 }
 
 section{
-  max-height: 60%;
   float: left;
   box-sizing: border-box;
-  width: 50%;
+  width: 100%;
   height: 100%;
-  padding: 20px;
   font-size: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .material-icons.md-48 { 
@@ -54,8 +54,7 @@ section{
 table.gridtable {
   width: 100%;
   height: 100%;
-  margin-left:auto; 
-  margin-right:auto;
+
   
 }
   table.gridtable th {
@@ -71,9 +70,31 @@ table.gridtable {
   .icon{
     font-size: 48px;
   }
-  .vidéo{
-    padding: 50px;
-    width: 100%;
-    height: 40%;
-    text-align: center;
+
+
+ .centericon{
+  position: absolute;
+  top: 50%;
+  left: 9%;
+  transform: translate(-50%, -50%);
+ }
+
+ .centervideo{
+  position: relative;
+  margin-top: 30px;
+  left: 50%;
+  bottom: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 2000px) {
+  .fonctions {
+    margin-top: 30%;
   }
+}
+
+.row{
+  padding-top: 40px;
+}
