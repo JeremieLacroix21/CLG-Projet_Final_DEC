@@ -5,7 +5,7 @@ import { Product } from '../models/product';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { productPanier } from '../models/productPanier.entity';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
