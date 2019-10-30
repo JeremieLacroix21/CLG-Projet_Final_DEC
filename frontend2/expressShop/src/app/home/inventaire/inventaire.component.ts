@@ -15,13 +15,21 @@ export class InventaireComponent implements OnInit, OnDestroy {
   public dataSource = new MatTableDataSource<Product>();
   subscription: Subscription;
   products: Product[];
+  resultsLength = 0;
 
-  public displayedColumns = ['idproduits', 'prix', 'tags', 'idFournisseur', 'nomFournisseur', 'enStock', 'nom', 'description'];
+  public displayedColumns = ['nom', 'prix', 'tags' ,'enStock', 'description'];
 
   
   constructor(private productService: ProductService, private auth: AuthService) { 
-    this.subscription = this.productService.getProduitByFournisseur(auth.currUser.iduser).subscribe(products => {this.dataSource.data = this.products = products
+    this.subscription = this.productService.getProduitByFournisseur(auth.currUser.iduser).subscribe(products => 
+      {
+        this.dataSource.data = this.products = products
+        this.resultsLength = products.length;
+
+        console.log(this.products);
     });
+
+    
   }
 
   ngOnInit() {

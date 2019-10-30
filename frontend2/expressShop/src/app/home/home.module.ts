@@ -87,7 +87,6 @@ import { AgmCoreModule } from '@agm/core';
     HttpClientModule,
     PopUpModule,
     DirectivesModule,
-
      // material
      MatBadgeModule,
      MatBottomSheetModule,
