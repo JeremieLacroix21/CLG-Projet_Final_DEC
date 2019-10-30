@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HomeRoutingModule } from './home-routing.module';
 import { BrowseProductsComponent } from './browse-products/browse-products.component';
 import { ModifProfileComponent } from './modif-profile/modif-profile.component';
@@ -66,7 +65,11 @@ import { InventaireComponent } from './inventaire/inventaire.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< HEAD
 import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
+=======
+import { RatingModule } from 'ng-starrating';
+>>>>>>> 5b98c18d358df474698a19816346fdacd098786e
 
 
 @NgModule({
@@ -137,9 +140,8 @@ import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-pan
      CdkTreeModule,
      MatTreeModule,
      NgxSpinnerModule,
-     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB23aRLsMN0fgjxGHsf-PyXC8EHtgznvg8'
-    })
+     AgmCoreModule.forRoot({apiKey: 'AIzaSyB23aRLsMN0fgjxGHsf-PyXC8EHtgznvg8'}),
+     RatingModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

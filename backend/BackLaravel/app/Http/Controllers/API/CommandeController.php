@@ -41,16 +41,43 @@ class CommandeController extends Controller
     }
     public function GetCommandeFournisseur(Request $request)
     {
-        $matchThese = ['commandes.idFournisseur' => $request['idFournisseur'], 'commandes.complete' => $request['Encours']];
+        $arraycommandes = array("");
+        $matchThese = ['commandes.idFournisseur' => $request['idFournisseur']];
         $commandes = DB::table('commandes')
-        ->select('*')->where($matchThese)->get();
-        return json_encode($commandes);
+        ->select('*')->where($matchThese)->get();  
+        $i = 0;
+        $data = [];
+        foreach($commandes as $key => $value)
+        {
+            $Commande = DB::table('commandes')
+             ->join('commandeItems', 'commandes.idCommande','=', 'commandeItems.idCommande')
+             ->join('produits', 'commandeItems.idproduit','=', 'produits.idproduits')
+             ->select('imgGUID','nom','prix','quantite','description')->where('commandes.idCommande', '=', $value->idCommande)->get();
+            $Distributeur = DB::table('users')
+            ->select('iduser','nomutilisateur','adresse','email','Telephone')->where('iduser', '=',  $value->idDistributeur)->get();
+            $new = (array) $Commande;
+            $first_key = key($new);
+            $new['TableItem'] = $new[$first_key];
+            unset($new[$first_key]);
+            $arraycommandes = (array)$value;
+            $arraycommandes['nomDistributeur'] = $Distributeur[0]->nomutilisateur; 
+            $arraycommandes['EmailDistributeur'] =  $Distributeur[0]->email; 
+            $arraycommandes['telephone'] =  $Distributeur[0]->Telephone; 
+            $arrayfini = array_merge($arraycommandes,$new);
+            $arraycommandes = array_merge($arrayfini , $arraycommandes);
+            $data[$i] = $arrayfini;
+            $i++;
+        }
+        return json_encode($data);
     }
-    public function GetFournisseur(Request $request)
-    {
-        $Fournisseur = DB::table('users')
-        ->select('iduser','nomutilisateur','adresse','email','Telephone')->where('iduser', '=', $request['idFournisseur'])->get();
-        return json_encode($Fournisseur);
+
+    public function CompleteCommande(Request $request) {
+        $results = DB::table('commandes')
+        ->where([
+            ['idCommande', '=', $request['idCommande']]
+        ])
+        ->update(['complete' => '1']);
+        return json_encode($results);
     }
 
     public function GetLogs() {

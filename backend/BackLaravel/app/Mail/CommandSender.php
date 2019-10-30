@@ -24,7 +24,7 @@ class CommandSender extends Mailable
 
     public function build()
     {
-        $address = 'ExpressShop.Recovery@hotmail.com';
+        $address = 'express.shop.company@gmail.com';
         $subject = 'Vous avez reçu une commande';
         $name = 'Express Shop';
         

@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { config } from '../../config';
-import { Product } from '../models/product';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Commandes } from '../models//commandes';
-import {formatDate} from '@angular/common';
-import { CommandesItems } from '../models/commandesItems';
+import { CommandesFournisseur } from '../models//commandesFournisseur';
 
 @Injectable({
     providedIn: 'root'
@@ -24,11 +20,20 @@ export class CommandeService {
       );
     }
 
+    GetCommandeFournisseur(idFournisseur){
+      const body = new HttpParams().set('idFournisseur', idFournisseur.toString());
+      return this.http.post<CommandesFournisseur[]>(
+        `${config.apiUrl}/api/GetCommandeFournisseur`,
+        body.toString(),
+        config.headerObject
+      );
+    }
+
     
-    GetFournisseur(idFournisseur){
-      const body = new HttpParams().set('idFournisseur', idFournisseur.toString())
+    CompleteCommande(idcommande){
+      const body = new HttpParams().set('idCommande', idcommande.toString())
       return this.http.post(
-        `${config.apiUrl}/api/GetFournisseur`,
+        `${config.apiUrl}/api/CompleteCommande`,
         body.toString(),
         config.headerObject
       );

@@ -9,8 +9,8 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { GeocodeService } from 'src/app/services/maps.service';
 import { Location } from 'src/app/models/location-models';
 import { ConcatSource } from 'webpack-sources';
-
-
+import { StarRatingComponent } from 'ng-starrating';
+import { AuthService } from 'src/app/services';
 
 @Component({
   selector: 'app-supplier-infos',
@@ -25,6 +25,10 @@ export class SupplierInfosComponent implements OnInit {
  // initial center position for the map
   address : string;
   location: Location;
+  rating : number;
+  newrating : number;
+  ratingreadonly : boolean;
+  newnewrating:number;
 
   private supplierId: number;
   private profileToShow: Supplier;
@@ -32,7 +36,7 @@ export class SupplierInfosComponent implements OnInit {
   private dataSource: MatTableDataSource<Supplier>;
   popupvisible = false;
 
-  constructor(private ref: ChangeDetectorRef,private geocodeService : GeocodeService,private router: Router, private route: ActivatedRoute, private userService: UserService, private loader: LoaderService) {
+  constructor( private AuthService : AuthService,private ref: ChangeDetectorRef,private geocodeService : GeocodeService,private router: Router, private route: ActivatedRoute, private userService: UserService, private loader: LoaderService) {
   }
 
   ngOnInit() {
@@ -50,7 +54,9 @@ export class SupplierInfosComponent implements OnInit {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: { s: supplier.iduser }});
     this.profileToShow = supplier;
     this.address = this.profileToShow.adresse;
-   this.showLocation();
+    this.rating  = this.profileToShow.nbEtoiles;
+    this.newnewrating = 0;
+    this.showLocation();
   }
 
   applyFilter(filterValue: string) {
@@ -65,7 +71,6 @@ export class SupplierInfosComponent implements OnInit {
       if (this.supplierId)
         this.profileToShow = this.dataSource.data.find(s => s.iduser == this.supplierId);
       this.loader.hide();
-      
     });
   }
 
@@ -102,21 +107,28 @@ export class SupplierInfosComponent implements OnInit {
   onClickNoterCompagnie()
   {
     this.popupvisible = true;
-    this.updateNbEtoile(3);
+    let iduser = this.AuthService.currUser.iduser;
+    let idfournisseur = this.profileToShow.iduser;
+    this.userService.UpdateRating(iduser,idfournisseur,this.newrating).subscribe();
+    this.closePopUp();
   }
-  ClosePopUp()
+
+  openPopUp()
+  {
+      this.popupvisible = true;
+  }
+  closePopUp()
   {
     this.popupvisible = false;
   }
 
-  updateNbEtoile(number:number)
-  {
-
-  }
-
   redirectToChat()
   {
-
+      //todo
   }
 
+  onRate($event:{newValue:number}) {
+      this.newrating = $event.newValue;
+      console.log(this.newrating);
+  }
 }

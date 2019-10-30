@@ -127,5 +127,45 @@ class ProfilController extends Controller
               return response()->json(['success' => 'profile updated'], $this->successStatus);
           }
     }
+
+    public function UpdateRating(Request $request)
+    {
+        if($request->get('rating') <= 5 && $request->get('rating') > 0)
+        
+        {$results = DB::table('Ratings')
+        ->updateOrInsert(
+        ['idfournisseur' => $request->get('idfournisseur'), 'iduser' => $request->get('iduser')],
+        ['rating' => $request->get('rating')]
+        );
+        //faire la moyenne 
+        $moyenne = DB::table('Ratings')
+        ->where('idfournisseur','=',$request->get('idfournisseur'))
+        ->avg('rating');
+
+        
+        round($moyenne);
+        if ($moyenne >= 6)
+        {
+            $moyenne = 5;
+        }
+        else if ($moyenne <= 0)
+        {
+            $moyenne = 1;
+        }
+        //update le current rating avec la moyenne  
+        $results += DB::table('fournisseurs')
+        ->where('idfournisseur','=',$request->get('idfournisseur'))
+        ->update(['nbEtoiles' => $moyenne]);
+        if (is_null($results)) {
+            return response()->json(['error'=> 'User or supplier doesnt exist'], 401);
+          } else {
+              return response()->json(['success' => 'rating updated'], $this->successStatus);
+          }
+        }
+        else
+        {
+            return response()->json(['error'=> 'value ou of bound'], 401);
+        }
+    }
 }
 ?>
