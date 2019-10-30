@@ -28,7 +28,7 @@ export class SupplierInfosComponent implements OnInit {
   rating : number;
   newrating : number;
   ratingreadonly : boolean;
-  
+  newnewrating:number;
 
   private supplierId: number;
   private profileToShow: Supplier;
