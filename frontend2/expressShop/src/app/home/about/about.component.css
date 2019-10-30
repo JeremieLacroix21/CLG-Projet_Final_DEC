@@ -94,7 +94,43 @@ table.gridtable {
     margin-top: 30%;
   }
 }
+@media screen and (min-width: 2000px) {
+  .button_div {
+    position: relative;
+    left: 30px;
+  }
+}
 
 .row{
   padding-top: 40px;
+}
+.Profil{
+  height: 80%;
+   text-align: center; 
+    margin-top: 25%;
+}
+footer {
+  clear: both;
+  position: relative;
+  top: 100%;
+  height: 350px;
+  margin-top: 300px;
+  background-color: rgb(197, 197, 197);
+}
+.button_div{
+  float: left;
+  position: relative;
+  right: 18px;
+}
+.fieldinput{
+  width: 450px;
+}
+
+.form-control {
+  background-color:transparent;
+  border: 0px solid;
+}
+.form-control:focus {
+  background-color:transparent;
+  border: 0px solid;
 }

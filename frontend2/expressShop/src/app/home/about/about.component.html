@@ -38,7 +38,7 @@
           Il pourra tout comme sur le site web compléter des commandes.
       </p>
     </section>
-    <section style="margin-top: 5px;">
+    <section>
         <section class="container mt-4 mb-4">
             <header>
                 <h3>Les membres de notre équipe</h3>
@@ -108,7 +108,7 @@
           </section>
   </section>
   </div>
-  <div style="height: 80%; text-align: center;  margin-top: 20%;">
+  <div class="Profil">
       <img src="assets/img/citynight.jpg" class="ImagePrincipal">
       <div class="centervideo">
           <h1 style="color: white;">Comment fonctionne Express Shop?</h1>
@@ -136,8 +136,8 @@
                       <div class="card">
                           <img class="card-img-top" src="assets/img/citynight.jpg">
                           <div class="card-body text-center"> 
-                              <h5 class="card-title">Services Title 1</h5>
-                              <p class="card-text">Place some text for the service 1 here. </p>
+                              <h5 class="card-title">Ajouter des produits à votre commande</h5>
+                              <p class="card-text">Les distributeurs inscrits sur Express Shop peuvent compléter leur commande à l'aide de leur panier.</p>
                               <a href="#" class="btn btn-info">Voir la page</a>
                           </div>
                         </div>
@@ -148,8 +148,8 @@
                       <div class="card">
                           <img class="card-img-top" src="assets/img/citynight.jpg">
                           <div class="card-body text-center"> 
-                              <h5 class="card-title">Services Title 1</h5>
-                              <p class="card-text">Place some text for the service 1 here. </p>
+                              <h5 class="card-title">Voir vos commandes</h5>
+                              <p class="card-text">Express Shop vous permet de consulter vos commandes en cours, ainsi que celle terminé.</p>
                               <a href="#" class="btn btn-info">Voir la page</a>
                           </div>
                         </div>
@@ -158,8 +158,30 @@
                       <div class="card">
                           <img class="card-img-top" src="assets/img/citynight.jpg">
                           <div class="card-body text-center"> 
-                              <h5 class="card-title">Services Title 1</h5>
-                              <p class="card-text">Place some text for the service 1 here. </p>
+                              <h5 class="card-title">Voir les informations des fournisseurs</h5>
+                              <p class="card-text">Express Shop vous permet de consulter les profils de tous les fournisseurs inscirt au site.</p>
+                              <a href="#" class="btn btn-info">Voir la page</a>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="card">
+                          <img class="card-img-top" src="assets/img/citynight.jpg">
+                          <div class="card-body text-center"> 
+                              <h5 class="card-title">Modifier votre inventaire</h5>
+                              <p class="card-text">Les fournisseurs peuvent ajouter, modifier et supprimer des produits de leur inventaire.</p>
+                              <a href="#" class="btn btn-info">Voir la page</a>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="card">
+                          <img class="card-img-top" src="assets/img/citynight.jpg">
+                          <div class="card-body text-center"> 
+                              <h5 class="card-title">Modifier les informations de votre profil</h5>
+                              <p class="card-text">Les utilisateurs inscrits à Express Shop peuvent modifier les informations de leur profil.</p>
                               <a href="#" class="btn btn-info">Voir la page</a>
                           </div>
                         </div>
@@ -168,5 +190,34 @@
           </div>
       </div>
     </div>
+    <footer>
+        <div class="container contact-form">
+            <form [formGroup]="form">
+                <h3>Envoyez nous un message</h3>
+               <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="fieldinput" >
+                            <input type="Nom" id="inputNom" name="Nom" ngModel class="form-control" matInput placeholder="Votre nom" formControlName="Nom">
+                            <mat-error *ngIf="Nom.hasError('required')">Le nom est obligatoire</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="fieldinput"> 
+                            <input type="email" id="inputemail" name="email" ngModel class="form-control" matInput placeholder="Votre adresse courriel" formControlName="email" style="outline:none;">
+                            <mat-error *ngIf="email.hasError('required')">votre adresse courriel est obligatoire</mat-error>
+                        </mat-form-field>
+                        <div class="button_div">
+                            <button type="submit" (click)="onSubmit(false)" class="button_login" mat-button>Envoyer le message</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="description-field">
+                            <mat-label>Votre message</mat-label>
+                            <textarea matInput placeholder="Votre message" name="message" formControlName="message" id="inputmessage" style="height: 80px;"></textarea>
+                            <mat-error *ngIf="message.hasError('required')">Le message est obligatoire</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+    </div>
+    </footer>
 </body>
 </html>
