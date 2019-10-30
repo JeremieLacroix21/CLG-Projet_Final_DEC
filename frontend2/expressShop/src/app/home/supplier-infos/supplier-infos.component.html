@@ -43,11 +43,14 @@
             <p>Email : {{profileToShow.email}}</p>
             <div class="map_container">
                     <agm-map 
-                    [latitude]="lat"
-                    [longitude]="lng"
+                    [latitude]="location?.lat"
+                    [longitude]="location?.lng"
                     [zoom]="zoom"
                     [disableDefaultUI]="false"
                     [zoomControl]="false">
+                    <agm-marker [latitude]="location?.lat"
+                    [longitude]="location?.lng"></agm-marker>
+
                   </agm-map></div>
         </div>
         

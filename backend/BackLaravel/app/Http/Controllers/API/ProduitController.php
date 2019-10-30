@@ -41,6 +41,36 @@ class ProduitController extends Controller
         return json_encode($data);
     }
 
+    public function GetProductsByFournisseur(Request $request)
+    {
+        $produits = DB::table('produits')
+        ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
+        ->select('produits.*', 'users.nomutilisateur')
+        ->where('idFournisseur', '=', $request['idFournisseur'])
+        ->get();
+
+        $array = [];
+        $data = [];
+        $i = 0;
+        foreach($produits as $produit)
+        {
+            $array = DB::select('Call GetTagsbyIdProduit(?)',array($produit->idproduits));
+            $data[$i] = [
+                'idproduits'=>$produit->idproduits,
+                'nom'=>$produit->nom,
+                'prix'=>$produit->prix,
+                'idFournisseur'=>$produit->idFournisseur,
+                'nomFournisseur'=>$produit->nomutilisateur,
+                'enStock'=>$produit->enStock,
+                'imgGUID'=>$produit->imgGUID,
+                'description'=>$produit->description,
+                'tags'=>$array,
+            ];
+            ++$i;
+        }
+        return json_encode($data);
+    }
+
     public function SearchProducts(Request $request)
     {
         $data = [];
@@ -147,18 +177,21 @@ class ProduitController extends Controller
     return json_encode($data);
    }
 
-   public function GetFournisseurParCommande(Request $request)
-   {
+    // Input : A string of product ids separated by semicolons
+    // Output : An array of all the suppliers that own products in the list
+    public function GetFournisseurParCommande(Request $request)
+    {
         //Get chacun des produits
         $arrayProduit = [];
-        $data = explode(";",$request["idproduits"]);
+        $data = explode(";", $request["idproduits"]);
         $i = 0;
         foreach ($data as $idproduit) {
-            if($idproduit != "")
-            {
-                $arrayProduit[$i] = DB::table('produits')->select('idFournisseur')
-                ->where('idproduits', '=', $idproduit)->get();
-                $i++;
+            if ($idproduit != "") {
+                $arrayProduit[$i] = DB::table('produits')
+                    ->select('idFournisseur')
+                    ->where('idproduits', '=', $idproduit)
+                    ->get();
+                ++$i;
             }
         }
         //remove les duplicates (wow)
@@ -223,43 +256,58 @@ class ProduitController extends Controller
         $Data = DB::select('Call GetLastInsertedCommande()');
         return json_encode($Data);
     }
+
     public function InsertCommandeItems(Request $request)
     {   
-        $produit = DB::select('Call InsertCommandeItems(?,?,?)',array($request["idCommande"],$request["idProduit"],$request['quantite']));
+        $produit = DB::select('Call InsertCommandeItems(?,?,?)', array($request["idCommande"], $request["idProduit"], $request['quantite']));
     }
+
     public function EnvoieCommande(Request $request)
     {
-        $Fournisseur = DB::table('users')->select('*')->where('iduser', $request['idFournisseur'])->first();
-        $idcommande = DB::select('Call GetLastInsertedCommandByFournisseur(?)',array($request["idFournisseur"]));
+        $Fournisseur = DB::table('users')
+            ->select('*')
+            ->where('iduser', '=', $request['idFournisseur'])
+            ->first();
+
+        $idcommande = DB::select('Call GetLastInsertedCommandByFournisseur(?)', array($request["idFournisseur"]));
+
         //Select tout les produits
         $arrayNomPrenom = array($Fournisseur);
         $occupation = array_column($idcommande, 'MAX(idCommande)');
         $matchThese = ['commandes.idFournisseur' => $request['idFournisseur'], 'commandes.idCommande' => $occupation];
         $produits = DB::table('produits')
-        ->join('commandeItems', 'produits.idproduits','=', 'commandeItems.idProduit')
-        ->join('commandes', 'commandeItems.idCommande','=', 'commandes.idCommande')
-        ->select('prix','nom','description', 'quantite','dateCreation')->where($matchThese)->get();
+            ->join('commandeItems', 'produits.idproduits','=', 'commandeItems.idProduit')
+            ->join('commandes', 'commandeItems.idCommande','=', 'commandes.idCommande')
+            ->select('prix','nom','description', 'quantite','dateCreation')
+            ->where($matchThese)
+            ->get();
+
         //Met les produits dans un array
         $i = 0;
         $arrayProduit = array("");
-        foreach($produits as $produit)
-        {
+        foreach($produits as $produit) {
             $a = array($i);
             //wtf tbk
             $arrayProduittest = array_combine($a ,array($produit));
-                    if (array_key_exists($i, $arrayProduittest)) {
-                        $c[$i] = $arrayProduittest[$i];
-                    }
-                    else{
-                        $c[$i] = $arrayProduit;
-                    }
+            if (array_key_exists($i, $arrayProduittest)) {
+                $c[$i] = $arrayProduittest[$i];
+            } else {
+                $c[$i] = $arrayProduit;
+            }
             $arrayProduit = $c;
-            $i++;
+            ++$i;
         }
+
         //Select le nom du distruteur
-        $Distributeur = DB::table('users')->select('nomutilisateur')->where('iduser', $request['idDistributeur'])->first();
-        Mail::to($Fournisseur->email)->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur,$arrayProduit));
-        return response()->json(['success'=> 'email sent'],200);
+        $Distributeur = DB::table('users')
+            ->select('nomutilisateur')
+            ->where('iduser', $request['idDistributeur'])
+            ->first();
+
+        Mail::to($Fournisseur->email)
+            ->send(new CommandSender($arrayNomPrenom, $Distributeur->nomutilisateur, $arrayProduit));
+    
+        return response()->json(['success'=> 'email sent'], 200);
     }
 }
 ?>

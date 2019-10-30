@@ -16,17 +16,21 @@ export class CommandeService {
     constructor(private http: HttpClient) {}
 
     GetCommande(idDistributeur){
-        const body = new HttpParams().set('idDistributeur', idDistributeur.toString());
-    return this.http.post<Commandes[]>(
-      `${config.apiUrl}/api/GetCommandeDistributeur`, body.toString(),
-      config.headerObject);
+      const body = new HttpParams().set('idDistributeur', idDistributeur.toString());
+      return this.http.post<Commandes[]>(
+        `${config.apiUrl}/api/GetCommandeDistributeur`,
+        body.toString(),
+        config.headerObject
+      );
     }
 
     
     GetFournisseur(idFournisseur){
       const body = new HttpParams().set('idFournisseur', idFournisseur.toString())
-  return this.http.post(
-    `${config.apiUrl}/api/GetFournisseur`, body.toString(),
-    config.headerObject);
-  }
+      return this.http.post(
+        `${config.apiUrl}/api/GetFournisseur`,
+        body.toString(),
+        config.headerObject
+      );
+    }
 }

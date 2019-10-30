@@ -90,36 +90,36 @@ class PassportController extends Controller
     */
     public function register(Request $request)
     {
-        $input = $request->all();
         $user_favorites = DB::table('users')
-        ->where('nomutilisateur', '=', $input['name'])
-        ->first();
+            ->where('nomutilisateur', '=', $request->get('name'))
+            ->first();
         $useremail = DB::table('users')
-        ->where('email', '=', $input['email'])
-        ->first();
-        if(!is_null($user_favorites))
-        {
-        return response()->json([@"Le nom d'utilisateur est déja utilisé"], 401);
+            ->where('email', '=', $request->get('email'))
+            ->first();
+
+        if (!is_null($user_favorites)) {
+            return response()->json([@"Le nom d'utilisateur est déja utilisé"], 401);
         }
-        if(!is_null($useremail))
-        {
-        return response()->json([@"Le email est déja utilisé"], 401);
+        if (!is_null($useremail)) {
+            return response()->json([@"Le email est déja utilisé"], 401);
         }
-        DB::table('users')->insert(array(
-        'nomutilisateur' =>  $input['name'],
-        'email' => $input['email'],
-        'motdepasse' => $input['password'],
-        'nom' => $input['nom'],
-        'prenom' => $input['prenom'],
-        'TypeUser' => $input['TypeUser'],
-        'adresse' => $input['adresse'],
-        'admin' => $input['admin'],
-        'confirme' => $input['confirme'],
-        'dateinscription' => $input['dateinscription'],
-        'Telephone' => $input['telephone'],
-        'imgGUID' => $input['photo'],
-        'description' => $input['description']
-        ));
+
+        DB::table('users')->insert([
+        'nomutilisateur' => $request->get('name'),
+        'email'=> $request->get('email'),
+        'motdepasse' => $request->get('password'),
+        'nom' => $request->get('nom'),
+        'prenom' => $request->get('prenom'),
+        'TypeUser' => $request->get('TypeUser'),
+        'adresse' => $request->get('adresse'),
+        'admin' => $request->get('admin'),
+        'confirme' => $request->get('confirme'),
+        'dateinscription' => $request->get('dateinscription'),
+        'Telephone' => $request->get('telephone'),
+        'description' => $request->get('description'),
+        'imgGUID' => $request->get('photo')
+        ]);
+        
         return response()->json(['success'=> 'User Created'], $this->successStatus);
     }
 
@@ -172,7 +172,7 @@ class PassportController extends Controller
         $data = [];
         $i = 0;
         foreach($users as $user) {
-            $data[$i] = $users;
+            $data[$i] = $user;
             ++$i;
         }
         return json_encode($data);
