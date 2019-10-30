@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, throwError, of, Subscriber } from 'rxjs';
 import { BD_User } from '../models/user';
 import { config } from '../../config';
 import { Supplier } from '../models/supplier';
+import { N } from '@angular/cdk/keycodes';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,6 @@ export class UserService {
     const body = new HttpParams()
       .set('iduser', iduser.toString())
       .set('confirme', confirmRegistration.toString());
-
     return this.http.put(
       `${config.apiUrl}/api/UpdateConfirmRegistration`,
       body.toString(),
@@ -41,7 +41,6 @@ export class UserService {
   deleteUser(iduser:number) {
     const body = new HttpParams()
       .set('iduser', iduser.toString());
-
     return this.http.put(
       `${config.apiUrl}/api/DeleteUser`,
       body.toString(),
@@ -62,17 +61,17 @@ export class UserService {
 
   UpdateUser(iduser:number,nomutilisateur:string,courriel:string,téléphone:string,description:string)
   {
+    console.log("update");
     const body = new HttpParams()
     .set('iduser',iduser.toString())
-    .set('nomutilisateur',nomutilisateur.toString())
-    .set('email',courriel.toString())
-    .set('Telephone',téléphone.toString())
-    .set('description',description.toString());
-    return this.http.post(`${config.apiUrl} /api/UpdateUser`,
+    .set('nomutilisateur',nomutilisateur)
+    .set('email',courriel)
+    .set('Telephone',téléphone)
+    .set('description',description);
+    return this.http.post(`${config.apiUrl}/api/UpdateUser`,
     body.toString(),
     config.headerObject
     );
-    
   }
 
   GetUserInformation(iduser:number)

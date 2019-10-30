@@ -33,7 +33,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route Profil
  Route::post('/profil','API\ProfilController@GetUser');
  Route::post('GetUserInformation','API\ProfilController@GetUserInformation');
- Route::put('UpdatePassword','API\ProfilController@UpdatePassword');
+ Route::post('UpdatePassword','API\ProfilController@UpdatePassword');
  Route::post('UpdateUser','API\ProfilController@UpdateUser');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
