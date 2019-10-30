@@ -88,8 +88,6 @@ export class SupplierInfosComponent implements OnInit {
   }
 
   addressToCoordinates() {
-    
-    
     this.geocodeService.geocodeAddress(this.address)
     .subscribe((location: Location) => {
         this.location = location;
@@ -99,5 +97,15 @@ export class SupplierInfosComponent implements OnInit {
     console.log(this.address);
   }
 
-  
+
+  updateNbEtoile(number:number)
+  {
+
+  }
+
+  redirectToChat()
+  {
+
+  }
+
 }

@@ -14,6 +14,7 @@
         <mat-list-item *ngFor="let supplier of dataSource.filteredData; last as isLastSupplier" (click)="onClickSupplier(supplier)">
             <img matListAvatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
             <h4 mat-line>{{supplier.nomutilisateur}}</h4>
+
             <p mat-line class="tags-display">
                 <ng-container *ngFor="let tag of supplier.tags; last as isLastTag">{{tag}}<ng-container *ngIf="!isLastTag">, </ng-container></ng-container>
             </p>
@@ -29,8 +30,18 @@
     </button>
     
     <ng-container *ngIf="profileToShow">
+
+        
+            
+            
         <div class="username-block">
+                
             <h1>{{profileToShow.nomutilisateur}}</h1>
+            <div class="boutton_messagerie">
+                    <button mat-raised-button color="primary" >Envoyer un message</button>
+                    <button mat-raised-button color="primary" >Noter la compagnie</button>
+                </div>
+            
             <div class="info-block"> <h3>Infos</h3>
                 <p>Description : {{profileToShow.description}}</p>
                 <p>Tags : {{profileToShow.tags}}</p>
@@ -38,9 +49,9 @@
             <img class="shown-logo" src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
         </div>
         <div class="contact-block"> <h3>Contact</h3>
-            <p>Adresse : {{profileToShow.adresse}}</p>
-            <p>Telephone : {{profileToShow.telephone}}</p>
             <p>Email : {{profileToShow.email}}</p>
+            <p>Telephone : {{profileToShow.telephone}}</p>
+            <p>Adresse : {{profileToShow.adresse}}</p>
             <div class="map_container">
                     <agm-map 
                     [latitude]="location?.lat"
