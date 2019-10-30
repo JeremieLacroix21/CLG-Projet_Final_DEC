@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError, of, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '../models';
 import { config } from '../../config';
 import { BD_User, VISIT, SUPPLIER, DISTRIB, ADMIN } from '../models/user';
 import { Supplier } from '../models/supplier';
@@ -49,7 +47,6 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-
   public get currUser(): BD_User {
     return this.currentUserSubject.value as BD_User;
   }
@@ -62,11 +59,9 @@ export class AuthService {
     return this.currentUserSubject.value as Distributor;
   }
 
-
   public updateCurrUser(user) {
     this.currentUserSubject.next(user);
-}
-
+  }
  
   loginAsVisitor() {
     if (!this.currUser) {

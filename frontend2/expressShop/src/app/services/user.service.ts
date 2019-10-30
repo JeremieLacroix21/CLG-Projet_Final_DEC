@@ -5,6 +5,7 @@ import { BD_User } from '../models/user';
 import { config } from '../../config';
 import { Supplier } from '../models/supplier';
 import { N } from '@angular/cdk/keycodes';
+import { LogItem } from '../models/log-item';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,12 @@ export class UserService {
       body.toString(),
       config.headerObject
     );
+  }
+
+  getLogs() {
+    return this.http.get<LogItem[]>(
+      `${config.apiUrl}/api/GetLogs`,
+      config.headerObject
+    )
   }
 }
