@@ -159,17 +159,20 @@ export class ProductService {
 
   }
 
-  /* UpdateProduct(idProduit: number, nom: string, qty: number) {
+  UpdateProduct(idProduit: number, nom: string, prix:number, tags:string, enStock: number, description:string) {
     const body = new HttpParams()
-      .set('iduser', iduser.toString())
-      .set('idproduit', idproduit.toString())
-      .set('quantity', qty.toString());
+      .set('idProduit', idProduit.toString())
+      .set('nom', nom.toString())
+      .set('prix', prix.toString())
+      .set('tags', tags.toString())
+      .set('enStock', enStock.toString())
+      .set('description', description.toString());
 
     return this.http.put(
-      `${config.apiUrl}/api/UpdateQuantityPanier`,
+      `${config.apiUrl}/api/UpdateProduct`,
       body.toString(),
       config.headerObject
     );
-  } */
+  }
 }
 

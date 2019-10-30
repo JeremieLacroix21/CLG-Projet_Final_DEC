@@ -67,10 +67,7 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
 import { RatingModule } from 'ng-starrating';
-<<<<<<< HEAD
-=======
 import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
->>>>>>> 128f5f6de528a20b6c15cee4295bbe7ceb170bf4
 
 
 @NgModule({
@@ -86,7 +83,7 @@ import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier
     CommandeComponent,
     Aboutcomponent,
     InventaireComponent,
-    FavoriteSupplierComponent
+    FavoriteSupplierComponent,
     ExpandedPanelComponent
   ],
   imports: [
