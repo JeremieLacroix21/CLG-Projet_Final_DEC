@@ -44,6 +44,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('GetCommandeDistributeur','API\CommandeController@GetCommandeDistributeur');
  Route::post('CompleteCommande','API\CommandeController@CompleteCommande');
  Route::post('GetCommandeFournisseur','API\CommandeController@GetCommandeFournisseur');
+ //Route About
+ Route::post('EnvoieMessage','API\AboutController@EnvoieMessage');
 //Route Middleware
  Route::group(['middleware' => 'auth:api'], function(){
  });
