@@ -69,7 +69,6 @@ import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-pan
 import { RatingModule } from 'ng-starrating';
 import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
 
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -84,7 +83,7 @@ import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier
     Aboutcomponent,
     InventaireComponent,
     FavoriteSupplierComponent,
-    ExpandedPanelComponent
+    ExpandedPanelComponent,
   ],
   imports: [
     CommonModule,

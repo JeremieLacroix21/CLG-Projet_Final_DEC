@@ -8,6 +8,7 @@ import { HomeComponent } from '../home.component';
 import { LoaderService } from 'src/app/services/loader.service';
 import { LogItem } from 'src/app/models/log-item';
 
+
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
@@ -93,7 +94,8 @@ export class AdminUsersComponent implements OnInit {
     this.loadedLogs.subscribe(data => {
       this.dataSourceLog = new MatTableDataSource(data);
       this.dataSourceLog.filterPredicate = (data: LogItem, filter: string) => {
-        return filter.trim().toLowerCase().includes(this.formatLog(data).trim().toLowerCase());
+        console.log('big nigga');
+        return this.formatLog(data).trim().toLowerCase().includes(filter.trim().toLowerCase());
       };
     });
   }

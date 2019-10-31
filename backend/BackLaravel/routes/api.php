@@ -40,11 +40,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('UpdateUser','API\ProfilController@UpdateUser');
  Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
  Route::put('DeleteUser','API\ProfilController@DeleteUser');
-
  Route::post('UpdateRating','API\ProfilController@UpdateRating');
 
+
+ Route::post('AddFavoriteSuppliers','API\ProfilController@AddFavoriteSuppliers');
+ Route::post('deleteFavoriteSuppliers','API\ProfilController@deleteFavoriteSuppliers');
+ Route::post('GetFavoriteSuppliers','API\ProfilController@GetFavoriteSuppliers');
+
  //Route Produit
- Route::put('UpdateProduct','API\ProduitController@UpdateProduct');
+ Route::post('UpdateProduct','API\ProduitController@UpdateProduct');
  //Route Commande
 
  Route::post('GetCommandeDistributeur','API\CommandeController@GetCommandeDistributeur');

@@ -95,7 +95,7 @@ export class UserService {
 
   UpdateRating(iduser:number,idfournisseur:number,rating:number)
   {
-    console.log("update");
+    
     const body = new HttpParams()
     .set('iduser',iduser.toString())
     .set('idfournisseur',idfournisseur.toString())
@@ -105,4 +105,16 @@ export class UserService {
     config.headerObject
     );
   }
+
+
+  GetFavoriteSuppliers(iduser:number)
+    {
+      const body = new HttpParams()
+      .set('iduser',iduser.toString());
+      return this.http.post<BD_User[]>(
+        `${config.apiUrl}/api/GetFavoriteSuppliers`,
+        body.toString(),
+        config.headerObject
+      );
+    }
 }

@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -339,7 +337,7 @@ class ProduitController extends Controller
         if (is_null($results)) {
            return response()->json(['error' => 'product doesnt exist'], 401);
           } else {
-              return response()->json(['success' => 'product changed'], 200);
+            return response()->json(['success' => 'product changed'], 200);
         }
     }
 
