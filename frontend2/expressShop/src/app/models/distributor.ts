@@ -8,4 +8,5 @@ import { Injectable } from '@angular/core';
 )
 export class Distributor extends BD_User {
     public cart: productPanier[];
+    public Favorite: BD_User[];
 }

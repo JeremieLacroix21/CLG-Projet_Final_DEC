@@ -82,6 +82,7 @@ export class AuthService {
       config.headerObject
     );
 
+
     this.spinner.show();
     request.subscribe(
       user => {
