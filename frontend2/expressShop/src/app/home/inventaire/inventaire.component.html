@@ -33,7 +33,7 @@
             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
                 <div class="example-element-detail"
                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                    <app-expanded-panel style="width: 100%;" [item]="element"></app-expanded-panel>
+                    <app-expanded-panel style="width: 100%;" [item]="element" (refresh)="refreshMethod($event)"></app-expanded-panel>
                 </div>
             </td>
         </ng-container>

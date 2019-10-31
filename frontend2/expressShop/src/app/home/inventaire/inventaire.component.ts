@@ -17,6 +17,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
       state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
+    
   ],
 })
 
@@ -41,6 +42,16 @@ export class InventaireComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  refreshMethod($event){
+    if($event)
+    {
+      this.subscription = this.productService.getProduitByFournisseur(this.auth.currUser.iduser).subscribe(products => {
+        this.dataSource.data = this.products = products
+        this.resultsLength = products.length;
+      });
+    }
   }
 
 }

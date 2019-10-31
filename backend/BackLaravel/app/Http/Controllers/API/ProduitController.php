@@ -315,20 +315,12 @@ class ProduitController extends Controller
         $input = $request->all();
 
         $results = DB::table('produits')
-        ->where('idproduits', '=', $request->get('idProduit'))
-        ->update(['nom' => $request->get('nom')]);
-
-        $results = DB::table('produits')
-        ->where('idproduits', '=', $request->get('idProduit'))
-        ->update(['prix' => $request->get('prix')]);
-
-        $results = DB::table('produits')
-        ->where('idproduits', '=', $request->get('idProduit'))
-        ->update(['enStock' => $request->get('enStock')]);
-
-        $results = DB::table('produits')
-        ->where('idproduits', '=', $request->get('idProduit'))
-        ->update(['description' => $request->get('description')]);        
+        ->where('idproduits', '=', $request->get('idproduits'))
+        ->update(['nom' => $request->get('nom')], 
+        ['prix' => $request->get('prix')], 
+        ['enStock' => $request->get('enStock')], 
+        ['description' => $request->get('description')]);
+    
 
         $data = explode(";",$input["Tags"]);
         foreach ($data as $Tags) {
@@ -350,5 +342,17 @@ class ProduitController extends Controller
               return response()->json(['success' => 'product changed'], 200);
         }
     }
+
+    public function DeleteProduct(Request $request)
+   {
+        $results = DB::table('produits')->where('idproduits', '=', $request['idproduits'])
+            ->delete();
+
+        if (is_null($results)) {
+            return response()->json(['error'=> 'product doesnt exist'], 401);
+        } else {
+            return response()->json(['success' => 'item deleted'], 200);
+        }
+   }
 }
 ?>

@@ -161,15 +161,25 @@ export class ProductService {
 
   UpdateProduct(idProduit: number, nom: string, prix:number, tags:string, enStock: number, description:string) {
     const body = new HttpParams()
-      .set('idProduit', idProduit.toString())
+      .set('idproduits', idProduit.toString())
       .set('nom', nom.toString())
       .set('prix', prix.toString())
-      .set('tags', tags.toString())
+      .set('Tags', tags.toString())
       .set('enStock', enStock.toString())
       .set('description', description.toString());
 
-    return this.http.put(
+    return this.http.post(
       `${config.apiUrl}/api/UpdateProduct`,
+      body.toString(),
+      config.headerObject
+    );
+  }
+
+  DeleteProduct(idProduit: number){
+    const body = new HttpParams().set('idproduits', idProduit.toString());
+
+    return this.http.put(
+      `${config.apiUrl}/api/DeleteProduct`,
       body.toString(),
       config.headerObject
     );

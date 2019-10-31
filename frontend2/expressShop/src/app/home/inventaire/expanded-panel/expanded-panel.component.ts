@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
@@ -21,6 +21,13 @@ export class ExpandedPanelComponent implements OnInit {
 
   @Input()
   item: Product;
+
+  @Output()
+  refresh= new EventEmitter<boolean>();
+
+  uploadComplete() {
+    this.refresh.emit(true);
+  }
 
   productForm = new FormGroup({
     nom: new FormControl('', Validators.required),
@@ -56,7 +63,7 @@ export class ExpandedPanelComponent implements OnInit {
 
   addArraytoChips(str_array: String[]) {
     str_array.forEach(element => {
-      this.tags.push({ name: element['tag'].trim()});
+      this.tags.push({ name: element['tag'].trim() });
     });
   }
 
@@ -90,18 +97,26 @@ export class ExpandedPanelComponent implements OnInit {
       });
 
       this.productService.UpdateProduct(this.item.idproduits,
-         this.productForm.controls.nom.value,
-         this.productForm.controls.prix.value,
-         this.TagChaine,
-         this.productForm.controls.enStock.value,
-         this.productForm.controls.description.value
-          ).subscribe(
+        this.productForm.controls.nom.value,
+        this.productForm.controls.prix.value,
+        this.TagChaine,
+        this.productForm.controls.enStock.value,
+        this.productForm.controls.description.value
+      ).subscribe(
         (res) => {
+          this.uploadComplete();
         },
         (err) => {
 
         }
       );
     }
+  }
+
+  DeleteProduct(){
+    console.log(this.item.idproduits);
+    this.productService.DeleteProduct(this.item.idproduits).subscribe();
+    this.uploadComplete();
+    console.log("del product");
   }
 }

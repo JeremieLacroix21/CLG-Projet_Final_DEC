@@ -12,9 +12,9 @@
       <div>
         <button mat-button [matMenuTriggerFor]="menu">{{nomutilisateur}}</button>
         <mat-menu #menu>
-          <button *ngIf="auth.currUser.TypeUser === this.auth.S" mat-menu-item [routerLink]="'inventaire'" routerLinkActive="active">inventaire</button>
+          <button *ngIf="auth.currUser.TypeUser === this.auth.S || auth.currUser.TypeUser === this.auth.A" mat-menu-item [routerLink]="'inventaire'" routerLinkActive="active">inventaire</button>
           <button *ngIf="auth.currUser.TypeUser !== this.auth.V" mat-menu-item [routerLink]="'modifprofile'" routerLinkActive="active">Modifier Profil</button>
-          <button *ngIf="auth.currUser.TypeUser === this.auth.D" mat-menu-item [routerLink]="'Favoritesupplier'" routerLinkActive="active">Founisseur(s) favori(s)</button>
+          <button *ngIf="auth.currUser.TypeUser === this.auth.D " mat-menu-item [routerLink]="'Favoritesupplier'" routerLinkActive="active">Founisseur(s) favori(s)</button>
         </mat-menu>
         <button mat-icon-button><mat-icon (click)="callLogout()">power_off</mat-icon></button>
         <a [allowUserTypes]="[auth.D]" mat-button matBadge="{{nbCartItems}}" [routerLink]="'shoppingCart'" routerLinkActive="active"><i class="material-icons">shopping_cart</i></a>

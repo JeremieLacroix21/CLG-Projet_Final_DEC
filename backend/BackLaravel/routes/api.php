@@ -58,3 +58,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
  Route::post('GetProductsByFournisseur','API\ProduitController@GetProductsByFournisseur');
+ Route::put('DeleteProduct','API\ProduitController@DeleteProduct');
