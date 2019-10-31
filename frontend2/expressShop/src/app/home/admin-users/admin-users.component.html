@@ -7,7 +7,7 @@
     </mat-card>
     
     <mat-tab-group (selectedTabChange)="requestLogs()">
-        <mat-tab><mat-card class="users-table-card">
+        <mat-tab label="Comptes"><mat-card class="users-table-card">
         <h3>Comptes</h3>
 
         <table *ngIf="!this.logsAreShown" mat-table [dataSource]="dataSourceUsers" matSort class="users-table">
@@ -74,7 +74,7 @@
 
         </mat-card></mat-tab>
 
-        <mat-tab><mat-card class="users-table-card">
+        <mat-tab label="Activités"><mat-card class="users-table-card">
             <h3>Activités</h3>
             <table *ngIf='(loadedLogs | async) as logs' mat-table [dataSource]="dataSourceLog" matSort matSortActive="timestamp" matSortDirection="desc" matSortDisableClear class="users-table">
     
