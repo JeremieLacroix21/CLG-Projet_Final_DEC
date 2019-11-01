@@ -177,7 +177,6 @@ export class ProductService {
 
   DeleteProduct(idProduit: number){
     const body = new HttpParams().set('idproduits', idProduit.toString());
-
     return this.http.put(
       `${config.apiUrl}/api/DeleteProduct`,
       body.toString(),
