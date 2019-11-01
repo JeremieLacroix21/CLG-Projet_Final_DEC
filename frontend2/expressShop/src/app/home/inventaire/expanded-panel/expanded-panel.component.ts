@@ -95,7 +95,7 @@ export class ExpandedPanelComponent implements OnInit {
       this.tags.forEach(element => {
         this.TagChaine += element.name + ";";
       });
-
+      this.TagChaine = this.TagChaine.substring(0, this.TagChaine.length - 1);
       this.productService.UpdateProduct(this.item.idproduits,
         this.productForm.controls.nom.value,
         this.productForm.controls.prix.value,

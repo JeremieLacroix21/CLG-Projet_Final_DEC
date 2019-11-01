@@ -168,6 +168,7 @@ export class SubscribeComponent implements OnInit {
    tag.forEach(element =>{
     this.TagChaine += element.name + ";";
    });
+   this.TagChaine = this.TagChaine.substring(0, this.TagChaine.length - 1);
    this.subscribeservice.AddTag(this.TagChaine).subscribe(
     (res) => {
       this.form.controls.tags.setValue(res.toString());

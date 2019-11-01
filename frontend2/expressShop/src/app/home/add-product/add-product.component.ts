@@ -23,7 +23,7 @@ export class AddProductComponent implements OnInit {
     description: new FormControl('', Validators.required),
     prix: new FormControl('', Validators.required),
     quantite: new FormControl('', Validators.required),
-    tags: new FormControl('', Validators.required)
+    tags: new FormControl('')
   })
 
   get nom() { return this.productForm.get('nom'); }
@@ -66,16 +66,18 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
-
+    console.log('allo')
     if (this.productForm.invalid) {
+      console.log('error ');
       return;
+      
     }
     else {
       this.TagChaine = "";
       this.tags.forEach(element => {
         this.TagChaine += element.name + ";";
       });
-
+      this.TagChaine = this.TagChaine.substring(0, this.TagChaine.length - 1);
       this.productService.AddProduct(this.productForm.controls.nom.value,
         this.productForm.controls.prix.value,
         this.auth.currUser.iduser,
@@ -87,9 +89,10 @@ export class AddProductComponent implements OnInit {
         (res) => {
           this.productForm.reset()
           this.tags = new Array();
+          console.log('inserted');
         },
         (err) => {
-
+          console.log('error inserting');
         }
       );
     }

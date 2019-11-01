@@ -329,7 +329,7 @@ class ProduitController extends Controller
                 ));
          }
          //Ajout du lien tag
-         DB::select('Call InsertionLienTagsProduit(?)',array($Tags));
+         DB::select('Call InsertionLienTagsProduit2(?,?)',array($Tags, $request['idproduits']));
         }
 
         if (is_null($results)) {
