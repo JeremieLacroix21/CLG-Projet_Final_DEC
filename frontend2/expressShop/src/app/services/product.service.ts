@@ -71,7 +71,7 @@ export class ProductService {
       .set('iduser', iduser.toString())
       .set('idproduit', idproduit.toString());
 
-    return this.http.put(
+    return this.http.post(
       `${config.apiUrl}/api/DeleteProductFromPanier`,
       body.toString(),
       config.headerObject
@@ -84,7 +84,7 @@ export class ProductService {
       .set('idproduit', idproduit.toString())
       .set('quantity', qty.toString());
 
-    return this.http.put(
+    return this.http.post(
       `${config.apiUrl}/api/UpdateQuantityPanier`,
       body.toString(),
       config.headerObject
@@ -177,7 +177,7 @@ export class ProductService {
 
   DeleteProduct(idProduit: number){
     const body = new HttpParams().set('idproduits', idProduit.toString());
-    return this.http.put(
+    return this.http.post(
       `${config.apiUrl}/api/DeleteProduct`,
       body.toString(),
       config.headerObject

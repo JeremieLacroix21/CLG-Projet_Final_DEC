@@ -32,7 +32,7 @@ export class UserService {
     const body = new HttpParams()
       .set('iduser', iduser.toString())
       .set('confirme', confirmRegistration.toString());
-    return this.http.put(
+    return this.http.post(
       `${config.apiUrl}/api/UpdateConfirmRegistration`,
       body.toString(),
       config.headerObject
@@ -42,7 +42,7 @@ export class UserService {
   deleteUser(iduser:number) {
     const body = new HttpParams()
       .set('iduser', iduser.toString());
-    return this.http.put(
+    return this.http.post(
       `${config.apiUrl}/api/DeleteUser`,
       body.toString(),
       config.headerObject
@@ -79,7 +79,7 @@ export class UserService {
   {
     const body = new HttpParams()
     .set('iduser',iduser.toString());
-    return this.http.put<BD_User[]>(
+    return this.http.post<BD_User[]>(
       `${config.apiUrl}/api/GetUserInformation`,
       body.toString(),
       config.headerObject

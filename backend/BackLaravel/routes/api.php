@@ -31,15 +31,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('GetpanierFromId','API\ProduitController@GetpanierFromId');
  Route::post('AddProductToPanier','API\ProduitController@AddProductToPanier');
  Route::post('countItemFromid','API\ProduitController@countItemFromid');
- Route::put('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
- Route::put('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
+ Route::post('DeleteProductFromPanier','API\ProduitController@DeleteProductFromPanier');
+ Route::post('UpdateQuantityPanier','API\ProduitController@UpdateQuantityPanier');
 //Route Profil
  Route::post('/profil','API\ProfilController@GetUser');
  Route::post('GetUserInformation','API\ProfilController@GetUserInformation');
  Route::post('UpdatePassword','API\ProfilController@UpdatePassword');
  Route::post('UpdateUser','API\ProfilController@UpdateUser');
- Route::put('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
- Route::put('DeleteUser','API\ProfilController@DeleteUser');
+ Route::post('UpdateConfirmRegistration','API\ProfilController@UpdateConfirmRegistration');
+ Route::post('DeleteUser','API\ProfilController@DeleteUser');
  Route::post('UpdateRating','API\ProfilController@UpdateRating');
 
 

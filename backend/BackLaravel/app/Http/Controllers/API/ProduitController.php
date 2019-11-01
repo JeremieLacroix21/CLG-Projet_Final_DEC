@@ -41,9 +41,7 @@ class ProduitController extends Controller
     public function GetProductsByFournisseur(Request $request)
     {
         $produits = DB::table('produits')
-        ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
-        ->select('produits.*', 'users.nomutilisateur')
-        ->where('idFournisseur', '=', $request['idFournisseur'])
+        ->where('idFournisseur', '=', $request['id'])
         ->get();
 
         $array = [];
@@ -57,7 +55,6 @@ class ProduitController extends Controller
                 'nom'=>$produit->nom,
                 'prix'=>$produit->prix,
                 'idFournisseur'=>$produit->idFournisseur,
-                'nomFournisseur'=>$produit->nomutilisateur,
                 'enStock'=>$produit->enStock,
                 'imgGUID'=>$produit->imgGUID,
                 'description'=>$produit->description,
@@ -67,6 +64,7 @@ class ProduitController extends Controller
         }
         return json_encode($data);
     }
+
 
     public function SearchProducts(Request $request)
     {
