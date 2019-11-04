@@ -13,8 +13,8 @@ import { ADMIN, SUPPLIER, DISTRIB } from '../models/user';
 import { AuthGuard } from '../guard/auth.guard';
 import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
-import { FavoriteSupplierComponent} from './favorite-supplier/favorite-supplier.component';
-import {ListeCompagnieComponent} from './Liste-compagnie/Liste-compagnie.component';
+import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
+import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.component';
 const routes: Routes = [
   {
     path: '',
