@@ -89,17 +89,7 @@ table.gridtable {
   transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 2000px) {
-  .fonctions {
-    margin-top: 30%;
-  }
-}
-@media screen and (min-width: 2000px) {
-  .button_div {
-    position: relative;
-    left: 30px;
-  }
-}
+
 
 .row{
   padding-top: 40px;
@@ -118,9 +108,8 @@ footer {
   background-color: rgb(197, 197, 197);
 }
 .button_div{
-  float: left;
-  position: relative;
-  right: 18px;
+position: relative;
+right: 29%;
 }
 .fieldinput{
   width: 450px;
@@ -133,4 +122,62 @@ footer {
 .form-control:focus {
   background-color:transparent;
   border: 0px solid;
+}
+
+
+p{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+}
+
+.container.custom-container {
+  margin-top: 1%;
+  height: 400%;
+  max-width: inherit;
+
+  padding-left:  20%;
+  padding-right:  20%;
+}
+
+.row.video{
+  background: url("src/assets/img/citynight.jpg");
+  margin-top: 1%;
+  height: 50%;
+  max-width: inherit;
+  margin-left:-50%;
+  margin-right:-50%;
+}
+.row.message{
+  padding-top: 0px;
+  margin-top: 0px;
+  background-color: rgb(197, 197, 197);
+  margin-left:-50%;
+  margin-right:-50%;
+  
+}
+
+.card-text {
+  font-size: 17px;
+}
+
+
+
+@media only screen and (max-width: 1250px) {
+  .container.custom-container {
+    padding-left:  10%;
+    padding-right:  10%;
+  }
+  p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+  }
+  .card-img-top{
+    max-height: 400px;
+  }
+}
+
+@media only screen and (min-width: 1250px) {
+  .card-img-top{
+    max-height: 500px;
+  }
 }
