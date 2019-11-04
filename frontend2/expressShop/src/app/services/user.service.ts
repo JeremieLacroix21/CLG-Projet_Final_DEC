@@ -117,4 +117,14 @@ export class UserService {
         config.headerObject
       );
     }
+
+
+    getSuppliersAndDistributor()
+    {
+      
+      return this.http.post<BD_User[]>(
+        `${config.apiUrl}/api/GetFavoriteSuppliers`,
+        config.headerObject
+      );
+    }
 }
