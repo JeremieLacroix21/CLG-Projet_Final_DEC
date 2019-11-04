@@ -14,6 +14,7 @@ import { AuthGuard } from '../guard/auth.guard';
 import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
 import { FavoriteSupplierComponent} from './favorite-supplier/favorite-supplier.component';
+import {ListeCompagnieComponent} from './Liste-compagnie/Liste-compagnie.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,7 +31,8 @@ const routes: Routes = [
       { path: 'commande', component: CommandeComponent, data: {allowed: [SUPPLIER, DISTRIB]} },
       { path: 'inventaire', component: InventaireComponent, data: {allowed: [SUPPLIER, ADMIN]} },
       { path: 'about', component: Aboutcomponent},
-      { path: 'Favoritesupplier', component: FavoriteSupplierComponent, data: {allowed: [DISTRIB]} }
+      { path: 'Favoritesupplier', component: FavoriteSupplierComponent, data: {allowed: [DISTRIB]} },
+      { path: 'Allsuppliers', component: ListeCompagnieComponent, data: {allowed: [DISTRIB]} }
     ]
   },
   { path: '**', redirectTo: '404' }

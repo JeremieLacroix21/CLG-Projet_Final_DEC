@@ -68,6 +68,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
 import { RatingModule } from 'ng-starrating';
 import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
+import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier
     InventaireComponent,
     FavoriteSupplierComponent,
     ExpandedPanelComponent,
+    ListeCompagnieComponent,
   ],
   imports: [
     CommonModule,
