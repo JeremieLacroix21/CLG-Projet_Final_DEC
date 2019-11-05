@@ -78,12 +78,10 @@ export class SupplierInfosComponent implements OnInit {
 
   onClickCollapseBtn(event) {
     let btn = document.getElementById('collapseBtn');
-
     // Rotate the icon
     for(var i = 0; i < btn.children.length; ++i) {
       btn.children[i].classList.toggle('rotatedIcon');
     }
-
     // Toggle the favorite attribute
     btn.attributes['collapsed'].value = (btn.attributes['collapsed'].value === 'false' ? 'true' : 'false');
   }
@@ -110,26 +108,29 @@ export class SupplierInfosComponent implements OnInit {
     this.currentRate = 1;
     this.closePopUp();
   }
+
   onClickAddOrDeletefromFavorite()
   {
     let iduser = this.AuthService.currUser.iduser;
     let idfournisseur = this.profileToShow.iduser;
     this.AddOrDeleteFromfavorite(iduser,idfournisseur);
-    
   }
+
   openPopUp()
   {
       this.popupvisible = true;
   }
+
   closePopUp()
   {
     this.popupvisible = false;
   }
+
   AddOrDeleteFromfavorite(iduser:number,idfournisseur:number)
   {
     this.userService.AddOrDeleteFavoriteSuppliers(iduser,idfournisseur).subscribe();
   }
-
+  
   redirectToChat()
   {
       //todo
