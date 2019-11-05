@@ -131,11 +131,10 @@ export class UserService {
     }
 
 
-    getSuppliersAndDistributor()
+    GetAllusers()
     {
-      
       return this.http.post<BD_User[]>(
-        `${config.apiUrl}/api/GetFavoriteSuppliers`,
+        `${config.apiUrl}/api/GetAllUsers`,
         config.headerObject
       );
     }

@@ -24,18 +24,15 @@ export class ListeCompagnieComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private userservice:UserService,private authservice:AuthService, private loader: LoaderService) { 
     this.initiatedatasource();
-    
   }
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
   initiatedatasource()
   {
-    this.userservice.getAllSuppliers
-    this.subscription = this.userservice.getAllSuppliers();
-      this.subscription.subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-        console.log(data);
-      });
+    this.subscription = this.userservice.getAll();
+    this.subscription.subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
 }
