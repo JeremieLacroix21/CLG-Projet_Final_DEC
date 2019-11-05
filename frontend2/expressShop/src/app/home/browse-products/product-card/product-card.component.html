@@ -22,7 +22,7 @@
         {{product.description}}
     </mat-card-content>
 
-    <mat-card-actions [allowUserTypes]="[auth.D]">
+    <mat-card-actions class="card-actions" [allowUserTypes]="[auth.D]">
         <button id="favorite-{{product.idproduits}}" class="mdc-icon-button" (click)="onClickFavoriteBtn()">
             <i class="material-icons mdc-icon-button__icon">{{isInFavorites ? 'star' : 'star_border'}}</i>
         </button>
