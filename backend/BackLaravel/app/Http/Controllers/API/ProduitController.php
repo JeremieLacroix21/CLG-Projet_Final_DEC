@@ -120,17 +120,21 @@ class ProduitController extends Controller
 
    public function AddImage(Request $request)
    {
+        $filename=$_FILES["Image"]["name"];
+        $extension=explode(".", $filename);
+        $newfilename=$request->Nom .".".end($extension);
        $data = $request->file('Image')->getClientOriginalName();
-       $destination = base_path() . '/storage/ImageUpload';
+       //CHEMIN À CHANGER QUAND UPLOAD LE SITE
+       $destination = "C:\wamp64\www\Projet_Final_Technique\\frontend2\\expressShop\src\assets\img";
         $ImageExiste = DB::table('produits')
         ->where('imgGUID', '=', $data)
         ->first();
         if (is_null($ImageExiste)) {
-            $request->file('Image')->move($destination, $data);
-            return json_encode($data);
+            $request->file('Image')->move($destination, $newfilename);
+            return json_encode($newfilename);
         }
         else{
-            return json_encode($data);
+            return response()->json(['error'=> "Nom d'image déja utilisé"], 401);
         }
    }
 

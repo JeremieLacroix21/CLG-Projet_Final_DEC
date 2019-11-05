@@ -4,6 +4,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { v4 as uuid } from 'uuid';
 import { ProductService } from '../../services/product.service';
+import { subscribeservice } from '../../services/subscribe.service';
 import { AuthService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -40,10 +41,14 @@ export class AddProductComponent implements OnInit {
   tags: tag[] = [];
   tagarray: string[];
   TagChaine: string;
+  selectedfile : File;
+  imageSrc: string;
 
-  constructor(private productService: ProductService, private auth: AuthService, private loader: LoaderService) { }
+  constructor(private productService: ProductService, private auth: AuthService, 
+    private loader: LoaderService, private subscribeservice: subscribeservice) { }
 
   ngOnInit() {
+    this.imageSrc = "assets/img/missing-image-640x360.png"
   }
 
   add(event: MatChipInputEvent): void {
@@ -65,12 +70,16 @@ export class AddProductComponent implements OnInit {
     }
   }
 
+  onFileChanged(event) {
+    this.selectedfile = event.target.files[0]
+    const reader = new FileReader();
+    reader.onload = e => this.imageSrc = reader.result.toString();
+    reader.readAsDataURL(this.selectedfile);
+  }
+
   onSubmit() {
-    console.log('allo')
     if (this.productForm.invalid) {
-      console.log('error ');
       return;
-      
     }
     else {
       this.TagChaine = "";
@@ -78,23 +87,31 @@ export class AddProductComponent implements OnInit {
         this.TagChaine += element.name + ";";
       });
       this.TagChaine = this.TagChaine.substring(0, this.TagChaine.length - 1);
-      this.productService.AddProduct(this.productForm.controls.nom.value,
-        this.productForm.controls.prix.value,
-        this.auth.currUser.iduser,
-        this.productForm.controls.quantite.value,
-        uuid(),
-        this.productForm.controls.description.value,
-        this.TagChaine
-      ).subscribe(
-        (res) => {
-          this.productForm.reset()
-          this.tags = new Array();
-          console.log('inserted');
-        },
-        (err) => {
+        console.log(this.TagChaine);
+      //Envoi de l'image
+      this.subscribeservice.uploadImage(this.selectedfile).subscribe(
+        (res) =>{
+            this.productService.AddProduct(this.productForm.controls.nom.value,
+              this.productForm.controls.prix.value,
+              this.auth.currUser.iduser,
+              this.productForm.controls.quantite.value,
+              res.toString(),
+              this.productForm.controls.description.value,
+              this.TagChaine
+            ).subscribe(
+              (res) => {
+                console.log(res);
+                this.productForm.reset()
+                this.tags = new Array();
+              },
+              (err) => {
+                console.log('error inserting');
+              }
+            );
+          });
+        (err)=>{
           console.log('error inserting');
         }
-      );
     }
   }
 }

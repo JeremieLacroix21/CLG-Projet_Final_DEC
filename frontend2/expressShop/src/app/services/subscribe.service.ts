@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { config } from '../../config';
 import {formatDate} from '@angular/common';
@@ -14,7 +15,8 @@ export class subscribeservice {
 
   uploadImage(Images: File) {
     const Image = new FormData();
-    Image.append('Image', Images);
+    Image.append('Image', Images)
+    Image.set('Nom',uuid());
     return this.http.post(`${config.apiUrl}/api/AddImage`, Image);
   }
 
