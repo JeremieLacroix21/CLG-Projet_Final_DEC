@@ -17,7 +17,7 @@ export class ListeCompagnieComponent implements OnInit {
   
   subscription: Observable<BD_User[]>;
   dataSource: MatTableDataSource<BD_User>;
-  displayedColumns: string[] = ['nomutilisateur','email','Telephone','description'];
+  displayedColumns: string[] = ['nomutilisateur','email','type de compagnie'];
   
 
 
