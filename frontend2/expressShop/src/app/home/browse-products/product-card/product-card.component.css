@@ -1,9 +1,12 @@
 .product-img-card {
-    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    width:  150px;
+    height: 170px;
 }
 
-app-product-card {
-    /*display: inline-grid;*/
+.product-card {
+    height: 100%;
 }
 
 .supplier-name {
