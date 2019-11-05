@@ -171,17 +171,32 @@ class ProfilController extends Controller
     }
 
 
-    public function AddFavoriteSuppliers(Request $request)
+    public function AddOrDeleteFavoriteSuppliers(Request $request)
     { 
         $result = DB::Table('fournisseur_fav')
-        ->insert(['iduser' => $request->get('iduser'), 'idfournisseur' => $request->get('idfournisseur')]);
-    }
-
-    public function deleteFavoriteSuppliers(Request $request)
-    {
-        $result = DB::Table('fournisseur_fav')
-        ->where(['idfournisseur', '=', $request->get('idfournisseur')],['iduser', '=', $request->get('iduser')])
-        ->delete();
+        ->where([
+            ['iduser','=',$request->get('iduser')],
+            ['idfournisseur','=',$request->get('idfournisseur')]
+        ])
+        ->first();
+        if (is_null($result))
+        {
+            //si il n'existe pas on l'insere
+            $result = DB::Table('fournisseur_fav')
+            ->insert(['iduser' => $request->get('iduser'), 'idfournisseur' => $request->get('idfournisseur')]);
+            return response()->json(['error'=> 'favorite inserted'], 200);
+        }
+        else 
+        {
+            //si il existe on le delete
+            $result = DB::Table('fournisseur_fav')
+            ->where([
+                ['iduser','=',$request->get('iduser')],
+                ['idfournisseur','=',$request->get('idfournisseur')]
+            ])
+            ->delete();
+            return response()->json(['error'=> 'favorite deleted'], 200);
+        }
     }
 
     public function GetFavoriteSuppliers(Request $request)

@@ -8,8 +8,6 @@ import { UserService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
 import { GeocodeService } from 'src/app/services/maps.service';
 import { Location } from 'src/app/models/location-models';
-import { ConcatSource } from 'webpack-sources';
-import { StarRatingComponent } from 'ng-starrating';
 import { AuthService } from 'src/app/services';
 
 
@@ -29,7 +27,7 @@ export class SupplierInfosComponent implements OnInit {
   rating : number;
   newrating : number;
   ratingreadonly : boolean;
-  newnewrating:number;
+  currentRate:number = 1;
 
   private supplierId: number;
   private profileToShow: Supplier;
@@ -56,7 +54,6 @@ export class SupplierInfosComponent implements OnInit {
     this.profileToShow = supplier;
     this.address = this.profileToShow.adresse;
     this.rating  = this.profileToShow.nbEtoiles;
-    this.newnewrating = 0;
     this.showLocation();
   }
 
@@ -102,7 +99,6 @@ export class SupplierInfosComponent implements OnInit {
         this.ref.detectChanges();  
       }      
     );       
-    console.log(this.address);
   }
 
   onClickNoterCompagnie()
@@ -110,10 +106,17 @@ export class SupplierInfosComponent implements OnInit {
     this.popupvisible = true;
     let iduser = this.AuthService.currUser.iduser;
     let idfournisseur = this.profileToShow.iduser;
-    this.userService.UpdateRating(iduser,idfournisseur,this.newrating).subscribe();
+    this.userService.UpdateRating(iduser,idfournisseur,this.currentRate).subscribe();
+    this.currentRate = 1;
     this.closePopUp();
   }
-
+  onClickAddOrDeletefromFavorite()
+  {
+    let iduser = this.AuthService.currUser.iduser;
+    let idfournisseur = this.profileToShow.iduser;
+    this.AddOrDeleteFromfavorite(iduser,idfournisseur);
+    
+  }
   openPopUp()
   {
       this.popupvisible = true;
@@ -122,14 +125,13 @@ export class SupplierInfosComponent implements OnInit {
   {
     this.popupvisible = false;
   }
+  AddOrDeleteFromfavorite(iduser:number,idfournisseur:number)
+  {
+    this.userService.AddOrDeleteFavoriteSuppliers(iduser,idfournisseur).subscribe();
+  }
 
   redirectToChat()
   {
       //todo
-  }
-
-  onRate($event:{newValue:number}) {
-      this.newrating = $event.newValue;
-      console.log(this.newrating);
   }
 }

@@ -62,13 +62,17 @@ import { CommandeComponent } from './commande/commande.component';
 import { DirectivesModule } from '../directives/directives.module';
 import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
+import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
+import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
 import { RatingModule } from 'ng-starrating';
-import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
-import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.component';
+
+//test
+import {NgbModule,NgbRating} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -141,7 +145,8 @@ import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.compo
      MatTreeModule,
      NgxSpinnerModule,
      AgmCoreModule.forRoot({apiKey: 'AIzaSyB23aRLsMN0fgjxGHsf-PyXC8EHtgznvg8'}),
-     RatingModule
+     RatingModule,
+     NgbModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

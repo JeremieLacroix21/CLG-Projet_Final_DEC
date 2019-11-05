@@ -98,8 +98,10 @@ agm-map{
     position: relative;
     width: calc(100% - 68px);
 }
-
-.boutton_messagerie{
-    position: relative;
-   padding: 1px;
-}
+.star {
+    font-size: 3rem;
+    color: #b0c4de;
+  }
+  .filled {
+    color: yellow;
+  }

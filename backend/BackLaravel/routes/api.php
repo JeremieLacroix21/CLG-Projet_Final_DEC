@@ -43,8 +43,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('UpdateRating','API\ProfilController@UpdateRating');
 
 
- Route::post('AddFavoriteSuppliers','API\ProfilController@AddFavoriteSuppliers');
- Route::post('deleteFavoriteSuppliers','API\ProfilController@deleteFavoriteSuppliers');
+ Route::post('AddOrDeleteFavoriteSuppliers','API\ProfilController@AddOrDeleteFavoriteSuppliers');
  Route::post('GetFavoriteSuppliers','API\ProfilController@GetFavoriteSuppliers');
 
  //Route Produit

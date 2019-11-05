@@ -118,6 +118,18 @@ export class UserService {
       );
     }
 
+    AddOrDeleteFavoriteSuppliers(iduser:number,idfournisseur:number)
+    {
+      const body = new HttpParams()
+      .set('iduser',iduser.toString())
+      .set('idfournisseur',idfournisseur.toString())
+      return this.http.post(`${config.apiUrl}/api/AddOrDeleteFavoriteSuppliers`,
+      body.toString(),
+      config.headerObject
+      );
+
+    }
+
 
     getSuppliersAndDistributor()
     {
