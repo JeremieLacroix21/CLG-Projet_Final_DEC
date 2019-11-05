@@ -1308,6 +1308,9 @@ let UserService = class UserService {
             .set('iduser', iduser.toString());
         return this.http.post(`${_config__WEBPACK_IMPORTED_MODULE_3__["config"].apiUrl}/api/GetFavoriteSuppliers`, body.toString(), _config__WEBPACK_IMPORTED_MODULE_3__["config"].headerObject);
     }
+    getSuppliersAndDistributor() {
+        return this.http.post(`${_config__WEBPACK_IMPORTED_MODULE_3__["config"].apiUrl}/api/GetFavoriteSuppliers`, _config__WEBPACK_IMPORTED_MODULE_3__["config"].headerObject);
+    }
 };
 UserService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
