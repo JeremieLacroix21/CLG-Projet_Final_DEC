@@ -41,7 +41,7 @@ class PassportController extends Controller
         if (is_null($user)) {
             return response()->json([@"Informations invalides"], 401);
         } else if ($user->confirme == 0) {
-            return response()->json([@"Le compte est en attente de confirmation par un administrateur"], 401);
+            return response()->json([@"Compte non confirmé"], 401);
         } else {
             $propertiesFromUserType = null;
             if ($user->TypeUser === "Fournisseur") {

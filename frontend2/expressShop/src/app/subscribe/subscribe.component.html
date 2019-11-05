@@ -47,7 +47,7 @@
         </mat-form-field></p>
         
         <p class="upload">Photo de profil</p>
-        <p style="height: 155px">
+        <p style="height: 155px;">
             <img id="Image" [src]="imageSrc" class="IMG"/>
             <mat-form-field appearance="outline" class="description-field">
                 <mat-label>Description</mat-label>
@@ -82,6 +82,10 @@
     </form>
     </mat-card-content>
     </mat-card>
+      <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
+        <p class="loadingText">Création de votre compte...</p>
+      </ngx-spinner>
+    </div>
     <app-pop-up [isOpen]="popUpOpen">
         <div class="blur">
           <header>
@@ -96,7 +100,3 @@
           </footer>
         </div>
       </app-pop-up>
-      <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
-        <p class="loadingText">Création de votre compte...</p>
-      </ngx-spinner>
-    </div>
