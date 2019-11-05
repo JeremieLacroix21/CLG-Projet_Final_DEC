@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::get('GetAllUsers', 'API\PassportController@GetAllUsers');
  Route::get('GetAllSuppliers', 'API\PassportController@GetAllSuppliers');
  Route::post('AddTag', 'API\PassportController@AddTag');
+ Route::get('GetSuppliersAndDistributor', 'API\PassportController@GetSuppliersAndDistributor');
+ 
 //Route Produit
  Route::get('GetAllProducts','API\ProduitController@GetAllProducts');
  Route::post('SearchProducts','API\ProduitController@SearchProducts');
@@ -43,8 +45,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::post('UpdateRating','API\ProfilController@UpdateRating');
 
 
- Route::post('AddFavoriteSuppliers','API\ProfilController@AddFavoriteSuppliers');
- Route::post('deleteFavoriteSuppliers','API\ProfilController@deleteFavoriteSuppliers');
+ Route::post('AddOrDeleteFavoriteSuppliers','API\ProfilController@AddOrDeleteFavoriteSuppliers');
  Route::post('GetFavoriteSuppliers','API\ProfilController@GetFavoriteSuppliers');
 
  //Route Produit

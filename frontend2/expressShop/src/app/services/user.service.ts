@@ -118,12 +118,23 @@ export class UserService {
       );
     }
 
-
-    getSuppliersAndDistributor()
+    AddOrDeleteFavoriteSuppliers(iduser:number,idfournisseur:number)
     {
-      
+      const body = new HttpParams()
+      .set('iduser',iduser.toString())
+      .set('idfournisseur',idfournisseur.toString())
+      return this.http.post(`${config.apiUrl}/api/AddOrDeleteFavoriteSuppliers`,
+      body.toString(),
+      config.headerObject
+      );
+
+    }
+
+
+    GetAllusers()
+    {
       return this.http.post<BD_User[]>(
-        `${config.apiUrl}/api/GetFavoriteSuppliers`,
+        `${config.apiUrl}/api/GetAllUsers`,
         config.headerObject
       );
     }
