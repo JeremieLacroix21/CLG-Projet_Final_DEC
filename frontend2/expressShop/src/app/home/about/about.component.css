@@ -140,7 +140,7 @@ p{
 }
 
 .row.video{
-  background: url("src/assets/img/citynight.jpg");
+  background: url("src/assets/citynight.jpg");
   margin-top: 1%;
   height: 50%;
   max-width: inherit;
