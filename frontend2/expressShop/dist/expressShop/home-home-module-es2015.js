@@ -568,7 +568,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-card class=\"product-mat-card\">\r\n  <mat-card-title>Ajouter Produit</mat-card-title>\r\n  <mat-card-content>\r\n    <form [formGroup]=\"productForm\" (ngSubmit)=\"onSubmit()\" class=\"product-card\">\r\n      <div id=\"left\">\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Nom\" formControlName=\"nom\">\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"definition\" formControlName=\"description\">\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Prix\" type=\"number\" class=\"example-right-align\" formControlName=\"prix\">\r\n            <span matPrefix>$&nbsp;</span>\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Quantité\" type=\"number\" class=\"example-right-align\" formControlName=\"quantite\">\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field class=\"example-chip-list\">\r\n            <mat-chip-list #chipList aria-label=\"Fruit selection\">\r\n              <mat-chip *ngFor=\"let tag of tags\" [selectable]=\"selectable\" [removable]=\"removable\"\r\n                (removed)=\"remove(tag)\">\r\n                {{tag.name}}\r\n                <mat-icon matChipRemove *ngIf=\"removable\">cancel</mat-icon>\r\n              </mat-chip>\r\n              <input placeholder=\"New tag...\" [matChipInputFor]=\"chipList\"\r\n                [matChipInputSeparatorKeyCodes]=\"separatorKeysCodes\" [matChipInputAddOnBlur]=\"addOnBlur\"\r\n                (matChipInputTokenEnd)=\"add($event)\">\r\n            </mat-chip-list>\r\n          </mat-form-field>\r\n        </p>\r\n      </div>\r\n      <div id=\"right\">\r\n        <p class=\"upload\">Photo de profil</p>\r\n        <p style=\"height: 155px\">\r\n          <img id=\"Image\" [src]=\"imageSrc\" class=\"IMG\" />\r\n        </p>\r\n        <p><input type='file' class=\"upload\" (change)=\"onFileChanged($event)\" /></p>\r\n      </div>\r\n      <button mat-button type=\"submit\">Ajouter</button>\r\n    </form>\r\n  </mat-card-content>\r\n</mat-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-card class=\"product-mat-card\">\r\n  <mat-card-title>Ajouter Produit</mat-card-title>\r\n  <mat-card-content>\r\n    <form [formGroup]=\"productForm\" (ngSubmit)=\"onSubmit()\" class=\"product-card\">\r\n      <div id=\"left\">\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Nom\" formControlName=\"nom\">\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"definition\" formControlName=\"description\">\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Prix\" type=\"number\" class=\"example-right-align\" formControlName=\"prix\">\r\n            <span matPrefix>$&nbsp;</span>\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Quantité\" type=\"number\" class=\"example-right-align\" formControlName=\"quantite\">\r\n          </mat-form-field>\r\n        </p>\r\n        <p>\r\n          <mat-form-field class=\"example-chip-list\">\r\n            <mat-chip-list #chipList aria-label=\"Fruit selection\">\r\n              <mat-chip *ngFor=\"let tag of tags\" [selectable]=\"selectable\" [removable]=\"removable\"\r\n                (removed)=\"remove(tag)\">\r\n                {{tag.name}}\r\n                <mat-icon matChipRemove *ngIf=\"removable\">cancel</mat-icon>\r\n              </mat-chip>\r\n              <input placeholder=\"New tag...\" [matChipInputFor]=\"chipList\"\r\n                [matChipInputSeparatorKeyCodes]=\"separatorKeysCodes\" [matChipInputAddOnBlur]=\"addOnBlur\"\r\n                (matChipInputTokenEnd)=\"add($event)\">\r\n            </mat-chip-list>\r\n          </mat-form-field>\r\n        </p>\r\n      </div>\r\n      <div id=\"right\">\r\n        <p class=\"upload\">Photo du produit</p>\r\n        <p style=\"height: 155px\">\r\n          <img id=\"Image\" [src]=\"imageSrc\" class=\"IMG\" />\r\n        </p>\r\n        <p><input type='file' class=\"upload\" (change)=\"onFileChanged($event)\" /></p>\r\n      </div>\r\n      <button mat-button type=\"submit\">Ajouter</button>\r\n    </form>\r\n  </mat-card-content>\r\n</mat-card>");
 
 /***/ }),
 
@@ -607,7 +607,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-card class=\"product-card grid-item\">\r\n\r\n    <mat-card-title-group>\r\n        <mat-card-title>{{product.nom}}</mat-card-title>\r\n        <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->\r\n        <mat-card-subtitle class=\"supplier-name\">Offert par \r\n        <a [routerLink]=\"'/home/supplierInfos'\" [queryParams]=\"{ s: product.idFournisseur }\">\r\n            {{product.nomFournisseur}}\r\n        </a>\r\n        </mat-card-subtitle>\r\n        <!-- TODO: Load the supplier's logo -->\r\n        <a [routerLink]=\"'/home/supplierInfos'\" [queryParams]=\"{ s: product.idFournisseur }\">\r\n            <img mat-card-avatar src=\"https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png\" />\r\n        </a>\r\n    </mat-card-title-group>\r\n\r\n    <!-- TODO: Load the product's image -->\r\n    <!-- TODO: Define and implement the action to execute when clicking the product's picture -->\r\n    <a href=\"\"><img mat-card-image class=\"product-img-card\" src=\"http://pbs.twimg.com/media/Dg19RdYWsAAkoI0.jpg\" /></a>\r\n\r\n    <mat-card-content class=\"product-card-content\">\r\n        {{product.description}}\r\n    </mat-card-content>\r\n\r\n    <mat-card-actions [allowUserTypes]=\"[auth.D]\">\r\n        <button id=\"favorite-{{product.idproduits}}\" class=\"mdc-icon-button\" (click)=\"onClickFavoriteBtn()\">\r\n            <i class=\"material-icons mdc-icon-button__icon\">{{isInFavorites ? 'star' : 'star_border'}}</i>\r\n        </button>\r\n        <mat-card-subtitle class=\"price-text\">${{product.prix}}</mat-card-subtitle>\r\n        <button id=\"cart-{{product.idproduits}}\" class=\"mdc-icon-button cart-btn\" (click)=\"onClickCartBtn()\">\r\n            <i class=\"material-icons mdc-icon-button__icon\">{{isInCart ? 'remove_shopping_cart' : 'add_shopping_cart'}}</i>\r\n        </button>\r\n    </mat-card-actions>\r\n\r\n</mat-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-card class=\"product-card grid-item\">\r\n\r\n    <mat-card-title-group>\r\n        <mat-card-title>{{product.nom}}</mat-card-title>\r\n        <!-- TODO: Redirect to supplier's profile page when clicking the name or the logo -->\r\n        <mat-card-subtitle class=\"supplier-name\">Offert par \r\n        <a [routerLink]=\"'/home/supplierInfos'\" [queryParams]=\"{ s: product.idFournisseur }\">\r\n            {{product.nomFournisseur}}\r\n        </a>\r\n        </mat-card-subtitle>\r\n        <!-- TODO: Load the supplier's logo -->\r\n        <a [routerLink]=\"'/home/supplierInfos'\" [queryParams]=\"{ s: product.idFournisseur }\">\r\n            <img mat-card-avatar src=\"https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png\" />\r\n        </a>\r\n    </mat-card-title-group>\r\n\r\n    <!-- TODO: Load the product's image -->\r\n    <!-- TODO: Define and implement the action to execute when clicking the product's picture -->\r\n    <a href=\"\"><img mat-card-image class=\"product-img-card\" src=\"assets/img/{{product.imgGUID}}\" /></a>\r\n\r\n    <mat-card-content class=\"product-card-content\">\r\n        {{product.description}}\r\n    </mat-card-content>\r\n\r\n    <mat-card-actions [allowUserTypes]=\"[auth.D]\">\r\n        <button id=\"favorite-{{product.idproduits}}\" class=\"mdc-icon-button\" (click)=\"onClickFavoriteBtn()\">\r\n            <i class=\"material-icons mdc-icon-button__icon\">{{isInFavorites ? 'star' : 'star_border'}}</i>\r\n        </button>\r\n        <mat-card-subtitle class=\"price-text\">${{product.prix}}</mat-card-subtitle>\r\n        <button id=\"cart-{{product.idproduits}}\" class=\"mdc-icon-button cart-btn\" (click)=\"onClickCartBtn()\">\r\n            <i class=\"material-icons mdc-icon-button__icon\">{{isInCart ? 'remove_shopping_cart' : 'add_shopping_cart'}}</i>\r\n        </button>\r\n    </mat-card-actions>\r\n\r\n</mat-card>");
 
 /***/ }),
 
@@ -620,7 +620,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"titre\">Vos commandes</h1>\r\n<!-- nav table -->\r\n<mat-form-field class=\"Nav\">\r\n  <mat-label>Choisir le type de commande</mat-label>\r\n  <mat-select [(value)]=\"selectedrow\">\r\n    <mat-option value=\"0\" (click)=\"ChangeRow()\">En cours</mat-option>\r\n    <mat-option value=\"1\" (click)=\"ChangeRow()\">Terminé</mat-option>\r\n  </mat-select>\r\n</mat-form-field>\r\n<!-- filter -->\r\n<mat-form-field class=\"Nav\" style=\"width: 15%; left:7%\">\r\n    <input matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filtre\">\r\n</mat-form-field>\r\n<div class=\"Nav\" style=\"width: 90%;\">\r\n  <!-- Affichage Distributeur -->\r\n  <table *ngIf=\"EstDistributeur\" mat-table [dataSource]=\"dataSource\" multiTemplateDataRows class=\"mat-elevation-z8\" matSort>\r\n    <ng-container  matColumnDef=\"{{column}}\" *ngFor=\"let column of displayedColumns\">\r\n      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\"> {{commande[column]}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"expandedDetail\">\r\n      <th mat-header-cell *matHeaderCellDef> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\" [attr.colspan]=\"displayedColumns.length\">\r\n        <div class=\"example-element-detail\"\r\n            [@detailExpand]=\"commande == expandedElement ? 'expanded' : 'collapsed'\">\r\n            <table class=\"tableproduit\">\r\n              <th>Image du produit</th><th>Nom</th><th>Prix</th><th>Quantité</th><th>Description</th>\r\n            <ng-container *ngFor=\"let item of commande.TableItem; let i = index\">\r\n              <tr class=\"tableelement\">\r\n                  <td class=\"image\">\r\n                    <img src=\"{{item.imgGUID}}\"  style=\"min-width: 80px; height: 80px;\" >\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.nom}}\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.prix}}$\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.quantite}}\r\n                </td>\r\n                <td class=\"description\">\r\n                    {{item.description}}\r\n                </td>\r\n              </tr>\r\n            </ng-container>\r\n            </table>\r\n        </div>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let element; columns: displayedColumns;\"\r\n        class=\"example-element-row\"\r\n        [class.example-expanded-row]=\"expandedElement === element\"\r\n        (click)=\"expandedElement = expandedElement === element ? null : element\">\r\n    </tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: ['expandedDetail']\" class=\"example-detail-row\"></tr>\r\n  </table>\r\n\r\n   <!-- Affichage Fournisseur -->\r\n   <table *ngIf=\"!EstDistributeur\" mat-table [dataSource]=\"dataSourceFournisseur\" multiTemplateDataRows class=\"mat-elevation-z8\" matSort>\r\n    <ng-container  matColumnDef=\"{{column}}\" *ngFor=\"let column of displayedColumns2\">\r\n      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\"> {{commande[column]}}\r\n          <button mat-button *ngIf=\"column == 'Terminé la commande' && !TermineSection\" class=\"buttonterminé\"  (click)=\"CompleteCommande($event,commande.idCommande)\">Complété la commande</button>\r\n          <p *ngIf=\"column == 'Terminé la commande' && TermineSection\"> Commande complétée <mat-icon style=\"color: green;\">check_circle</mat-icon></p>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"expandedDetail\">\r\n      <th mat-header-cell *matHeaderCellDef> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\" [attr.colspan]=\"displayedColumns2.length\">\r\n        <div class=\"example-element-detail\"\r\n            [@detailExpand]=\"commande == expandedElement ? 'expanded' : 'collapsed'\">\r\n            <table class=\"tableproduit\">\r\n              <th>Image du produit</th><th>Nom</th><th>Prix</th><th>Quantité</th><th>Description</th>\r\n            <ng-container *ngFor=\"let item of commande.TableItem; let i = index\">\r\n              <tr class=\"tableelement\">\r\n                  <td class=\"image\">\r\n                    <img src=\"{{item.imgGUID}}\"  style=\"min-width: 80px; height: 80px;\" >\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.nom}}\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.prix}}$\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.quantite}}\r\n                </td>\r\n                <td class=\"description\">\r\n                    {{item.description}}\r\n                </td>\r\n              </tr>\r\n            </ng-container>\r\n            </table>\r\n        </div>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns2\"></tr>\r\n    <tr mat-row *matRowDef=\"let element; columns: displayedColumns2;\"\r\n        class=\"example-element-row\"\r\n        [class.example-expanded-row]=\"expandedElement === element\"\r\n        (click)=\"expandedElement = expandedElement === element ? null : element\">\r\n    </tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: ['expandedDetail']\" class=\"example-detail-row\"></tr>\r\n  </table>\r\n\r\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"titre\">Vos commandes</h1>\r\n<!-- nav table -->\r\n<mat-form-field class=\"Nav\">\r\n  <mat-label>Choisir le type de commande</mat-label>\r\n  <mat-select [(value)]=\"selectedrow\">\r\n    <mat-option value=\"0\" (click)=\"ChangeRow()\">En cours</mat-option>\r\n    <mat-option value=\"1\" (click)=\"ChangeRow()\">Terminé</mat-option>\r\n  </mat-select>\r\n</mat-form-field>\r\n<!-- filter -->\r\n<mat-form-field class=\"Nav\" style=\"width: 15%; left:7%\">\r\n    <input matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filtre\">\r\n</mat-form-field>\r\n<div class=\"Nav\" style=\"width: 90%;\">\r\n  <!-- Affichage Distributeur -->\r\n  <table *ngIf=\"EstDistributeur\" mat-table [dataSource]=\"dataSource\" multiTemplateDataRows class=\"mat-elevation-z8\" matSort>\r\n    <ng-container  matColumnDef=\"{{column}}\" *ngFor=\"let column of displayedColumns\">\r\n      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\"> {{commande[column]}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"expandedDetail\">\r\n      <th mat-header-cell *matHeaderCellDef> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\" [attr.colspan]=\"displayedColumns.length\">\r\n        <div class=\"example-element-detail\"\r\n            [@detailExpand]=\"commande == expandedElement ? 'expanded' : 'collapsed'\">\r\n            <table class=\"tableproduit\">\r\n              <th>Image du produit</th><th>Nom</th><th>Prix</th><th>Quantité</th><th>Description</th>\r\n            <ng-container *ngFor=\"let item of commande.TableItem; let i = index\">\r\n              <tr class=\"tableelement\">\r\n                  <td class=\"image\">\r\n                    <img src=\"../../assets/img/{{item.imgGUID}}\"  style=\"min-width: 80px; height: 80px;\" >\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.nom}}\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.prix}}$\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.quantite}}\r\n                </td>\r\n                <td class=\"description\">\r\n                    {{item.description}}\r\n                </td>\r\n              </tr>\r\n            </ng-container>\r\n            </table>\r\n        </div>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let element; columns: displayedColumns;\"\r\n        class=\"example-element-row\"\r\n        [class.example-expanded-row]=\"expandedElement === element\"\r\n        (click)=\"expandedElement = expandedElement === element ? null : element\">\r\n    </tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: ['expandedDetail']\" class=\"example-detail-row\"></tr>\r\n  </table>\r\n\r\n   <!-- Affichage Fournisseur -->\r\n   <table *ngIf=\"!EstDistributeur\" mat-table [dataSource]=\"dataSourceFournisseur\" multiTemplateDataRows class=\"mat-elevation-z8\" matSort>\r\n    <ng-container  matColumnDef=\"{{column}}\" *ngFor=\"let column of displayedColumns2\">\r\n      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\"> {{commande[column]}}\r\n          <button mat-button *ngIf=\"column == 'Terminé la commande' && !TermineSection\" class=\"buttonterminé\"  (click)=\"CompleteCommande($event,commande.idCommande)\">Complété la commande</button>\r\n          <p *ngIf=\"column == 'Terminé la commande' && TermineSection\"> Commande complétée <mat-icon style=\"color: green;\">check_circle</mat-icon></p>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"expandedDetail\">\r\n      <th mat-header-cell *matHeaderCellDef> {{column}} </th>\r\n      <td mat-cell *matCellDef=\"let commande\" [attr.colspan]=\"displayedColumns2.length\">\r\n        <div class=\"example-element-detail\"\r\n            [@detailExpand]=\"commande == expandedElement ? 'expanded' : 'collapsed'\">\r\n            <table class=\"tableproduit\">\r\n              <th>Image du produit</th><th>Nom</th><th>Prix</th><th>Quantité</th><th>Description</th>\r\n            <ng-container *ngFor=\"let item of commande.TableItem; let i = index\">\r\n              <tr class=\"tableelement\">\r\n                  <td class=\"image\">\r\n                    <img src=\"../../assets/img/{{item.imgGUID}}\"  style=\"min-width: 80px; height: 80px;\" >\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.nom}}\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.prix}}$\r\n                </td>\r\n                <td class=\"prix\">\r\n                    {{item.quantite}}\r\n                </td>\r\n                <td class=\"description\">\r\n                    {{item.description}}\r\n                </td>\r\n              </tr>\r\n            </ng-container>\r\n            </table>\r\n        </div>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns2\"></tr>\r\n    <tr mat-row *matRowDef=\"let element; columns: displayedColumns2;\"\r\n        class=\"example-element-row\"\r\n        [class.example-expanded-row]=\"expandedElement === element\"\r\n        (click)=\"expandedElement = expandedElement === element ? null : element\">\r\n    </tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: ['expandedDetail']\" class=\"example-detail-row\"></tr>\r\n  </table>\r\n\r\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\r\n</div>");
 
 /***/ }),
 
@@ -711,7 +711,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n\r\n<div [class.filter]=\"isBlur\">\r\n<h1>Votre Panier</h1>\r\n  <div class=\"mat-elevation-z8\" >\r\n    <table mat-table [dataSource]=\"dataSource\">\r\n        \r\n      <!-- image -->\r\n      <ng-container matColumnDef=\"image\">\r\n        <th mat-header-cell *matHeaderCellDef>image</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.imgGUID}}</td>\r\n        <td mat-footer-cell *matFooterCellDef>Total</td>\r\n      </ng-container>\r\n      <!-- id -->\r\n      <ng-container matColumnDef=\"id\">\r\n        <th mat-header-cell *matHeaderCellDef>id</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.idproduits}}</td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n      </ng-container>\r\n      <!-- nom -->\r\n      <ng-container matColumnDef=\"nom\">\r\n        <th mat-header-cell *matHeaderCellDef>nom</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.nom}}</td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n      </ng-container>\r\n      <!-- prix -->\r\n      <ng-container matColumnDef=\"prix\">\r\n        <th mat-header-cell *matHeaderCellDef>prix</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.prix}}</td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n      </ng-container>\r\n      <!--qté -->\r\n      <ng-container matColumnDef=\"quantité\">\r\n        <th mat-header-cell *matHeaderCellDef>quantité</th>\r\n        <td mat-cell *matCellDef=\"let product\">\r\n           <button type=\"submit\" (click)=\"this.increment(product.idproduits)\" id=\"bt2plus\">+</button>\r\n            <input type=\"number\" min=\"0\" id=\"text+i\" (keyup)=\"0\" (key.enter)=\"set(product.idproduits)\"  placeholder=\"{{product.quantity}}\">\r\n          <button type=\"submit\" (click)=\"decrement(product.idproduits)\" id=\"bt2moin\">-</button>\r\n        </td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n        \r\n      </ng-container>\r\n      <!--sous total -->\r\n      <ng-container matColumnDef=\"sous-total\">\r\n        <th mat-header-cell *matHeaderCellDef>sous-total</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.prix * product.quantity}}</td>\r\n        <td mat-footer-cell *matFooterCellDef>{{total}}$CAD</td>\r\n      </ng-container> \r\n\r\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n      <tr mat-footer-row *matFooterRowDef=\"displayedColumns; sticky: true\"></tr>\r\n    </table>\r\n  \r\n    <mat-paginator [pageSizeOptions]=\"[20, 10, 5]\" showFirstLastButtons></mat-paginator>\r\n  </div>\r\n  \r\n  <div class=\"PanierButtonDiv\">\r\n      <a routerLink=\"/home\"><button mat-raised-button color=\"primary\" class=\"PanierButton\">retourner au browser</button></a>\r\n      <button *ngIf=\"!EstVide\" mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"ValidateCommande()\">Passer la commande</button>\r\n  </div>\r\n</div>\r\n<app-pop-up [isOpen]=\"popUpOpen\">\r\n  <div style=\"text-align: center\">\r\n    <header>\r\n      <span><b>Envoyer la ou les commande(s) au(x) fournisseur(s)?</b></span>\r\n    </header>\r\n    <main style=\"margin-top: 20px\">\r\n    <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"SendCommande()\">confirmer</button>\r\n    <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"ClosePopUp()\">annuler</button>      \r\n    </main>\r\n  </div>\r\n</app-pop-up>\r\n<app-pop-up [isOpen]=\"popUpEmail\">\r\n  <div style=\"text-align: center\">\r\n    <header>\r\n      <span><b>Commande(s) envoyée(s) au(x) fournisseur(s)!</b></span>\r\n    </header>\r\n    <main style=\"margin-top: 20px\">\r\n    <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"ReturnMenu()\">retourner au menu</button>      \r\n    </main>\r\n  </div>\r\n</app-pop-up>");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n\r\n<div [class.filter]=\"isBlur\">\r\n<h1>Votre Panier</h1>\r\n  <div class=\"mat-elevation-z8\" >\r\n    <table mat-table [dataSource]=\"dataSource\">\r\n        \r\n      <!-- image -->\r\n      <ng-container matColumnDef=\"image\">\r\n        <th mat-header-cell *matHeaderCellDef>image</th>\r\n        <td mat-cell *matCellDef=\"let product\" style=\"max-width: 100px;\"><img src=\"../../assets/img/{{product.imgGUID}}\" style=\"max-width: 100px; max-height: 100px;\" alt=\"...\"></td>\r\n        <td mat-footer-cell *matFooterCellDef>Total</td>\r\n      </ng-container>\r\n      <!-- id -->\r\n      <ng-container matColumnDef=\"id\">\r\n        <th mat-header-cell *matHeaderCellDef>id</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.idproduits}}</td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n      </ng-container>\r\n      <!-- nom -->\r\n      <ng-container matColumnDef=\"nom\">\r\n        <th mat-header-cell *matHeaderCellDef>nom</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.nom}}</td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n      </ng-container>\r\n      <!-- prix -->\r\n      <ng-container matColumnDef=\"prix\">\r\n        <th mat-header-cell *matHeaderCellDef>prix</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.prix}}</td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n      </ng-container>\r\n      <!--qté -->\r\n      <ng-container matColumnDef=\"quantité\">\r\n        <th mat-header-cell *matHeaderCellDef>quantité</th>\r\n        <td mat-cell *matCellDef=\"let product\">\r\n           <button type=\"submit\" (click)=\"this.increment(product.idproduits)\" id=\"bt2plus\">+</button>\r\n            <input type=\"number\" min=\"0\" id=\"text+i\" (keyup)=\"0\" (key.enter)=\"set(product.idproduits)\"  placeholder=\"{{product.quantity}}\">\r\n          <button type=\"submit\" (click)=\"decrement(product.idproduits)\" id=\"bt2moin\">-</button>\r\n        </td>\r\n        <td mat-footer-cell *matFooterCellDef></td>\r\n        \r\n      </ng-container>\r\n      <!--sous total -->\r\n      <ng-container matColumnDef=\"sous-total\">\r\n        <th mat-header-cell *matHeaderCellDef>sous-total</th>\r\n        <td mat-cell *matCellDef=\"let product\">{{product.prix * product.quantity}}</td>\r\n        <td mat-footer-cell *matFooterCellDef>{{total}}$CAD</td>\r\n      </ng-container> \r\n\r\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n      <tr mat-footer-row *matFooterRowDef=\"displayedColumns; sticky: true\"></tr>\r\n    </table>\r\n  \r\n    <mat-paginator [pageSizeOptions]=\"[20, 10, 5]\" showFirstLastButtons></mat-paginator>\r\n  </div>\r\n  \r\n  <div class=\"PanierButtonDiv\">\r\n      <a routerLink=\"/home\"><button mat-raised-button color=\"primary\" class=\"PanierButton\">retourner au browser</button></a>\r\n      <button *ngIf=\"!EstVide\" mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"ValidateCommande()\">Passer la commande</button>\r\n  </div>\r\n</div>\r\n<app-pop-up [isOpen]=\"popUpOpen\">\r\n  <div style=\"text-align: center\">\r\n    <header>\r\n      <span><b>Envoyer la ou les commande(s) au(x) fournisseur(s)?</b></span>\r\n    </header>\r\n    <main style=\"margin-top: 20px\">\r\n    <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"SendCommande()\">confirmer</button>\r\n    <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"ClosePopUp()\">annuler</button>      \r\n    </main>\r\n  </div>\r\n</app-pop-up>\r\n<app-pop-up [isOpen]=\"popUpEmail\">\r\n  <div style=\"text-align: center\">\r\n    <header>\r\n      <span><b>Commande(s) envoyée(s) au(x) fournisseur(s)!</b></span>\r\n    </header>\r\n    <main style=\"margin-top: 20px\">\r\n    <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"ReturnMenu()\">retourner au menu</button>      \r\n    </main>\r\n  </div>\r\n</app-pop-up>");
 
 /***/ }),
 
@@ -725,265 +725,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<ng-container *ngIf=\"(loadedSuppliers | async) as users\">\r\n<mat-drawer-container class=\"container\">\r\n\r\n<mat-drawer #browserSection class=\"browse-section\" mode=\"side\" opened (openedChange)=\"onClickCollapseBtn($event)\">\r\n    <mat-form-field class=\"filter-form-field\" [floatLabel]=\"never\">\r\n        <mdb-icon fas icon=\"search\" aria-hidden=\"true\"></mdb-icon>\r\n        <input matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Recherche\"/>\r\n        <mat-hint>{{dataSource.filteredData.length}} résultats correspondent</mat-hint>\r\n    </mat-form-field>\r\n\r\n    <mat-divider></mat-divider>\r\n    \r\n    <mat-list>\r\n        <mat-list-item *ngFor=\"let supplier of dataSource.filteredData; last as isLastSupplier\" (click)=\"onClickSupplier(supplier)\">\r\n            <img matListAvatar src=\"https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png\" />\r\n            <h4 mat-line>{{supplier.nomutilisateur}}</h4>\r\n\r\n            <p mat-line class=\"tags-display\">\r\n                <ng-container *ngFor=\"let tag of supplier.tags; last as isLastTag\">{{tag}}<ng-container *ngIf=\"!isLastTag\">, </ng-container></ng-container>\r\n            </p>\r\n            <mat-divider [inset]=\"true\" *ngIf=\"!isLastSupplier\"></mat-divider>\r\n        </mat-list-item>\r\n        <mat-divider></mat-divider>\r\n    </mat-list>\r\n</mat-drawer>\r\n\r\n<mat-drawer-content class=\"profile-section\">\r\n    <button id=\"collapseBtn\" class=\"mdc-icon-button\" collapsed=\"false\" (click)=\"browserSection.toggle()\">\r\n        <i class=\"material-icons mdc-icon-button__icon\">forward</i>\r\n    </button>\r\n    \r\n    <ng-container *ngIf=\"profileToShow\">\r\n\r\n        \r\n            \r\n            \r\n        <div class=\"username-block\">\r\n                \r\n            <h1>{{profileToShow.nomutilisateur}}</h1>\r\n            <div class=\"boutton_messagerie\">\r\n                    <button mat-raised-button color=\"primary\">Envoyer un message</button>\r\n                    <button mat-raised-button color=\"primary\" (click)=\"openPopUp()\">Noter la compagnie</button>\r\n                </div>\r\n            \r\n            <div class=\"info-block\"> <h3>Infos</h3>\r\n                <p>Description : {{profileToShow.description}}</p>\r\n                <p>Tags : {{profileToShow.tags}}</p>\r\n                <p>Nombre d'étoiles : {{rating}}\r\n                <star-rating [value]=\"rating\" checkedcolor=\"yellow\" uncheckedcolor=\"black\" size=\"30px\" [readonly]=\"ratingreadonly\">\r\n                </star-rating></p>\r\n                \r\n            </div>\r\n            <img class=\"shown-logo\" src=\"https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png\" />\r\n        </div>\r\n        <div class=\"contact-block\"> <h3>Contact</h3>\r\n            <p>Email : {{profileToShow.email}}</p>\r\n            <p>Telephone : {{profileToShow.telephone}}</p>\r\n            <p>Adresse : {{profileToShow.adresse}}</p>\r\n            <div class=\"map_container\">\r\n                    <agm-map \r\n                    [latitude]=\"location?.lat\"\r\n                    [longitude]=\"location?.lng\"\r\n                    [zoom]=\"zoom\"\r\n                    [disableDefaultUI]=\"false\"\r\n                    [zoomControl]=\"false\">\r\n                    <agm-marker [latitude]=\"location?.lat\"\r\n                    [longitude]=\"location?.lng\"></agm-marker>\r\n\r\n                  </agm-map></div>\r\n        </div>\r\n        \r\n    </ng-container>\r\n    \r\n</mat-drawer-content>\r\n\r\n</mat-drawer-container>\r\n</ng-container>\r\n<app-pop-up [isOpen]=\"popupvisible\">\r\n        <div style=\"text-align: center\">\r\n          <header>\r\n            <span><b>Noter la compagnie:</b></span>\r\n          </header>\r\n          <main style=\"margin-top: 20px\">\r\n            <star-rating [value]=\"newnewrating\" checkedcolor=\"yellow\" uncheckedcolor=\"black\" size=\"24px\" readonly=\"false\" (rate)=\"onRate($event)\" readonly>\r\n            </star-rating>\r\n          <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"onClickNoterCompagnie()\">confirmer</button>\r\n          <button mat-raised-button color=\"primary\" class=\"PanierButton\" (click)=\"closePopUp()\">annuler</button>      \r\n          </main>\r\n        </div>\r\n      </app-pop-up>\r\n\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/uuid/index.js":
-/*!************************************!*\
-  !*** ./node_modules/uuid/index.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var v1 = __webpack_require__(/*! ./v1 */ "./node_modules/uuid/v1.js");
-var v4 = __webpack_require__(/*! ./v4 */ "./node_modules/uuid/v4.js");
-
-var uuid = v4;
-uuid.v1 = v1;
-uuid.v4 = v4;
-
-module.exports = uuid;
-
-
-/***/ }),
-
-/***/ "./node_modules/uuid/lib/bytesToUuid.js":
-/*!**********************************************!*\
-  !*** ./node_modules/uuid/lib/bytesToUuid.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Convert array of 16 byte values to UUID string format of the form:
- * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
- */
-var byteToHex = [];
-for (var i = 0; i < 256; ++i) {
-  byteToHex[i] = (i + 0x100).toString(16).substr(1);
-}
-
-function bytesToUuid(buf, offset) {
-  var i = offset || 0;
-  var bth = byteToHex;
-  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
-  return ([bth[buf[i++]], bth[buf[i++]], 
-	bth[buf[i++]], bth[buf[i++]], '-',
-	bth[buf[i++]], bth[buf[i++]], '-',
-	bth[buf[i++]], bth[buf[i++]], '-',
-	bth[buf[i++]], bth[buf[i++]], '-',
-	bth[buf[i++]], bth[buf[i++]],
-	bth[buf[i++]], bth[buf[i++]],
-	bth[buf[i++]], bth[buf[i++]]]).join('');
-}
-
-module.exports = bytesToUuid;
-
-
-/***/ }),
-
-/***/ "./node_modules/uuid/lib/rng-browser.js":
-/*!**********************************************!*\
-  !*** ./node_modules/uuid/lib/rng-browser.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// Unique ID creation requires a high quality random # generator.  In the
-// browser this is a little complicated due to unknown quality of Math.random()
-// and inconsistent support for the `crypto` API.  We do the best we can via
-// feature-detection
-
-// getRandomValues needs to be invoked in a context where "this" is a Crypto
-// implementation. Also, find the complete implementation of crypto on IE11.
-var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
-                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
-
-if (getRandomValues) {
-  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
-  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
-
-  module.exports = function whatwgRNG() {
-    getRandomValues(rnds8);
-    return rnds8;
-  };
-} else {
-  // Math.random()-based (RNG)
-  //
-  // If all else fails, use Math.random().  It's fast, but is of unspecified
-  // quality.
-  var rnds = new Array(16);
-
-  module.exports = function mathRNG() {
-    for (var i = 0, r; i < 16; i++) {
-      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
-      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
-    }
-
-    return rnds;
-  };
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/uuid/v1.js":
-/*!*********************************!*\
-  !*** ./node_modules/uuid/v1.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
-var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
-
-// **`v1()` - Generate time-based UUID**
-//
-// Inspired by https://github.com/LiosK/UUID.js
-// and http://docs.python.org/library/uuid.html
-
-var _nodeId;
-var _clockseq;
-
-// Previous uuid creation time
-var _lastMSecs = 0;
-var _lastNSecs = 0;
-
-// See https://github.com/broofa/node-uuid for API details
-function v1(options, buf, offset) {
-  var i = buf && offset || 0;
-  var b = buf || [];
-
-  options = options || {};
-  var node = options.node || _nodeId;
-  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
-
-  // node and clockseq need to be initialized to random values if they're not
-  // specified.  We do this lazily to minimize issues related to insufficient
-  // system entropy.  See #189
-  if (node == null || clockseq == null) {
-    var seedBytes = rng();
-    if (node == null) {
-      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
-      node = _nodeId = [
-        seedBytes[0] | 0x01,
-        seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]
-      ];
-    }
-    if (clockseq == null) {
-      // Per 4.2.2, randomize (14 bit) clockseq
-      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
-    }
-  }
-
-  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
-  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
-  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
-  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
-
-  // Per 4.2.1.2, use count of uuid's generated during the current clock
-  // cycle to simulate higher resolution clock
-  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
-
-  // Time since last uuid creation (in msecs)
-  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
-
-  // Per 4.2.1.2, Bump clockseq on clock regression
-  if (dt < 0 && options.clockseq === undefined) {
-    clockseq = clockseq + 1 & 0x3fff;
-  }
-
-  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
-  // time interval
-  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
-    nsecs = 0;
-  }
-
-  // Per 4.2.1.2 Throw error if too many uuids are requested
-  if (nsecs >= 10000) {
-    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
-  }
-
-  _lastMSecs = msecs;
-  _lastNSecs = nsecs;
-  _clockseq = clockseq;
-
-  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
-  msecs += 12219292800000;
-
-  // `time_low`
-  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
-  b[i++] = tl >>> 24 & 0xff;
-  b[i++] = tl >>> 16 & 0xff;
-  b[i++] = tl >>> 8 & 0xff;
-  b[i++] = tl & 0xff;
-
-  // `time_mid`
-  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
-  b[i++] = tmh >>> 8 & 0xff;
-  b[i++] = tmh & 0xff;
-
-  // `time_high_and_version`
-  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
-  b[i++] = tmh >>> 16 & 0xff;
-
-  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
-  b[i++] = clockseq >>> 8 | 0x80;
-
-  // `clock_seq_low`
-  b[i++] = clockseq & 0xff;
-
-  // `node`
-  for (var n = 0; n < 6; ++n) {
-    b[i + n] = node[n];
-  }
-
-  return buf ? buf : bytesToUuid(b);
-}
-
-module.exports = v1;
-
-
-/***/ }),
-
-/***/ "./node_modules/uuid/v4.js":
-/*!*********************************!*\
-  !*** ./node_modules/uuid/v4.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
-var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
-
-function v4(options, buf, offset) {
-  var i = buf && offset || 0;
-
-  if (typeof(options) == 'string') {
-    buf = options === 'binary' ? new Array(16) : null;
-    options = null;
-  }
-  options = options || {};
-
-  var rnds = options.random || (options.rng || rng)();
-
-  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-  rnds[6] = (rnds[6] & 0x0f) | 0x40;
-  rnds[8] = (rnds[8] & 0x3f) | 0x80;
-
-  // Copy bytes to buffer, if provided
-  if (buf) {
-    for (var ii = 0; ii < 16; ++ii) {
-      buf[i + ii] = rnds[ii];
-    }
-  }
-
-  return buf || bytesToUuid(rnds);
-}
-
-module.exports = v4;
-
 
 /***/ }),
 
@@ -1216,9 +957,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/cdk/keycodes */ "./node_modules/@angular/cdk/esm2015/keycodes.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _services_product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/product.service */ "./src/app/services/product.service.ts");
+/* harmony import */ var _services_product_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/product.service */ "./src/app/services/product.service.ts");
+/* harmony import */ var _services_subscribe_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/subscribe.service */ "./src/app/services/subscribe.service.ts");
 /* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services */ "./src/app/services/index.ts");
 /* harmony import */ var src_app_services_loader_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/loader.service */ "./src/app/services/loader.service.ts");
 
@@ -1230,10 +970,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddProductComponent = class AddProductComponent {
-    constructor(productService, auth, loader) {
+    constructor(productService, auth, loader, subscribeservice) {
         this.productService = productService;
         this.auth = auth;
         this.loader = loader;
+        this.subscribeservice = subscribeservice;
         this.productForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
             nom: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
             description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
@@ -1253,6 +994,7 @@ let AddProductComponent = class AddProductComponent {
     get prix() { return this.productForm.get('prix'); }
     get quantite() { return this.productForm.get('quantite'); }
     ngOnInit() {
+        this.imageSrc = "assets/img/missing-image-640x360.png";
     }
     add(event) {
         const input = event.input;
@@ -1270,10 +1012,14 @@ let AddProductComponent = class AddProductComponent {
             this.tags.splice(index, 1);
         }
     }
+    onFileChanged(event) {
+        this.selectedfile = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result.toString();
+        reader.readAsDataURL(this.selectedfile);
+    }
     onSubmit() {
-        console.log('allo');
         if (this.productForm.invalid) {
-            console.log('error ');
             return;
         }
         else {
@@ -1282,20 +1028,28 @@ let AddProductComponent = class AddProductComponent {
                 this.TagChaine += element.name + ";";
             });
             this.TagChaine = this.TagChaine.substring(0, this.TagChaine.length - 1);
-            this.productService.AddProduct(this.productForm.controls.nom.value, this.productForm.controls.prix.value, this.auth.currUser.iduser, this.productForm.controls.quantite.value, Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])(), this.productForm.controls.description.value, this.TagChaine).subscribe((res) => {
-                this.productForm.reset();
-                this.tags = new Array();
-                console.log('inserted');
-            }, (err) => {
-                console.log('error inserting');
+            console.log(this.TagChaine);
+            //Envoi de l'image
+            this.subscribeservice.uploadImage(this.selectedfile).subscribe((res) => {
+                this.productService.AddProduct(this.productForm.controls.nom.value, this.productForm.controls.prix.value, this.auth.currUser.iduser, this.productForm.controls.quantite.value, res.toString(), this.productForm.controls.description.value, this.TagChaine).subscribe((res) => {
+                    console.log(res);
+                    this.productForm.reset();
+                    this.tags = new Array();
+                }, (err) => {
+                    console.log('error inserting');
+                });
             });
+            (err) => {
+                console.log('error inserting');
+            };
         }
     }
 };
 AddProductComponent.ctorParameters = () => [
-    { type: _services_product_service__WEBPACK_IMPORTED_MODULE_5__["ProductService"] },
+    { type: _services_product_service__WEBPACK_IMPORTED_MODULE_4__["ProductService"] },
     { type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
-    { type: src_app_services_loader_service__WEBPACK_IMPORTED_MODULE_7__["LoaderService"] }
+    { type: src_app_services_loader_service__WEBPACK_IMPORTED_MODULE_7__["LoaderService"] },
+    { type: _services_subscribe_service__WEBPACK_IMPORTED_MODULE_5__["subscribeservice"] }
 ];
 AddProductComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
