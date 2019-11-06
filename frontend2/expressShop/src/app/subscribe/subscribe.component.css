@@ -44,6 +44,9 @@ mat-error{
 .button_login {
     float: right;
 }
+.error{
+  color:red;
+}
 
 .IMG{
   position: relative;

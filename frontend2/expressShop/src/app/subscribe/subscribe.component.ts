@@ -47,6 +47,7 @@ export class SubscribeComponent implements OnInit {
   loading = false;
   isBlur = false;
   submitted = false;
+  NomImage : string;
   EstFournisseur : boolean;
   returnUrl: string;
   TagChaine : string;
@@ -114,7 +115,7 @@ export class SubscribeComponent implements OnInit {
       this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value,
         this.form.controls.prenom.value,this.form.controls.nom.value,this.form.controls.adresse.value,
         this.form.controls.Telephone.value,this.form.controls.email.value,this.form.controls.TypeUser.value,
-        this.form.controls.Image.value,this.form.controls.Description.value).subscribe(
+        this.NomImage,this.form.controls.Description.value).subscribe(
        (res) => {
          if(this.form.controls.TypeUser.value == "Fournisseur")
          {
@@ -136,7 +137,7 @@ export class SubscribeComponent implements OnInit {
   onUpload() {
     this.subscribeservice.uploadImage(this.selectedfile).subscribe(
       (res) => {
-        this.form.controls.Image.setValue(res.toString());
+        this.NomImage = res.toString();
       },
       (err) => {
         console.log(err);
