@@ -45,7 +45,7 @@ class ProfilController extends Controller
                 'confirme'=> $user->prenom,
                 'dateinscription'=> $user->prenom,
                 'email' => $user->email,
-                'Telephone' => $user->Téléphone,
+                'Telephone' => $user->Telephone,
                 'description' => $user->description
             ];
             return json_encode($data);
