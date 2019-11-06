@@ -13,9 +13,8 @@ export class AboutService {
         const sendemail = new HttpParams().set('Nom', name)
         .set('message', message).set('email', email);
         return this.http.post(
-          `${config.apiUrl}/api/EnvoieMessage`,
+          `http://127.0.0.1:8000/api/EnvoieMessage`,
           sendemail.toString(),
           config.headerObject);
     }
-
 }

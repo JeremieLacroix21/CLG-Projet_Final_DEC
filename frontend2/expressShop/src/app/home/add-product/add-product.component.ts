@@ -7,6 +7,7 @@ import { ProductService } from '../../services/product.service';
 import { subscribeservice } from '../../services/subscribe.service';
 import { AuthService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface tag {
   name: string;
@@ -45,7 +46,8 @@ export class AddProductComponent implements OnInit {
   imageSrc: string;
 
   constructor(private productService: ProductService, private auth: AuthService, 
-    private loader: LoaderService, private subscribeservice: subscribeservice) { }
+    private loader: LoaderService, private subscribeservice: subscribeservice,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.imageSrc = "assets/img/missing-image-640x360.png"
@@ -82,6 +84,7 @@ export class AddProductComponent implements OnInit {
       return;
     }
     else {
+      this.loader.show("Ajout de votre produit...");
       this.TagChaine = "";
       this.tags.forEach(element => {
         this.TagChaine += element.name + ";";
@@ -100,12 +103,22 @@ export class AddProductComponent implements OnInit {
               this.TagChaine
             ).subscribe(
               (res) => {
-                console.log(res);
-                this.productForm.reset()
+                this.loader.hide();
+                this.productForm.reset();
+                this.nom.setErrors(null);
+                this.description.setErrors(null);
+                this.prix.setErrors(null);
+                this.quantite.setErrors(null);
                 this.tags = new Array();
+                this.imageSrc = "assets/img/missing-image-640x360.png";
+                this._snackBar.open("Produit ajoutée!", "ok", {
+                  duration: 3000,
+                });
               },
               (err) => {
-                console.log('error inserting');
+                this._snackBar.open("Erreur lors de l'ajout du produit", "ok", {
+                  duration: 3000,
+                });
               }
             );
           });
