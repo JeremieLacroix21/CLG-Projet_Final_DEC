@@ -101,7 +101,7 @@ class PassportController extends Controller
             return response()->json([@"Le nom d'utilisateur est déja utilisé"], 401);
         }
         if (!is_null($useremail)) {
-            return response()->json([@"Le email est déja utilisé"], 401);
+            return response()->json([@"Le email est déja utilisé"], 402);
         }
 
         DB::table('users')->insert([
