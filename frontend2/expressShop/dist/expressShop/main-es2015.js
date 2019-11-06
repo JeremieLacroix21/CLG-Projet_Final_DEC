@@ -1450,28 +1450,24 @@ let SubscribeComponent = class SubscribeComponent {
         }
         else {
             this.spinner.show();
-            this.onUpload();
-            this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value, this.form.controls.prenom.value, this.form.controls.nom.value, this.form.controls.adresse.value, this.form.controls.Telephone.value, this.form.controls.email.value, this.form.controls.TypeUser.value, this.NomImage, this.form.controls.Description.value).subscribe((res) => {
-                if (this.form.controls.TypeUser.value == "Fournisseur") {
-                    this.AjoutTags(this.tag);
-                }
-                this.invalidsubscribe = false;
-                this.spinner.hide();
-                this.isBlur = true;
-                this.popUpOpen = true;
+            this.subscribeservice.uploadImage(this.selectedfile).subscribe((res) => {
+                this.subscribeservice.subscribe(this.form.controls.username.value, this.form.controls.password.value, this.form.controls.prenom.value, this.form.controls.nom.value, this.form.controls.adresse.value, this.form.controls.Telephone.value, this.form.controls.email.value, this.form.controls.TypeUser.value, res.toString(), this.form.controls.Description.value).subscribe((res) => {
+                    if (this.form.controls.TypeUser.value == "Fournisseur") {
+                        this.AjoutTags(this.tag);
+                    }
+                    this.invalidsubscribe = false;
+                    this.spinner.hide();
+                    this.isBlur = true;
+                    this.popUpOpen = true;
+                }, (err) => {
+                    this.spinner.hide();
+                    this.invalidsubscribe = true;
+                    this.errormessages = err.error;
+                });
             }, (err) => {
-                this.spinner.hide();
-                this.invalidsubscribe = true;
-                this.errormessages = err.error;
+                console.log(err);
             });
         }
-    }
-    onUpload() {
-        this.subscribeservice.uploadImage(this.selectedfile).subscribe((res) => {
-            this.NomImage = res.toString();
-        }, (err) => {
-            console.log(err);
-        });
     }
     add(event) {
         const input = event.input;
