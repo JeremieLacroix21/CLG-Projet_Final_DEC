@@ -317,11 +317,19 @@ class ProduitController extends Controller
 
         $results = DB::table('produits')
         ->where('idproduits', '=', $request->get('idproduits'))
-        ->update(['nom' => $request->get('nom')], 
-        ['prix' => $request->get('prix')], 
-        ['enStock' => $request->get('enStock')], 
-        ['description' => $request->get('description')]);
-    
+        ->update(['nom' => $request['nom']]);
+
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request["idproduits"])
+        ->update(['enStock' => $request["enStock"]]);
+
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request["idproduits"])
+        ->update(['prix' => $request["prix"]]);
+
+        $results = DB::table('produits')
+        ->where('idproduits', '=', $request["idproduits"])
+        ->update(['description' => $request["description"]]);
 
         $data = explode(";",$input["Tags"]);
         foreach ($data as $Tags) {

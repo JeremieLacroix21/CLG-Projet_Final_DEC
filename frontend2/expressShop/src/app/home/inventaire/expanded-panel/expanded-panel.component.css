@@ -5,3 +5,23 @@ form{
 mat-form-field{
     padding-right:10px;
   }
+
+.example-chip-list{
+    width: 100%;
+}
+
+.main-tr{
+    width: 100%;
+}
+
+.last-td{
+    top:50%;
+}
+
+.chips{
+    width:100% ;
+}
+
+tr{
+    height: 100%;
+}

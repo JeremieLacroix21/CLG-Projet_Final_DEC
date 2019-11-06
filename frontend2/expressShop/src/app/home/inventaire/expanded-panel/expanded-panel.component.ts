@@ -105,9 +105,10 @@ export class ExpandedPanelComponent implements OnInit {
       ).subscribe(
         (res) => {
           this.uploadComplete();
+          console.log(res);
         },
         (err) => {
-
+          console.log(err);
         }
       );
     }
@@ -116,7 +117,6 @@ export class ExpandedPanelComponent implements OnInit {
   DeleteProduct(){
     console.log(this.item.idproduits);
     this.productService.DeleteProduct(this.item.idproduits).subscribe();
-    this.uploadComplete();
     console.log("del product");
   }
 }
