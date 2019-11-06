@@ -1,11 +1,19 @@
-<div [class.filter]="isBlur">
+<body>
+<div>
+  <div class="container">
+    <div class="header">
+        <div class="centered">
+            <img class="logoES" src="/assets/ESLogo2_Black_NoBg_NoText_Reverse_278x155.png" />
+            <span class="EStitle-black">xpress Shop</span>
+        </div>
+  </div>
+  <div class="row justify-content-center">
 
-    <h1 align="center">Express Shop</h1>
-    
+  </div>
     <mat-card>
         <mat-card-title>Inscription</mat-card-title>
     <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="RealForm">
     
         <p><mat-form-field>
             <input type="username" id="inputUsername" name="username" ngModel class="form-control" matInput placeholder="Nom d'utilisateur" formControlName="username">
@@ -86,6 +94,7 @@
         <p class="loadingText">Création de votre compte...</p>
       </ngx-spinner>
     </div>
+</div>
     <app-pop-up [isOpen]="popUpOpen">
         <div class="blur">
           <header>
@@ -99,4 +108,5 @@
             <button (click)="cancelOption()" mat-button style="float: right">Retour au menu</button>
           </footer>
         </div>
-      </app-pop-up>
+      </app-pop-up>  
+    </body>

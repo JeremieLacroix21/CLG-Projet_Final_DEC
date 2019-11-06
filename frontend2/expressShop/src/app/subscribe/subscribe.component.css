@@ -1,7 +1,6 @@
 :host {
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
 }
 
 .mat-form-field {
@@ -10,16 +9,34 @@
   margin-right:15px;
 }
 
+.logoES {
+  height: 150px;
+}
+
+.EStitle-black {
+  color: #424244;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 60px;
+  position: relative;
+  top: 20px;
+}
+
 mat-card-title,
 mat-card-content {
   display: flex;
   justify-content: center;
 }
 
-.error {
-  padding: 16px;
+.header{
   width: 100%;
-  color: red;
+  height: 80%;
+  padding-bottom: 100px;
+  padding-top: 100px;
+  text-align: center;
+}
+mat-error{
+  font-size: 13px;
 }  
 .button_div{
     padding-top: 20px;
@@ -68,8 +85,80 @@ mat-card-content {
     width: 90%;
   }
 
+  textarea.mat-input-element {
+    resize: none;
+    overflow: none;
+}
   .filter { filter: blur(3px);  } 
  
   mat-error{
     font-size: 14px;
+  }
+  body{
+    width: 100%;
+    height: 100%;
+    background: url("/assets/holy.png");
+  }
+
+  @media only screen and (min-width: 1250px) {
+    .mat-form-field {
+      width: 45%;
+    }
+    .RealForm{
+      width: 90%;
+    }
+  
+    mat-form-field{
+      font-size: 15px;
+    }
+  
+    input{
+      width: 100%;
+      font-size: 15px;
+    }
+    mat-error {
+      font-size: 17px;
+    }
+    mat-checkbox{
+      font-size: 17px;
+    }
+  
+    mat-card-title{
+      font-size: 35px;
+      padding-top: 20px;
+    }
+  
+    mat-card-title,
+    mat-card-content {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+  
+    body{
+      width: 100%;
+      height: 100%;
+      background: url("/assets/holy.png");
+    }
+  
+    app-pop-up{
+      margin: 0px;
+    }
+
+     .description-field {
+      left: 100px;
+      width: 70%;
+      bottom: 18px;
+    }
+     textarea{
+       width:600px;
+     }
+    button{
+      font-size: 17px;
+    }
+    .tag{
+      min-width: 300px;
+      width: 90%;
+    }
+  
   }
