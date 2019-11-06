@@ -13,7 +13,7 @@ class ProduitController extends Controller
     {
         $produits = DB::table('produits')
         ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
-        ->select('produits.*', 'users.nomutilisateur')
+        ->select('produits.*', 'users.nomutilisateur', 'users.imgGUID as imgGUIDuser')
         ->get();
 
         $array = [];
@@ -32,6 +32,7 @@ class ProduitController extends Controller
                 'imgGUID'=>$produit->imgGUID,
                 'description'=>$produit->description,
                 'tags'=>$array,
+                'imgGUIDuser'=>$produit->imgGUIDuser,
             ];
             ++$i;
         }

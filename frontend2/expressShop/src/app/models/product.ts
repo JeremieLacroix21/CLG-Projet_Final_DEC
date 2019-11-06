@@ -8,4 +8,5 @@ export class Product {
     nom: string;
     imgGUID: string;
     description: string;
+    imgGUIDuser: string;
 }

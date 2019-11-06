@@ -12,7 +12,7 @@
     
     <mat-list>
         <mat-list-item *ngFor="let supplier of dataSource.filteredData; last as isLastSupplier" (click)="onClickSupplier(supplier)">
-            <img matListAvatar src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
+            <img matListAvatar src="assets/img/{{supplier.logoGUID}}" />
             <h4 mat-line>{{supplier.nomutilisateur}}</h4>
 
             <p mat-line class="tags-display">
@@ -51,7 +51,7 @@
                 </star-rating></p>
                 
             </div>
-            <img class="shown-logo" src="https://pbs.twimg.com/profile_images/378800000498110973/232c0075e8606910dc6545d774b48d63_400x400.png" />
+            <img class="shown-logo" src="assets/img/{{supplier.logoGUID}}" />
         </div>
         <div class="contact-block"> <h3>Contact</h3>
             <p>Email : {{profileToShow.email}}</p>
