@@ -119,3 +119,232 @@
     right: 170px;
   }
 }
+
+  
+@media only screen and (min-width: 992px) {
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  mat-card{
+    width: 60%;
+    height: 550px;
+  }
+
+  mat-form-field{
+    font-size: 15px;
+  }
+  .RealForm{
+    width: 80%;
+  }
+
+  input{
+    width: 100%;
+    font-size: 15px;
+  }
+  mat-error {
+    font-size: 15px;
+  }
+  mat-checkbox{
+    font-size: 15px;
+  }
+
+  mat-card-title{
+    font-size: 35px;
+    padding-top: 20px;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .error {
+    position: relative;
+    top: 40px;
+    font-size: 15px;
+    width: 100%;
+    color:  red;
+  }  
+  
+  .button_login {
+    font-size: 15px;
+    width: 23%;
+    padding-right: 25px;
+    float: right;
+  }
+  .button_Visit {
+    font-size: 15px;
+    padding-right: 25px;
+    width: 23%;
+  }
+  .button_Subscribe {
+    font-size: 15px;
+    width: 23%;
+    padding-right: 25px;
+  }
+  .BTN_User{
+    font-size: 15px;
+    position: relative;
+    left: 50px;
+    bottom: 265px;
+  }
+  .BTN_Pass{
+    font-size: 15px;
+    position: relative;
+    right: 149px;
+    bottom: 140px;
+  }
+  body{
+    width: 100%;
+    height: 100%;
+    background: url("/assets/holy.png");
+  }
+
+  app-pop-up{
+    margin: 0px;
+  }
+
+  .EStitle-black {
+    color: #424244;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 40px;
+    position: relative;
+    top:15px
+  }
+  
+  .logoES {
+    height: 100px;
+  }
+  .header{
+    width: 100%;
+    height: 40%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    text-align: center;
+  }
+  .row.custom{
+      width: 150%;
+      position: relative;
+      top: 50px;
+  }
+}
+
+
+@media only screen and (max-width: 1250px) {
+ 
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  mat-card{
+    width: 80%;
+    height: 550px;
+  }
+
+  mat-form-field{
+    font-size: 13px;
+  }
+  .RealForm{
+    width: 80%;
+  }
+
+  input{
+    width: 100%;
+    font-size: 13px;
+  }
+  mat-error {
+    font-size: 13px;
+  }
+  mat-checkbox{
+    font-size: 13px;
+  }
+
+  mat-card-title{
+    font-size: 35px;
+    padding-top: 20px;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .error {
+    position: relative;
+    top: 40px;
+    font-size: 13px;
+    width: 100%;
+    color:  red;
+  }  
+  
+  .button_login {
+    font-size: 13px;
+    width: 23%;
+    padding-right: 25px;
+    float: right;
+  }
+  .button_Visit {
+    font-size: 13px;
+    padding-right: 25px;
+    width: 23%;
+  }
+  .button_Subscribe {
+    font-size: 13px;
+    width: 23%;
+    padding-right: 25px;
+  }
+  .BTN_User{
+    font-size: 13px;
+    position: relative;
+    left: 40px;
+    bottom: 265px;
+  }
+  .BTN_Pass{
+    font-size: 13px;
+    position: relative;
+    right: 135px;
+    bottom: 140px;
+  }
+  body{
+    width: 100%;
+    height: 100%;
+    background: url("src/assets/holy.png");
+  }
+
+  app-pop-up{
+    margin: 0px;
+  }
+
+  .EStitle-black {
+    color: #424244;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 40px;
+    position: relative;
+    top:15px
+  }
+  
+  .logoES {
+    height: 100px;
+  }
+  .header{
+    width: 100%;
+    height: 40%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    text-align: center;
+  }
+  .row.custom{
+      width: 150%;
+      position: relative;
+      top: 50px;
+  }
+}
