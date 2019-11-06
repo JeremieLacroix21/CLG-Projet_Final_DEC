@@ -97,7 +97,7 @@ mat-error{
   body{
     width: 100%;
     height: 100%;
-    background: url("/assets/img/holy.png");
+    background: url("src/assets/img/holy.png");
   }
 
   @media only screen and (min-width: 1250px) {
@@ -138,7 +138,7 @@ mat-error{
     body{
       width: 100%;
       height: 100%;
-      background: url("/assets/img/holy.png");
+      background: url("src/assets/img/holy.png");
     }
   
     app-pop-up{
