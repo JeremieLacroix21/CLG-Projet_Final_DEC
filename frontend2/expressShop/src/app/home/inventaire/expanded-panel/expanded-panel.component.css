@@ -4,6 +4,7 @@ form{
 
 mat-form-field{
     padding-right:10px;
+    align-self: auto;
   }
 
 .example-chip-list{
@@ -13,15 +14,29 @@ mat-form-field{
 .main-tr{
     width: 100%;
 }
-
-.last-td{
-    top:50%;
+.tr-input{
+    width: 100%;
+}
+.td-chips{
+    width:45% ;
+    height: 100%;
 }
 
-.chips{
-    width:100% ;
+.td-input{
+    width: 20%;
 }
+
+.td-button{
+    width: 15%;
+    align-self: auto;
+    padding-top: 15px;
+}
+
 
 tr{
     height: 100%;
+}
+
+input{
+    width: 100%;
 }
