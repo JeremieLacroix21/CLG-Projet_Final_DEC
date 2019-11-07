@@ -60,6 +60,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 //google map
 import { AgmCoreModule } from '@agm/core';
+
+import { PusherService } from './services/Pusher.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +129,7 @@ import { AgmCoreModule } from '@agm/core';
     })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [PusherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

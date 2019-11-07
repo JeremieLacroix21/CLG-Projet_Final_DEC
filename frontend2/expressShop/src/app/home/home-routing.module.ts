@@ -15,6 +15,7 @@ import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
 import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
 import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.component';
+import { MessageComponent } from './message/message.component';
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +33,9 @@ const routes: Routes = [
       { path: 'inventaire', component: InventaireComponent, data: {allowed: [SUPPLIER, ADMIN]} },
       { path: 'about', component: Aboutcomponent},
       { path: 'Favoritesupplier', component: FavoriteSupplierComponent, data: {allowed: [DISTRIB]} },
-      { path: 'Allsuppliers', component: ListeCompagnieComponent, data: {allowed: [DISTRIB]} }
+      { path: 'Allsuppliers', component: ListeCompagnieComponent, data: {allowed: [DISTRIB]} },
+      { path: 'message', component: MessageComponent, data: {allowed: [SUPPLIER, DISTRIB]} },
+
     ]
   },
   { path: '**', redirectTo: '404' }

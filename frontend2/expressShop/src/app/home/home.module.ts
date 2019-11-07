@@ -64,17 +64,22 @@ import { Aboutcomponent } from './about/about.component';
 import { InventaireComponent } from './inventaire/inventaire.component';
 import { FavoriteSupplierComponent } from './favorite-supplier/favorite-supplier.component';
 import { ListeCompagnieComponent } from './liste-compagnie/liste-compagnie.component';
+import { MessageComponent } from './message/message.component';
+import { FormsModule } from '@angular/forms';
 //google map
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpandedPanelComponent } from './inventaire/expanded-panel/expanded-panel.component';
 import { RatingModule } from 'ng-starrating';
 
+//Service chat-kit
+import { PusherService } from '../services/Pusher.service';
 //test
 import {NgbModule,NgbRating} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
+  providers: [PusherService],
   declarations: [
     HomeComponent,
     BrowseProductsComponent,
@@ -90,8 +95,10 @@ import {NgbModule,NgbRating} from '@ng-bootstrap/ng-bootstrap';
     FavoriteSupplierComponent,
     ExpandedPanelComponent,
     ListeCompagnieComponent,
+    MessageComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,

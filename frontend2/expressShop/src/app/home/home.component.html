@@ -34,6 +34,7 @@
       <a [allowUserTypes]="[auth.S]" mat-list-item [routerLink]="'add-product'" routerLinkActive="active">Ajouter Produit</a>
       <a [allowUserTypes]="[auth.S, auth.D]" mat-list-item [routerLink]="'commande'" routerLinkActive="active">Voir vos commandes</a>
       <a [allowUserTypes]="[auth.A]" mat-list-item [routerLink]="'admin-users'" routerLinkActive="active">Gérer les utilisateurs</a>
+      <a [allowUserTypes]="[auth.S, auth.D]" mat-list-item [routerLink]="'message'" routerLinkActive="active">Messages</a>
       <a mat-list-item [routerLink]="'about'" routerLinkActive="active">À propos</a>
     </mat-nav-list>
     
