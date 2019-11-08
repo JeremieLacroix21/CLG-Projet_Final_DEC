@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PusherService } from '../../services/Pusher.service';
 
+
 interface Message {
   text: string;
   user: string;
@@ -19,23 +20,18 @@ export class MessageComponent implements OnInit {
   userName: string = '';
   messageText : string = '';
 
-  constructor(private pusherService: PusherService) {
+  constructor(private pusherService: PusherService, private auth : AuthService) {
     this.messages = [];
+    
   }
 
   ngOnInit() {
-    this.pusherService.messagesChannel.bind('client-new-message', (message) => {
-      this.messages.push(message);
-    });
+    //Check if user already exist or create it
+    this.pusherService.LogUser(this.auth.currUser.nomutilisateur)
   }
 
   sendMessage(user: string, text: string) {
-    const message: Message = {
-       user: user,
-       text: text,
+    this.pusherService.CreateRoom('1'/*idfournisseur*/,
+    this.auth.currUser.nomutilisateur, 'Pepsi');
     }
-    this.pusherService.messagesChannel.trigger('client-new-message', message);
-    this.messages.push(message);
   }
-
-}
