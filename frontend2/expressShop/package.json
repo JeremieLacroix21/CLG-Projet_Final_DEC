@@ -24,6 +24,7 @@
     "@angular/router": "~8.2.4",
     "@material/icon-button": "^3.2.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.2",
+    "@pusher/chatkit-server": "^2.1.1",
     "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.2.1",

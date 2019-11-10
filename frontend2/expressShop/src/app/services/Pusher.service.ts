@@ -1,7 +1,7 @@
 import { environment } from '../models/environment';
+import Chatkit from '@pusher/chatkit-server'
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ChatManager, TokenProvider} from '@pusher/chatkit-client'
-//import Chatkit from '@pusher/chatkit-server'
 import { Observable } from 'rxjs';
 
 
@@ -11,8 +11,8 @@ export class PusherService {
   CurrentRoom : any;
 
   constructor() {
-   // const chatkit = new Chatkit({
-     // instanceLocator: 'v1:us1:d7d0c9d7-f015-46e9-8b2b-a76f076a0fac',
+    //const chatkit = new Chatkit({
+      //instanceLocator: 'v1:us1:d7d0c9d7-f015-46e9-8b2b-a76f076a0fac',
      // key: 'dce21979-34a1-49ea-a4ad-279b56d18616:atOlbUV6cUoxEYlPnsFuqJARamtZgubVoG/0Dd11zw8=',
    // })
   }
