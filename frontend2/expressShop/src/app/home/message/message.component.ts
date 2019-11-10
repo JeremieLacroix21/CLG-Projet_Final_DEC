@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PusherService } from '../../services/Pusher.service';
+import { User } from 'src/app/models';
 
 
 interface Message {
@@ -26,8 +27,15 @@ export class MessageComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Check if user already exist or create it
-    this.pusherService.LogUser(this.auth.currUser.nomutilisateur)
+    var User;
+    if(this.auth.D)
+    {
+      User = 'D' + this.auth.currUser.iduser;
+    }
+    else{
+      User = 'S' + this.auth.currUser.iduser;
+    }
+    this.pusherService.LogUser(User, this.auth.currUser.nomutilisateur)
   }
 
   sendMessage(user: string, text: string) {

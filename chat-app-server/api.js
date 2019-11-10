@@ -59,7 +59,7 @@ router.post("/createUser", (req, res) => {
 	});
 })
 
-app.post("/createConversation", (req, res) => {
+router.post("/createConversation", (req, res) => {
 	if ((req.body.distrib_id.charAt(0) != 'D') || (req.body.supplier_id.charAt(0) != 'S')) {
 		res.status(402).send({message:'A provided user id does not match the required user type: ' + req.body});
 	}
