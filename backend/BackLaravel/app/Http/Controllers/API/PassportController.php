@@ -246,4 +246,35 @@ class PassportController extends Controller
         }
         return response()->json(['sucess'=> 'tag insere'], 200);
     }
+
+    public function GetAllProductsAndroid()
+    {
+        $produits = DB::table('produits')
+        ->join('users', 'users.iduser', '=', 'produits.idFournisseur')
+        ->select('produits.*', 'users.nomutilisateur', 'users.imgGUID as imgGUIDuser')
+        ->get();
+        
+        $data = [];
+        $i = 0;
+        foreach($produits as $produit) {
+            $tags = DB::table('lien_produits_tags')
+                ->where('lien_produits_tags.idProduit', '=', $produit->idproduits)
+                ->join('tags_produit', 'tags_produit.idTag', '=', 'lien_produits_tags.idTags')
+                ->select('tag')
+                ->get();
+        
+            $tags_str = [];
+            $j = 0;
+            foreach($tags as $tag) {
+                $tags_str[$j] = $tag->tag;
+                ++$j;
+            }
+
+            $produit = (object)array_merge((array)$produit, array("tags"=>$tags_str));
+
+            $data[$i] = $produit;
+            ++$i;
+        }
+        return json_encode($data);
+    }
 }
