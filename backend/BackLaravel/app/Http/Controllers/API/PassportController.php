@@ -224,6 +224,30 @@ class PassportController extends Controller
         return json_encode($data);
     }
 
+    // Meant to be called when the currUser is a distributor
+    // returns the list of suppliers that do not have a conversation with the currUser
+    public function GetAllNotInConvSuppliers(Request $request) {
+        // Get the chatkit ids of users that are already in a conversation with the distributor
+        $chatkitIds = explode(";", $request->get("suppliersInConv"));
+        // Remove the first char of the chatkit ids
+        $supplierIds = array();
+        foreach ($chatkitIds as $id) {
+            $supplierIds[] = (int)substr($id, 1);
+        }
+
+        $users = DB::table('fournisseurs')
+            ->join('users', 'fournisseurs.idFournisseur', '=', 'users.iduser')
+            ->where([['TypeUser', '=', 'Fournisseur'], ['confirme', '=', '1']])
+            ->whereNotIn('users.iduser', $supplierIds)
+            ->select(
+                'iduser',
+                'nomutilisateur'
+            )
+            ->get();
+
+        return response()->json($users, 200);
+    }
+
     public function AddTag(Request $request)
     {
         $input = $request->all();

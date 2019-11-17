@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::get('GetAllSuppliers', 'API\PassportController@GetAllSuppliers');
  Route::post('AddTag', 'API\PassportController@AddTag');
  Route::get('GetSuppliersAndDistributor', 'API\PassportController@GetSuppliersAndDistributor');
+ Route::post('GetAllNotInConvSuppliers', 'API\PassportController@GetAllNotInConvSuppliers');
  
 //Route Produit
  Route::get('GetAllProducts','API\ProduitController@GetAllProducts');
