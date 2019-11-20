@@ -126,7 +126,7 @@ class ProduitController extends Controller
         $newfilename=$request->Nom .".".end($extension);
        $data = $request->file('Image')->getClientOriginalName();
        //CHEMIN À CHANGER QUAND UPLOAD LE SITE
-       $destination = "C:\wamp64\www\Projet_Final_Technique\\frontend2\\expressShop\src\assets\img";
+       $destination = "/var/www/html/dist/expressShop/assets/img/";
         $ImageExiste = DB::table('produits')
         ->where('imgGUID', '=', $data)
         ->first();
